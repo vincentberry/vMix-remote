@@ -23,6 +23,20 @@ if (!empty($_GET["session_vmix"])) {
 
         // Filtrer les fichiers pour exclure les entrées "." et ".."
         $filteredFiles = array_filter($files, function ($file) {
+            // Vérifier si le fichier existe
+            if (file_exists( '../file/'.$file)) {
+                // Obtenir le timestamp de la dernière modification du fichier
+                $timestamp_derniere_modif = filemtime( '../file/'.$file);
+
+                // Obtenir le timestamp actuel
+                $timestamp_actuel = time();
+
+                // Vérifier si le fichier a été modifié il y a plus de 5 minutes
+                if ($timestamp_actuel - $timestamp_derniere_modif > 300) { // 300 secondes = 5 minutes
+                    // Supprimer le fichier
+                    unlink( '../file/'.$file);
+                }
+            }
             return $file !== '.' && $file !== '..';
         });
 
