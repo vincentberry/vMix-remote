@@ -29,7 +29,7 @@
             color: $primary-btn;
 
             &.master{
-                display: none;
+                visibility: hidden;
             }
     
             &.true{
