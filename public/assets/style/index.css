@@ -926,8 +926,20 @@ button.btn-succer:hover {
 main {
   display: grid;
   grid-template-columns: 80% 20%;
+  margin: 0px 10px;
 }
-main #output-container {
+main #InputSourcesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+}
+main #audioBusesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+main #audioSourcesContainer {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -1057,12 +1069,14 @@ main #output-container {
   background-color: #b46a00;
 }
 
-.audio-source {
+.audio-source, .audio-bus {
   background: #0a0f14;
   border: 1px solid #616161;
   margin: 5px;
+  max-width: 300px;
+  overflow: hidden;
 }
-.audio-source h2 {
+.audio-source h2, .audio-bus h2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1070,12 +1084,14 @@ main #output-container {
   padding: 10px 0px;
   border-bottom: 1px solid #ffffff;
 }
-.audio-source .button {
+.audio-source .button, .audio-bus .button {
   display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
 }
-.audio-source .button p {
-  width: 40px;
-  height: 40px;
+.audio-source .button p, .audio-bus .button p {
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1087,14 +1103,17 @@ main #output-container {
   overflow: hidden;
   color: #616161;
 }
-.audio-source .button p.true {
+.audio-source .button p.master, .audio-bus .button p.master {
+  display: none;
+}
+.audio-source .button p.true, .audio-bus .button p.true {
   color: #616161;
 }
-.audio-source .button p.false {
+.audio-source .button p.false, .audio-bus .button p.false {
   color: #c62828;
   border: 1px solid #c62828;
 }
-.audio-source .button p.muted.true::before {
+.audio-source .button p.muted.true::before, .audio-bus .button p.muted.true::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -1108,7 +1127,7 @@ main #output-container {
   -moz-osx-font-smoothing: grayscale;
   content: "\e69f";
 }
-.audio-source .button p.muted.false::before {
+.audio-source .button p.muted.false::before, .audio-bus .button p.muted.false::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -1122,45 +1141,68 @@ main #output-container {
   -moz-osx-font-smoothing: grayscale;
   content: "\e692";
 }
-.audio-source .button p.soloPFL {
+.audio-source .button p.soloPFL, .audio-bus .button p.soloPFL {
   font-size: 1rem;
 }
-.audio-source .button p.solo {
+.audio-source .button p.solo, .audio-bus .button p.solo {
   font-size: 1.5rem;
 }
-.audio-source .button p.solo.false {
+.audio-source .button p.solo.false, .audio-bus .button p.solo.false {
   color: #616161;
   border: 1px solid #616161;
 }
-.audio-source .button p.solo.true {
+.audio-source .button p.solo.true, .audio-bus .button p.solo.true {
   color: #006400;
   border: 1px solid #006400;
 }
-.audio-source .button p.solo:hover {
+.audio-source .button p.solo:hover, .audio-bus .button p.solo:hover {
   border: 1px solid #ffffff;
   color: #ffffff;
   transition: 0.5s ease;
 }
-.audio-source .button p:hover {
+.audio-source .button p.bus, .audio-bus .button p.bus {
+  font-size: 1.5rem;
+}
+.audio-source .button p.bus.false, .audio-bus .button p.bus.false {
+  color: #616161;
+  border: 1px solid #616161;
+}
+.audio-source .button p.bus.true, .audio-bus .button p.bus.true {
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+.audio-source .button p.bus:hover, .audio-bus .button p.bus:hover {
   border: 1px solid #ffffff;
   color: #ffffff;
   transition: 0.5s ease;
 }
-.audio-source .range {
-  position: relative;
-  pointer-events: none;
-  margin: 20px 10px;
-  padding: 5px;
-  display: block;
+.audio-source .button p:hover, .audio-bus .button p:hover {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  transition: 0.5s ease;
 }
-.audio-source .range input[type=range] {
+.audio-source .master, .audio-bus .master {
+  display: grid;
+  grid-template-columns: 150px 70px 70px;
+}
+.audio-source .range, .audio-bus .range {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  transform: translateX(0px) rotate(90deg);
+  width: 50px;
+  height: 150px;
+}
+.audio-source .range input[type=range], .audio-bus .range input[type=range] {
   -webkit-appearance: none;
-  width: 85%;
+  width: 150px;
   height: 5px;
   background: #1e2328;
   outline: none;
 }
-.audio-source .range input[type=range]::-webkit-slider-thumb {
+.audio-source .range input[type=range]::-webkit-slider-thumb, .audio-bus .range input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: #1e2328;
   border: 1px solid #ECECEC;
@@ -1169,19 +1211,37 @@ main #output-container {
   cursor: pointer;
   pointer-events: auto !important;
 }
-.audio-source .range input[type=range]::-webkit-slider-thumb:hover {
+.audio-source .range input[type=range]::-webkit-slider-thumb:hover, .audio-bus .range input[type=range]::-webkit-slider-thumb:hover {
   background: #ffffff;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-.audio-source .range .number {
+.audio-source .range label, .audio-bus .range label {
+  position: absolute;
+  color: #006400;
+}
+.audio-source .range .number, .audio-bus .range .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #1e2328;
   padding: 5px;
   max-width: 50px;
   overflow: hidden;
+}
+
+.audio-bus .master {
+  grid-template-columns: 1fr 1fr;
+}
+.audio-bus .master .button {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#audioBusesContainer {
+  display: flex;
+  width: auto;
 }
 
 nav {
@@ -1245,4 +1305,28 @@ nav div .statut_vmix_contener .statut_vmix input[type=checkbox] {
 }
 nav div .statut_vmix_contener .statut_vmix.true {
   background: #c62828;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 800px;
+  z-index: 1000;
+  height: 800px;
+  transform: translate(-50%);
+  background: #0a0f14;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.inputContainer.none {
+  display: none;
+}
+
+.closeButton {
+  cursor: pointer;
 }/*# sourceMappingURL=index.css.map */
