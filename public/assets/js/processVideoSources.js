@@ -48,11 +48,12 @@ function processVideoSources(xmlString) {
         if (parseInt(number) === activeNumber) {
             videoDiv.classList.add('program');
         }
+        const types = "camera";
         videoDiv.name = "input_" + number;
         videoDiv.innerHTML = `
                 <h2>${number}</h2>
                 <div class="type">
-                    <img src="./assets/icon/${type}.svg" alt="${type}">
+                    <img src="./assets/icon/${types}.svg" alt="${type}">
                     <h1>${title}</h1>
                 </div>
             `;

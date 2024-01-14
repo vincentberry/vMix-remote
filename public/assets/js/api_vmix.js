@@ -1,6 +1,6 @@
 
 //Api Vmix Command
- function vMix_OverlayToggle(overlay, key) {
+function vMix_OverlayToggle(overlay, key) {
     // URL de votre endpoint de serveur
     const url = 'flyValue=OverlayInput' + overlay +
         '&inputValue=' + encodeURIComponent(key) +
@@ -83,28 +83,33 @@ function vMix_Audio(key) {
 }
 
 function MasterAudio(key) {
-    const flyValue = "";
-    console.log(key);
-    // Récupérer l'élément <input> par son ID
-    if($key = "master"){
-        const flyValue = "MasterAudio";
-    }else{
-        const flyValue = key + "Audio";
-    }
+
     // URL de votre endpoint de serveur
-    const url = 'flyValue=' + flyValue +
+    const url = 'flyValue=' + key + "Audio" +
         '&inputValue=0' +
         '&durationValue=0' +
         '&mixValue=0';
 
     ApiVmixSend(url)
 }
-function AudioBus(key, bus) {
+
+function BusXSendToMaster(key) {
 
     // URL de votre endpoint de serveur
-    const url = 'AudioBus=' + bus +
+    const url = 'flyValue=BusXSendToMaster' +
+        '&inputValue=0' +
+        '&durationValue='+ key +
+        '&mixValue=0';
+
+    ApiVmixSend(url)
+}
+function AudioBus(key, bus) {
+
+
+    // URL de votre endpoint de serveur
+    const url = 'flyValue=AudioBus' +
         '&inputValue=' + encodeURIComponent(key) +
-        '&durationValue=0' +
+        '&durationValue=' + bus +
         '&mixValue=0';
 
     ApiVmixSend(url)
@@ -112,7 +117,6 @@ function AudioBus(key, bus) {
 
 
 function vMix_Solo(key) {
-    // Récupérer l'élément <input> par son ID
 
     // URL de votre endpoint de serveur
     const url = 'flyValue=Solo' +

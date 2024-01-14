@@ -60,7 +60,7 @@ function getAudioBusHTML(audioBus) {
     const meterF1 = parseFloat(audioBus.getAttribute('meterF1'));
     const meterF2 = parseFloat(audioBus.getAttribute('meterF2'));
     const sendToMaster = audioBus.getAttribute('sendToMaster') === 'True';
-    const audioBussesHTML = `<p class="bus ${busName} ${sendToMaster}">M</p>`;
+    const audioBussesHTML = `<p class="bus ${busName} ${sendToMaster}" onclick="BusXSendToMaster('${busName.charAt(busName.length - 1)}')">M</p>`;
     return `
                 <h2>${busName}</h2>
                 <div class="master">

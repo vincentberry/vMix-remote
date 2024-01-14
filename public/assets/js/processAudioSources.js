@@ -68,9 +68,9 @@ function getAudioSourceHTML(audioSource) {
         }
 
         if (activatedBus === "master") {
-            return `<p class="bus ${active}" onclick="AudioBus('${key}', M)">M</p>`;
+            return `<p class="bus ${active}" onclick="AudioBus('${key}', 'M')">M</p>`;
         } else {
-            return `<p class="bus ${active}" onclick="AudioBus('${key}', ${activatedBus})">${activatedBus}</p>`;
+            return `<p class="bus ${active}" onclick="AudioBus('${key}', '${activatedBus}')">${activatedBus}</p>`;
         }
     }).join('');
     return `
