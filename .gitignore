@@ -1,2 +1,9 @@
-index.css.map
-index.css
+# Created by .ignore support plugin (hsz.mobi)
+### Composer template
+.gitignore
+.idea/
+/logs/
+/log/
+/file/
+/db/
+.vscode/

@@ -50,11 +50,9 @@ function chargerFichierXML() {
             }
         }
     }
-
-    xhr.open('GET', "vmix.php?session_vmix=" + document.getElementById('vmix_connect').value, true) 
-    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
-    xhr.send()
 }
+window.onload = chargerFichierXML;
+setInterval(chargerFichierXML, 1000);
 
 function new_session(data) {
 
@@ -94,5 +92,3 @@ function new_session(data) {
 
 }
 // Charger le fichier XML et générer les éléments HTML au chargement de la page
-window.onload = chargerFichierXML;
-setInterval(chargerFichierXML, 1000);
