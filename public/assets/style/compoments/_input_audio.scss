@@ -16,6 +16,7 @@
         display: flex;
         flex-wrap: wrap;
         align-content: flex-end;
+        z-index: 10;
         p {
             width: 30px;
             height: 30px;
@@ -140,6 +141,7 @@
         label{
             position: absolute;
             color: $audio;
+            z-index: -10;
         }
     
         .number {

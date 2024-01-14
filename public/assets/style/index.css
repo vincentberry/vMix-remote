@@ -1089,6 +1089,7 @@ main #audioSourcesContainer {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-end;
+  z-index: 10;
 }
 .audio-source .button p, .audio-bus .button p {
   width: 30px;
@@ -1220,6 +1221,7 @@ main #audioSourcesContainer {
 .audio-source .range label, .audio-bus .range label {
   position: absolute;
   color: #006400;
+  z-index: -10;
 }
 .audio-source .range .number, .audio-bus .range .number {
   display: flex;
