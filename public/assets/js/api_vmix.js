@@ -82,6 +82,34 @@ function vMix_Audio(key) {
     ApiVmixSend(url)
 }
 
+function MasterAudio(key) {
+    const flyValue = "";
+    console.log(key);
+    // Récupérer l'élément <input> par son ID
+    if($key = "master"){
+        const flyValue = "MasterAudio";
+    }else{
+        const flyValue = key + "Audio";
+    }
+    // URL de votre endpoint de serveur
+    const url = 'flyValue=' + flyValue +
+        '&inputValue=0' +
+        '&durationValue=0' +
+        '&mixValue=0';
+
+    ApiVmixSend(url)
+}
+function AudioBus(key, bus) {
+
+    // URL de votre endpoint de serveur
+    const url = 'AudioBus=' + bus +
+        '&inputValue=' + encodeURIComponent(key) +
+        '&durationValue=0' +
+        '&mixValue=0';
+
+    ApiVmixSend(url)
+}
+
 
 function vMix_Solo(key) {
     // Récupérer l'élément <input> par son ID

@@ -65,7 +65,7 @@ function getAudioBusHTML(audioBus) {
                 <h2>${busName}</h2>
                 <div class="master">
                     <div class="button">
-                        <p class="muted ${muted}" onclick="vMix_AudioBus('${busName}')"></p>
+                        <p class="muted ${muted}" onclick="MasterAudio('${busName}')"></p>
                         ${audioBussesHTML}
                     </div>
                     <div class="range">
