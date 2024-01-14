@@ -1,23 +1,39 @@
-main{
+main {
     display: grid;
-    grid-template-columns: 80%  20%;
-    #output-container{
+    grid-template-columns: 80% 20%;
+    margin: 0px 10px;
+
+    #InputSourcesContainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: center;
+    }
+
+    #audioBusesContainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start
+    }
+
+    
+    #audioSourcesContainer {
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start
     }
 
     @media (max-width: 1200px) {
-        grid-template-columns: 60%  40%;
+        grid-template-columns: 60% 40%;
     }
 
     @media (max-width: 700px) {
-        grid-template-columns: 50%  50%;
+        grid-template-columns: 50% 50%;
     }
+
     @media (max-width: 500px) {
         display: block;
     }
 
 
 }
-

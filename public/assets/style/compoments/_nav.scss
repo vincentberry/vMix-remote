@@ -73,3 +73,33 @@ nav {
     }
 
 }
+
+
+
+
+///a supprioer
+/// 
+/// 
+.inputContainer {
+    @include center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    width: 800px;
+    z-index: 1000;
+    height: 800px;
+    transform: translate(-50%);
+    background: $background_item;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+
+    &.none {
+        display: none;
+    }
+
+}
+
+.closeButton {
+    cursor: pointer;
+}
