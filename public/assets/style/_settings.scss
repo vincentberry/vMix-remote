@@ -1,0 +1,148 @@
+@font-face {
+    font-family: "Oswald";
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: "Roboto-Bold";
+    src: url(../fonts/Roboto-Bold.ttf);
+}
+
+$font1: Roboto-Bold, sans-serif;
+$font2: Roboto-Bold, sans-serif;
+$primary: rgb(253, 253, 253);
+$primary-btn: #616161;
+$secondary: #e4e4e4;
+$secondary-btn: #797979;
+$color-text: #ffffff;
+$color-error: $primary;
+
+//vmix color
+$background: #1e2328;
+$background_video: #002b6c;
+$background_item: #0a0f14;;
+$program: #c62828;
+$preview: #b46a00;
+$audio: #006400;
+
+
+
+// Alert colors
+$color-info: #4bb1cf;
+$color-danger: #ED4F32;
+$color-primary: #288feb;
+$color-success: #15CD72;
+$color-warning: #edcd4d;
+$color-warning-btn: #a07c39;
+$color-muted: #ECECEC;
+
+.info { background: $color-info; }
+.danger { background: $color-danger; }
+.primary { background: $color-primary; }
+.success { background: $color-success; }
+.warning { background: $color-warning; }
+.muted { background: $color-muted; }
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin center-custom($space) {
+    display: flex;
+    align-items: center;
+    justify-content: $space;
+}
+
+@mixin buttom {
+    text-transform: uppercase;
+    background: $background;
+    border: 2px solid $primary-btn;
+    padding: 10px 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.2s ease;
+
+    &:hover {
+        background: $secondary-btn;
+    }
+}
+
+* {
+    font-family: $font1;
+    color: $color-text;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    outline: none;
+    resize: none;
+    border-style: none;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+body {
+    text-align: center;
+    background: $background;
+}
+
+@mixin logo {
+    background: url(../img/Logo-multiCAM-LIVE.png) center/cover no-repeat;
+}
+
+@mixin logo-min {
+    background: url(../img/Logo-multiCAM-LIVE.png) center/cover no-repeat;
+}
+
+
+
+img[data-src] {
+    filter: blur(0.2em);
+}
+
+img {
+    filter: blur(0em);
+    transition: filter 0.5s;
+}
+
+button{
+    @include buttom;
+
+    &.btn-danger{
+        background: #BB0104;
+        &:hover{
+            background: #910002;
+        }
+    }
+
+    &.btn-warning{
+        background: $color-warning;
+        color: $background;
+        &:hover{
+            background: $color-warning-btn;
+        }
+    }
+
+    &.btn-succer{
+        background: $color-warning;
+        color: $background;
+        &:hover{
+            background: $color-warning-btn;
+        }
+    }
+}
+
+.disabled{
+    display: none;
+}
+
+@mixin status_pgm{
+    &.program{
+        background-color: $program;
+    }
+    &.preview{
+        background-color: $preview;
+    }
+}
+

@@ -1,0 +1,75 @@
+nav {
+    height: 50px;
+    position: fixed;
+    z-index: 110;
+    width: 100%;
+    transition: 0.5s ease;
+    background: $background_item;
+
+    div {
+        height: 100%;
+        display: flex;
+        @include center;
+        justify-content: space-around;
+
+        .list {
+            display: flex;
+
+
+            label {
+                padding: 10px;
+                font-size: 0.8rem;
+                font-family: $font2;
+            }
+
+            select {
+                border-radius: 10px;
+                background: $background;
+                padding: 10px;
+                font-family: $font2;
+                font-size: 0.8rem;
+            }
+        }
+
+        #projetName {
+            font-weight: 900;
+            padding: 10px;
+            font-size: 1.2rem;
+            align-items: center;
+            color: $audio;
+        }
+
+        .statut_vmix_contener {
+
+            // Styles pour le conteneur
+            .statut_vmix {
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+                @include center;
+                border: $color-muted solid 1px;
+                background: $background;
+
+                // Styles pour le texte "fullscreen"
+                h1 {
+                    padding: 5px;
+                    @include center;
+                    text-transform: uppercase;
+                    font-size: 1rem;
+                }
+
+                // Styles pour la case à cocher
+                input[type="checkbox"] {
+                    // Cacher la case à cocher native
+                    display: none;
+                }
+
+                &.true {
+                    background: $program;
+                }
+            }
+        }
+
+    }
+
+}

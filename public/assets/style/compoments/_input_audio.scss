@@ -1,0 +1,127 @@
+.audio-source {
+    background: $background_item;
+    border: 1px solid $primary-btn;
+    margin: 5px;
+
+    h2{
+        @include center;
+        font-size: 1rem;
+        padding: 10px 0px;
+        border-bottom: 1px solid $color-text ;
+    }
+
+    .button{
+        display: flex;
+
+        p {
+            width: 40px;
+            height: 40px;
+            @include center;
+            font-size: 2rem;
+            margin: 5px;
+            background: $background;
+            border: 1px solid $primary-btn;
+            cursor: pointer;
+            overflow: hidden;
+            color: $primary-btn;
+    
+            &.true{
+                color: $primary-btn;
+            }
+    
+            &.false{
+                color: $program;
+                border: 1px solid $program;
+            }
+    
+            &.muted{
+                &.true{
+                    @include icon($icon-mute); 
+                }
+        
+                &.false{
+                    @include icon($icon-volume); 
+                }
+            }
+    
+            &.soloPFL{
+                font-size: 1rem;
+            }
+
+            &.solo{
+                font-size: 1.5rem;
+
+                &.false{
+                    color: $primary-btn;
+                    border: 1px solid $primary-btn;
+                }
+        
+                &.true{
+                    color: $audio;
+                    border: 1px solid $audio;
+                }
+                &:hover{
+                    border: 1px solid $color-text;
+                    color: $color-text;
+                    transition: 0.5s ease;
+                }
+            }
+
+            &:hover{
+                border: 1px solid $color-text;
+                color: $color-text;
+                transition: 0.5s ease;
+            }
+        }
+    }
+
+   
+
+
+
+
+
+    .range{
+        position: relative;
+        pointer-events: none;
+        margin: 20px 10px;
+        padding: 5px;
+        display: block;
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 85%;
+            height: 5px;
+            background: $background;
+            outline: none;  
+         //   transform: rotate(-90deg);  
+        }
+    
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background: $background;
+            border: 1px solid $color-muted;
+            height: 25px;
+            width: 10px;
+            cursor: pointer;
+            pointer-events: auto !important;
+
+            &:hover{
+                background: $color-text;
+                transition: 0.5s ease;
+            }
+        }
+    
+        .number {
+            background: $background;
+
+            padding: 5px;
+            max-width: 50px;
+            overflow: hidden;
+            @include center;
+          //  transform: rotate(90deg);
+        }
+
+    }
+   
+}
