@@ -40,6 +40,7 @@ function chargerFichierXML() {
                     console.log(data);
                     new_session(data);
                 } else {
+                    processSettings(data);
                     processVideoSources(data);
                     processAudioBuses(data);
                     processAudioSources(data);
@@ -62,10 +63,20 @@ function new_session(data) {
     var selectElement = document.getElementById('vmix_connect');
     var files = JSON.parse(data);
 
-    const outputContainer = document.getElementById('InputSourcesContainer');
+    const videoSourcesContainer = document.getElementById('videoSourcesContainer');
     // Supprimer les éléments existants dans le conteneur de sortie
-    while (outputContainer.firstChild) {
-        outputContainer.removeChild(outputContainer.firstChild);
+    while (videoSourcesContainer.firstChild) {
+        videoSourcesContainer.removeChild(videoSourcesContainer.firstChild);
+    }
+    const audioBusesContainer = document.getElementById('audioBusesContainer');
+    // Supprimer les éléments existants dans le conteneur de sortie
+    while (audioBusesContainer.firstChild) {
+        audioBusesContainer.removeChild(audioBusesContainer.firstChild);
+    }
+    const audioSourcesContainer = document.getElementById('audioSourcesContainer');
+    // Supprimer les éléments existants dans le conteneur de sortie
+    while (audioSourcesContainer.firstChild) {
+        audioSourcesContainer.removeChild(audioSourcesContainer.firstChild);
     }
     // Ajouter les options au <select>
     // Ajouter les options au <select> uniquement si elles n'existent pas déjà
