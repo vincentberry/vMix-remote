@@ -19,7 +19,10 @@ function processAudioSources(xmlString) {
         // Si la source audio existe déjà, la mettre à jour
         if (existingAudioSource) {
             // Mettre à jour les informations nécessaires
-            existingAudioSource.innerHTML = getAudioSourceHTML(audioSource);
+           const AudioSourceHTML = getAudioSourceHTML(audioSource);
+           if( existingAudioSource.innerHTML != AudioSourceHTML){
+               existingAudioSource.innerHTML = AudioSourceHTML;
+           }
         } else {
             // Créer une nouvelle div pour la source audio
             const newDivElement = document.createElement('div');
@@ -52,12 +55,12 @@ function getAudioSourceHTML(audioSource) {
     const muted = audioSource.getAttribute('muted') === 'True';
     const volume = parseFloat(audioSource.getAttribute('volume'));
     const gainDb = parseFloat(audioSource.getAttribute('gainDb'));
-    const balance = parseFloat(audioSource.getAttribute('balance'));
-    const soloPFL = audioSource.getAttribute('soloPFL') === 'True';
+    //const balance = parseFloat(audioSource.getAttribute('balance'));
+    //const soloPFL = audioSource.getAttribute('soloPFL') === 'True';
     const solo = audioSource.getAttribute('solo') === 'True';
     const audiobusses = audioSource.getAttribute('audiobusses');
-    const meterF1 = parseFloat(audioSource.getAttribute('meterF1'));
-    const meterF2 = parseFloat(audioSource.getAttribute('meterF2'));
+    //const meterF1 = parseFloat(audioSource.getAttribute('meterF1'));
+    //const meterF2 = parseFloat(audioSource.getAttribute('meterF2'));
     const audioBussesHTML = activatedBuses.map((activatedBus, index) => {
         let active = 'false';
 
