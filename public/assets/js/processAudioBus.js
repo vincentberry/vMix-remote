@@ -18,7 +18,10 @@ function processAudioBuses(xmlString) {
         // Si le bus audio existe déjà, le mettre à jour
         if (existingAudioBus) {
             // Mettre à jour les informations nécessaires
-            existingAudioBus.innerHTML = getAudioBusHTML(audioBus);
+            const AudioBusHTML = getAudioBusHTML(audioBus);
+            if( existingAudioBus.innerHTML != AudioBusHTML){
+                existingAudioBus.innerHTML = AudioBusHTML;
+            }
         } else {
             // Créer une nouvelle div pour le bus audio
             const newDivElement = document.createElement('div');
