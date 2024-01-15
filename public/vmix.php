@@ -4,11 +4,21 @@ $db = App::getDatabase();
 
 if (!empty($_GET["session_vmix"])) {
     $session_vmix = $_GET['session_vmix'];
-    // Construire la commande en brut
+
+    // Obtenir le timestamp actuel
+    $timestamp_actuel = time();
 
     if ($session_vmix && $session_vmix <> "N") {
 
         $file = "../file/" . $session_vmix . ".xml";
+
+        $timestamp_derniere_modif = filemtime( '../file/'.$file);
+
+        if ($timestamp_actuel - $timestamp_derniere_modif > 30){
+            http_response_code(201);
+            echo json_encode(array("reset" => "Le vmix n'a rien envoyé depuis plus de 30s"));
+            die();
+        }
         if (file_exists($file)){
             echo file_get_contents($file);
             die();
@@ -28,11 +38,8 @@ if (!empty($_GET["session_vmix"])) {
                 // Obtenir le timestamp de la dernière modification du fichier
                 $timestamp_derniere_modif = filemtime( '../file/'.$file);
 
-                // Obtenir le timestamp actuel
-                $timestamp_actuel = time();
-
                 // Vérifier si le fichier a été modifié il y a plus de 5 minutes
-                if ($timestamp_actuel - $timestamp_derniere_modif > 300) { // 300 secondes = 5 minutes
+                if (time() - $timestamp_derniere_modif > 300) { // 300 secondes = 5 minutes
                     // Supprimer le fichier
                     unlink( '../file/'.$file);
                 }

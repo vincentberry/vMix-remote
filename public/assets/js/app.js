@@ -46,7 +46,13 @@ function chargerFichierXML() {
                     processPageSources(data);
                 }
             } else {
-                AlertPopup(JSON.parse(xhr.responseText)['error'])
+                if (JSON.parse(xhr.responseText)['error']){
+                    AlertPopup(JSON.parse(xhr.responseText)['error'])
+                }else if(JSON.parse(xhr.responseText)['reset']){
+                    AlertPopup(JSON.parse(xhr.responseText)['reset'])
+                    document.getElementById('vmix_connect').value = "N"
+                }
+                
             }
         }
     }

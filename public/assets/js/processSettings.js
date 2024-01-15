@@ -9,9 +9,6 @@ function processSettings(xmlString) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
 
-    const inputs = xmlDoc.querySelectorAll('input');
-
-    const outputContainer = document.getElementById('videoSourcesContainer');
     previewNumber = parseInt(xmlDoc.querySelector('preview').textContent);
     activeNumber = parseInt(xmlDoc.querySelector('active').textContent);
     activeOverlay1 = parseInt(xmlDoc.querySelector('overlay[number="1"]').textContent);
