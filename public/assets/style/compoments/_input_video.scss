@@ -1,4 +1,4 @@
-.input_video{
+.video-source{
     margin: 5px;
     border: 1px solid $primary-btn;
     height: 156px;
@@ -14,8 +14,11 @@
         position: relative;
         overflow: hidden;
         height: 100%;
+
         .type{
             height: 100%;
+            user-select: none;
+            pointer-events: none;
             width: 100%;
             z-index: 10;
             display: grid;
@@ -35,6 +38,8 @@
         }
         h2{
             position: absolute;
+            user-select: none;
+            pointer-events: none;
             left: 5px;
             top: 0px;
             z-index: 10;

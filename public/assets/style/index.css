@@ -929,7 +929,7 @@ main {
   margin: 0px 10px;
   padding-top: 50px;
 }
-main #InputSourcesContainer {
+main #videoSourcesContainer {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -961,7 +961,7 @@ main #audioSourcesContainer {
   }
 }
 
-.input_video {
+.video-source {
   margin: 5px;
   border: 1px solid #616161;
   height: 156px;
@@ -973,32 +973,40 @@ main #audioSourcesContainer {
   grid-template-rows: 80% 20%;
   cursor: pointer;
 }
-.input_video .video {
+.video-source .video {
   position: relative;
   overflow: hidden;
   height: 100%;
 }
-.input_video .video .type {
+.video-source .video .type {
   height: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
   width: 100%;
   z-index: 10;
   display: grid;
   grid-template-rows: 30% 70%;
   padding: 10px;
 }
-.input_video .video .type img {
+.video-source .video .type img {
   height: 100%;
   filter: invert(100%);
 }
-.input_video .video .type h1 {
+.video-source .video .type h1 {
   text-align: center;
   font-size: 1.2rem;
   align-self: flex-end;
   overflow: hidden;
   word-wrap: break-word;
 }
-.input_video .video h2 {
+.video-source .video h2 {
   position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
   left: 5px;
   top: 0px;
   z-index: 10;
@@ -1006,28 +1014,28 @@ main #audioSourcesContainer {
   font-size: 2rem;
   color: rgba(255, 255, 255, 0.537254902);
 }
-.input_video .video img {
+.video-source .video img {
   width: 100%;
   height: auto;
 }
-.input_video .video.program {
+.video-source .video.program {
   background-color: #c62828;
 }
-.input_video .video.preview {
+.video-source .video.preview {
   background-color: #b46a00;
 }
-.input_video .video:hover {
+.video-source .video:hover {
   background-color: #003f9f;
   transition: 0.5s ease;
 }
-.input_video .overlay {
+.video-source .overlay {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   flex-direction: row;
 }
-.input_video .overlay button {
+.video-source .overlay button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1041,11 +1049,11 @@ main #audioSourcesContainer {
   border-top: 1px solid #616161;
   border-right: 1px solid #616161;
 }
-.input_video .overlay button.menu {
+.video-source .overlay button.menu {
   font-size: 1.2rem;
   border-right: 0px solid #616161;
 }
-.input_video .overlay button.menu::before {
+.video-source .overlay button.menu::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -1059,14 +1067,14 @@ main #audioSourcesContainer {
   -moz-osx-font-smoothing: grayscale;
   content: "\e636";
 }
-.input_video .overlay button:hover {
+.video-source .overlay button:hover {
   background-color: #343d45;
   transition: 0.5s ease;
 }
-.input_video .overlay button.program {
+.video-source .overlay button.program {
   background-color: #c62828;
 }
-.input_video .overlay button.preview {
+.video-source .overlay button.preview {
   background-color: #b46a00;
 }
 
@@ -1187,6 +1195,11 @@ main #audioSourcesContainer {
   display: grid;
   grid-template-columns: 150px 70px 70px;
 }
+.audio-source .containerRange, .audio-bus .containerRange {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .audio-source .range, .audio-bus .range {
   display: flex;
   justify-content: center;
@@ -1222,6 +1235,10 @@ main #audioSourcesContainer {
   position: absolute;
   color: #006400;
   z-index: -10;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 .audio-source .range .number, .audio-bus .range .number {
   display: flex;
@@ -1256,12 +1273,11 @@ nav {
   background: #0a0f14;
 }
 nav div {
-  height: 100%;
-  display: flex;
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: space-around;
+  height: 100%;
+  justify-content: space-between;
 }
 nav div .list {
   display: flex;
