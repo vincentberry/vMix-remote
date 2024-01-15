@@ -53,7 +53,8 @@ function getAudioSourceHTML(audioSource) {
     const key = audioSource.getAttribute('key');
     const title = audioSource.getAttribute('title');
     const muted = audioSource.getAttribute('muted') === 'True';
-    const volume = parseFloat(audioSource.getAttribute('volume'));
+    const volume = Math.pow(parseFloat(audioSource.getAttribute('volume')) * 1000000, 0.25);
+    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(audioSource.getAttribute('volume')))) / 100);
     const gainDb = parseFloat(audioSource.getAttribute('gainDb'));
     //const balance = parseFloat(audioSource.getAttribute('balance'));
     //const soloPFL = audioSource.getAttribute('soloPFL') === 'True';
@@ -84,14 +85,18 @@ function getAudioSourceHTML(audioSource) {
                             <p class="solo ${solo}" onclick="vMix_Solo('${key}')">S</p>
                             ${audioBussesHTML}
                         </div>
-       
-                        <div class="range">
-                            <label for="volume-${key}">Volume: ${Math.floor(volume)}%</label>
-                            <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('${key}')">
+                        
+                        <div class="containerRange">
+                            <div class="range">
+                                <label for="volume-${key}">Volume: ${Math.floor(volumeDB)}db</label>
+                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('${key}')">
+                            </div>
                         </div>
-                        <div class="range">
-                            <label for="gainDb-${key}">gainDb: +${Math.floor(gainDb)}db</label>
-                            <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="vMix_SetGain('${key}')">
+                        <div class="containerRange">
+                            <div class="range">
+                                <label for="gainDb-${key}">gainDb: +${Math.floor(gainDb)}db</label>
+                                <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="vMix_SetGain('${key}')">
+                            </div>
                         </div>
                     </div>
                 `;

@@ -58,7 +58,8 @@ function getAudioBusHTML(audioBus) {
     // Adapté à votre structure XML réelle
     // Vous devrez extraire les attributs et valeurs selon votre structure exacte
     const busName = audioBus.tagName;
-    const volume = parseFloat(audioBus.getAttribute('volume'));
+    const volume = Math.pow(parseFloat(audioBus.getAttribute('volume')) * 1000000, 0.25);
+    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(audioBus.getAttribute('volume')))) / 100);
     const muted = audioBus.getAttribute('muted') === 'True';
     const meterF1 = parseFloat(audioBus.getAttribute('meterF1'));
     const meterF2 = parseFloat(audioBus.getAttribute('meterF2'));
@@ -71,9 +72,11 @@ function getAudioBusHTML(audioBus) {
                         <p class="muted ${muted}" onclick="MasterAudio('${busName}')"></p>
                         ${audioBussesHTML}
                     </div>
-                    <div class="range">
-                        <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetBusVolume('${busName}')">
-                        <label for="volume-${busName}">${Math.floor(volume)}%</label>
+                    <div class="containerRange">
+                        <div class="range">
+                            <label for="volume-${busName}">${Math.floor(volumeDB)}%</label>
+                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetBusVolume('${busName}')">
+                        </div>
                     </div>
                 </div>
             `;
