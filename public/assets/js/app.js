@@ -29,7 +29,6 @@ var getHttpRequest = function () {
 
 function chargerFichierXML() {
 
-
     var xhr = getHttpRequest()
 
     xhr.onreadystatechange = function () {
@@ -101,7 +100,6 @@ function new_session(data) {
         }
         return false;
     }
-
 
 }
 // Charger le fichier XML et générer les éléments HTML au chargement de la page
