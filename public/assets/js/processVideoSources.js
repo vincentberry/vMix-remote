@@ -1,103 +1,95 @@
-// Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processVideoSources(xmlString) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+    const videoSources = xmlDoc.querySelectorAll('input');
 
-    const inputs = xmlDoc.querySelectorAll('input');
+    // Récupérer le conteneur pour les sources video
+    const container = document.getElementById('videoSourcesContainer');
 
-    const outputContainer = document.getElementById('InputSourcesContainer');
-    const previewNumber = parseInt(xmlDoc.querySelector('preview').textContent);
-    const activeNumber = parseInt(xmlDoc.querySelector('active').textContent);
-    document.getElementById('projetName').textContent = xmlDoc.querySelector('preset').textContent;
+    // Parcourir toutes les sources video
+    videoSources.forEach(videoSource => {
+        // Récupérer la clé unique de la source video
+        const key = videoSource.getAttribute('key');
 
-    updateCheckboxClass('streaming', JSON.parse(xmlDoc.querySelector('streaming').textContent.trim().toLowerCase()));
-    updateCheckboxClass('recording', JSON.parse(xmlDoc.querySelector('recording').textContent.trim().toLowerCase()));
-    updateCheckboxClass('external', JSON.parse(xmlDoc.querySelector('external').textContent.trim().toLowerCase()));
-    updateCheckboxClass('fullscreen', JSON.parse(xmlDoc.querySelector('fullscreen').textContent.trim().toLowerCase()));
+        // Vérifier si une source video avec la même clé existe déjà dans le conteneur
+        const existingAudioSource = document.querySelector(`.video-source[data-key="${key}"]`);
 
+        // Si la source video existe déjà, la mettre à jour
+        if (existingAudioSource) {
+            // Mettre à jour les informations nécessaires
+           const VideoSourceHTML = getVideoSourceHTML(videoSource);
+            if( existingAudioSource.innerHTML != VideoSourceHTML){
+                existingAudioSource.innerHTML = VideoSourceHTML;
+            }
+        } else {
+            // Créer une nouvelle div pour la source video
+            const newDivElement = document.createElement('div');
+            newDivElement.className = 'video-source';
+            newDivElement.setAttribute('data-key', key);
 
-    PreviewInterfaceWeb = previewNumber;
-    // Supprimer les éléments existants dans le conteneur de sortie
-    while (outputContainer.firstChild) {
-        outputContainer.removeChild(outputContainer.firstChild);
-    }
-    const overlays = xmlDoc.querySelectorAll('overlay');
-    overlays.forEach(overlay => {
-        const overlayNumber1 = parseInt(overlay.getAttribute('number'));
+            // Remplir la div avec les informations
+            newDivElement.innerHTML = getVideoSourceHTML(videoSource);
 
+            // Ajouter la nouvelle div au conteneur
+            container.appendChild(newDivElement);
+        }
     });
+}
 
-    inputs.forEach(input => {
-        const key = input.getAttribute('key');
-        const number = input.getAttribute('number');
-        const type = input.getAttribute('type');
-        const title = input.getAttribute('title');
-
-        const inputDiv = document.createElement('div');
-        inputDiv.className = 'input_video';
-        inputDiv.id = key;
-
-        const videoDiv = document.createElement('div');
-        videoDiv.className = 'video';
-
-        // Ajouter la classe "preview" si le nombre correspond à previewNumber
-        if (parseInt(number) === previewNumber) {
-            videoDiv.classList.add('preview');
+// Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
+function getVideoSourceHTML(videoSource) {
+    const key = videoSource.getAttribute('key');
+    const title = videoSource.getAttribute('title');
+    const number = videoSource.getAttribute('number');
+    const type = videoSource.getAttribute('type');
+    const types = "camera";
+    var tally = "";
+    var tallyeOverlay1
+    var tallyeOverlay2
+    var tallyeOverlay3
+    var tallyeOverlay4
+    // Ajouter la classe "preview" si le nombre correspond à previewNumber
+    if (parseInt(number) === previewNumber) {
+            tally = "preview";
         }
         // Ajouter la classe "program" si le nombre correspond à previewNumber
         if (parseInt(number) === activeNumber) {
-            videoDiv.classList.add('program');
+            tally = 'program';
         }
-        const types = "camera";
-        videoDiv.name = "input_" + number;
-        videoDiv.innerHTML = `
-                <h2>${number}</h2>
-                <div class="type">
-                    <img src="./assets/icon/${types}.svg" alt="${type}">
-                    <h1>${title}</h1>
-                </div>
-            `;
+        // Ajouter la classe "preview" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay1) {
+            tallyeOverlay1 = "program";
+        }
+        // Ajouter la classe "program" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay2) {
+            tallyeOverlay2 = 'program';
+        }
+        // Ajouter la classe "preview" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay3) {
+            tallyeOverlay3 = "program";
+        }
+        // Ajouter la classe "program" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay4) {
+            tallyeOverlay4 = 'program';
+        }
+        
+    return `
+    <div class="video ${tally}" onclick="vMix_PreviewInput('${key}')">
+        <h2>${number}</h2>
+        <div class="type">
+            <img src="./assets/icon/${types}.svg" alt="${type}">
+            <h1>${title}</h1>
+        </div>
+    </div>
+    <div class="overlay">
+        <button class="${tallyeOverlay1}" onclick="vMix_OverlayToggle(1,'${key}')">1</button>
+        <button class="${tallyeOverlay2}" onclick="vMix_OverlayToggle(2,'${key}')">2</button>
+        <button class="${tallyeOverlay3}" onclick="vMix_OverlayToggle(3,'${key}')">3</button>
+        <button class="${tallyeOverlay4}" onclick="vMix_OverlayToggle(4,'${key}')">4</button>
+        <button class="menu grid_menu" onclick="OpenPageInput('inputContainer_${key}')"></button>
+    </div>
+`;
 
-        // Ajouter l'événement onclick
-        videoDiv.onclick = function () {
-            vMix_PreviewInput(key)
-        };
-
-        const overlayDiv = document.createElement('div');
-        overlayDiv.className = 'overlay';
-
-        overlays.forEach(overlay => {
-            const overlayNumber = parseInt(overlay.getAttribute('number'));
-            const overlayContent = overlay.textContent.trim(); // Contenu de la balise overlay
-
-            if (overlayNumber < 5) {
-                varClass = "";
-                if (overlayContent === number) {
-                    varClass = 'program';
-
-                }
-                if (overlay.getAttribute('preview') === 'True' && overlayContent === number) {
-                    varClass = 'preview';
-
-                }
-                // Ajouter la classe "preview" aux boutons correspondant à previewNumber
-                overlayDiv.innerHTML += `
-                            <button
-                            class="${varClass} a${overlayNumber}" style="grid-area: grid_${overlayNumber};"
-                            id="overlay_${overlayNumber}_id_${key}" 
-                            onclick="vMix_OverlayToggle(${overlayNumber},${number})
-                            ">${overlayNumber}
-                            </button>`;
-            }
-
-        });
-       
-        overlayDiv.innerHTML += `<button onclick="OpenPageInput('inputContainer_${ input.getAttribute('key')}')" class="menu grid_menu"></button>`;
-
-        inputDiv.appendChild(videoDiv);
-        inputDiv.appendChild(overlayDiv);
-
-        outputContainer.appendChild(inputDiv);
-    });
 }
+
 
