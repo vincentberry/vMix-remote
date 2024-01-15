@@ -24,7 +24,7 @@ if (!empty($_GET["session_vmix"])) {
         // Filtrer les fichiers pour exclure les entrées "." et ".."
         $filteredFiles = array_filter($files, function ($file) {
             // Vérifier si le fichier existe
-            if (file_exists( '../file/'.$file)) {
+            if (file_exists( '../file/'.$file) && $file !== '.' && $file !== '..') {
                 // Obtenir le timestamp de la dernière modification du fichier
                 $timestamp_derniere_modif = filemtime( '../file/'.$file);
 
