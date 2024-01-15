@@ -19,7 +19,7 @@ function processAudioSources(xmlString) {
         // Si la source audio existe déjà, la mettre à jour
         if (existingAudioSource) {
             // Mettre à jour les informations nécessaires
-           const AudioSourceHTML = getAudioSourceHTML(audioSource);
+           const AudioSourceHTML = getAudioSourceHTML(audioSource);        
            if( existingAudioSource.innerHTML != AudioSourceHTML){
                existingAudioSource.innerHTML = AudioSourceHTML;
            }
@@ -89,7 +89,7 @@ function getAudioSourceHTML(audioSource) {
                             <label for="volume-${key}">Volume: ${Math.floor(volume)}%</label>
                             <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('${key}')">
                         </div>
-                        <div class="range" >
+                        <div class="range">
                             <label for="gainDb-${key}">gainDb: +${Math.floor(gainDb)}db</label>
                             <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="vMix_SetGain('${key}')">
                         </div>
