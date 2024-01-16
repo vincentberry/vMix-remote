@@ -104,63 +104,69 @@
 
     .master{
         display: grid;
-        grid-template-columns: 150px 70px 70px; 
-    }
+        grid-template-columns: 150px 70px 70px;
 
-    .containerRange{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    .range{
-        @include center;
-        margin: 0px;
-        padding: 0px;
-        transform: translateX(-00px) rotate(270deg);
-        width: 50px;
-        height: 150px;
-        
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 150px;
-            height: 5px;
-            background: $background;
-            outline: none;  
-        }
-    
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            background: $background;
-            border: 1px solid $color-muted;
-            height: 25px;
-            width: 10px;
-            cursor: pointer;
-            pointer-events: auto !important;
-
-            &:hover{
-                background: $color-text;
-                transition: 0.5s ease;
-            }
-        }
-
-        label{
-            position: absolute;
-            color: $audio;
-            z-index: -10;
-            user-select: none;
-            pointer-events: none;
-        }
-    
-        .number {
-            @include center;
-            background: $background;
-            padding: 5px;
-            max-width: 50px;
+        .containerRange{
+            width: 100%;
+            height: 100%;
             overflow: hidden;
         }
 
+        .range{
+            @include center;
+            margin: 0px;
+            padding: 0px;
+            transform: translateX(-00px) rotate(270deg);
+            width: 50px;
+            height: 150px;
+            position: relative;
+            
+            input[type="range"] {
+                -webkit-appearance: none;
+                width: 150px;
+                height: 5px;
+                background: $background;
+                outline: none;  
+            }
+        
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                background: $background;
+                border: 1px solid $color-muted;
+                height: 25px;
+                width: 10px;
+                cursor: pointer;
+                pointer-events: auto !important;
+    
+                &:hover{
+                    background: $color-text;
+                    transition: 0.5s ease;
+                }
+            }
+    
+            label{
+                position: absolute;
+                color: $audio;
+                z-index: -10;
+                user-select: none;
+                pointer-events: none;
+            }
+        
+            .number {
+                @include center;
+                background: $background;
+                padding: 5px;
+                max-width: 50px;
+                overflow: hidden;
+            }
+    
+        }
+    
     }
+
+
+
+
 }
 
 .audio-bus{
