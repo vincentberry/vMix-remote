@@ -14,6 +14,7 @@
         position: relative;
         overflow: hidden;
         height: 100%;
+        transition: 0.5s ease;
 
         .type{
             height: 100%;
@@ -36,6 +37,7 @@
                 word-wrap: break-word;
             }
         }
+
         h2{
             position: absolute;
             user-select: none;
@@ -55,7 +57,12 @@
 
         &:hover{
             background-color: lighten($background_video, 10%);
-            transition: 0.5s ease;
+            &.program{
+                background-color: lighten($program, 10%); 
+            }
+            &.preview{
+                background-color: lighten($preview, 10%); 
+            }
         }
     }
 
@@ -63,7 +70,8 @@
         @include center;
         height: 100%;
         flex-direction: row;
-        
+        transition: 0.5s ease;
+
         button{
             @include center;
             padding: 0px;
@@ -83,7 +91,12 @@
             }
             &:hover{
                 background-color: lighten($background, 10%);
-                transition: 0.5s ease;
+                &.program{
+                    background-color: lighten($program, 10%); 
+                }
+                &.preview{
+                    background-color: lighten($preview, 10%); 
+                }
             }
             @include status_pgm;
             
