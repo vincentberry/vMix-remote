@@ -46,8 +46,6 @@ function vMix_SetVolume(key) {
     // Récupérer l'élément <input> par son ID
     const volumeInput = document.getElementById(`volume-${key}`);
 
-
-
     // URL de votre endpoint de serveur
     const url = 'flyValue=SetVolume' +
         '&inputValue=' + encodeURIComponent(key) +
@@ -82,7 +80,7 @@ function vMix_Audio(key) {
     ApiVmixSend(url)
 }
 
-function MasterAudio(key) {
+function  vMix_MasterAudio(key) {
 
     // URL de votre endpoint de serveur
     const url = 'flyValue=' + key + "Audio" +
@@ -93,7 +91,7 @@ function MasterAudio(key) {
     ApiVmixSend(url)
 }
 
-function BusXSendToMaster(key) {
+function vMix_BusXSendToMaster(key) {
 
     // URL de votre endpoint de serveur
     const url = 'flyValue=BusXSendToMaster' +
@@ -103,13 +101,15 @@ function BusXSendToMaster(key) {
 
     ApiVmixSend(url)
 }
-function AudioBus(key, bus) {
 
-
+function vMix_AudioBus(key) {
+    // Récupérer l'élément <input> par son ID
+    const volumeInput = document.getElementById(`volume-${key}`);
+    console.log(volumeInput);
     // URL de votre endpoint de serveur
-    const url = 'flyValue=AudioBus' +
-        '&inputValue=' + encodeURIComponent(key) +
-        '&durationValue=' + bus +
+    const url = 'flyValue=Set'+key+'Volume ' +
+        '&inputValue=0' +
+        '&durationValue=' + volumeInput.value +
         '&mixValue=0';
 
     ApiVmixSend(url)
