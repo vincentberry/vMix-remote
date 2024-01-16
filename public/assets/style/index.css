@@ -1271,6 +1271,7 @@ nav {
   width: 100%;
   transition: 0.5s ease;
   background: #0a0f14;
+  padding: 0px 10px;
 }
 nav div {
   display: flex;
@@ -1281,6 +1282,7 @@ nav div {
 }
 nav div .list {
   display: flex;
+  margin-left: 50px;
 }
 nav div .list label {
   padding: 10px;
@@ -1296,12 +1298,11 @@ nav div .list select {
 }
 nav div .script_down {
   cursor: pointer;
-  filter: invert(100%);
+  width: 40px;
   transition: 0.5s ease;
 }
 nav div .script_down:hover {
-  transform: scale(1.2);
-  filter: invert(80%);
+  filter: invert(100%);
 }
 nav div #projetName {
   font-weight: 900;
