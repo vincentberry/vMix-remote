@@ -1,10 +1,3 @@
-var previewNumber;
-var activeNumber;
-var activeOverlay1;
-var activeOverlay2;
-var activeOverlay3;
-var activeOverlay4;
-
 function processSettings(xmlString) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
