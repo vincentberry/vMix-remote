@@ -36,7 +36,6 @@
                     </select>
                 </div>
             </div>
-
             <h1 id="projetName"></h1>
             <div class="right">
                 <div class="statut_vmix_contener">
@@ -54,24 +53,33 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </nav>
 
     <!-- <div class="loader" id = loader></div> -->
     <main>
-        <button onclick="vMix_ActiveInput(previewNumber)">CUT</button>
-        <button onclick="vMix_Fade(previewNumber)">FACE</button>
-        <div id="videoSourcesContainer"></div>
-        <div>
-            <div id="audioBusesContainer"></div>
-            <div id="audioSourcesContainer"></div>
-        </div>
+        <div class="tooltip" id="tooltip-volume">dddd</div>
+        <section class="center">
+            <div class="ContainerCommandSelector">
+                <div>
+                    <label for="commandSelector">Select a Command:</label>
+                    <select id="commandSelector" onchange="updateCommandDetails()">
+                    </select>
+                </div>
+                <div id="commandDetails"></div>
+                <button onclick="sendCommand()">Send Command</button>
+            </div>
+        </section>
+        <button onclick="vMix_ActiveInput()">CUT</button>
+        <button onclick="vMix_Fade()">FACE</button>
+        <section class="VmixContainer">
+            <div id="videoSourcesContainer"></div>
+            <div>
+                <div id="audioBusesContainer"></div>
+                <div id="audioSourcesContainer"></div>
+            </div>
+        </section>
         <div id="inputsContainer"></div>
-
-
-
-
     </main>
     <div id="VmixScript" style="display: none;">
         Dim userurl As String = "<p id="urlserverscriptmvix"></p>api.php"
@@ -139,6 +147,15 @@
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
 <script>
     let activatedBuses = [];
+    var commands;
+    var id_input;
+    var previewNumber;
+    var activeNumber;
+    var activeOverlay1;
+    var activeOverlay2;
+    var activeOverlay3;
+    var activeOverlay4;
+
     document.getElementById("urlserverscriptmvix").textContent = window.location.href;
     // Fonction pour charger le fichier XML depuis l'API
 
