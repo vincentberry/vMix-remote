@@ -28,7 +28,7 @@ class db_insert{
 
     public static function delete_vmix_command($id){
 
-        App::getDatabase()->query('DELETE command where id = ?', [
+        App::getDatabase()->query('DELETE FROM command where id = ?', [
             $id
             ]
         );

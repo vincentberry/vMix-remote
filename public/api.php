@@ -22,7 +22,7 @@ if($_POST["connector"] && $_POST["xml"]){
     if($req){
         foreach ($req as $item) {
             // Accéder aux valeurs individuelles
-            db_insert::push_vmix_command($item->id);
+            db_insert::delete_vmix_command($item->id);
             $envoi_vmix = $envoi_vmix . "$item->command, $item->input, $item->value, $item->duration!";
             
         }
@@ -39,9 +39,3 @@ if($_POST["connector"] && $_POST["xml"]){
 http_response_code(403);
 echo json_encode(array("error" => "valeur envoi non conforme !"));
 die();
-
-
-
-
-
-// }
