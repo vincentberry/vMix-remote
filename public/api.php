@@ -23,7 +23,7 @@ if($_POST["connector"] && $_POST["xml"]){
         foreach ($req as $item) {
             // Accéder aux valeurs individuelles
             db_insert::push_vmix_command($item->id);
-            $envoi_vmix = $envoi_vmix . "$item->type, $item->input, $item->duration, $item->value!";
+            $envoi_vmix = $envoi_vmix . "$item->command, $item->input, $item->value, $item->duration!";
             
         }
     

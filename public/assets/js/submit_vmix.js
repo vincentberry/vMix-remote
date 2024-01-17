@@ -1,4 +1,20 @@
-function ApiVmixSend(req) {
+function ApiVmixSend(command, input = 0, value = 0, duration = 0) {
+
+        // Construire la requête à envoyer à vMix
+        let queryString = `session_vmix=${document.getElementById('vmix_connect').value}&command=${encodeURIComponent(command)}`;
+
+        // Ajouter les paramètres d'entrée, valeur et durée s'ils sont fournis
+        if (input !== undefined) {
+            queryString += `&input=${encodeURIComponent(input)}`;
+        }
+    
+        if (value !== undefined) {
+            queryString += `&value=${encodeURIComponent(value)}`;
+        }
+    
+        if (duration !== undefined) {
+            queryString += `&duration=${encodeURIComponent(duration)}`;
+        }
 
         var xhr = getHttpRequest()
            
@@ -12,7 +28,7 @@ function ApiVmixSend(req) {
             }
         }
 
-        xhr.open('GET', "api_command.php?session_vmix=" + document.getElementById('vmix_connect').value +"&"+ req, true) 
+        xhr.open('GET', "api_command.php?" + queryString, true) 
         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
         xhr.send()
 }

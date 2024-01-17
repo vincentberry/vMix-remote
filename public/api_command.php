@@ -2,16 +2,16 @@
 require_once "../config.php";
 $db = App::getDatabase();
 
-if (!empty($_GET["flyValue"]) && !empty($_GET["session_vmix"])) {
+if (!empty($_GET["command"]) && !empty($_GET["session_vmix"])) {
 
     // Construire la commande en brut
     $session_vmix = $_GET["session_vmix"];
-    $type = $_GET["flyValue"];
-    $input =  $_GET["inputValue"];
-    $duration = $_GET["durationValue"];
-    $value = $_GET["mixValue"];
+    $command = $_GET["command"];
+    $input =  $_GET["input"];
+    $value = $_GET["value"];
+    $duration = $_GET["duration"];
 
-    $req = db_insert::new_command($session_vmix, $type, $input, $duration, $value);
+    $req = db_insert::new_command($session_vmix, $command, $input, $value, $duration);
     echo json_encode(array("Valid" => "Command $req bien envoyée ! Elle va bientôt être exécutée !"));
     die();
 }
