@@ -47,6 +47,7 @@
 body {
   text-align: center;
   background: #1e2328;
+  overflow-x: hidden;
 }
 
 img[data-src] {
@@ -91,8 +92,34 @@ button.btn-succer:hover {
   background: #a07c39;
 }
 
+select, input {
+  border-radius: 10px;
+  background: #616161;
+  padding: 10px;
+  font-family: Roboto-Bold, sans-serif;
+  font-size: 0.8rem;
+  border: 1px solid #0a0f14;
+}
+
 .disabled {
   display: none;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  opacity: 0;
+  z-index: 100;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  top: 50px;
+  left: 0px;
+}
+.tooltip.affiche {
+  opacity: 1;
 }
 
 @font-face {
@@ -924,10 +951,56 @@ button.btn-succer:hover {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 80% 20%;
   margin: 0px 10px;
   padding-top: 50px;
+}
+main .VmixContainer {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+@media (max-width: 1200px) {
+  main .VmixContainer {
+    grid-template-columns: 60% 40%;
+  }
+}
+@media (max-width: 700px) {
+  main .VmixContainer {
+    grid-template-columns: 50% 50%;
+  }
+}
+@media (max-width: 500px) {
+  main .VmixContainer {
+    display: block;
+  }
+}
+main .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .ContainerCommandSelector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+  padding: 10px;
+  background: #0a0f14;
+  border: 1px solid #4bb1cf;
+  width: 1400px;
+}
+main .ContainerCommandSelector.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .ContainerCommandSelector p {
+  color: #1e2328;
+  font-size: 0.9rem;
+  padding-top: 5px;
+}
+main .ContainerCommandSelector select {
+  cursor: pointer;
 }
 main #videoSourcesContainer {
   display: flex;
@@ -944,21 +1017,6 @@ main #audioSourcesContainer {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-}
-@media (max-width: 1200px) {
-  main {
-    grid-template-columns: 60% 40%;
-  }
-}
-@media (max-width: 700px) {
-  main {
-    grid-template-columns: 50% 50%;
-  }
-}
-@media (max-width: 500px) {
-  main {
-    display: block;
-  }
 }
 
 .video-source {
@@ -977,6 +1035,7 @@ main #audioSourcesContainer {
   position: relative;
   overflow: hidden;
   height: 100%;
+  transition: 0.5s ease;
 }
 .video-source .video .type {
   height: 100%;
@@ -1026,7 +1085,12 @@ main #audioSourcesContainer {
 }
 .video-source .video:hover {
   background-color: #003f9f;
-  transition: 0.5s ease;
+}
+.video-source .video:hover.program {
+  background-color: #da4747;
+}
+.video-source .video:hover.preview {
+  background-color: #e78800;
 }
 .video-source .overlay {
   display: flex;
@@ -1034,6 +1098,7 @@ main #audioSourcesContainer {
   align-items: center;
   height: 100%;
   flex-direction: row;
+  transition: 0.5s ease;
 }
 .video-source .overlay button {
   display: flex;
@@ -1069,7 +1134,12 @@ main #audioSourcesContainer {
 }
 .video-source .overlay button:hover {
   background-color: #343d45;
-  transition: 0.5s ease;
+}
+.video-source .overlay button:hover.program {
+  background-color: #da4747;
+}
+.video-source .overlay button:hover.preview {
+  background-color: #e78800;
 }
 .video-source .overlay button.program {
   background-color: #c62828;
@@ -1195,12 +1265,12 @@ main #audioSourcesContainer {
   display: grid;
   grid-template-columns: 150px 70px 70px;
 }
-.audio-source .containerRange, .audio-bus .containerRange {
+.audio-source .master .containerRange, .audio-bus .master .containerRange {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-.audio-source .range, .audio-bus .range {
+.audio-source .master .range, .audio-bus .master .range {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1209,15 +1279,17 @@ main #audioSourcesContainer {
   transform: translateX(0px) rotate(270deg);
   width: 50px;
   height: 150px;
+  position: relative;
 }
-.audio-source .range input[type=range], .audio-bus .range input[type=range] {
+.audio-source .master .range input[type=range], .audio-bus .master .range input[type=range] {
   -webkit-appearance: none;
   width: 150px;
   height: 5px;
   background: #1e2328;
   outline: none;
+  padding: 0px;
 }
-.audio-source .range input[type=range]::-webkit-slider-thumb, .audio-bus .range input[type=range]::-webkit-slider-thumb {
+.audio-source .master .range input[type=range]::-webkit-slider-thumb, .audio-bus .master .range input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: #1e2328;
   border: 1px solid #ECECEC;
@@ -1226,12 +1298,12 @@ main #audioSourcesContainer {
   cursor: pointer;
   pointer-events: auto !important;
 }
-.audio-source .range input[type=range]::-webkit-slider-thumb:hover, .audio-bus .range input[type=range]::-webkit-slider-thumb:hover {
+.audio-source .master .range input[type=range]::-webkit-slider-thumb:hover, .audio-bus .master .range input[type=range]::-webkit-slider-thumb:hover {
   background: #ffffff;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-.audio-source .range label, .audio-bus .range label {
+.audio-source .master .range label, .audio-bus .master .range label {
   position: absolute;
   color: #006400;
   z-index: -10;
@@ -1240,7 +1312,7 @@ main #audioSourcesContainer {
           user-select: none;
   pointer-events: none;
 }
-.audio-source .range .number, .audio-bus .range .number {
+.audio-source .master .range .number, .audio-bus .master .range .number {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1295,6 +1367,7 @@ nav div .list select {
   padding: 10px;
   font-family: Roboto-Bold, sans-serif;
   font-size: 0.8rem;
+  cursor: pointer;
 }
 nav div .script_down {
   cursor: pointer;

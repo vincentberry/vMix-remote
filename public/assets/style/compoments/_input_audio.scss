@@ -126,7 +126,8 @@
                 width: 150px;
                 height: 5px;
                 background: $background;
-                outline: none;  
+                outline: none;
+                padding: 0px
             }
         
             input[type="range"]::-webkit-slider-thumb {
@@ -163,9 +164,6 @@
         }
     
     }
-
-
-
 
 }
 
