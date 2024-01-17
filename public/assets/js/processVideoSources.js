@@ -42,7 +42,6 @@ function getVideoSourceHTML(videoSource) {
     const title = videoSource.getAttribute('title');
     const number = videoSource.getAttribute('number');
     const type = videoSource.getAttribute('type');
-    const types = "camera";
     var tally = "";
     var tallyeOverlay1
     var tallyeOverlay2
@@ -77,7 +76,7 @@ function getVideoSourceHTML(videoSource) {
     <div class="video ${tally}" onclick="ApiVmixSend('PreviewInput','${key}')">
         <h2>${number}</h2>
         <div class="type">
-            <img src="./assets/icon/${types}.svg" alt="${type}">
+            <img src="./assets/icon/${type}.svg" alt="${type}">
             <h1>${title}</h1>
         </div>
     </div>

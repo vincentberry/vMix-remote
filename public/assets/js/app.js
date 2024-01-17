@@ -76,6 +76,22 @@ function new_session(data) {
     // Récupérer l'élément <select> par son ID
     var selectElement = document.getElementById('vmix_connect');
     var files = JSON.parse(data);
+    activatedBuses = [];
+    id_input= "";
+    previewNumber= "";
+    activeNumber= "";
+    activeOverlay1= "";
+    activeOverlay2= "";
+    activeOverlay3= "";
+    activeOverlay4 = "";
+
+    document.getElementById('projetName').textContent = "" ;
+
+    updateCheckboxClass('streaming', false);
+    updateCheckboxClass('recording', false);
+    updateCheckboxClass('external', false);
+    updateCheckboxClass('fullscreen', false);
+
 
     const videoSourcesContainer = document.getElementById('videoSourcesContainer');
     // Supprimer les éléments existants dans le conteneur de sortie

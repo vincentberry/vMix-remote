@@ -39,16 +39,27 @@
             <h1 id="projetName"></h1>
             <div class="right">
                 <div class="statut_vmix_contener">
-                    <div id="streaming" class="statut_vmix">
+                    <div id="streaming" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the streaming?','StartStopStreaming')" class="statut_vmix">
                         <h1>Streaming</h1>
+                        <div class="activeContainer">
+                            <div id="statut_streaming1" class=""></div>
+                            <div id="statut_streaming2" class=""></div>
+                            <div id="statut_streaming3" class=""></div>
+                        </div>
                     </div>
-                    <div id="recording" class="statut_vmix">
+                    <div id="recording" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the recording?','StartStopRecording')" class="statut_vmix">
                         <h1>Recording</h1>
+                        <div class="activeContainer">
+                            <div id="statut_recording1" class=""></div>
+                            <div id="statut_recording2" class=""></div>
+                        </div>
                     </div>
-                    <div id="external" class="statut_vmix">
+                    <div id="external" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the external?','StartStopExternal')" class="statut_vmix">
                         <h1>external</h1>
+                        <div class="activeContainer">
+                        </div>
                     </div>
-                    <div id="fullscreen" class="statut_vmix">
+                    <div id="fullscreen" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the fullscreen?','Fullscreen')" class="statut_vmix">
                         <h1>fullscreen</h1>
                     </div>
                 </div>

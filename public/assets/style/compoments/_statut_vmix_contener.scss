@@ -1,0 +1,71 @@
+.statut_vmix_contener {
+
+    // Styles pour le conteneur
+    .statut_vmix {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        @include center;
+        border: $color-muted solid 1px;
+        background: $background;
+        cursor: pointer;
+        transition: 0.5s ease;
+        position: relative;
+
+        // Styles pour le texte "fullscreen"
+        h1 {
+            padding: 5px;
+            @include center;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        // Styles pour la case à cocher
+        input[type="checkbox"] {
+            // Cacher la case à cocher native
+            display: none;
+        }
+
+        &:hover{
+            background-color: lighten($background, 10%); 
+        }
+
+        &.true {
+            background: $program;
+            &:hover{
+                background-color: lighten($program, 10%); 
+            }
+            .activeContainer{
+                div{
+                    border: 1px solid $preview;
+                }
+            }    
+        }
+
+    .activeContainer{
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            
+            div{
+                width: 5px;
+                height: 5px;
+                background: transparent;
+                margin: 0 2px;
+                transition: 0.5s ease;
+                border: 1px solid transparent;
+
+                &.active{
+                    background: $preview;
+                }
+            }
+
+
+
+        }
+
+    }
+}

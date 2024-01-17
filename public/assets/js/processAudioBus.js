@@ -64,12 +64,16 @@ function getAudioBusHTML(audioBus) {
     const meterF1 = parseFloat(audioBus.getAttribute('meterF1'));
     const meterF2 = parseFloat(audioBus.getAttribute('meterF2'));
     const sendToMaster = audioBus.getAttribute('sendToMaster') === 'True';
+    let busCommand = `'BusXAudio',undefined,'${busName.charAt(busName.length - 1)}'`
+    if (busName.toLowerCase() === "master") {
+        busCommand = `'masterAudio'`
+    }
     const audioBussesHTML = `<p class="bus ${busName} ${sendToMaster}" onclick="ApiVmixSend('BusXSendToMaster',undefined,'${busName.charAt(busName.length - 1)}')">M</p>`;
     return `
                 <h2>${busName}</h2>
                 <div class="master">
                     <div class="button">
-                        <p class="muted ${muted}" onclick="ApiVmixSend('${busName}Audio')"></p>
+                        <p class="muted ${muted}" onclick="ApiVmixSend(${busCommand})"></p>
                         ${audioBussesHTML}
                     </div>
                     <div class="containerRange">

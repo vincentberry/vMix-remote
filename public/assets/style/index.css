@@ -1081,7 +1081,7 @@ main #audioSourcesContainer {
   background-color: #c62828;
 }
 .video-source .video.preview {
-  background-color: #b46a00;
+  background-color: #f19e1b;
 }
 .video-source .video:hover {
   background-color: #003f9f;
@@ -1090,7 +1090,7 @@ main #audioSourcesContainer {
   background-color: #da4747;
 }
 .video-source .video:hover.preview {
-  background-color: #e78800;
+  background-color: #f4b24b;
 }
 .video-source .overlay {
   display: flex;
@@ -1139,13 +1139,13 @@ main #audioSourcesContainer {
   background-color: #da4747;
 }
 .video-source .overlay button:hover.preview {
-  background-color: #e78800;
+  background-color: #f4b24b;
 }
 .video-source .overlay button.program {
   background-color: #c62828;
 }
 .video-source .overlay button.preview {
-  background-color: #b46a00;
+  background-color: #f19e1b;
 }
 
 .audio-source, .audio-bus {
@@ -1232,8 +1232,8 @@ main #audioSourcesContainer {
   border: 1px solid #616161;
 }
 .audio-source .button p.solo.true, .audio-bus .button p.solo.true {
-  color: #006400;
-  border: 1px solid #006400;
+  color: #41ae46;
+  border: 1px solid #41ae46;
 }
 .audio-source .button p.solo:hover, .audio-bus .button p.solo:hover {
   border: 1px solid #ffffff;
@@ -1305,7 +1305,7 @@ main #audioSourcesContainer {
 }
 .audio-source .master .range label, .audio-bus .master .range label {
   position: absolute;
-  color: #006400;
+  color: #41ae46;
   z-index: -10;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1382,7 +1382,7 @@ nav div #projetName {
   padding: 10px;
   font-size: 1.2rem;
   align-items: center;
-  color: #006400;
+  color: #41ae46;
 }
 nav div .statut_vmix_contener .statut_vmix {
   display: flex;
@@ -1393,6 +1393,9 @@ nav div .statut_vmix_contener .statut_vmix {
   align-items: center;
   border: #ECECEC solid 1px;
   background: #1e2328;
+  cursor: pointer;
+  transition: 0.5s ease;
+  position: relative;
 }
 nav div .statut_vmix_contener .statut_vmix h1 {
   padding: 5px;
@@ -1405,8 +1408,36 @@ nav div .statut_vmix_contener .statut_vmix h1 {
 nav div .statut_vmix_contener .statut_vmix input[type=checkbox] {
   display: none;
 }
+nav div .statut_vmix_contener .statut_vmix:hover {
+  background-color: #343d45;
+}
 nav div .statut_vmix_contener .statut_vmix.true {
   background: #c62828;
+}
+nav div .statut_vmix_contener .statut_vmix.true:hover {
+  background-color: #da4747;
+}
+nav div .statut_vmix_contener .statut_vmix.true .activeContainer div {
+  border: 1px solid #f19e1b;
+}
+nav div .statut_vmix_contener .statut_vmix .activeContainer {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+nav div .statut_vmix_contener .statut_vmix .activeContainer div {
+  width: 5px;
+  height: 5px;
+  background: transparent;
+  margin: 0 2px;
+  transition: 0.5s ease;
+  border: 1px solid transparent;
+}
+nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
+  background: #f19e1b;
 }
 
 .inputContainer {
