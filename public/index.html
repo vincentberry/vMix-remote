@@ -70,8 +70,10 @@
                 <button onclick="sendCommand()">Send Command</button>
             </div>
         </section>
-        <button onclick="vMix_ActiveInput()">CUT</button>
-        <button onclick="vMix_Fade()">FACE</button>
+        <button onclick="ApiVmixSend('Cut', previewNumber)">CUT</button>
+        <button onclick="ApiVmixSend('Fade', previewNumber)">FACE</button>
+        <button onclick="ApiVmixSend('Stinger1', previewNumber)">STINGER 1</button>
+        <button onclick="ApiVmixSend('Merge', previewNumber)">MERGE</button>
         <section class="VmixContainer">
             <div id="videoSourcesContainer"></div>
             <div>

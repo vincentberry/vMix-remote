@@ -57,7 +57,7 @@ function chargerFichierXML() {
         }
     }
 
-    xhr.open('GET', "vmix.php?session_vmix=" + document.getElementById('vmix_connect').value, true) 
+    xhr.open('GET', "connect.php?session_vmix=" + document.getElementById('vmix_connect').value, true) 
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
     xhr.send()
 }

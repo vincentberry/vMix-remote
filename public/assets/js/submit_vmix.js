@@ -28,7 +28,7 @@ function ApiVmixSend(command, input = 0, value = 0, duration = 0) {
             }
         }
 
-        xhr.open('GET', "api_command.php?" + queryString, true) 
+        xhr.open('GET', "send_command.php?" + queryString, true) 
         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
         xhr.send()
 }

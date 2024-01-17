@@ -74,7 +74,7 @@ function getAudioBusHTML(audioBus) {
                     </div>
                     <div class="containerRange">
                         <div class="range">
-                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('Set${busName}Volume','${busName}')" onmouseover="showVolume('volume-${busName}')" onmouseout="hideTooltip('volume-${busName}')">
+                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="ApiVmixSend('Set${busName}Volume','${busName}',this.value)" onmouseover="showVolume('volume-${busName}')" onmouseout="hideTooltip('volume-${busName}')">
                         </div>
                     </div>
                 </div>

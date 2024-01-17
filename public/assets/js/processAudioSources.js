@@ -87,12 +87,12 @@ function getAudioSourceHTML(audioSource) {
                         </div>
                         <div class="containerRange">
                             <div class="range">
-                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('SetVolume','${key}')" onmouseover="showVolume('volume-${key}')" onmouseout="hideTooltip('volume-${key}')">
+                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="ApiVmixSend('SetVolume','${key}',this.value)" onmouseover="showVolume('volume-${key}')" onmouseout="hideTooltip('volume-${key}')">
                             </div>
                         </div>
                         <div class="containerRange">
                             <div class="range">
-                                <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="vMix_SetGain('${key}')" onmouseover="showGainDb('gainDb-${key}')" onmouseout="hideTooltip('gainDb-${key}')">
+                                <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="ApiVmixSend('SetGain','${key}',this.value)" onmouseover="showGainDb('gainDb-${key}')" onmouseout="hideTooltip('gainDb-${key}')">
                             </div>
                         </div>
                     </div>
