@@ -74,10 +74,69 @@ function getAudioBusHTML(audioBus) {
                     </div>
                     <div class="containerRange">
                         <div class="range">
-                            <label for="volume-${busName}">${Math.floor(volumeDB)}%</label>
-                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_AudioBus('${busName}')">
+                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_AudioBus('${busName}')" onmouseover="showVolume('volume-${busName}')" onmouseout="hideTooltip('volume-${busName}')">
                         </div>
                     </div>
                 </div>
             `;
+}
+
+function showGainDb(sliderId) {
+    var tooltip = document.getElementById('tooltip-volume');
+    tooltip.classList.add('affiche');
+
+    // Mettre à jour le tooltip lorsque le curseur se déplace
+    document.addEventListener('mousemove', function (event) {
+        var range = document.getElementById(sliderId);
+
+        var tooltipPosition = range.getBoundingClientRect();
+        const volumeDB = parseFloat(document.getElementById(sliderId).value);
+        tooltip.textContent = "+" + Math.floor(volumeDB) +" db";
+
+          // Positionner l'info-bulle en fonction de la position de la souris
+          var rect = range.getBoundingClientRect();
+          var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Positionner l'info-bulle
+        tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
+        tooltip.style.top = event.clientY + scrollTop - 10 + 'px'; // Ajuster la position verticale si nécessaire
+    });
+}
+
+function showVolume(sliderId) {
+    var tooltip = document.getElementById('tooltip-volume');
+    tooltip.classList.add('affiche');
+
+    // Mettre à jour le tooltip lorsque le curseur se déplace
+    document.addEventListener('mousemove', function (event) {
+        var range = document.getElementById(sliderId);
+
+        var tooltipPosition = range.getBoundingClientRect();
+        const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(document.getElementById(sliderId).value))) / 100);
+        if (volumeDB != -Infinity){
+            tooltip.textContent = Math.floor(volumeDB) +" db";
+        }else{
+            tooltip.textContent = "-∞ db"
+        }
+
+          // Positionner l'info-bulle en fonction de la position de la souris
+          var rect = range.getBoundingClientRect();
+          var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Positionner l'info-bulle
+        tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
+        tooltip.style.top = event.clientY + scrollTop - 10 + 'px'; // Ajuster la position verticale si nécessaire
+    });
+}
+
+function hideTooltip(sliderId) {
+    var tooltip = document.getElementById('tooltip-volume');
+    tooltip.classList.remove('affiche');
+
+    // Arrêter de mettre à jour le tooltip lorsque le curseur ne survole pas le range
+    document.removeEventListener('mousemove', function (event) {
+        // Ne fait rien ici
+    });
 }

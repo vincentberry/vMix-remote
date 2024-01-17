@@ -20,22 +20,22 @@ function vMix_PreviewInput(key) {
     ApiVmixSend(url)
 }
 
-function vMix_ActiveInput(key) {
+function vMix_ActiveInput() {
 
     // URL de votre endpoint de serveur
     const url = 'flyValue=ActiveInput' +
-        '&inputValue=' + encodeURIComponent(key) +
+        '&inputValue=' + encodeURIComponent(previewNumber) +
         '&durationValue=0' +
         '&mixValue=0';
 
     ApiVmixSend(url)
 }
 
-function vMix_Fade(key) {
+function vMix_Fade() {
 
     // URL de votre endpoint de serveur
     const url = 'flyValue=Fade' +
-        '&inputValue=' + encodeURIComponent(key) +
+        '&inputValue=' + encodeURIComponent(previewNumber) +
         '&durationValue=500' +
         '&mixValue=0';
 
@@ -105,7 +105,7 @@ function vMix_BusXSendToMaster(key) {
 function vMix_AudioBus(key) {
     // Récupérer l'élément <input> par son ID
     const volumeInput = document.getElementById(`volume-${key}`);
-    console.log(volumeInput);
+
     // URL de votre endpoint de serveur
     const url = 'flyValue=Set'+key+'Volume ' +
         '&inputValue=0' +

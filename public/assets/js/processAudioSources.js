@@ -85,17 +85,14 @@ function getAudioSourceHTML(audioSource) {
                             <p class="solo ${solo}" onclick="vMix_Solo('${key}')">S</p>
                             ${audioBussesHTML}
                         </div>
-                        
                         <div class="containerRange">
                             <div class="range">
-                                <label for="volume-${key}">Volume: ${Math.floor(volumeDB)}db</label>
-                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('${key}')">
+                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('${key}')" onmouseover="showVolume('volume-${key}')" onmouseout="hideTooltip('volume-${key}')">
                             </div>
                         </div>
                         <div class="containerRange">
                             <div class="range">
-                                <label for="gainDb-${key}">gainDb: +${Math.floor(gainDb)}db</label>
-                                <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="vMix_SetGain('${key}')">
+                                <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="vMix_SetGain('${key}')" onmouseover="showGainDb('gainDb-${key}')" onmouseout="hideTooltip('gainDb-${key}')">
                             </div>
                         </div>
                     </div>
