@@ -19,3 +19,13 @@ function processSettings(xmlString) {
     updateCheckboxClass('fullscreen', JSON.parse(xmlDoc.querySelector('fullscreen').textContent.trim().toLowerCase()));
 
 }
+
+function updateCheckboxClass(checkboxId, className) {
+    if (className) {
+        // La case à cocher est cochée, ajouter la classe
+        document.getElementById(checkboxId).classList.add('true');
+    } else {
+        // La case à cocher n'est pas cochée, supprimer la classe
+        document.getElementById(checkboxId).classList.remove('true');
+    }
+}
