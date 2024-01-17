@@ -72,22 +72,22 @@ function getAudioSourceHTML(audioSource) {
         }
 
         if (activatedBus === "master") {
-            return `<p class="bus ${active}" onclick="AudioBus('${key}', 'M')">M</p>`;
+            return `<p class="bus ${active}" onclick="ApiVmixSend('AudioBus','${key}', 'M')">M</p>`;
         } else {
-            return `<p class="bus ${active}" onclick="AudioBus('${key}', '${activatedBus}')">${activatedBus}</p>`;
+            return `<p class="bus ${active}" onclick="ApiVmixSend('AudioBus','${key}','${activatedBus}')">${activatedBus}</p>`;
         }
     }).join('');
     return `
                     <h2>${title}</h2>
                     <div class="master">
                         <div class="button">
-                            <p class="muted ${muted}" onclick="vMix_Audio('${key}')"></p>
-                            <p class="solo ${solo}" onclick="vMix_Solo('${key}')">S</p>
+                            <p class="muted ${muted}" onclick="ApiVmixSend('Audio', '${key}')"></p>
+                            <p class="solo ${solo}" onclick="ApiVmixSend('Solo', '${key}')">S</p>
                             ${audioBussesHTML}
                         </div>
                         <div class="containerRange">
                             <div class="range">
-                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('${key}')" onmouseover="showVolume('volume-${key}')" onmouseout="hideTooltip('volume-${key}')">
+                                <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('SetVolume','${key}')" onmouseover="showVolume('volume-${key}')" onmouseout="hideTooltip('volume-${key}')">
                             </div>
                         </div>
                         <div class="containerRange">

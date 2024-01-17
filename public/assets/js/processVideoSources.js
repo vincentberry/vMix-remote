@@ -74,7 +74,7 @@ function getVideoSourceHTML(videoSource) {
         }
         
     return `
-    <div class="video ${tally}" onclick="vMix_PreviewInput('${key}')">
+    <div class="video ${tally}" onclick="ApiVmixSend('PreviewInput','${key}')">
         <h2>${number}</h2>
         <div class="type">
             <img src="./assets/icon/${types}.svg" alt="${type}">
@@ -82,10 +82,10 @@ function getVideoSourceHTML(videoSource) {
         </div>
     </div>
     <div class="overlay">
-        <button class="${tallyeOverlay1}" onclick="vMix_OverlayToggle(1,'${key}')">1</button>
-        <button class="${tallyeOverlay2}" onclick="vMix_OverlayToggle(2,'${key}')">2</button>
-        <button class="${tallyeOverlay3}" onclick="vMix_OverlayToggle(3,'${key}')">3</button>
-        <button class="${tallyeOverlay4}" onclick="vMix_OverlayToggle(4,'${key}')">4</button>
+        <button class="${tallyeOverlay1}" onclick="ApiVmixSend('OverlayInput1','${key}')">1</button>
+        <button class="${tallyeOverlay2}" onclick="ApiVmixSend('OverlayInput2','${key}')">2</button>
+        <button class="${tallyeOverlay3}" onclick="ApiVmixSend('OverlayInput3','${key}')">3</button>
+        <button class="${tallyeOverlay4}" onclick="ApiVmixSend('OverlayInput4','${key}')">4</button>
         <button class="menu grid_menu" onclick="OpenPageInput('inputContainer_${key}')"></button>
     </div>
 `;

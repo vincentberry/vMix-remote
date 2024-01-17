@@ -64,17 +64,17 @@ function getAudioBusHTML(audioBus) {
     const meterF1 = parseFloat(audioBus.getAttribute('meterF1'));
     const meterF2 = parseFloat(audioBus.getAttribute('meterF2'));
     const sendToMaster = audioBus.getAttribute('sendToMaster') === 'True';
-    const audioBussesHTML = `<p class="bus ${busName} ${sendToMaster}" onclick="vMix_BusXSendToMaster('${busName.charAt(busName.length - 1)}')">M</p>`;
+    const audioBussesHTML = `<p class="bus ${busName} ${sendToMaster}" onclick="ApiVmixSend('BusXSendToMaster',undefined,'${busName.charAt(busName.length - 1)}')">M</p>`;
     return `
                 <h2>${busName}</h2>
                 <div class="master">
                     <div class="button">
-                        <p class="muted ${muted}" onclick="vMix_MasterAudio('${busName}')"></p>
+                        <p class="muted ${muted}" onclick="ApiVmixSend('${busName}Audio')"></p>
                         ${audioBussesHTML}
                     </div>
                     <div class="containerRange">
                         <div class="range">
-                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_AudioBus('${busName}')" onmouseover="showVolume('volume-${busName}')" onmouseout="hideTooltip('volume-${busName}')">
+                            <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="vMix_SetVolume('Set${busName}Volume','${busName}')" onmouseover="showVolume('volume-${busName}')" onmouseout="hideTooltip('volume-${busName}')">
                         </div>
                     </div>
                 </div>
