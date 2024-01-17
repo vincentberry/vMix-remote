@@ -42,6 +42,7 @@ if (!empty($_GET["session_vmix"])) {
                 if (time() - $timestamp_derniere_modif > 300) { // 300 secondes = 5 minutes
                     // Supprimer le fichier
                     unlink( '../file/'.$file);
+                    return "";
                 }
             }
             return $file !== '.' && $file !== '..';
