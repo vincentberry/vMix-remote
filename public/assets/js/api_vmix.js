@@ -1,5 +1,5 @@
 // Charger le fichier JSON
-fetch('api.json')
+fetch('api_vmix.json')
     .then(response => response.json())
     .then(data => {
         commands = data; // Assigner les données à la variable commands
