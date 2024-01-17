@@ -26,7 +26,7 @@ var getHttpRequest = function () {
 
     return httpRequest
 }
-
+var init = 1;
 function chargerFichierXML() {
 
     var xhr = getHttpRequest()
@@ -36,28 +36,37 @@ function chargerFichierXML() {
             if (xhr.status === 200) {
                 data = xhr.responseText;
                 if (document.getElementById('vmix_connect').value === "N") {
-                    console.log(data);
                     new_session(data);
+                    let vmix_connect_param = get_vmix_connect_param();
+                    if (vmix_connect_param && init === 1){
+                        document.getElementById('vmix_connect').value = vmix_connect_param;
+                        init = 0;
+                    }else{
+                        update_url("N");
+                    }
                 } else {
                     processSettings(data);
                     processVideoSources(data);
                     processAudioBuses(data);
                     processAudioSources(data);
                     processPageSources(data);
+                    update_url(document.getElementById('vmix_connect').value);
                 }
             } else {
-                if (JSON.parse(xhr.responseText)['error']){
+                if (JSON.parse(xhr.responseText)['error']) {
                     AlertPopup(JSON.parse(xhr.responseText)['error'])
-                }else if(JSON.parse(xhr.responseText)['reset']){
+                } else if (JSON.parse(xhr.responseText)['reset']) {
                     AlertPopup(JSON.parse(xhr.responseText)['reset'])
                     document.getElementById('vmix_connect').value = "N"
+                    update_url("N");
                 }
-                
+
             }
         }
+        
     }
 
-    xhr.open('GET', "connect.php?session_vmix=" + document.getElementById('vmix_connect').value, true) 
+    xhr.open('GET', "connect.php?session_vmix=" + document.getElementById('vmix_connect').value, true)
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
     xhr.send()
 }
@@ -108,6 +117,45 @@ function new_session(data) {
     }
 
 }
+
+function update_url(paramValue) {
+    let currentUrl = window.location.href;
+    let paramName = 'vmix_connect';
+    let regex = new RegExp(`([?&])${paramName}=.*?(&|$)`, 'i');
+    let paramExists = currentUrl.match(regex);
+
+    // Vérifiez si le paramètre existe et a une valeur différente
+    if (paramExists) {
+        let existingValue = currentUrl.match(regex)[0].split('=')[1];
+        if (existingValue !== paramValue) {
+            // Mettez à jour la valeur du paramètre existant
+            let newUrl = currentUrl.replace(regex, `$1${paramName}=${paramValue}$2`);
+            window.history.replaceState({}, '', newUrl);
+        }
+    } else {
+        // Ajoutez le paramètre à l'URL s'il n'existe pas
+        let separator = currentUrl.includes('?') ? '&' : '?';
+        let newUrl = currentUrl + separator + `${paramName}=${paramValue}`;
+        window.history.pushState({}, '', newUrl);
+    }
+}
+
+function get_vmix_connect_param() {
+    let currentUrl = window.location.href;
+    let paramName = 'vmix_connect';
+    let regex = new RegExp(`[?&]${paramName}=([^&]*)`, 'i');
+    let match = currentUrl.match(regex);
+
+    if (match) {
+        // La valeur du paramètre vmix_connect existe dans l'URL
+        return decodeURIComponent(match[1]);
+    } else {
+        // Le paramètre vmix_connect n'existe pas dans l'URL
+        return null;
+    }
+}
+
+
 // Charger le fichier XML et générer les éléments HTML au chargement de la page
 window.onload = chargerFichierXML;
 setInterval(chargerFichierXML, 1000);

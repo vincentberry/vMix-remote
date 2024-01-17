@@ -128,11 +128,11 @@
 
         ' Appeler la fonction VMix avec les paramètres appropriés
         API.Function(functionType, Input:=inputParam, Value:=valueParam, Duration:=durationParam)
-        Console.WriteLine(functionType)
+        'Console.WriteLine(functionType)
         Elseif Not String.IsNullOrEmpty(rawCommand) Then
-        Console.WriteLine(rawCommand)
+        'Console.WriteLine(rawCommand)
         Else
-        Console.WriteLine("La commande VMix est mal formée.")
+        'Console.WriteLine("La commande VMix est mal formée.")
         End If
         Next
 
