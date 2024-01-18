@@ -22,22 +22,12 @@ CREATE TABLE `command` (
   `push_vmix` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `vmix` (
-  `id` int(11) NOT NULL,
-  `session_vmix` int(11) NOT NULL,
-  `date_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `session_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 ALTER TABLE `command`
   ADD PRIMARY KEY (`id`);
-
 
 ALTER TABLE `command`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
-
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON `remotevmix`.* TO 'user'@'%';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
