@@ -36,14 +36,14 @@ function chargerFichierXML() {
             if (xhr.status === 200) {
                 data = xhr.responseText;
                 if (document.getElementById('vmix_connect').value === "N") {
-                    new_session(data);
+                                        new_session(data);
                     let vmix_connect_param = get_vmix_connect_param();
                     if (vmix_connect_param && init === 1){
                         document.getElementById('vmix_connect').value = vmix_connect_param;
                         init = 0;
                     }else{
                         update_url("N");
-                    }
+                                           }
                 } else {
                     processSettings(data);
                     processVideoSources(data);
@@ -66,7 +66,7 @@ function chargerFichierXML() {
         
     }
 
-    xhr.open('GET', "connect.php?session_vmix=" + document.getElementById('vmix_connect').value, true)
+    xhr.open('GET', "api/connect.php?session_vmix=" + document.getElementById('vmix_connect').value, true)
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
     xhr.send()
 }
@@ -75,7 +75,7 @@ function new_session(data) {
 
     // Récupérer l'élément <select> par son ID
     var selectElement = document.getElementById('vmix_connect');
-    var files = JSON.parse(data);
+        var files = JSON.parse(data);
     activatedBuses = [];
     id_input= "";
     previewNumber= "";

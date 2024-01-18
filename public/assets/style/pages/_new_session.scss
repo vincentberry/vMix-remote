@@ -1,0 +1,28 @@
+.new_session{
+    @include center;
+    flex-direction: column;
+    height: 100vh;
+
+    h1{
+        margin: 20px;
+    }
+
+    select{
+        cursor: pointer;
+    }
+
+    button{
+
+        background: $preview;
+        transition: 0.5s ease-in;
+        margin-top: 50px;
+        &:hover{
+            color: $preview;
+            background-color: lighten($preview, 50%); 
+        }
+    }
+
+    p{
+        color: $primary-btn;
+    }
+}

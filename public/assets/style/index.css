@@ -1019,6 +1019,56 @@ main #audioSourcesContainer {
   align-content: flex-start;
 }
 
+.new_session {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.new_session h1 {
+  margin: 20px;
+}
+.new_session select {
+  cursor: pointer;
+}
+.new_session button {
+  background: #f19e1b;
+  transition: 0.5s ease-in;
+  margin-top: 50px;
+}
+.new_session button:hover {
+  color: #f19e1b;
+  background-color: white;
+}
+.new_session p {
+  color: #616161;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 800px;
+  z-index: 1000;
+  height: 800px;
+  transform: translate(-50%);
+  background: #0a0f14;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.inputContainer.none {
+  display: none;
+}
+
+.closeButton {
+  cursor: pointer;
+}
+
 .video-source {
   margin: 5px;
   border: 1px solid #616161;
@@ -1438,28 +1488,4 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div {
 }
 nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   background: #f19e1b;
-}
-
-.inputContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  width: 800px;
-  z-index: 1000;
-  height: 800px;
-  transform: translate(-50%);
-  background: #0a0f14;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-.inputContainer.none {
-  display: none;
-}
-
-.closeButton {
-  cursor: pointer;
 }/*# sourceMappingURL=index.css.map */

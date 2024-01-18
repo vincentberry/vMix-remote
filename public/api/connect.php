@@ -1,6 +1,6 @@
 <?php
-require_once "../config.php";
-$db = App::getDatabase();
+$Dir_inc = '../../';
+require_once $Dir_inc."config.php";
 
 if (!empty($_GET["session_vmix"])) {
     $session_vmix = $_GET['session_vmix'];
@@ -10,9 +10,9 @@ if (!empty($_GET["session_vmix"])) {
 
     if ($session_vmix && $session_vmix <> "N") {
 
-        $file = "../file/" . $session_vmix . ".xml";
+        $file = $Dir_inc."file/" . $session_vmix . ".xml";
 
-        $timestamp_derniere_modif = filemtime( '../file/'.$file);
+        $timestamp_derniere_modif = filemtime($file);
 
         if ($timestamp_actuel - $timestamp_derniere_modif > 30){
             http_response_code(201);
@@ -26,22 +26,23 @@ if (!empty($_GET["session_vmix"])) {
 
     } else {
         // Spécifiez le chemin du dossier
-        $directoryPath = '../file/';
+        $directoryPath = $Dir_inc.'file/';
 
         // Utilisez scandir pour obtenir la liste des fichiers dans le dossier
         $files = scandir($directoryPath);
 
         // Filtrer les fichiers pour exclure les entrées "." et ".."
-        $filteredFiles = array_filter($files, function ($file) {
+        $filteredFiles = array_filter($files, function ($file) use ($Dir_inc)  {
             // Vérifier si le fichier existe
-            if (file_exists( '../file/'.$file) && $file !== '.' && $file !== '..') {
+            $dir_file = $Dir_inc.'file/'.$file;
+            if (file_exists($dir_file) && $file !== '.' && $file !== '..') {
                 // Obtenir le timestamp de la dernière modification du fichier
-                $timestamp_derniere_modif = filemtime( '../file/'.$file);
+                $timestamp_derniere_modif = filemtime($dir_file);
 
                 // Vérifier si le fichier a été modifié il y a plus de 5 minutes
                 if (time() - $timestamp_derniere_modif > 300) { // 300 secondes = 5 minutes
                     // Supprimer le fichier
-                    unlink( '../file/'.$file);
+                    unlink($dir_file);
                     return "";
                 }
             }

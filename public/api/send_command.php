@@ -1,5 +1,6 @@
 <?php
-require_once "../config.php";
+$Dir_inc = '../../';
+require_once $Dir_inc."config.php";
 $db = App::getDatabase();
 
 if (!empty($_GET["command"]) && !empty($_GET["session_vmix"])) {
