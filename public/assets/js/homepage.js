@@ -105,7 +105,11 @@ function get_vmix_connect_param() {
     }
 }
 
+function AlertPopup(data) {
+    console.log(data);
+    window.alert(data);
+}
 
 // Charger le fichier XML et générer les éléments HTML au chargement de la page
 window.onload = chargerFichierXML;
-setInterval(chargerFichierXML, 1000);
+setInterval(chargerFichierXML, 10000);
