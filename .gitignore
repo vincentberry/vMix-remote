@@ -6,6 +6,6 @@
 /log/
 /file/
 /app/file/
-/db/
+/app/db/
 .vscode/
 database.sqlite
