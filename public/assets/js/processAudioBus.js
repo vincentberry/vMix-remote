@@ -19,7 +19,7 @@ function processAudioBuses(xmlString) {
         if (existingAudioBus) {
             // Mettre à jour les informations nécessaires
             const AudioBusHTML = getAudioBusHTML(audioBus);
-            if( existingAudioBus.innerHTML != AudioBusHTML){
+            if (existingAudioBus.innerHTML != AudioBusHTML) {
                 existingAudioBus.innerHTML = AudioBusHTML;
             }
         } else {
@@ -78,7 +78,22 @@ function getAudioBusHTML(audioBus) {
                     </div>
                     <div class="containerRange">
                         <div class="range">
+                            <label>volume</label>
                             <input type="range" id="volume-${busName}" value="${volume}" min="0" max="100" step="1" onclick="ApiVmixSend('Set${busName}Volume','${busName}',this.value)" onmouseover="showVolume('volume-${busName}')" onmouseout="hideTooltip('volume-${busName}')">
+                            <div class="sliderticks">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,12 +110,12 @@ function showGainDb(sliderId) {
 
         var tooltipPosition = range.getBoundingClientRect();
         const volumeDB = parseFloat(document.getElementById(sliderId).value);
-        tooltip.textContent = "+" + Math.floor(volumeDB) +" db";
+        tooltip.textContent = "+" + Math.floor(volumeDB) + " db";
 
-          // Positionner l'info-bulle en fonction de la position de la souris
-          var rect = range.getBoundingClientRect();
-          var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        // Positionner l'info-bulle en fonction de la position de la souris
+        var rect = range.getBoundingClientRect();
+        var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         // Positionner l'info-bulle
         tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
@@ -118,16 +133,16 @@ function showVolume(sliderId) {
 
         var tooltipPosition = range.getBoundingClientRect();
         const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(document.getElementById(sliderId).value))) / 100);
-        if (volumeDB != -Infinity){
-            tooltip.textContent = Math.floor(volumeDB) +" db";
-        }else{
+        if (volumeDB != -Infinity) {
+            tooltip.textContent = Math.floor(volumeDB) + " db";
+        } else {
             tooltip.textContent = "-∞ db"
         }
 
-          // Positionner l'info-bulle en fonction de la position de la souris
-          var rect = range.getBoundingClientRect();
-          var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        // Positionner l'info-bulle en fonction de la position de la souris
+        var rect = range.getBoundingClientRect();
+        var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         // Positionner l'info-bulle
         tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';

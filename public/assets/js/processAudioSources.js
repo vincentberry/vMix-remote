@@ -19,10 +19,10 @@ function processAudioSources(xmlString) {
         // Si la source audio existe déjà, la mettre à jour
         if (existingAudioSource) {
             // Mettre à jour les informations nécessaires
-           const AudioSourceHTML = getAudioSourceHTML(audioSource);        
-           if( existingAudioSource.innerHTML != AudioSourceHTML){
-               existingAudioSource.innerHTML = AudioSourceHTML;
-           }
+            const AudioSourceHTML = getAudioSourceHTML(audioSource);
+            if (existingAudioSource.innerHTML != AudioSourceHTML) {
+                existingAudioSource.innerHTML = AudioSourceHTML;
+            }
         } else {
             // Créer une nouvelle div pour la source audio
             const newDivElement = document.createElement('div');
@@ -87,12 +87,42 @@ function getAudioSourceHTML(audioSource) {
                         </div>
                         <div class="containerRange">
                             <div class="range">
+                                <label>volume</label>
                                 <input type="range" id="volume-${key}" value="${volume}" min="0" max="100" step="1" onclick="ApiVmixSend('SetVolume','${key}',this.value)" onmouseover="showVolume('volume-${key}')" onmouseout="hideTooltip('volume-${key}')">
+                                <div class="sliderticks">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
                         <div class="containerRange">
                             <div class="range">
+                                 <label>gain</label>
                                 <input type="range" id="gainDb-${key}" value="${gainDb}" min="0" max="24" step="1" onclick="ApiVmixSend('SetGain','${key}',this.value)" onmouseover="showGainDb('gainDb-${key}')" onmouseout="hideTooltip('gainDb-${key}')">
+                                <div class="sliderticks">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
                     </div>

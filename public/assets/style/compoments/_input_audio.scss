@@ -1,22 +1,24 @@
-.audio-source, .audio-bus {
+.audio-source,
+.audio-bus {
     background: $background_item;
     border: 1px solid $primary-btn;
     margin: 5px;
     max-width: 300px;
     overflow: hidden;
 
-    h2{
+    h2 {
         @include center;
         font-size: 1rem;
         padding: 10px 0px;
         border-bottom: 1px solid $color-text ;
     }
 
-    .button{
+    .button {
         display: flex;
         flex-wrap: wrap;
         align-content: flex-end;
         z-index: 10;
+
         p {
             width: 30px;
             height: 30px;
@@ -29,72 +31,74 @@
             overflow: hidden;
             color: $primary-btn;
 
-            &.master{
+            &.master {
                 visibility: hidden;
             }
-    
-            &.true{
+
+            &.true {
                 color: $primary-btn;
             }
-    
-            &.false{
+
+            &.false {
                 color: $program;
                 border: 1px solid $program;
             }
-    
-            &.muted{
-                &.true{
-                    @include icon($icon-mute); 
+
+            &.muted {
+                &.true {
+                    @include icon($icon-mute);
                 }
-        
-                &.false{
-                    @include icon($icon-volume); 
+
+                &.false {
+                    @include icon($icon-volume);
                 }
             }
-    
-            &.soloPFL{
+
+            &.soloPFL {
                 font-size: 1rem;
             }
 
-            &.solo{
+            &.solo {
                 font-size: 1.5rem;
 
-                &.false{
+                &.false {
                     color: $primary-btn;
                     border: 1px solid $primary-btn;
                 }
-        
-                &.true{
+
+                &.true {
                     color: $audio;
                     border: 1px solid $audio;
                 }
-                &:hover{
+
+                &:hover {
                     border: 1px solid $color-text;
                     color: $color-text;
                     transition: 0.5s ease;
                 }
             }
 
-            &.bus{
+            &.bus {
                 font-size: 1.5rem;
 
-                &.false{
+                &.false {
                     color: $primary-btn;
                     border: 1px solid $primary-btn;
                 }
-        
-                &.true{
+
+                &.true {
                     color: $program;
                     border: 1px solid $program;
                 }
-                &:hover{
+
+                &:hover {
                     border: 1px solid $color-text;
                     color: $color-text;
                     transition: 0.5s ease;
                 }
             }
 
-            &:hover{
+            &:hover {
                 border: 1px solid $color-text;
                 color: $color-text;
                 transition: 0.5s ease;
@@ -102,17 +106,17 @@
         }
     }
 
-    .master{
+    .master {
         display: grid;
         grid-template-columns: 150px 70px 70px;
 
-        .containerRange{
+        .containerRange {
             width: 100%;
             height: 100%;
             overflow: hidden;
         }
 
-        .range{
+        .range {
             @include center;
             margin: 0px;
             padding: 0px;
@@ -120,7 +124,7 @@
             width: 50px;
             height: 150px;
             position: relative;
-            
+
             input[type="range"] {
                 -webkit-appearance: none;
                 width: 150px;
@@ -129,7 +133,25 @@
                 outline: none;
                 padding: 0px
             }
-        
+
+            .sliderticks {
+                position: absolute;
+                display: flex;
+                left: -44px;
+                transform: translateY(10px);
+                z-index: -10;
+                justify-content: space-between;
+
+                span {
+                    margin-left: 10px;
+                    display: flex;
+                    justify-content: center;
+                    width: 1px;
+                    height: 10px;
+                    background: $background;
+                }
+            }
+
             input[type="range"]::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 background: $background;
@@ -138,21 +160,23 @@
                 width: 10px;
                 cursor: pointer;
                 pointer-events: auto !important;
-    
-                &:hover{
+
+                &:hover {
                     background: $color-text;
                     transition: 0.5s ease;
                 }
             }
-    
-            label{
+
+            label {
                 position: absolute;
                 color: $audio;
+                transform: translateY(-15px);
                 z-index: -10;
                 user-select: none;
                 pointer-events: none;
+                color: $background;
             }
-        
+
             .number {
                 @include center;
                 background: $background;
@@ -160,27 +184,27 @@
                 max-width: 50px;
                 overflow: hidden;
             }
-    
+
         }
-    
+
     }
 
 }
 
-.audio-bus{
+.audio-bus {
 
-    .master{
+    .master {
         grid-template-columns: 1fr 1fr;
     }
 
-   .master .button{
+    .master .button {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
     }
-} 
+}
 
-#audioBusesContainer{
+#audioBusesContainer {
     display: flex;
     width: auto;
 }

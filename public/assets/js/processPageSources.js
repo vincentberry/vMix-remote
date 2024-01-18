@@ -8,12 +8,17 @@ function processPageSources(xmlString) {
 
     // Loop through each input and create a corresponding div
     inputs.forEach(input => {
+        var inputContent = input.innerHTML;
+
         const div = document.createElement("div");
         div.id = "inputContainer_"+input.getAttribute('key');
         div.className = "inputContainer none";
         div.innerHTML = `
-            <span>${ input.cloneNode(true)}</span>
-            <span class="closeButton" onclick="closePageInput(this)">✖</span>
+            <div class="Container">
+                <span class="closeButton" onclick="closePageInput(this)">✖</span>
+                <div>${ inputContent}</div>
+            </div>
+      
         `;
         container.appendChild(div);
     });
@@ -21,7 +26,7 @@ function processPageSources(xmlString) {
 
 function closePageInput(button) {
     // Get the parent div and hide it
-    const inputContainer = button.parentNode;
+    const inputContainer = button.parentNode.parentNode;
     inputContainer.classList.add("none");
 }
 

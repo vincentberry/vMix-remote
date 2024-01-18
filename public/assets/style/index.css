@@ -1055,20 +1055,37 @@ main #audioSourcesContainer {
 }
 
 .inputContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.inputContainer .Container {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 20%;
+  top: 50%;
   left: 50%;
-  width: 800px;
-  z-index: 1000;
-  height: 800px;
-  transform: translate(-50%);
+  transform: translate(-50%, -50%);
+  width: 80%;
+  min-height: 300px;
   background: #0a0f14;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   padding: 10px;
+}
+.inputContainer .Container span {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  transition: 0.5s ease;
+}
+.inputContainer .Container span:hover {
+  transform: scale(1.5);
 }
 .inputContainer.none {
   display: none;
@@ -1207,14 +1224,16 @@ main #audioSourcesContainer {
   background-color: #f19e1b;
 }
 
-.audio-source, .audio-bus {
+.audio-source,
+.audio-bus {
   background: #0a0f14;
   border: 1px solid #616161;
   margin: 5px;
   max-width: 300px;
   overflow: hidden;
 }
-.audio-source h2, .audio-bus h2 {
+.audio-source h2,
+.audio-bus h2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1222,13 +1241,15 @@ main #audioSourcesContainer {
   padding: 10px 0px;
   border-bottom: 1px solid #ffffff;
 }
-.audio-source .button, .audio-bus .button {
+.audio-source .button,
+.audio-bus .button {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-end;
   z-index: 10;
 }
-.audio-source .button p, .audio-bus .button p {
+.audio-source .button p,
+.audio-bus .button p {
   width: 30px;
   height: 30px;
   display: flex;
@@ -1242,17 +1263,21 @@ main #audioSourcesContainer {
   overflow: hidden;
   color: #616161;
 }
-.audio-source .button p.master, .audio-bus .button p.master {
+.audio-source .button p.master,
+.audio-bus .button p.master {
   visibility: hidden;
 }
-.audio-source .button p.true, .audio-bus .button p.true {
+.audio-source .button p.true,
+.audio-bus .button p.true {
   color: #616161;
 }
-.audio-source .button p.false, .audio-bus .button p.false {
+.audio-source .button p.false,
+.audio-bus .button p.false {
   color: #c62828;
   border: 1px solid #c62828;
 }
-.audio-source .button p.muted.true::before, .audio-bus .button p.muted.true::before {
+.audio-source .button p.muted.true::before,
+.audio-bus .button p.muted.true::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -1266,7 +1291,8 @@ main #audioSourcesContainer {
   -moz-osx-font-smoothing: grayscale;
   content: "\e69f";
 }
-.audio-source .button p.muted.false::before, .audio-bus .button p.muted.false::before {
+.audio-source .button p.muted.false::before,
+.audio-bus .button p.muted.false::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -1280,56 +1306,69 @@ main #audioSourcesContainer {
   -moz-osx-font-smoothing: grayscale;
   content: "\e692";
 }
-.audio-source .button p.soloPFL, .audio-bus .button p.soloPFL {
+.audio-source .button p.soloPFL,
+.audio-bus .button p.soloPFL {
   font-size: 1rem;
 }
-.audio-source .button p.solo, .audio-bus .button p.solo {
+.audio-source .button p.solo,
+.audio-bus .button p.solo {
   font-size: 1.5rem;
 }
-.audio-source .button p.solo.false, .audio-bus .button p.solo.false {
+.audio-source .button p.solo.false,
+.audio-bus .button p.solo.false {
   color: #616161;
   border: 1px solid #616161;
 }
-.audio-source .button p.solo.true, .audio-bus .button p.solo.true {
+.audio-source .button p.solo.true,
+.audio-bus .button p.solo.true {
   color: #41ae46;
   border: 1px solid #41ae46;
 }
-.audio-source .button p.solo:hover, .audio-bus .button p.solo:hover {
+.audio-source .button p.solo:hover,
+.audio-bus .button p.solo:hover {
   border: 1px solid #ffffff;
   color: #ffffff;
   transition: 0.5s ease;
 }
-.audio-source .button p.bus, .audio-bus .button p.bus {
+.audio-source .button p.bus,
+.audio-bus .button p.bus {
   font-size: 1.5rem;
 }
-.audio-source .button p.bus.false, .audio-bus .button p.bus.false {
+.audio-source .button p.bus.false,
+.audio-bus .button p.bus.false {
   color: #616161;
   border: 1px solid #616161;
 }
-.audio-source .button p.bus.true, .audio-bus .button p.bus.true {
+.audio-source .button p.bus.true,
+.audio-bus .button p.bus.true {
   color: #c62828;
   border: 1px solid #c62828;
 }
-.audio-source .button p.bus:hover, .audio-bus .button p.bus:hover {
+.audio-source .button p.bus:hover,
+.audio-bus .button p.bus:hover {
   border: 1px solid #ffffff;
   color: #ffffff;
   transition: 0.5s ease;
 }
-.audio-source .button p:hover, .audio-bus .button p:hover {
+.audio-source .button p:hover,
+.audio-bus .button p:hover {
   border: 1px solid #ffffff;
   color: #ffffff;
   transition: 0.5s ease;
 }
-.audio-source .master, .audio-bus .master {
+.audio-source .master,
+.audio-bus .master {
   display: grid;
   grid-template-columns: 150px 70px 70px;
 }
-.audio-source .master .containerRange, .audio-bus .master .containerRange {
+.audio-source .master .containerRange,
+.audio-bus .master .containerRange {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-.audio-source .master .range, .audio-bus .master .range {
+.audio-source .master .range,
+.audio-bus .master .range {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1340,7 +1379,8 @@ main #audioSourcesContainer {
   height: 150px;
   position: relative;
 }
-.audio-source .master .range input[type=range], .audio-bus .master .range input[type=range] {
+.audio-source .master .range input[type=range],
+.audio-bus .master .range input[type=range] {
   -webkit-appearance: none;
   width: 150px;
   height: 5px;
@@ -1348,7 +1388,26 @@ main #audioSourcesContainer {
   outline: none;
   padding: 0px;
 }
-.audio-source .master .range input[type=range]::-webkit-slider-thumb, .audio-bus .master .range input[type=range]::-webkit-slider-thumb {
+.audio-source .master .range .sliderticks,
+.audio-bus .master .range .sliderticks {
+  position: absolute;
+  display: flex;
+  left: -44px;
+  transform: translateY(10px);
+  z-index: -10;
+  justify-content: space-between;
+}
+.audio-source .master .range .sliderticks span,
+.audio-bus .master .range .sliderticks span {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  width: 1px;
+  height: 10px;
+  background: #1e2328;
+}
+.audio-source .master .range input[type=range]::-webkit-slider-thumb,
+.audio-bus .master .range input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: #1e2328;
   border: 1px solid #ECECEC;
@@ -1357,21 +1416,26 @@ main #audioSourcesContainer {
   cursor: pointer;
   pointer-events: auto !important;
 }
-.audio-source .master .range input[type=range]::-webkit-slider-thumb:hover, .audio-bus .master .range input[type=range]::-webkit-slider-thumb:hover {
+.audio-source .master .range input[type=range]::-webkit-slider-thumb:hover,
+.audio-bus .master .range input[type=range]::-webkit-slider-thumb:hover {
   background: #ffffff;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-.audio-source .master .range label, .audio-bus .master .range label {
+.audio-source .master .range label,
+.audio-bus .master .range label {
   position: absolute;
   color: #41ae46;
+  transform: translateY(-15px);
   z-index: -10;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   pointer-events: none;
+  color: #1e2328;
 }
-.audio-source .master .range .number, .audio-bus .master .range .number {
+.audio-source .master .range .number,
+.audio-bus .master .range .number {
   display: flex;
   justify-content: center;
   align-items: center;
