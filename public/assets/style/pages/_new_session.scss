@@ -25,4 +25,13 @@
     p{
         color: $primary-btn;
     }
+    .github{
+        width: 50px;
+        height: 50px;
+        filter: invert(100%);
+        cursor: pointer;
+        &:hover{
+            filter: invert(50%); 
+        }
+    }
 }

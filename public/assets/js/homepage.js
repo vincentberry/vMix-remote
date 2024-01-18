@@ -36,21 +36,9 @@ function chargerFichierXML() {
             if (xhr.status === 200) {
                 data = xhr.responseText;
                 if (document.getElementById('vmix_connect').value === "N") {
-                                        new_session(data);
-                    let vmix_connect_param = get_vmix_connect_param();
-                    if (vmix_connect_param && init === 1){
-                        document.getElementById('vmix_connect').value = vmix_connect_param;
-                        init = 0;
-                    }else{
-                        update_url("N");
-                    }
+                    new_session(data);
                 } else {
-                    processSettings(data);
-                    processVideoSources(data);
-                    processAudioBuses(data);
-                    processAudioSources(data);
-                    processPageSources(data);
-                    update_url(document.getElementById('vmix_connect').value);
+                    window.location.href = '/?vmix_connect=' + document.getElementById('vmix_connect').value;
                 }
             } else {
                 if (JSON.parse(xhr.responseText)['error']) {
@@ -58,7 +46,6 @@ function chargerFichierXML() {
                 } else if (JSON.parse(xhr.responseText)['reset']) {
                     AlertPopup(JSON.parse(xhr.responseText)['reset'])
                     document.getElementById('vmix_connect').value = "N"
-                    update_url("N");
                 }
 
             }
@@ -75,39 +62,8 @@ function new_session(data) {
 
     // Récupérer l'élément <select> par son ID
     var selectElement = document.getElementById('vmix_connect');
-        var files = JSON.parse(data);
-    activatedBuses = [];
-    id_input= "";
-    previewNumber= "";
-    activeNumber= "";
-    activeOverlay1= "";
-    activeOverlay2= "";
-    activeOverlay3= "";
-    activeOverlay4 = "";
+    var files = JSON.parse(data);
 
-    document.getElementById('projetName').textContent = "" ;
-
-    updateCheckboxClass('streaming', false);
-    updateCheckboxClass('recording', false);
-    updateCheckboxClass('external', false);
-    updateCheckboxClass('fullscreen', false);
-
-
-    const videoSourcesContainer = document.getElementById('videoSourcesContainer');
-    // Supprimer les éléments existants dans le conteneur de sortie
-    while (videoSourcesContainer.firstChild) {
-        videoSourcesContainer.removeChild(videoSourcesContainer.firstChild);
-    }
-    const audioBusesContainer = document.getElementById('audioBusesContainer');
-    // Supprimer les éléments existants dans le conteneur de sortie
-    while (audioBusesContainer.firstChild) {
-        audioBusesContainer.removeChild(audioBusesContainer.firstChild);
-    }
-    const audioSourcesContainer = document.getElementById('audioSourcesContainer');
-    // Supprimer les éléments existants dans le conteneur de sortie
-    while (audioSourcesContainer.firstChild) {
-        audioSourcesContainer.removeChild(audioSourcesContainer.firstChild);
-    }
     // Ajouter les options au <select>
     // Ajouter les options au <select> uniquement si elles n'existent pas déjà
     for (var i = 0; i < files.length; i++) {
@@ -132,28 +88,6 @@ function new_session(data) {
         return false;
     }
 
-}
-
-function update_url(paramValue) {
-    let currentUrl = window.location.href;
-    let paramName = 'vmix_connect';
-    let regex = new RegExp(`([?&])${paramName}=.*?(&|$)`, 'i');
-    let paramExists = currentUrl.match(regex);
-
-    // Vérifiez si le paramètre existe et a une valeur différente
-    if (paramExists) {
-        let existingValue = currentUrl.match(regex)[0].split('=')[1];
-        if (existingValue !== paramValue) {
-            // Mettez à jour la valeur du paramètre existant
-            let newUrl = currentUrl.replace(regex, `$1${paramName}=${paramValue}$2`);
-            window.history.replaceState({}, '', newUrl);
-        }
-    } else {
-        // Ajoutez le paramètre à l'URL s'il n'existe pas
-        let separator = currentUrl.includes('?') ? '&' : '?';
-        let newUrl = currentUrl + separator + `${paramName}=${paramValue}`;
-        window.history.pushState({}, '', newUrl);
-    }
 }
 
 function get_vmix_connect_param() {

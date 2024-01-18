@@ -1,6 +1,7 @@
 <?php
 $Dir_inc = '../inc/';
 require $Dir_inc.'header.php';
+require $Dir_inc.'vmix_script.php';
 ?>
 <body>
     <nav id="nav" class="">
@@ -82,6 +83,15 @@ require $Dir_inc.'header.php';
 </body>
 
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
+<script src="./assets/js/app.js"></script>
+<script src="./assets/js/copy.js"></script>
+<script src="./assets/js/processSettings.js"></script>
+<script src="./assets/js/processAudioSources.js"></script>
+<script src="./assets/js/processAudioBus.js"></script>
+<script src="./assets/js/processVideoSources.js"></script>
+<script src="./assets/js/processPageSources.js"></script>
+<script src="./assets/js/api_vmix.js"></script>
+<script src="./assets/js/submit_vmix.js"></script>
 <script>
     let activatedBuses = [];
     var commands;
@@ -94,18 +104,12 @@ require $Dir_inc.'header.php';
     var activeOverlay4;
 
     document.getElementById("urlserverscriptmvix").textContent = window.location.href;
+    const vmix_connect_param = get_vmix_connect_param();
+    if (vmix_connect_param === null){
+        window.location.href = 'homepage.php';
+    }
 
 </script>
-<script src="./assets/js/app.js"></script>
-<script src="./assets/js/copy.js"></script>
-<script src="./assets/js/processSettings.js"></script>
-<script src="./assets/js/processAudioSources.js"></script>
-<script src="./assets/js/processAudioBus.js"></script>
-<script src="./assets/js/processVideoSources.js"></script>
-<script src="./assets/js/processPageSources.js"></script>
-<script src="./assets/js/api_vmix.js"></script>
-<script src="./assets/js/submit_vmix.js"></script>
 <?php
-require $Dir_inc.'vmix_script.php';
 require $Dir_inc.'footer.php';
 ?>
