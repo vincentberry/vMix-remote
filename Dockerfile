@@ -23,7 +23,8 @@ COPY /config/prod/apache2/sites-enabled /etc/apache2/sites-enabled/
 COPY app/ /var/www/html/
 
 RUN mkdir -p /var/www/html/file/
-RUN chmod -R 777 /var/www/html/file/
+RUN mkdir -p /var/www/html/db/
+RUN chmod -R 777 /var/www/html/db/
 RUN a2enmod rewrite
 RUN a2enmod remoteip && \
     a2enconf swag && \

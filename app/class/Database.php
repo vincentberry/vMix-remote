@@ -4,7 +4,7 @@ class Database{
     private $pdo;
 
     public function __construct(){
-        $this->pdo = new PDO('sqlite:'.dirname(__FILE__).'/database.sqlite');
+        $this->pdo = new PDO('sqlite:/var/www/html/db/database.sqlite');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->pdo->query("CREATE TABLE IF NOT EXISTS `command` (
