@@ -5,10 +5,10 @@ services:
     image: php:8.0-apache
     container_name: remotevmix-apache
     volumes:
-        - ./:/var/www/html/
-        - ./config/prod/apache2/conf-available/swag.conf:/etc/apache2/conf-available/swag.conf
-        - ./config/prod/apache2/sites-enabled:/etc/apache2/sites-enabled/
-        - ./config/prod/apache2/apache2.conf:/etc/apache2/apache2.conf
+        - ./app/:/var/www/html/
+        - ./build/prod/apache2/conf-available/swag.conf:/etc/apache2/conf-available/swag.conf
+        - ./build/prod/apache2/sites-enabled:/etc/apache2/sites-enabled/
+        - ./build/prod/apache2/apache2.conf:/etc/apache2/apache2.conf
         - ./log:/var/log/apache2
     restart: unless-stopped
     environment:
@@ -29,7 +29,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
         - ./db:/var/lib/mysql
-        - ./database/remotevmix.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+        - ./build/prod/database/remotevmix.sql:/docker-entrypoint-initdb.d/schema.sql:ro
     restart: unless-stopped
     hostname: remotevmix-db
     networks: 
