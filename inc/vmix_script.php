@@ -1,4 +1,9 @@
 <div id="VmixScript" style="display: none;">
+        ' ---------------------------------------------------
+        ' -------------------- VMIX REMOTE ------------------
+        ' ------ VERSION 1a 2324 (C) BY VINCENT BERRY -------
+        ' --https://github.com/vincentberry/vmix-remote------
+        ' ---------------------------------------------------  
         Dim userurl As String = "<p id="urlserverscriptmvix"></p>api/api.php"
         Dim mac As String = "1"
         Dim random As New Random()
@@ -57,5 +62,10 @@
         Dim StringValue As String = conected & userurl & R
         sleep(1000)
         Loop
+        ' ---------------------------------------------------
+        ' -------------------- VMIX REMOTE ------------------
+        ' ------ VERSION 1a 2324 (C) BY VINCENT BERRY -------
+        ' --https://github.com/vincentberry/vmix-remote------
+        ' ---------------------------------------------------
 
 </div>
