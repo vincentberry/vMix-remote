@@ -6,37 +6,15 @@ services:
     container_name: remotevmix-apache
     volumes:
         - ./app/:/var/www/html/
-        - ./build/prod/apache2/conf-available/swag.conf:/etc/apache2/conf-available/swag.conf
-        - ./build/prod/apache2/sites-enabled:/etc/apache2/sites-enabled/
-        - ./build/prod/apache2/apache2.conf:/etc/apache2/apache2.conf
+        - ./config/prod/apache2/conf-available/swag.conf:/etc/apache2/conf-available/swag.conf
+        - ./config/prod/apache2/sites-enabled:/etc/apache2/sites-enabled/
         - ./log:/var/log/apache2
     restart: unless-stopped
-    environment:
-      - DB_USER=root
-      - DB_PASSWORD=password
-    depends_on: 
-      - remotevmix-db
     hostname: remotevmix-apache
      # command: a2enmod rewrite  && a2enmod remoteip && a2enconf swag && docker-php-ext-install pdo pdo_mysql && /etc/init.d/apache2 restart 
     networks: 
       - remotevmix_apache
-      - remotevmix_db
- 
-  remotevmix-db:
-    image: mariadb:latest
-    container_name: remotevmix-db
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-    volumes:
-        - ./db:/var/lib/mysql
-        - ./build/prod/database/remotevmix.sql:/docker-entrypoint-initdb.d/schema.sql:ro
-    restart: unless-stopped
-    hostname: remotevmix-db
-    networks: 
-      - remotevmix_db
 
 networks:
   remotevmix_apache:
     name: remotevmix_apache
-  remotevmix_db:
-    name: remotevmix_db

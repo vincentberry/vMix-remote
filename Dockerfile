@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:apache
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
@@ -17,13 +17,15 @@ RUN apt-get update -qq && \
 
 # PHP Extensions
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
-COPY conf/php.ini /usr/local/etc/php/conf.d/app.ini
 
 # Apache
-COPY errors /errors
-COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
-COPY index.php /app/index.php
+COPY config/prod/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf
+COPY /config/prod/apache2/sites-enabled /etc/apache2/sites-enabled/
+COPY app/ /var/www/html/
 
-RUN a2enmod rewrite remoteip && \
-    a2enconf z-app
+RUN mkdir -p /var/www/html/file/
+RUN chmod -R 777 /var/www/html/file/
+RUN a2enmod rewrite
+RUN a2enmod remoteip && \
+    a2enconf swag && \
+    /etc/init.d/apache2 restart
