@@ -53,7 +53,7 @@ function chargerFichierXML() {
         
     }
 
-    xhr.open('GET', "api/connect.php?session_vmix=" + document.getElementById('vmix_connect').value, true)
+    xhr.open('GET', "api/connect?session_vmix=" + document.getElementById('vmix_connect').value, true)
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
     xhr.send()
 }

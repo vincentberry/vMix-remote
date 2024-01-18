@@ -13,7 +13,7 @@ require $Dir_inc . 'vmix_script.php';
                 <option value="N">--Please choose the vmix--</option>
             </select>
         </div>
-        <button>DOWNLOAD SCRIPT FOR VMIX</button>
+        <button onclick="copyToClipboard('VmixScript')">DOWNLOAD SCRIPT FOR VMIX</button>
         <p>BY VINCENT BERRY</p>
         <a href="https://github.com/vincentberry/vmix-remote" target="_blank">
             <img class="github" src="./assets/icon/GitHub.svg" alt="github">
@@ -26,7 +26,7 @@ require $Dir_inc . 'vmix_script.php';
 <script src="./assets/js/homepage.js"></script>
 <script src="./assets/js/copy.js"></script>
 <script>
-    document.getElementById("urlserverscriptmvix").textContent = window.location.href;
+    document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
     const vmix_connect_param = get_vmix_connect_param();
     if (vmix_connect_param) {
         window.location.href = '/?vmix_connect=' + vmix_connect_param;

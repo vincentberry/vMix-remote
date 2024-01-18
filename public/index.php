@@ -103,10 +103,10 @@ require $Dir_inc.'vmix_script.php';
     var activeOverlay3;
     var activeOverlay4;
 
-    document.getElementById("urlserverscriptmvix").textContent = window.location.href;
+    document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
     const vmix_connect_param = get_vmix_connect_param();
     if (vmix_connect_param === null){
-        window.location.href = 'homepage.php';
+        window.location.href = '/homepage';
     }
 
 </script>

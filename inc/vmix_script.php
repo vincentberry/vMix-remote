@@ -4,7 +4,7 @@
         ' ------ VERSION 1a 2324 (C) BY VINCENT BERRY -------
         ' --https://github.com/vincentberry/vmix-remote------
         ' ---------------------------------------------------  
-        Dim userurl As String = "<p id="urlserverscriptmvix"></p>api/api.php"
+        Dim userurl As String = "<p id="urlserverscriptmvix"></p>/api/api"
         Dim mac As String = "1"
         Dim random As New Random()
         dim useraccountcode AS String = random.Next(1, 999999999).ToString()
