@@ -1,9 +1,9 @@
-name: dockerhub_main
+name: dockerhub_dev
 
 on:
   push:
     branches:  
-      - main
+      - dev
 
 jobs:
 
