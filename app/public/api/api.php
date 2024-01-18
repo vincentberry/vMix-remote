@@ -11,20 +11,18 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"])){
         // Sauvegarder le XML dans un fichier
         file_put_contents($file, $_POST["xml"]);
 
-        // Construire la commande en brut
-        $flyValue = "ActiveInput";
-        $inputValue = "2";
-        $durationValue = "500";
-        $mixValue = "0";
-        $file =  $Dir_inc."file/command.json";
-
         $req = db_retrun::db_command_vmix($_POST["connector"]);
         $envoi_vmix = "";
         if($req){
             foreach ($req as $item) {
                 // Accéder aux valeurs individuelles
-                db_insert::delete_vmix_command($item->id);
-                $envoi_vmix = $envoi_vmix . "$item->command, $item->input, $item->value, $item->duration!";
+                $command = $item["command"];
+                $input = $item["input"];
+                $value = $item["value"];
+                $duration = $item["duration"];
+                // Accéder aux valeurs individuelles
+                $envoi_vmix = $envoi_vmix . "$command, $input, $value, $duration!";
+                db_insert::delete_vmix_command($item["id"]);
                 
             }
         
