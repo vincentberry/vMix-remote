@@ -1,12 +1,5 @@
 <?php
 
-$nomDossier = '../../file';
-// Vérifier si le dossier n'existe pas
-if (!is_dir($nomDossier)) {
-    // Créer le dossier
-    mkdir($nomDossier);
-}
-
 spl_autoload_register('app_autoload');
 
 function app_autoload($class){
@@ -14,14 +7,17 @@ function app_autoload($class){
         '',
     );
     foreach( $dirs as $dir ) {
+        if (file_exists("../class/".$dir.$class.'.php')) {
+            require("../class/".$dir.$class.'.php');
+        }
         if (file_exists("../../class/".$dir.$class.'.php')) {
             require("../../class/".$dir.$class.'.php');
-        }
-        if (file_exists("../../../class/".$dir.$class.'.php')) {
-            require("../../../class/".$dir.$class.'.php');
-        }
-        if (file_exists("../../../../../class/".$dir.$class.'.php')) {
-            require("../../../../../class/".$dir.$class.'.php');
+            $nomDossier = '../../file';
+            // Vérifier si le dossier n'existe pas
+            if (!is_dir($nomDossier)) {
+                // Créer le dossier
+                mkdir($nomDossier);
+            }
         }
     }
 }
