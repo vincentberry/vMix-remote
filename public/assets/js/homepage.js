@@ -67,14 +67,14 @@ function new_session(data) {
     // Ajouter les options au <select>
     // Ajouter les options au <select> uniquement si elles n'existent pas déjà
     for (var i = 0; i < files.length; i++) {
-        var fileName = files[i];
+        var fileId = files[i]['id'];
 
         // Vérifier si l'option existe déjà
-        if (!optionExists(fileName)) {
+        if (!optionExists(fileId)) {
             console.log("new connection")
             var option = document.createElement('option');
-            option.value = fileName;
-            option.textContent = fileName;
+            option.value = fileId;
+            option.textContent = files[i]['name'] + "_" + fileId;
             selectElement.appendChild(option);
         }
     }

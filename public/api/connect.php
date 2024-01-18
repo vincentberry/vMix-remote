@@ -27,37 +27,46 @@ if (!empty($_GET["session_vmix"])) {
     } else {
         // Spécifiez le chemin du dossier
         $directoryPath = $Dir_inc.'file/';
-
-        // Utilisez scandir pour obtenir la liste des fichiers dans le dossier
-        $files = scandir($directoryPath);
-
+    
+        // Initialiser un tableau pour stocker les informations des fichiers
+        $fileInfoArray = [];
+    
         // Filtrer les fichiers pour exclure les entrées "." et ".."
-        $filteredFiles = array_filter($files, function ($file) use ($Dir_inc)  {
+        $filteredFiles = array_filter(scandir($directoryPath), function ($file) use ($Dir_inc, &$fileInfoArray)  {
             // Vérifier si le fichier existe
             $dir_file = $Dir_inc.'file/'.$file;
             if (file_exists($dir_file) && $file !== '.' && $file !== '..') {
                 // Obtenir le timestamp de la dernière modification du fichier
                 $timestamp_derniere_modif = filemtime($dir_file);
-
+    
                 // Vérifier si le fichier a été modifié il y a plus de 5 minutes
                 if (time() - $timestamp_derniere_modif > 300) { // 300 secondes = 5 minutes
                     // Supprimer le fichier
                     unlink($dir_file);
                     return "";
                 }
+    
+                // Charger le fichier XML
+                $xml = simplexml_load_file($dir_file);
+                
+                // Récupérer le contenu du nœud <preset>
+                $nomFichierSansChemin = preg_replace('#.*\\\#', '', (string)$xml->preset);
+                $nomFichierSansExtension = pathinfo($nomFichierSansChemin, PATHINFO_FILENAME);
+                
+                // Extraire le nom du fichier du chemin complet
+                $nomFichier = pathinfo($file, PATHINFO_FILENAME);
+    
+                // Stocker les informations dans le tableau
+                $fileInfoArray[] = [
+                    'id' => $nomFichier,
+                    'name' => $nomFichierSansExtension,
+                ];
             }
             return $file !== '.' && $file !== '..';
         });
 
-        // Supprimer l'extension des noms de fichier
-        $fileNamesWithoutExtension = array_map(function ($file) {
-            return pathinfo($file, PATHINFO_FILENAME);
-        }, $filteredFiles);
-
-        // Réindexer le tableau pour commencer à l'index 0
-        $indexedFileNames = array_values($fileNamesWithoutExtension);
-
-        echo json_encode($indexedFileNames);
+        // Renvoyer le résultat au format JSON
+        echo json_encode($fileInfoArray);
         die();
     }
 
