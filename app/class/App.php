@@ -7,7 +7,7 @@ class App
     static function getDatabase()
     {
         if (!self::$db) {
-            self::$db = new Database(getenv('DB_USER'), getenv('DB_PASSWORD'), 'remotevmix');
+            self::$db = new Database();
         }
         return self::$db;
     }

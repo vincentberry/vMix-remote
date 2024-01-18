@@ -8,3 +8,4 @@
 /app/file/
 /db/
 .vscode/
+database.sqlite

@@ -3,10 +3,20 @@ class Database{
 
     private $pdo;
 
-    public function __construct($login, $password, $database_name, $host = 'remotevmix-db'){
-        $this->pdo = new PDO("mysql:dbname=$database_name;host=$host", $login, $password);
+    public function __construct(){
+        $this->pdo = new PDO('sqlite:'.dirname(__FILE__).'/database.sqlite');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $this->pdo->query("CREATE TABLE IF NOT EXISTS `command` (
+                            `id` INTEGER PRIMARY KEY,
+                            `session_vmix` INTEGER NOT NULL,
+                            `date_time` TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                            `command` TEXT NOT NULL,
+                            `input` TEXT DEFAULT '0',
+                            `duration` TEXT DEFAULT '0',
+                            `value` TEXT DEFAULT '0',
+                            `push_vmix` INTEGER NOT NULL DEFAULT 0);"                                          
+        );
     }
 
 
