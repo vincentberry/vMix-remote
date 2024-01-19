@@ -32,14 +32,35 @@ nav {
             }
         }
 
-        .script_down{
+        .script_down {
             cursor: pointer;
             width: 40px;
             transition: 0.5s ease;
-            &:hover{
-                filter: invert(100%); 
+
+            &:hover {
+                filter: invert(100%);
             }
         }
+
+        #fast {
+            margin: 0 10px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('../icon/fast-delivery-icon.svg');
+
+            &:hover {
+                filter: invert(50%);
+            }
+
+            &.on {
+                background-image: url('../icon/fast-delivery-red-icon.svg');
+            }
+        }
+
 
         #projetName {
             font-weight: 900;

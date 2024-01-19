@@ -1,6 +1,4 @@
-function processSettings(xmlString) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+function processSettings(xmlDoc) {
 
     previewNumber = parseInt(xmlDoc.querySelector('preview').textContent);
     activeNumber = parseInt(xmlDoc.querySelector('active').textContent);

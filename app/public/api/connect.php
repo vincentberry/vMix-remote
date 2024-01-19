@@ -14,13 +14,13 @@ if (!empty($_GET["session_vmix"])) {
 
         $timestamp_derniere_modif = filemtime($file);
 
-        if ($timestamp_actuel - $timestamp_derniere_modif > 30){
+        if ($timestamp_actuel - $timestamp_derniere_modif > 130){
             http_response_code(201);
-            echo json_encode(array("reset" => "Le vmix n'a rien envoyé depuis plus de 30s"));
+            echo json_encode(array("reset" => "Le vmix n'a rien envoyé depuis plus de 130s"));
             die();
         }
         if (file_exists($file)){
-            echo file_get_contents($file);
+            echo '<root>'.file_get_contents($file).'</root>';
             die();
         }
 
@@ -47,10 +47,11 @@ if (!empty($_GET["session_vmix"])) {
                 }
     
                 // Charger le fichier XML
-                $xml = simplexml_load_file($dir_file);
-                
+                $xml = file_get_contents($dir_file);
+                $xml = simplexml_load_string('<root>' . (string)$xml . '</root>');
+
                 // Récupérer le contenu du nœud <preset>
-                $nomFichierSansChemin = preg_replace('#.*\\\#', '', (string)$xml->preset);
+                $nomFichierSansChemin = preg_replace('#.*\\\#', '', (string)$xml->vmix->preset);
                 $nomFichierSansExtension = pathinfo($nomFichierSansChemin, PATHINFO_FILENAME);
                 
                 // Extraire le nom du fichier du chemin complet

@@ -5,7 +5,7 @@
         ' --https://github.com/vincentberry/vmix-remote------
         ' ---------------------------------------------------  
         Dim userurl As String = "<p id="urlserverscriptmvix"></p>/api/api"
-        Dim mac As String = "1"
+        Dim session_delay As String = "30000"
         Dim random As New Random()
         dim useraccountcode AS String = random.Next(1, 999999999).ToString()
         Console.WriteLine("la session vmix est n°")
@@ -25,6 +25,7 @@
         Dim R As String
         Dim con As String = userurl
         NC.Add("connector",useraccountcode)
+        NC.Add("session_delay",session_delay)
         NC.Add("STATE",state)
         Dim RESP As Byte()
         Dim conected As String = userurl & p & u
@@ -48,6 +49,11 @@
 
         ' Appeler la fonction VMix avec les paramètres appropriés
         API.Function(functionType, Input:=inputParam, Value:=valueParam, Duration:=durationParam)
+
+        If functionType = "session_delay" Then
+        session_delay = valueParam
+        End If
+
         'Console.WriteLine(functionType)
         Elseif Not String.IsNullOrEmpty(rawCommand) Then
         'Console.WriteLine(rawCommand)
@@ -60,7 +66,7 @@
         catch
         End Try
         Dim StringValue As String = conected & userurl & R
-        sleep(1000)
+        sleep(session_delay)
         Loop
         ' ---------------------------------------------------
         ' -------------------- VMIX REMOTE ------------------

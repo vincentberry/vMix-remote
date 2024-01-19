@@ -1,11 +1,7 @@
-
 // Fonction pour traiter les sources audio
-function processAudioSources(xmlString) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-    const audioSources = xmlDoc.querySelectorAll('input[muted]');
+function processAudioSources(xmlDoc) {
 
-    // Récupérer le conteneur pour les sources audio
+    const audioSources = xmlDoc.querySelectorAll('input[muted]');
     const container = document.getElementById('audioSourcesContainer');
 
     // Parcourir toutes les sources audio
