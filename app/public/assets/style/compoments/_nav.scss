@@ -29,16 +29,16 @@ nav {
                 font-family: $font2;
                 font-size: 0.8rem;
                 cursor: pointer;
+                width: 220px;
             }
         }
 
         .script_down {
             cursor: pointer;
             width: 40px;
-            transition: 0.5s ease;
 
             &:hover {
-                filter: invert(100%);
+                filter: invert(30%);
             }
         }
 
@@ -51,13 +51,16 @@ nav {
             background-repeat: no-repeat;
             background-position: center;
             background-image: url('../icon/fast-delivery-icon.svg');
+            transition: 0.5s ease;
 
             &:hover {
                 filter: invert(50%);
+                transition: 0.5s ease;
             }
 
             &.on {
                 background-image: url('../icon/fast-delivery-red-icon.svg');
+                transition: 0.5s ease;
             }
         }
 

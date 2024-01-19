@@ -23,7 +23,7 @@ require $Dir_inc . 'vmix_script.php';
 </body>
 
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
-<script src="./assets/js/homepage.js"></script>
+<script src="./assets/js/lobby.js"></script>
 <script src="./assets/js/copy.js"></script>
 <script>
     document.getElementById("urlserverscriptmvix").textContent = window.location.origin;

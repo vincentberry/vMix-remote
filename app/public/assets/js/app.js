@@ -37,11 +37,12 @@ function chargerFichierXML() {
                 data = xhr.responseText;
                 if (document.getElementById('vmix_connect').value === "N") {
                     new_session(data);
+                    reset_session();
                     let vmix_connect_param = get_vmix_connect_param();
-                    if (vmix_connect_param && init === 1){
+                    if (vmix_connect_param && init === 1) {
                         document.getElementById('vmix_connect').value = vmix_connect_param;
                         init = 0;
-                    }else{
+                    } else {
                         update_url("N");
                     }
                 } else {
@@ -57,10 +58,12 @@ function chargerFichierXML() {
                     if (xmlDoc.querySelector('session_delay').textContent === "1000") {
                         document.getElementById('fast').className = "on";
                         console.log("ici")
-                    }else{
+                    } else {
                         document.getElementById('fast').className = "off";
                     }
                 }
+            } else if( xhr.status === 301) {
+                window.location.href = JSON.parse(xhr.responseText)['redirect'];
             } else {
                 if (JSON.parse(xhr.responseText)['error']) {
                     AlertPopup(JSON.parse(xhr.responseText)['error'])
@@ -72,7 +75,7 @@ function chargerFichierXML() {
 
             }
         }
-        
+
     }
 
     xhr.open('GET', "/api/connect?session_vmix=" + document.getElementById('vmix_connect').value, true)
@@ -80,27 +83,37 @@ function chargerFichierXML() {
     xhr.send()
 }
 
-function new_session(data) {
+function new_session_send() {
 
-    // Récupérer l'élément <select> par son ID
-    var selectElement = document.getElementById('vmix_connect');
-    var files = JSON.parse(data);
+    var xhr = getHttpRequest()
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                new_session(xhr.responseText);
+            }
+        }
+    }
+
+    xhr.open('GET', "/api/connect?session_vmix=N", true)
+    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
+    xhr.send()
+}
+
+function reset_session() {
     activatedBuses = [];
-    id_input= "";
-    previewNumber= "";
-    activeNumber= "";
-    activeOverlay1= "";
-    activeOverlay2= "";
-    activeOverlay3= "";
+    id_input = "";
+    previewNumber = "";
+    activeNumber = "";
+    activeOverlay1 = "";
+    activeOverlay2 = "";
+    activeOverlay3 = "";
     activeOverlay4 = "";
-
-    document.getElementById('projetName').textContent = "" ;
-
+    document.getElementById('projetName').textContent = "";
     updateCheckboxClass('streaming', false);
     updateCheckboxClass('recording', false);
     updateCheckboxClass('external', false);
     updateCheckboxClass('fullscreen', false);
-
 
     const videoSourcesContainer = document.getElementById('videoSourcesContainer');
     // Supprimer les éléments existants dans le conteneur de sortie
@@ -117,20 +130,38 @@ function new_session(data) {
     while (audioSourcesContainer.firstChild) {
         audioSourcesContainer.removeChild(audioSourcesContainer.firstChild);
     }
-    // Ajouter les options au <select>
-    // Ajouter les options au <select> uniquement si elles n'existent pas déjà
+}
+
+function new_session(data) {
+
+    // Récupérer l'élément <select> par son ID
+    var selectElement = document.getElementById('vmix_connect');
+    var files = JSON.parse(data);
+
+    // Stocker les identifiants des options actuelles
+    var currentOptions = Array.from(selectElement.options).map(option => option.value);
+
     for (var i = 0; i < files.length; i++) {
         var fileId = files[i]['id'];
 
         // Vérifier si l'option existe déjà
         if (!optionExists(fileId)) {
-            console.log("new connection")
+            console.log("new connection: " + fileId)
             var option = document.createElement('option');
             option.value = fileId;
             option.textContent = files[i]['name'] + "_" + fileId;
             selectElement.appendChild(option);
         }
     }
+
+    // Supprimer les options qui ne sont plus présentes
+    for (var i = 0; i < currentOptions.length; i++) {
+        if (!files.some(file => file.id === currentOptions[i]) && currentOptions[i] != "N") {
+            // L'option n'est plus présente, la supprimer
+            selectElement.remove(selectElement.querySelector(`[value="${currentOptions[i]}"]`));
+        }
+    }
+
     // Fonction pour vérifier si une option existe déjà
     function optionExists(value) {
         for (var i = 0; i < selectElement.options.length; i++) {
@@ -180,10 +211,10 @@ function get_vmix_connect_param() {
     }
 }
 
-function Session_delay(){
+function Session_delay() {
     if (document.getElementById('fast').className == "on") {
         ConfirmApiVmixSend("Are you sure you want to switch to slow mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", 0, "30000");
-    }else{
+    } else {
         ConfirmApiVmixSend("Are you sure you want to switch to fast mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", 0, "1000");
     }
 
