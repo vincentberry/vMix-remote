@@ -126,23 +126,24 @@ function showVolume(sliderId) {
     // Mettre à jour le tooltip lorsque le curseur se déplace
     document.addEventListener('mousemove', function (event) {
         var range = document.getElementById(sliderId);
+        if (range) {
+            var tooltipPosition = range.getBoundingClientRect();
+            const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(document.getElementById(sliderId).value))) / 100);
+            if (volumeDB != -Infinity) {
+                tooltip.textContent = Math.floor(volumeDB) + " db";
+            } else {
+                tooltip.textContent = "-∞ db"
+            }
 
-        var tooltipPosition = range.getBoundingClientRect();
-        const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(document.getElementById(sliderId).value))) / 100);
-        if (volumeDB != -Infinity) {
-            tooltip.textContent = Math.floor(volumeDB) + " db";
-        } else {
-            tooltip.textContent = "-∞ db"
+            // Positionner l'info-bulle en fonction de la position de la souris
+            var rect = range.getBoundingClientRect();
+            var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Positionner l'info-bulle
+            tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
+            tooltip.style.top = event.clientY + scrollTop - 10 + 'px'; // Ajuster la position verticale si nécessaire
         }
-
-        // Positionner l'info-bulle en fonction de la position de la souris
-        var rect = range.getBoundingClientRect();
-        var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Positionner l'info-bulle
-        tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
-        tooltip.style.top = event.clientY + scrollTop - 10 + 'px'; // Ajuster la position verticale si nécessaire
     });
 }
 
