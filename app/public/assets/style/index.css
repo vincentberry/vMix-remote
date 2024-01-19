@@ -1475,9 +1475,12 @@ nav div {
   height: 100%;
   justify-content: space-between;
 }
+nav div .left {
+  margin-left: 10px;
+}
 nav div .list {
   display: flex;
-  margin-left: 50px;
+  margin-left: 10px;
 }
 nav div .list label {
   padding: 10px;
@@ -1491,7 +1494,7 @@ nav div .list select {
   font-family: Roboto-Bold, sans-serif;
   font-size: 0.8rem;
   cursor: pointer;
-  width: 220px;
+  width: 250px;
 }
 nav div .script_down {
   cursor: pointer;
@@ -1501,7 +1504,7 @@ nav div .script_down:hover {
   filter: invert(30%);
 }
 nav div #fast {
-  margin: 0 10px;
+  margin-left: 10px;
   cursor: pointer;
   width: 50px;
   height: 50px;
