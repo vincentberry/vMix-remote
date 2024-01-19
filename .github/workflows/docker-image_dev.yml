@@ -24,8 +24,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag vincentberry/vmix-remote:dev 
       
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag vincentberry/vmix-remote:$(date +%s) 
-          
     - name: Docker Push
       run: docker push --all-tags vincentberry/vmix-remote
