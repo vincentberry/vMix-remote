@@ -1,9 +1,9 @@
 name: dockerhub_main
 
 on:
-  push:
-    branches:  
-      - main
+  release:
+    types:
+      - created
 
 jobs:
 
