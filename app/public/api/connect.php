@@ -71,6 +71,10 @@ if (!empty($_GET["session_vmix"])) {
         die();
     }
 
+}else{
+    http_response_code(301);
+    echo json_encode(array("redirect" => "/lobby"));
+    die();
 }
 
 http_response_code(403);
