@@ -1,9 +1,6 @@
-function processVideoSources(xmlString) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-    const videoSources = xmlDoc.querySelectorAll('input');
+function processVideoSources(xmlDoc) {
 
-    // Récupérer le conteneur pour les sources video
+    const videoSources = xmlDoc.querySelectorAll('input');
     const container = document.getElementById('videoSourcesContainer');
 
     // Parcourir toutes les sources video

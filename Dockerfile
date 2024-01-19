@@ -3,7 +3,7 @@ FROM php:apache
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 EXPOSE 80
-WORKDIR /app
+WORKDIR /var/www/html/
 
 RUN apt-get update -qq && \
     apt-get install -qy \

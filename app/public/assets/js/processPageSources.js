@@ -1,9 +1,7 @@
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
-function processPageSources(xmlString) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-    const inputs = xmlDoc.querySelectorAll('input');
+function processPageSources(xmlDoc) {
 
+    const inputs = xmlDoc.querySelectorAll('input');
     const container = document.getElementById("inputsContainer");
 
     // Loop through each input and create a corresponding div

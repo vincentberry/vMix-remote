@@ -45,12 +45,21 @@ function chargerFichierXML() {
                         update_url("N");
                     }
                 } else {
-                    processSettings(data);
-                    processVideoSources(data);
-                    processAudioBuses(data);
-                    processAudioSources(data);
-                    processPageSources(data);
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, 'text/xml');
+                    let vmixElement = xmlDoc.querySelector('vmix')
+                    processSettings(vmixElement);
+                    processVideoSources(vmixElement);
+                    processAudioBuses(vmixElement);
+                    processAudioSources(vmixElement);
+                    processPageSources(vmixElement);
                     update_url(document.getElementById('vmix_connect').value);
+                    if (xmlDoc.querySelector('session_delay').textContent === "1000") {
+                        document.getElementById('fast').className = "on";
+                        console.log("ici")
+                    }else{
+                        document.getElementById('fast').className = "off";
+                    }
                 }
             } else {
                 if (JSON.parse(xhr.responseText)['error']) {
@@ -169,6 +178,15 @@ function get_vmix_connect_param() {
         // Le paramètre vmix_connect n'existe pas dans l'URL
         return null;
     }
+}
+
+function Session_delay(){
+    if (document.getElementById('fast').className == "on") {
+        ConfirmApiVmixSend("Are you sure you want to switch to slow mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", 0, "30000");
+    }else{
+        ConfirmApiVmixSend("Are you sure you want to switch to fast mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", 0, "1000");
+    }
+
 }
 
 

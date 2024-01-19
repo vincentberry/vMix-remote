@@ -3,13 +3,17 @@ $Dir_inc = '../../';
 require_once $Dir_inc."config.php";
 $db = App::getDatabase();
 
-if(!empty($_POST["connector"]) && !empty($_POST["xml"])){
+if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["session_delay"])){
     if($_POST["connector"] && $_POST["xml"]){
 
         // Récupérer les données de la requête POST
         $file = $Dir_inc."file/".$_POST["connector"].".xml";
+
+        //Génére le XML à sauvegardé
+        $xml = "<session_delay>". $_POST["session_delay"] ."</session_delay>". $_POST["xml"];
+
         // Sauvegarder le XML dans un fichier
-        file_put_contents($file, $_POST["xml"]);
+        file_put_contents($file, $xml);
 
         $req = db_retrun::db_command_vmix($_POST["connector"]);
         $envoi_vmix = "";

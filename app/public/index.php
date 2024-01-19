@@ -14,6 +14,7 @@ require $Dir_inc.'vmix_script.php';
                         <option value="N">--Please choose the vmix--</option>
                     </select>
                 </div>
+                <div id="fast" class="off" onclick="Session_delay()"></div>
             </div>
             <h1 id="projetName"></h1>
             <div class="right">

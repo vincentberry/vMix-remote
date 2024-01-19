@@ -1,11 +1,7 @@
-
 // Fonction pour traiter les bus audio
-function processAudioBuses(xmlString) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-    const audioBuses = xmlDoc.querySelectorAll('audio > *');
+function processAudioBuses(xmlDoc) {
 
-    // Récupérer le conteneur pour les bus audio
+    const audioBuses = xmlDoc.querySelectorAll('audio > *');
     const container = document.getElementById('audioBusesContainer');
 
     // Parcourir tous les bus audio
