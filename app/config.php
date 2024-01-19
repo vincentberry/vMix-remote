@@ -18,6 +18,12 @@ function app_autoload($class){
                 // Créer le dossier
                 mkdir($nomDossier);
             }
+            $nomDossier = '../../db';
+            // Vérifier si le dossier n'existe pas
+            if (!is_dir($nomDossier)) {
+                // Créer le dossier
+                mkdir($nomDossier);
+            }
         }
     }
 }
