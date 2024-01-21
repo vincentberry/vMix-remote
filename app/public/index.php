@@ -79,7 +79,69 @@ require $Dir_inc.'vmix_script.php';
                 <div id="audioSourcesContainer"></div>
             </div>
         </section>
-        <div id="inputsContainer"></div>
+        <div id="inputsContainer">
+
+
+            <div id="inputContainer_4867e907-822b-tttt-814b-4b7454564fcb" style="display: none;" class="inputContainer">
+            <div class="Container">
+                <div class="header">
+                    <h1>Le nom de l'input</h1>
+                    <span class="closeButton" onclick="closePageInput(this)">✖</span>
+                </div>
+                <div class="body">
+                    <div class="nav">
+                        <button>General</button>
+                        <button>List</button>
+                        <button>Color Correction</button>
+                        <button>Layers</button>
+                    </div>
+                    <div class="content">
+                        <div class="general disabled">
+                            <div class="head">
+                                <h1 for="inputContainer_InputType">Type</h1>
+                                <button disabled>CHANGE</button>
+                            </div>
+                            <div class="GeneralContainer">
+                                <div>
+                                    <label for="inputContainer_InputName">Name</label>
+                                    <input id="inputContainer_InputName" type="text">
+                                </div>
+                                <div>
+                                    <label for="inputContainer_InputId">Id</label>
+                                    <input id="inputContainer_InputId" type="text">
+                                </div>
+                                <div>
+                                    <label for="inputContainer_InputLoop">Loop</label>
+                                    <input id="inputContainer_InputLoop" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="list">
+                            <div class="head">
+                                <button disabled>Add</button>
+                                <button disabled>Edit</button>
+                                <button disabled>Remove</button>
+                                <button disabled>Shuffle</button>
+                            </div>
+                            <div class="GeneralContainer">
+
+                                <ul>
+                                    <li class="select">
+                                        <input id="inputContainer_InputLoop select" type="checkbox">
+                                        <label>Nom de l'élément 1</label>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+        </div>
     </main>
 </body>
 
