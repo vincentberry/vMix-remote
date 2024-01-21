@@ -7,9 +7,11 @@ function processSettings(xmlDoc) {
     activeOverlay3 = parseInt(xmlDoc.querySelector('overlay[number="3"]').textContent);
     activeOverlay4 = parseInt(xmlDoc.querySelector('overlay[number="4"]').textContent);
     
-    var projetName =  xmlDoc.querySelector('preset').textContent.split(/[\\/]/);
-    projetName = projetName[projetName.length - 1].split('.')[0];
-    document.getElementById('projetName').textContent = projetName ;
+    if(xmlDoc.querySelector('preset')){
+        var projetName =  xmlDoc.querySelector('preset').textContent.split(/[\\/]/);
+        projetName = projetName[projetName.length - 1].split('.')[0];
+        document.getElementById('projetName').textContent = projetName ;
+    }
 
     updateCheckboxClass('streaming', JSON.parse(xmlDoc.querySelector('streaming').textContent.trim().toLowerCase()), xmlDoc);
     updateCheckboxClass('recording', JSON.parse(xmlDoc.querySelector('recording').textContent.trim().toLowerCase()), xmlDoc);
