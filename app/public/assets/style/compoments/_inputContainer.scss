@@ -1,0 +1,96 @@
+.inputContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+
+    .Container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 1400px;
+        height: 500px;
+        background: $background_item;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+
+        .header {
+            @include center-custom(space-between);
+            background: $color-muted;
+            height: 25px;
+            padding: 0px 10px;
+
+            h1 {
+                font-size: 0.8rem;
+                color: $background;
+                font-weight: 500;
+            }
+
+            span {
+                color: $background_item;
+                transition: 0.5s ease;
+
+                &:hover {
+                    color: $color-danger;
+                }
+            }
+
+        }
+
+        .body {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            height: 100%;
+            .nav {
+                background: $background_item;
+
+                button {
+                    background: transparent;
+                    margin: 0;
+                    width: 100%;
+                    overflow: hidden;
+                    border: 0px;
+                    text-align: left;
+                    font-size: 0.8em;
+                    font-weight: 400;
+                    padding: 10px 10px;
+                    text-transform: none;
+
+                    &:hover {
+                        background: $background;
+                    }
+
+                    &.active {
+                        background: $audio;
+                    }
+                }
+            }
+
+            .content{
+                background: $primary;
+                height: 100%;
+                min-height: 300px;
+                
+                @import "./inputContainerContent";
+            }
+        }
+
+
+    }
+
+    &.none {
+        display: none;
+    }
+
+}
+
+.closeButton {
+    cursor: pointer;
+}
