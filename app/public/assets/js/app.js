@@ -57,7 +57,6 @@ function chargerFichierXML() {
                     update_url(document.getElementById('vmix_connect').value);
                     if (xmlDoc.querySelector('session_delay').textContent === "1000") {
                         document.getElementById('fast').className = "on";
-                        console.log("ici")
                     } else {
                         document.getElementById('fast').className = "off";
                     }
