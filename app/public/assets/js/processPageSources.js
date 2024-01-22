@@ -39,6 +39,7 @@ function processPageSources(xmlDoc) {
             }));
             const inputContainer_content_list_ul = document.getElementById('inputContainer_content_list_ul');
             updateValue(inputContainer_content_list_ul, processPageSources_updateList(listItems), "");
+            document.getElementById('inputContainer_nav_list').style = ""
         } else {
             document.getElementById('inputContainer_nav_list').style.display = "none"
         }
