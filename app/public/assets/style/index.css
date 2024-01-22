@@ -1693,6 +1693,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   font-weight: 600;
   padding: 5px;
   color: #0a0f14;
+  width: 500px;
 }
 .inputContainer .Container .body .content input[type=checkbox] {
   position: relative;
@@ -1718,6 +1719,35 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   color: #0a0f14;
   font-size: 0.8rem;
   font-weight: 600;
+  padding: 5px;
+}
+.inputContainer .Container .body .content .Buttonvalid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0a0f14;
+  padding: 5px;
+  font-size: 1.5rem;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.inputContainer .Container .body .content .Buttonvalid::before {
+  display: inline-block;
+  font-family: "Pe-icon-7-stroke";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e66c";
+}
+.inputContainer .Container .body .content .Buttonvalid:hover {
+  color: #41ae46;
+  transform: scale(1.2);
 }
 .inputContainer .Container .body .content .general .GeneralContainer {
   display: flex;
@@ -1726,6 +1756,9 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   flex-direction: column;
 }
 .inputContainer .Container .body .content .general .GeneralContainer div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 5px;
 }
 .inputContainer .Container .body .content .general .head {

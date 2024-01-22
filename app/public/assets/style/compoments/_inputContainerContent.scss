@@ -6,6 +6,7 @@ input {
     font-weight: 600;
     padding: 5px;
     color: $background_item;
+    width: 500px;
 }
 
 input[type="checkbox"] {
@@ -35,6 +36,21 @@ label {
     color: $background_item;
     font-size: 0.8rem;
     font-weight: 600;
+    padding: 5px;
+}
+
+.Buttonvalid{
+    @include center;
+    @include icon($icon-check);
+    color: $background_item;
+    padding: 5px;
+    font-size: 1.5rem;
+    transition: 0.5s ease;
+    cursor: pointer;
+    &:hover{
+        color: $audio;
+        transform: scale(1.2)
+    }
 }
 
 @mixin mixinhead {
@@ -62,6 +78,7 @@ label {
         flex-direction: column;
 
         div {
+            @include center;
             margin: 5px;
         }
     }
@@ -70,7 +87,6 @@ label {
         @include mixinhead;
     }
 }
-
 
 .list {
 

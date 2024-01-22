@@ -82,7 +82,7 @@ function getVideoSourceHTML(videoSource) {
         <button class="${tallyeOverlay2}" onclick="ApiVmixSend('OverlayInput2','${key}')">2</button>
         <button class="${tallyeOverlay3}" onclick="ApiVmixSend('OverlayInput3','${key}')">3</button>
         <button class="${tallyeOverlay4}" onclick="ApiVmixSend('OverlayInput4','${key}')">4</button>
-        <button class="menu grid_menu" onclick="OpenPageInput('inputContainer_${key}')"></button>
+        <button class="menu grid_menu" onclick="OpenPageInput('${key}')"></button>
     </div>
 `;
 

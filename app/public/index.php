@@ -79,45 +79,42 @@ require $Dir_inc.'vmix_script.php';
                 <div id="audioSourcesContainer"></div>
             </div>
         </section>
-        <div id="inputsContainer">
-
-
-            <div id="inputContainer_4867e907-822b-tttt-814b-4b7454564fcb" style="display: none;" class="inputContainer">
+        <div  id="inputsContainer" class="inputContainer none">
             <div class="Container">
                 <div class="header">
-                    <h1>Le nom de l'input</h1>
+                    <h1 id="inputContainer_header"> </h1>
                     <span class="closeButton" onclick="closePageInput(this)">✖</span>
                 </div>
                 <div class="body">
-                    <div class="nav">
-                        <button>General</button>
-                        <button>List</button>
-                        <button>Color Correction</button>
-                        <button>Layers</button>
+                    <div id="inputContainer_nav" class="nav">
+                        <button id="inputContainer_nav_general" class="active" onclick="changeMenu('general')">General</button>
+                        <button id="inputContainer_nav_list" onclick="changeMenu('list')">List</button>
+                        <button id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
+                        <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
                     </div>
                     <div class="content">
-                        <div class="general disabled">
+                        <div id="inputContainer_content_general" class="general">
                             <div class="head">
-                                <h1 for="inputContainer_InputType">Type</h1>
+                                <h1 for="inputContainer_InputType"> </h1>
                                 <button disabled>CHANGE</button>
                             </div>
                             <div class="GeneralContainer">
                                 <div>
                                     <label for="inputContainer_InputName">Name</label>
-                                    <input id="inputContainer_InputName" type="text">
+                                    <input id="inputContainer_InputName" mouseup="ApiVmixSend('Loop','')" type="text">
+                                    <a class="Buttonvalid"></a>
                                 </div>
                                 <div>
                                     <label for="inputContainer_InputId">Id</label>
-                                    <input id="inputContainer_InputId" type="text">
+                                    <input id="inputContainer_InputId" type="text" disabled>
                                 </div>
                                 <div>
                                     <label for="inputContainer_InputLoop">Loop</label>
-                                    <input id="inputContainer_InputLoop" type="checkbox">
+                                    <input id="inputContainer_InputLoop" type="checkbox" onclick="ApiVmixSend('Loop','${key}')">
                                 </div>
                             </div>
                         </div>
-
-                        <div class="list">
+                        <div id="inputContainer_content_list" style="display:none;" class="list">
                             <div class="head">
                                 <button disabled>Add</button>
                                 <button disabled>Edit</button>
@@ -125,25 +122,23 @@ require $Dir_inc.'vmix_script.php';
                                 <button disabled>Shuffle</button>
                             </div>
                             <div class="GeneralContainer">
-
-                                <ul>
-                                    <li class="select">
-                                        <input id="inputContainer_InputLoop select" type="checkbox">
-                                        <label>Nom de l'élément 1</label>
-                                    </li>
+                                <ul id="inputContainer_content_list_ul">
                                 </ul>
-
                             </div>
                         </div>
+                        <div id="inputContainer_content_color_correction" style="display:none;" class="list"></div>
+                        <div id="inputContainer_content_layers" style="display:none;" class="list"></div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div> 
 
-
-        </div>
     </main>
 </body>
+
+<script>
+
+  </script>
 
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
 <script src="./assets/js/app.js"></script>
@@ -160,6 +155,7 @@ require $Dir_inc.'vmix_script.php';
     var commands;
     var id_input;
     var previewNumber;
+    var inputSelect;
     var activeNumber;
     var activeOverlay1;
     var activeOverlay2;

@@ -49,17 +49,17 @@ function chargerFichierXML() {
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(data, 'text/xml');
                     let vmixElement = xmlDoc.querySelector('vmix')
+                    if (xmlDoc.querySelector('session_delay').textContent === "1000") {
+                        document.getElementById('fast').className = "on";
+                    } else {
+                        document.getElementById('fast').className = "off";
+                    }
                     processSettings(vmixElement);
                     processVideoSources(vmixElement);
                     processAudioBuses(vmixElement);
                     processAudioSources(vmixElement);
                     processPageSources(vmixElement);
                     update_url(document.getElementById('vmix_connect').value);
-                    if (xmlDoc.querySelector('session_delay').textContent === "1000") {
-                        document.getElementById('fast').className = "on";
-                    } else {
-                        document.getElementById('fast').className = "off";
-                    }
                 }
             } else if( xhr.status === 301) {
                 window.location.href = JSON.parse(xhr.responseText)['redirect'];
