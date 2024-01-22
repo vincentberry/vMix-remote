@@ -1,3 +1,5 @@
+var inputContainer_InputName_No_Focus = true;
+
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processPageSources(xmlDoc) {
     if (inputSelect) {
@@ -69,7 +71,10 @@ function processPageSources(xmlDoc) {
         // Utilisation de la fonction pour mettre à jour les éléments
         updateValue(inputContainer_InputId, key);
         updateValue(inputContainer_InputType, type);
-        updateValue(inputContainer_InputName, shortTitle, "");
+        if (inputContainer_InputName_No_Focus) {
+            updateValue(inputContainer_InputName, shortTitle, "");
+            console.log("update");
+        }
         updateValue(inputContainer_InputLoop, loop, "Off");
 
 
@@ -123,5 +128,29 @@ function changeMenu(menuName) {
     // Définir la classe "active" sur l'élément correspondant au menu sélectionné
     document.getElementById('inputContainer_nav_' + menuMapping[menuName]).className = 'active';
     document.getElementById('inputContainer_content_' + menuMapping[menuName]).style.display = "";
-
 }
+
+
+//custom envoi vmix
+
+// inputContainer_InputName (Entrée)
+document.getElementById('inputContainer_InputName').addEventListener('focus', function () {
+    inputContainer_InputName_No_Focus = false;
+});
+
+// inputContainer_InputName (sortie)
+document.getElementById('inputContainer_InputName').addEventListener('blur', function () {
+    var inputValue = document.getElementById('inputContainer_InputName').value;
+    ApiVmixSend('SetInputName', inputSelect, inputValue);
+    inputContainer_InputName_No_Focus = true;
+});
+
+
+// inputContainer_InputLoop
+document.getElementById('inputContainer_InputLoop').addEventListener('click', function() {
+    if(document.getElementById('inputContainer_InputLoop').checked){
+        ApiVmixSend('LoopOn', inputSelect);
+    }else{
+        ApiVmixSend('LoopOff', inputSelect);
+    }
+});

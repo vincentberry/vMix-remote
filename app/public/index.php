@@ -102,7 +102,6 @@ require $Dir_inc.'vmix_script.php';
                                 <div>
                                     <label for="inputContainer_InputName">Name</label>
                                     <input id="inputContainer_InputName" mouseup="ApiVmixSend('Loop','')" type="text">
-                                    <a class="Buttonvalid"></a>
                                 </div>
                                 <div>
                                     <label for="inputContainer_InputId">Id</label>
@@ -110,7 +109,7 @@ require $Dir_inc.'vmix_script.php';
                                 </div>
                                 <div>
                                     <label for="inputContainer_InputLoop">Loop</label>
-                                    <input id="inputContainer_InputLoop" type="checkbox" onclick="ApiVmixSend('Loop','${key}')">
+                                    <input id="inputContainer_InputLoop" type="checkbox">
                                 </div>
                             </div>
                         </div>
