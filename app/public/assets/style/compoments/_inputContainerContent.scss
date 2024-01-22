@@ -108,21 +108,44 @@ label {
                     input[type="checkbox"] {
                         width: 7px;
                         height: 7px;
+                        cursor:default;
                     }
     
                     label{
                         font-size: 0.6rem;
                         margin-left: 5px;
                         font-weight: 400;
+                        cursor: pointer;
                     }
-    
-                    &.select{
-                       background: $color-warning; 
-                    }
-    
+
                     &:hover{
                         background: $color-muted;
                     }
+    
+                    &.select{
+                       background: $color-warning;
+                       
+                       &:hover{
+                            background: $color-warning;
+                            filter: brightness(90%);
+                        }
+                    }
+
+                    .Buttonremove{
+                        @include center;
+                        @include icon($icon-delete-user);
+                        color: $background_item;
+                        padding: 5px;
+                        font-size: 1.5rem;
+                        transition: 0.5s ease;
+                        cursor: pointer;
+                        &:hover{
+                            color: $audio;
+                            transform: scale(1.2)
+                        }
+                    }
+                    
+
                 }
     
                 div {

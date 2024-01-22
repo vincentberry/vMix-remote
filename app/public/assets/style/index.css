@@ -1801,17 +1801,51 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
 .inputContainer .Container .body .content .list .GeneralContainer ul li input[type=checkbox] {
   width: 7px;
   height: 7px;
+  cursor: default;
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul li label {
   font-size: 0.6rem;
   margin-left: 5px;
   font-weight: 400;
+  cursor: pointer;
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li:hover {
+  background: #ECECEC;
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul li.select {
   background: #edcd4d;
 }
-.inputContainer .Container .body .content .list .GeneralContainer ul li:hover {
-  background: #ECECEC;
+.inputContainer .Container .body .content .list .GeneralContainer ul li.select:hover {
+  background: #edcd4d;
+  filter: brightness(90%);
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Buttonremove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0a0f14;
+  padding: 5px;
+  font-size: 1.5rem;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Buttonremove::before {
+  display: inline-block;
+  font-family: "Pe-icon-7-stroke";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e6a7";
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Buttonremove:hover {
+  color: #41ae46;
+  transform: scale(1.2);
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul div {
   margin: 5px;

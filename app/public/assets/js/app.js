@@ -59,6 +59,7 @@ function chargerFichierXML() {
                     processAudioBuses(vmixElement);
                     processAudioSources(vmixElement);
                     processPageSources(vmixElement);
+                    XmlFile = vmixElement;
                     update_url(document.getElementById('vmix_connect').value);
                 }
             } else if( xhr.status === 301) {

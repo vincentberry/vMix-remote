@@ -74,7 +74,6 @@ function processPageSources(xmlDoc) {
         updateValue(inputContainer_InputType, type);
         if (inputContainer_InputName_No_Focus) {
             updateValue(inputContainer_InputName, shortTitle, "");
-            console.log("update");
         }
         updateValue(inputContainer_InputLoop, loop, "Off");
 
@@ -92,16 +91,18 @@ function closePageInput(key) {
 function OpenPageInput(key) {
     // Get the parent div and hide it
     inputSelect = key;
+    processPageSources(XmlFile);
     document.getElementById("inputsContainer").classList.remove("none");
 
 }
 
 function processPageSources_updateList(listItems) {
     // Utiliser la méthode map pour créer un tableau de chaînes HTML
-    const htmlListItems = listItems.map((item) => `
-        <li class="${item.selected ? 'select' : ''}">
-            <input type="checkbox" ${item.enabled}>
-            <label>${item.value} ${item.enabled}</label>
+    const htmlListItems = listItems.map((item, index) => `
+        <li class="${item.selected ? 'select' : ''}" onclick="ApiVmixSend('SelectIndex','${inputSelect}','${index + 1}')">
+            <input disabled type="checkbox" ${item.enabled}>
+            <label>${item.value}</label>
+            <a class="Buttonremove"><a>
         </li>
     `);
 
