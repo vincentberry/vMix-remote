@@ -53,16 +53,16 @@ function processPageSources(xmlDoc) {
         // Fonction pour mettre à jour une valeur si elle est différente et non vide
         function updateValue(element, attribute, defaultValue) {
             const attributeValue = attribute.trim();
-            const currentValue = element.value || element.title || element.innerHTML || element.checked.toString();
+            const currentValue = element.value || element.innerHTML || element.checked.toString();
 
             if (attributeValue !== "" && attributeValue !== currentValue) {
-                element.value = element.title = element.innerHTML = attributeValue;
+                element.value = element.innerHTML = attributeValue;
                 if (element.type === 'checkbox') {
                     element.checked = (defaultValue.toLowerCase() === 'true');
                 }
             } else if (attributeValue === "" && defaultValue !== undefined) {
                 // Mettre la valeur par défaut si l'attribut est vide
-                element.value = element.title = element.innerHTML = defaultValue;
+                element.value  = element.innerHTML = defaultValue;
                 if (element.type === 'checkbox') {
                     element.checked = (defaultValue.toLowerCase() === 'true');
                 }
@@ -85,24 +85,25 @@ function processPageSources(xmlDoc) {
 function closePageInput(key) {
     // Get the parent div and hide it
     insputSelect = "";
-    document.getElementById("inputsContainer").classList.add("none");
+    document.getElementById("inputsContainer").classList.add("disabled");
 }
 
 function OpenPageInput(key) {
     // Get the parent div and hide it
     inputSelect = key;
     processPageSources(XmlFile);
-    document.getElementById("inputsContainer").classList.remove("none");
+    changeMenu('general');
+    document.getElementById("inputsContainer").classList.remove("disabled");
 
 }
 
 function processPageSources_updateList(listItems) {
     // Utiliser la méthode map pour créer un tableau de chaînes HTML
     const htmlListItems = listItems.map((item, index) => `
-        <li class="${item.selected ? 'select' : ''}" onclick="ApiVmixSend('SelectIndex','${inputSelect}','${index + 1}')">
+        <li class="${item.selected ? 'select' : ''}">
             <input disabled type="checkbox" ${item.enabled}>
-            <label>${item.value}</label>
-            <a class="Buttonremove"><a>
+            <label onclick="ApiVmixSend('SelectIndex','${inputSelect}','${index + 1}')">${item.value}</label>
+            <a class="Button_remove" onclick="ConfirmApiVmixSend('Are you sure you want to delete the list element? ${item.value}','ListRemove','${inputSelect}','${index + 1}')"></a>
         </li>
     `);
 
@@ -155,4 +156,9 @@ document.getElementById('inputContainer_InputLoop').addEventListener('click', fu
     }else{
         ApiVmixSend('LoopOff', inputSelect);
     }
+});
+
+// inputContainer_listShuffle
+document.getElementById('inputContainer_listShuffle').addEventListener('click', function() {
+    ApiVmixSend('ListShuffle', inputSelect);
 });

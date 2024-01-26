@@ -1,14 +1,14 @@
 <?php
 $Dir_inc = '../inc/';
-require $Dir_inc.'header.php';
-require $Dir_inc.'vmix_script.php';
+require $Dir_inc . 'header.php';
+require $Dir_inc . 'vmix_script.php';
 ?>
+
 <body>
     <nav id="nav" class="">
         <div>
             <div class="left">
-                <img class="script_down" onclick="copyToClipboard('VmixScript')" src="./assets/icon/VMIX REMOTE.svg"
-                    alt="" srcset="">
+                <img class="script_down" onclick="copyToClipboard('VmixScript')" src="./assets/icon/VMIX REMOTE.svg" alt="" srcset="">
                 <div class="list">
                     <select name="vmix_connect" onmouseover="new_session_send()" onclick="chargerFichierXML()" id="vmix_connect">
                         <option value="N">--Please choose the vmix--</option>
@@ -19,9 +19,7 @@ require $Dir_inc.'vmix_script.php';
             <h1 id="projetName"></h1>
             <div class="right">
                 <div class="statut_vmix_contener">
-                    <div id="streaming"
-                        onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the streaming?','StartStopStreaming')"
-                        class="statut_vmix">
+                    <div id="streaming" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the streaming?','StartStopStreaming')" class="statut_vmix">
                         <h1>Streaming</h1>
                         <div class="activeContainer">
                             <div id="statut_streaming1" class=""></div>
@@ -29,25 +27,19 @@ require $Dir_inc.'vmix_script.php';
                             <div id="statut_streaming3" class=""></div>
                         </div>
                     </div>
-                    <div id="recording"
-                        onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the recording?','StartStopRecording')"
-                        class="statut_vmix">
+                    <div id="recording" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the recording?','StartStopRecording')" class="statut_vmix">
                         <h1>Recording</h1>
                         <div class="activeContainer">
                             <div id="statut_recording1" class=""></div>
                             <div id="statut_recording2" class=""></div>
                         </div>
                     </div>
-                    <div id="external"
-                        onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the external?','StartStopExternal')"
-                        class="statut_vmix">
+                    <div id="external" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the external?','StartStopExternal')" class="statut_vmix">
                         <h1>external</h1>
                         <div class="activeContainer">
                         </div>
                     </div>
-                    <div id="fullscreen"
-                        onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the fullscreen?','Fullscreen')"
-                        class="statut_vmix">
+                    <div id="fullscreen" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the fullscreen?','Fullscreen')" class="statut_vmix">
                         <h1>fullscreen</h1>
                     </div>
                 </div>
@@ -55,7 +47,7 @@ require $Dir_inc.'vmix_script.php';
         </div>
     </nav>
     <!-- <div class="loader" id = loader></div> -->
-    <main  id="main" class="connect">
+    <main id="main" class="connect">
         <div class="tooltip" id="tooltip-volume">dddd</div>
         <section class="center">
             <div class="ContainerCommandSelector">
@@ -79,7 +71,7 @@ require $Dir_inc.'vmix_script.php';
                 <div id="audioSourcesContainer"></div>
             </div>
         </section>
-        <div  id="inputsContainer" class="inputContainer none">
+        <div id="inputsContainer" class="inputContainer disabled">
             <div class="Container">
                 <div class="header">
                     <h1 id="inputContainer_header"> </h1>
@@ -113,12 +105,10 @@ require $Dir_inc.'vmix_script.php';
                                 </div>
                             </div>
                         </div>
-                        <div id="inputContainer_content_list" style="display:none;" class="list">
+                        <div id="inputContainer_content_list" class="list" style="display:none;">
                             <div class="head">
-                                <button disabled>Add</button>
-                                <button disabled>Edit</button>
-                                <button disabled>Remove</button>
-                                <button disabled>Shuffle</button>
+                                <button onclick="processPageSources_list_addItem()"> Add</button>
+                                <button id="inputContainer_listShuffle">Shuffle</button>
                             </div>
                             <div class="GeneralContainer">
                                 <ul id="inputContainer_content_list_ul">
@@ -130,14 +120,16 @@ require $Dir_inc.'vmix_script.php';
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+        <div id="EditContainer" class="EditContainer disabled">
+        </div>
 
     </main>
 </body>
 
 <script>
 
-  </script>
+</script>
 
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
 <script src="./assets/js/app.js"></script>
@@ -147,6 +139,7 @@ require $Dir_inc.'vmix_script.php';
 <script src="./assets/js/processAudioBus.js"></script>
 <script src="./assets/js/processVideoSources.js"></script>
 <script src="./assets/js/processPageSources.js"></script>
+<script src="./assets/js/processEdit.js"></script>
 <script src="./assets/js/api_vmix.js"></script>
 <script src="./assets/js/submit_vmix.js"></script>
 <script>
@@ -161,14 +154,13 @@ require $Dir_inc.'vmix_script.php';
     var activeOverlay3;
     var activeOverlay4;
     var XmlFile;
-    
+
     document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
     const vmix_connect_param = get_vmix_connect_param();
-    if (vmix_connect_param === null){
+    if (vmix_connect_param === null) {
         window.location.href = '/lobby';
     }
-
 </script>
 <?php
-require $Dir_inc.'footer.php';
+require $Dir_inc . 'footer.php';
 ?>

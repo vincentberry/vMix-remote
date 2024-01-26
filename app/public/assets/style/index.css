@@ -1647,12 +1647,8 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   color: #1e2328;
   font-weight: 500;
 }
-.inputContainer .Container .header span {
+.inputContainer .Container .header .closeButton {
   color: #0a0f14;
-  transition: 0.5s ease;
-}
-.inputContainer .Container .header span:hover {
-  color: #ED4F32;
 }
 .inputContainer .Container .body {
   display: grid;
@@ -1796,7 +1792,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   justify-content: flex-start;
   border-bottom: 1px solid #1e2328;
   padding: 5px;
-  cursor: pointer;
+  height: 35px;
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul li input[type=checkbox] {
   width: 7px;
@@ -1804,9 +1800,10 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   cursor: default;
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul li label {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   margin-left: 5px;
-  font-weight: 400;
+  font-weight: 500;
+  height: 100%;
   cursor: pointer;
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul li:hover {
@@ -1819,7 +1816,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   background: #edcd4d;
   filter: brightness(90%);
 }
-.inputContainer .Container .body .content .list .GeneralContainer ul li .Buttonremove {
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Button_remove {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1829,7 +1826,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   transition: 0.5s ease;
   cursor: pointer;
 }
-.inputContainer .Container .body .content .list .GeneralContainer ul li .Buttonremove::before {
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Button_remove::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -1841,11 +1838,37 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  content: "\e6a7";
+  content: "\e609";
 }
-.inputContainer .Container .body .content .list .GeneralContainer ul li .Buttonremove:hover {
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Button_remove:hover {
+  color: #ED4F32;
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Button_edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0a0f14;
+  padding: 5px;
+  font-size: 1.5rem;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Button_edit::before {
+  display: inline-block;
+  font-family: "Pe-icon-7-stroke";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e659";
+}
+.inputContainer .Container .body .content .list .GeneralContainer ul li .Button_edit:hover {
   color: #41ae46;
-  transform: scale(1.2);
 }
 .inputContainer .Container .body .content .list .GeneralContainer ul div {
   margin: 5px;
@@ -1868,10 +1891,63 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   border: 0px;
   margin-left: 2px;
 }
-.inputContainer.none {
-  display: none;
-}
 
 .closeButton {
   cursor: pointer;
+  transition: 0.5s ease;
+}
+.closeButton:hover {
+  color: #ED4F32;
+}
+
+.EditContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1010;
+}
+.EditContainer .Container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  padding: 50px;
+  background: #0a0f14;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  position: relative;
+}
+.EditContainer .Container .closeButton {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+.EditContainer .Container .body {
+  width: 100%;
+}
+.EditContainer .Container .body h1 {
+  padding: 10px;
+  font-size: 1.2rem;
+  color: #ECECEC;
+}
+.EditContainer .Container .body div {
+  width: 100%;
+  margin: 5px;
+}
+.EditContainer .Container .body div label {
+  margin-right: 5px;
+}
+.EditContainer .Container .body div input {
+  width: 50%;
+}
+.EditContainer .Container .body .valid {
+  background: #41ae46;
+}
+.EditContainer .Container .body .cancel {
+  background: #ED4F32;
 }/*# sourceMappingURL=index.css.map */

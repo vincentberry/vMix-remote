@@ -32,15 +32,9 @@
                 color: $background;
                 font-weight: 500;
             }
-
-            span {
-                color: $background_item;
-                transition: 0.5s ease;
-
-                &:hover {
-                    color: $color-danger;
-                }
-            }
+            .closeButton{
+                color: $background_item;                
+            }          
 
         }
 
@@ -85,12 +79,13 @@
 
     }
 
-    &.none {
-        display: none;
-    }
-
 }
 
 .closeButton {
     cursor: pointer;
+    transition: 0.5s ease;
+
+    &:hover {
+        color: $color-danger;
+    }
 }

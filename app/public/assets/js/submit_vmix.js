@@ -28,7 +28,7 @@ function ApiVmixSend(command, input = 0, value = 0, duration = 0) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                AlertPopup(JSON.parse(xhr.responseText)['Valid'])
+                AlertPopup(JSON.parse(xhr.responseText)['Valid'] + queryString )
             } else {
                 AlertPopup(JSON.parse(xhr.responseText)['error'])
             }
