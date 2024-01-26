@@ -119,70 +119,70 @@ require $Dir_inc . 'vmix_script.php';
                         <div id="inputContainer_content_layers" class="layers" style="display:none;" class="list">
                             <div class="left">
                                 <div class="list">
-                                    <label for=""> 1</label>
+                                    <label> 1</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '1,'+ this.value)" id="inputContainer_content_list_0">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 2</label>
+                                    <label> 2</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '2,'+ this.value)" id="inputContainer_content_list_1">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 3</label>
+                                    <label> 3</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '3,'+ this.value)" id="inputContainer_content_list_2">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 4</label>
+                                    <label> 4</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '4,'+ this.value)" id="inputContainer_content_list_3">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 5</label>
+                                    <label> 5</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '5,'+ this.value)" id="inputContainer_content_list_4">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 6</label>
+                                    <label> 6</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '6,'+ this.value)" id="inputContainer_content_list_5">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 7</label>
+                                    <label> 7</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '7,'+ this.value)" id="inputContainer_content_list_6">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 8</label>
+                                    <label> 8</label>
                                     <select onchange="ApiVmixSend('SetLayer',inputSelect, '8,'+ this.value)" id="inputContainer_content_list_7">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for=""> 9</label>
+                                    <label> 9</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '9,'+ this.value)" id="inputContainer_content_list_8">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label for="">10</label>
+                                    <label>10</label>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '10,'+ this.value)" id="inputContainer_content_list_9">
                                         <option value="">None</option>
                                     </select>
@@ -190,7 +190,9 @@ require $Dir_inc . 'vmix_script.php';
                                 </div>
                             </div>
                             <div class="rigth">
-
+                                <div>
+                                    <label>SS</label>
+                                </div>
                             </div>
                         </div>
                     </div>
