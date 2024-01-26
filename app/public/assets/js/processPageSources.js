@@ -44,6 +44,9 @@ function processPageSources(xmlDoc) {
             document.getElementById('inputContainer_nav_list').style.display = "none"
         }
 
+        processPageSources_updateLayers(input)
+        processPageSources_updateInput_layers(xmlDoc);
+
         // Supposons également que vous avez déjà obtenu la référence aux éléments HTML du formulaire
         const inputContainer_InputId = document.getElementById('inputContainer_InputId');
         const inputContainer_InputType = document.querySelector('h1[for="inputContainer_InputType"]');
@@ -62,7 +65,7 @@ function processPageSources(xmlDoc) {
                 }
             } else if (attributeValue === "" && defaultValue !== undefined) {
                 // Mettre la valeur par défaut si l'attribut est vide
-                element.value  = element.innerHTML = defaultValue;
+                element.value = element.innerHTML = defaultValue;
                 if (element.type === 'checkbox') {
                     element.checked = (defaultValue.toLowerCase() === 'true');
                 }
@@ -92,6 +95,7 @@ function OpenPageInput(key) {
     // Get the parent div and hide it
     inputSelect = key;
     processPageSources(XmlFile);
+    processPageSources_updateInput_layers(XmlFile);
     changeMenu('general');
     document.getElementById("inputsContainer").classList.remove("disabled");
 
@@ -111,6 +115,22 @@ function processPageSources_updateList(listItems) {
     const htmlString = htmlListItems.join('');
 
     return htmlString;
+}
+
+function processPageSources_updateLayers(inputSource) {
+    for (let i = 0; i <= 9; i++) {
+        if (inputSource) {
+            var overlays = inputSource.querySelectorAll('overlay');
+            overlays.forEach(overlay => {
+                var overlayIndex = overlay.getAttribute('index');
+                var overlayKey = overlay.getAttribute('key');
+                document.getElementById('inputContainer_content_list_' + overlayIndex).value = overlayKey
+                document.getElementById('inputContainer_content_list_' + i).value = ""
+            });
+        } else {
+            document.getElementById('inputContainer_content_list_' + i).value = ""
+        }
+    };
 }
 
 function changeMenu(menuName) {
@@ -133,6 +153,44 @@ function changeMenu(menuName) {
     document.getElementById('inputContainer_content_' + menuMapping[menuName]).style.display = "";
 }
 
+function processPageSources_updateInput_layers(xmlDoc) {
+
+    const inputSources = xmlDoc.querySelectorAll('input');
+
+    for (let i = 0; i <= 9; i++) {
+        var selectElement = document.getElementById('inputContainer_content_list_' + i);
+
+        if (selectElement) {
+            inputSources.forEach(inputSource => {
+                var key = inputSource.getAttribute('key');
+                var title = inputSource.getAttribute('number') + " :" + inputSource.getAttribute('title');
+
+                // Check if the option already exists
+                var existingOption = selectElement.querySelector('option[value="' + key + '"]');
+
+                if (existingOption) {
+                    // If the option exists, update its text
+                    if (existingOption.text !== title) {
+                        existingOption.text = title;
+                    }
+                } else {
+                    // If the option does not exist, add a new option
+                    var option = document.createElement('option');
+                    option.value = key;
+                    option.text = title;
+                    selectElement.add(option);
+                }
+            });
+
+            var existingKeys = Array.from(inputSources).map(inputSource => inputSource.getAttribute('key'));
+            Array.from(selectElement.options).forEach(option => {
+                if (option.value !== '' && !existingKeys.includes(option.value)) {
+                    selectElement.remove(option.index);
+                }
+            });
+        }
+    }
+}
 
 //custom envoi vmix
 
@@ -150,15 +208,15 @@ document.getElementById('inputContainer_InputName').addEventListener('blur', fun
 
 
 // inputContainer_InputLoop
-document.getElementById('inputContainer_InputLoop').addEventListener('click', function() {
-    if(document.getElementById('inputContainer_InputLoop').checked){
+document.getElementById('inputContainer_InputLoop').addEventListener('click', function () {
+    if (document.getElementById('inputContainer_InputLoop').checked) {
         ApiVmixSend('LoopOn', inputSelect);
-    }else{
+    } else {
         ApiVmixSend('LoopOff', inputSelect);
     }
 });
 
 // inputContainer_listShuffle
-document.getElementById('inputContainer_listShuffle').addEventListener('click', function() {
+document.getElementById('inputContainer_listShuffle').addEventListener('click', function () {
     ApiVmixSend('ListShuffle', inputSelect);
 });

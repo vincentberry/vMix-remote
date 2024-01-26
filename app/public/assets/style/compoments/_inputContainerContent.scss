@@ -175,3 +175,31 @@ label {
 
     }
 }
+
+.layers{
+
+    .list{
+        padding: 0;
+        margin: 2px;
+
+        label{
+            background: $background;
+            color: $color-text;
+            padding: 5px;
+        }
+
+        select{
+            padding: 5px;
+            width: 200px;
+        }
+
+        button{
+            padding: 5px 20px;
+            margin: 0px;
+            border: 0;
+            font-weight: 500;
+        }
+    }
+    
+
+}

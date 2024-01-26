@@ -102,7 +102,7 @@ function new_session_send() {
 
 function reset_session() {
     activatedBuses = [];
-    id_input = "";
+    inputArray = [];
     previewNumber = "";
     activeNumber = "";
     activeOverlay1 = "";

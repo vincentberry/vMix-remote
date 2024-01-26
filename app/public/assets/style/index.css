@@ -1891,6 +1891,25 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   border: 0px;
   margin-left: 2px;
 }
+.inputContainer .Container .body .content .layers .list {
+  padding: 0;
+  margin: 2px;
+}
+.inputContainer .Container .body .content .layers .list label {
+  background: #1e2328;
+  color: #ffffff;
+  padding: 5px;
+}
+.inputContainer .Container .body .content .layers .list select {
+  padding: 5px;
+  width: 200px;
+}
+.inputContainer .Container .body .content .layers .list button {
+  padding: 5px 20px;
+  margin: 0px;
+  border: 0;
+  font-weight: 500;
+}
 
 .closeButton {
   cursor: pointer;
