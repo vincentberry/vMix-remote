@@ -40,7 +40,7 @@
         Dim command
         ' Parcourir chaque commande dans le tableau
         For Each command In commands
-        Dim commandParts As String() = command.Split(","c)
+        Dim commandParts As String() = command.Split("~"c)
         If commandParts.Length = 4 Then
         Dim functionType As String = commandParts(0).Trim()
         Dim inputParam As String = commandParts(1).Trim()
