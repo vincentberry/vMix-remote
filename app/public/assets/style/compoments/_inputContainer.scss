@@ -71,7 +71,9 @@
                 background: $primary;
                 height: 100%;
                 min-height: 300px;
-                
+                @media (max-width: 1300px) {
+                    overflow-y: scroll;
+                }
                 @import "./inputContainerContent";
             }
         }

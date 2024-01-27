@@ -1681,6 +1681,11 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   height: 100%;
   min-height: 300px;
 }
+@media (max-width: 1300px) {
+  .inputContainer .Container .body .content {
+    overflow-y: scroll;
+  }
+}
 .inputContainer .Container .body .content input {
   background: #ece9e9;
   border: 1px solid #1e2328;
@@ -1891,24 +1896,135 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   border: 0px;
   margin-left: 2px;
 }
-.inputContainer .Container .body .content .layers .list {
+.inputContainer .Container .body .content .layers {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+}
+@media (max-width: 1300px) {
+  .inputContainer .Container .body .content .layers {
+    grid-template-columns: 1fr;
+    margin-bottom: 50px;
+  }
+}
+.inputContainer .Container .body .content .layers .left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.inputContainer .Container .body .content .layers .left .list {
+  display: flex;
+  align-items: flex-start;
   padding: 0;
   margin: 2px;
+  height: 26px;
 }
-.inputContainer .Container .body .content .layers .list label {
+.inputContainer .Container .body .content .layers .left .list .layer_number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 100%;
   background: #1e2328;
+}
+.inputContainer .Container .body .content .layers .left .list .layer_number label {
   color: #ffffff;
-  padding: 5px;
 }
-.inputContainer .Container .body .content .layers .list select {
-  padding: 5px;
+.inputContainer .Container .body .content .layers .left .list select {
+  padding: 4px;
   width: 200px;
+  border-radius: 0;
+  height: 100%;
 }
-.inputContainer .Container .body .content .layers .list button {
+.inputContainer .Container .body .content .layers .left .list button {
+  height: 100%;
   padding: 5px 20px;
   margin: 0px;
   border: 0;
   font-weight: 500;
+}
+.inputContainer .Container .body .content .layers .left .list button.on {
+  padding: 5px 10px;
+  background: #41ae46;
+}
+.inputContainer .Container .body .content .layers .left .list button.off {
+  padding: 5px 10px;
+  background: #ED4F32;
+}
+.inputContainer .Container .body .content .layers .rigth {
+  position: relative;
+}
+.inputContainer .Container .body .content .layers .rigth h1 {
+  font-size: 0.8rem;
+  padding: 5px;
+  color: #002b6c;
+}
+.inputContainer .Container .body .content .layers .rigth button {
+  position: absolute;
+  transform: translateY(-50%) translateX(50%);
+  top: 2px;
+  right: 20px;
+  font-size: 0.8rem;
+  padding: 5px;
+  border: 0;
+}
+.inputContainer .Container .body .content .layers .rigth .mode {
+  margin: 3px;
+  border: #1e2328 solid 1px;
+  padding: 10px;
+  background: #ECECEC;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_header h3 {
+  color: #0a0f14;
+  text-transform: uppercase;
+  font-style: 1rem;
+  font-weight: 600;
+  padding-bottom: 15px;
+  text-decoration-line: underline;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_header button {
+  position: absolute;
+  transform: translateY(-50%) translateX(50%);
+  top: 0;
+  right: 10px;
+  font-size: 0.8rem;
+  padding: 5px;
+  border: 0;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_content {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_content div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 26px;
+  margin: 5px;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_content div .label_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 100%;
+  background: #1e2328;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_content div .label_content label {
+  color: #ffffff;
+}
+.inputContainer .Container .body .content .layers .rigth .mode .mode_content div input {
+  width: 100px;
+  background: #ffffff;
 }
 
 .closeButton {

@@ -119,70 +119,92 @@ require $Dir_inc . 'vmix_script.php';
                         <div id="inputContainer_content_layers" class="layers" style="display:none;" class="list">
                             <div class="left">
                                 <div class="list">
-                                    <label> 1</label>
+                                    <div class="layer_number">
+                                        <label>1</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '1,'+ this.value)" id="inputContainer_content_list_0">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
+                                    <button class="on">ON</button>
+                                    <button class="off">OFF</button>
                                 </div>
                                 <div class="list">
-                                    <label> 2</label>
+                                    <div class="layer_number">
+                                        <label>2</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '2,'+ this.value)" id="inputContainer_content_list_1">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 3</label>
+                                    <div class="layer_number">
+                                        <label>3</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '3,'+ this.value)" id="inputContainer_content_list_2">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 4</label>
+                                    <div class="layer_number">
+                                        <label>4</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '4,'+ this.value)" id="inputContainer_content_list_3">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 5</label>
+                                    <div class="layer_number">
+                                        <label>5</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '5,'+ this.value)" id="inputContainer_content_list_4">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 6</label>
+                                    <div class="layer_number">
+                                        <label>6</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '6,'+ this.value)" id="inputContainer_content_list_5">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 7</label>
+                                    <div class="layer_number">
+                                        <label>7</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '7,'+ this.value)" id="inputContainer_content_list_6">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 8</label>
+                                    <div class="layer_number">
+                                        <label>8</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer',inputSelect, '8,'+ this.value)" id="inputContainer_content_list_7">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label> 9</label>
+                                    <div class="layer_number">
+                                        <label>9</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '9,'+ this.value)" id="inputContainer_content_list_8">
                                         <option value="">None</option>
                                     </select>
                                     <button>EDIT</button>
                                 </div>
                                 <div class="list">
-                                    <label>10</label>
+                                    <div class="layer_number">
+                                        <label>10</label>
+                                    </div>
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '10,'+ this.value)" id="inputContainer_content_list_9">
                                         <option value="">None</option>
                                     </select>
@@ -190,8 +212,99 @@ require $Dir_inc . 'vmix_script.php';
                                 </div>
                             </div>
                             <div class="rigth">
-                                <div>
-                                    <label>SS</label>
+                                <h1>LE NOM DE L'INPUT SELECTION</h1>
+                                <button>90 DEGRES</button>
+                                <div class="mode">
+                                    <div class="mode_header">
+                                        <h3>MOVE</h3>
+                                        <button>RESET</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <div>
+                                            <div class="label_content">
+                                                <label>X</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Y</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Width</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Height</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mode">
+                                    <div class="mode_header">
+                                        <h3>CROP</h3>
+                                        <button>RESET</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <div>
+                                            <div class="label_content">
+                                                <label>X1</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Y1</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>X1</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Y2</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mode">
+                                    <div class="mode_header">
+                                        <h3>BORDER</h3>
+                                        <button>RESET</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <div>
+                                            <div class="label_content">
+                                                <label>On/Off</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Thickness</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                        <div>
+                                            <div class="label_content">
+                                                <label>Radius</label>
+                                            </div>
+                                            <input type="text">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
