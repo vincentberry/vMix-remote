@@ -29,6 +29,22 @@ function processPageSources(xmlDoc) {
         // Obtenir le texte de l'élément <input>
         const inputText = input.textContent.trim();
 
+        // Obtenir l'élément GT <text> et son contenu
+        if (input.querySelector('text')) {
+            const textItems = Array.from(input.querySelectorAll('text')).map(item => ({
+                index: item.getAttribute('index'),
+                name: item.getAttribute('name'),
+                value: item.textContent.trim()
+            }));
+
+            console.log(textItems);
+            const inputContainer_content_text_ul = document.getElementById('inputContainer_content_text_ul');
+            updateValue(inputContainer_content_text_ul, processPageSources_updateText(textItems), "");
+            document.getElementById('inputContainer_nav_text').style = ""
+        } else {
+            document.getElementById('inputContainer_nav_text').style.display = "none"
+        }
+        
         // Obtenir l'élément <list> et son contenu
         if (input.querySelector('list')) {
             const listElement = input.querySelector('list');
@@ -117,6 +133,21 @@ function processPageSources_updateList(listItems) {
     return htmlString;
 }
 
+function processPageSources_updateText(textItems) {
+    // Utiliser la méthode map pour créer un tableau de chaînes HTML
+    const htmlTextItems = textItems.map((item, index) => `
+        <li>
+            <h3>${item.name}</h3>
+            <input type="text" ${item.value}>s
+        </li>
+    `);
+
+    // Joindre les chaînes HTML pour obtenir une seule chaîne
+    const htmlString = htmlTextItems.join('');
+
+    return htmlString;
+}
+
 function processPageSources_updateLayers(inputSource) {
     for (let i = 0; i <= 9; i++) {
         if (inputSource) {
@@ -139,7 +170,8 @@ function changeMenu(menuName) {
         'general': 'general',
         'list': 'list',
         'color_correction': 'color_correction',
-        'layers': 'layers'
+        'layers': 'layers',
+        'text': 'text'
     };
 
     // Réinitialiser toutes les classes à une chaîne vide
