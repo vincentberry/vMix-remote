@@ -3,6 +3,7 @@ function closeEdit() {
     // Get the parent div and hide it
     document.getElementById("EditContainer").classList.add("disabled");
 }
+
 function OpenEdit(HTML) {
     const ancienConteneur = document.getElementById("EditContainerContainer");
     if (ancienConteneur) {
