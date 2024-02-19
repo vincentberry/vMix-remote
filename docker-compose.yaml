@@ -11,6 +11,8 @@ services:
         - ./log:/var/log/apache2
     restart: unless-stopped
     hostname: remotevmix-apache
+    ports:
+      - "8080:80"
      # command: a2enmod rewrite  && a2enmod remoteip && a2enconf swag && docker-php-ext-install pdo pdo_mysql && /etc/init.d/apache2 restart 
     networks: 
       - remotevmix_apache
