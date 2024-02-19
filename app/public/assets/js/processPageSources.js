@@ -200,7 +200,8 @@ function changeMenu(menuName) {
         'general': 'general',
         'list': 'list',
         'color_correction': 'color_correction',
-        'layers': 'layers'
+        'layers': 'layers',
+        'text': 'text'
     };
 
     // Réinitialiser toutes les classes à une chaîne vide
