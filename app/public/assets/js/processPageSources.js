@@ -36,8 +36,6 @@ function processPageSources(xmlDoc) {
                 name: item.getAttribute('name'),
                 value: item.textContent.trim()
             }));
-
-            console.log(textItems);
             const inputContainer_content_text_ul = document.getElementById('inputContainer_content_text_ul');
             updateValue(inputContainer_content_text_ul, processPageSources_updateText(textItems), "");
             document.getElementById('inputContainer_nav_text').style = ""
