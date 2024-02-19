@@ -1954,13 +1954,11 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
 }
 .inputContainer .Container .body .content .layers .rigth {
   position: relative;
-  margin: 3px;
 }
 .inputContainer .Container .body .content .layers .rigth h1 {
-  font-size: 1.5rem;
-  padding: 10px 5px;
-  color: #ffffff;
-  background: #1e2328;
+  font-size: 0.8rem;
+  padding: 5px;
+  color: #002b6c;
 }
 .inputContainer .Container .body .content .layers .rigth button {
   position: absolute;
@@ -2031,6 +2029,10 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
 }
 .inputContainer .Container .body .content .text {
   background-color: red;
+}
+.inputContainer .Container .body .content .text .GeneralContainer ul li {
+  display: flex;
+  align-items: flex-start;
 }
 .inputContainer .Container .body .content .text .GeneralContainer ul li h3 {
   color: #0a0f14;

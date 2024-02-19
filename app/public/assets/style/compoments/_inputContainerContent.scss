@@ -331,6 +331,8 @@ label {
     .GeneralContainer {
         ul {
             li {
+                display: flex;
+                align-items: flex-start;
                 h3 {
                     color: $background_item;
                     padding: 10px;
