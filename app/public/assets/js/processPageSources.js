@@ -1,4 +1,6 @@
 var inputContainer_InputName_No_Focus = true;
+var inputContainer_LayersSelect_No_Focus = true;
+var PageSources_LayersSelect = "0";
 
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processPageSources(xmlDoc) {
@@ -94,8 +96,11 @@ function processPageSources(xmlDoc) {
         }
         updateValue(inputContainer_InputLoop, loop, "Off");
 
-
-        document.getElementById("inputContainer_header").innerHTML = `Input ${number}: ${document.getElementById("inputContainer_InputName").value}`;
+        inputContainer_header =  `Input ${number}: ${document.getElementById("inputContainer_InputName").value}`;
+        if (document.getElementById("inputContainer_header").innerHTML !== inputContainer_header) {
+            document.getElementById("inputContainer_header").innerHTML = inputContainer_header;
+        }
+        
     }
 };
 
@@ -149,12 +154,39 @@ function processPageSources_updateText(textItems) {
 function processPageSources_updateLayers(inputSource) {
     for (let i = 0; i <= 9; i++) {
         if (inputSource) {
-            var overlays = inputSource.querySelectorAll('overlay');
+            const overlays = inputSource.querySelectorAll('overlay');
             overlays.forEach(overlay => {
-                var overlayIndex = overlay.getAttribute('index');
-                var overlayKey = overlay.getAttribute('key');
-                document.getElementById('inputContainer_content_list_' + overlayIndex).value = overlayKey
-                document.getElementById('inputContainer_content_list_' + i).value = ""
+                const overlayIndex = overlay.getAttribute('index');
+                const overlayKey = overlay.getAttribute('key');
+                document.getElementById('inputContainer_List_Layers_' + overlayIndex).value = overlayKey;
+                document.getElementById('inputContainer_List_Layers_' + i).value = "";
+                document.getElementById('inputContainer_Content_Layers_Select').textContent = "Layer " +  (parseInt(PageSources_LayersSelect) + 1).toString();
+                if(PageSources_LayersSelect === overlayIndex && inputContainer_LayersSelect_No_Focus){
+                    const positionElement = overlay.getElementsByTagName('position')[0];
+                    if (positionElement){
+                        document.getElementById('inputContainer_Content_Layers_Select_move_X').value = positionElement.getAttribute('X');
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Y').value = positionElement.getAttribute('Y');
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Width').value = positionElement.getAttribute('width');
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Height').value = positionElement.getAttribute('height');
+                    }else{
+                        document.getElementById('inputContainer_Content_Layers_Select_move_X').value = "";
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Y').value = "";
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Width').value = "";
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Height').value = ""; 
+                    }
+                    const cropElement = overlay.getElementsByTagName('position')[0];
+                    if (cropElement){
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_X1').value = cropElement.getAttribute('X1');
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_Y1').value = cropElement.getAttribute('Y1');
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_X2').value = cropElement.getAttribute('X2');
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_Y2').value = cropElement.getAttribute('Y2');
+                    }else{
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_X1').value = "";
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_Y1').value = "";
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_X2').value = "";
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_Y2').value = ""; 
+                    }
+                }
             });
         } else {
             document.getElementById('inputContainer_content_list_' + i).value = ""
@@ -168,8 +200,7 @@ function changeMenu(menuName) {
         'general': 'general',
         'list': 'list',
         'color_correction': 'color_correction',
-        'layers': 'layers',
-        'text': 'text'
+        'layers': 'layers'
     };
 
     // Réinitialiser toutes les classes à une chaîne vide
@@ -188,7 +219,7 @@ function processPageSources_updateInput_layers(xmlDoc) {
     const inputSources = xmlDoc.querySelectorAll('input');
 
     for (let i = 0; i <= 9; i++) {
-        var selectElement = document.getElementById('inputContainer_content_list_' + i);
+        var selectElement = document.getElementById('inputContainer_List_Layers_' + i);
 
         if (selectElement) {
             inputSources.forEach(inputSource => {
@@ -220,6 +251,26 @@ function processPageSources_updateInput_layers(xmlDoc) {
             });
         }
     }
+}
+
+function changeMenu(menuName) {
+    // Liste des menus et de leurs correspondances avec les IDs des éléments HTML
+    const menuMapping = {
+        'general': 'general',
+        'list': 'list',
+        'color_correction': 'color_correction',
+        'layers': 'layers'
+    };
+
+    // Réinitialiser toutes les classes à une chaîne vide
+    for (const id in menuMapping) {
+        document.getElementById('inputContainer_nav_' + menuMapping[id]).className = '';
+        document.getElementById('inputContainer_content_' + menuMapping[id]).style.display = "none";
+    }
+
+    // Définir la classe "active" sur l'élément correspondant au menu sélectionné
+    document.getElementById('inputContainer_nav_' + menuMapping[menuName]).className = 'active';
+    document.getElementById('inputContainer_content_' + menuMapping[menuName]).style.display = "";
 }
 
 //custom envoi vmix

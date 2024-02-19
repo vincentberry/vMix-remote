@@ -193,6 +193,7 @@ label {
         align-items: flex-start;
         justify-content: flex-start;
         flex-direction: column;
+        align-items: center;
 
         .list {
             display: flex;
@@ -242,8 +243,7 @@ label {
 
     .rigth {
         position: relative;
-
-        h1 {
+        h1{
             font-size: 0.8rem;
             padding: 5px;
             color: $background_video;
@@ -252,15 +252,14 @@ label {
         button {
             position: absolute;
             transform: translateY(-50%) translateX(50%);
-            top: 2px;
-            right: 20px;
+            top: 10px;
+            right: 25px;
             font-size: 0.8rem;
             padding: 5px;
             border: 0;
         }
 
         .mode {
-            margin: 3px;
             border: $background solid 1px;
             padding: 10px;
             background: $color-muted;
@@ -275,7 +274,8 @@ label {
                     font-style: 1rem;
                     font-weight: 600;
                     padding-bottom: 15px;
-                    text-decoration-line: underline
+                    text-decoration-line: underline;
+                    transition: 0.5s ease;
                 }
 
                 button {

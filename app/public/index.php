@@ -94,7 +94,7 @@ require $Dir_inc . 'vmix_script.php';
                             <div class="GeneralContainer">
                                 <div>
                                     <label for="inputContainer_InputName">Name</label>
-                                    <input id="inputContainer_InputName" mouseup="ApiVmixSend('Loop','')" type="text">
+                                    <input id="inputContainer_InputName" type="text">
                                 </div>
                                 <div>
                                     <label for="inputContainer_InputId">Id</label>
@@ -131,98 +131,116 @@ require $Dir_inc . 'vmix_script.php';
                                     <div class="layer_number">
                                         <label>1</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '1,'+ this.value)" id="inputContainer_content_list_0">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '1,'+ this.value)" id="inputContainer_List_Layers_0">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
-                                    <button class="on">ON</button>
-                                    <button class="off">OFF</button>
+                                    <button onclick="PageSources_LayersSelect = '0'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '1')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '1')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>2</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '2,'+ this.value)" id="inputContainer_content_list_1">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '2,'+ this.value)" id="inputContainer_List_Layers_1">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '1'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '2')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '2')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>3</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '3,'+ this.value)" id="inputContainer_content_list_2">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '3,'+ this.value)" id="inputContainer_List_Layers_2">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '2'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '3')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '3')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>4</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '4,'+ this.value)" id="inputContainer_content_list_3">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '4,'+ this.value)" id="inputContainer_List_Layers_3">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '3'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '4')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '4')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>5</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '5,'+ this.value)" id="inputContainer_content_list_4">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '5,'+ this.value)" id="inputContainer_List_Layers_4">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '4'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '5')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '5')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>6</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '6,'+ this.value)" id="inputContainer_content_list_5">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '6,'+ this.value)" id="inputContainer_List_Layers_5">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '5'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '6')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '6')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>7</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '7,'+ this.value)" id="inputContainer_content_list_6">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '7,'+ this.value)" id="inputContainer_List_Layers_6">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '6'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '7')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '7')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>8</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer',inputSelect, '8,'+ this.value)" id="inputContainer_content_list_7">
+                                    <select onchange="ApiVmixSend('SetLayer',inputSelect, '8,'+ this.value)" id="inputContainer_List_Layers_7">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '7'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '8')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '8')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>9</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '9,'+ this.value)" id="inputContainer_content_list_8">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '9,'+ this.value)" id="inputContainer_List_Layers_8">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '8'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '9')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '9')" class="off">OFF</button>
                                 </div>
                                 <div class="list">
                                     <div class="layer_number">
                                         <label>10</label>
                                     </div>
-                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '10,'+ this.value)" id="inputContainer_content_list_9">
+                                    <select onchange="ApiVmixSend('SetLayer', inputSelect, '10,'+ this.value)" id="inputContainer_List_Layers_9">
                                         <option value="">None</option>
                                     </select>
-                                    <button>EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '9'" >EDIT</button>
+                                    <button onclick="ApiVmixSend('LayerOn', inputSelect, '10')" class="on">ON</button>
+                                    <button onclick="ApiVmixSend('LayerOff', inputSelect, '10')" class="off">OFF</button>
                                 </div>
                             </div>
                             <div class="rigth">
-                                <h1>LE NOM DE L'INPUT SELECTION</h1>
-                                <button>90 DEGRES</button>
+                                <h1 id="inputContainer_Content_Layers_Select"></h1>
+                                <button>90°</button>
                                 <div class="mode">
                                     <div class="mode_header">
                                         <h3>MOVE</h3>
@@ -233,25 +251,25 @@ require $Dir_inc . 'vmix_script.php';
                                             <div class="label_content">
                                                 <label>X</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_move_X" type="number">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Y</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_move_Y" type="number">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Width</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_move_Width" type="number">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Height</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_move_Height" type="number">
                                         </div>
                                     </div>
 
@@ -266,30 +284,30 @@ require $Dir_inc . 'vmix_script.php';
                                             <div class="label_content">
                                                 <label>X1</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_crop_X1" type="text">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Y1</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_crop_Y1" type="text">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>X1</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_crop_X2" type="text">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Y2</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_crop_Y2" type="text">
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="mode">
+                                <div class="mode" style="display: none;">
                                     <div class="mode_header">
                                         <h3>BORDER</h3>
                                         <button>RESET</button>
@@ -299,19 +317,19 @@ require $Dir_inc . 'vmix_script.php';
                                             <div class="label_content">
                                                 <label>On/Off</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_border" type="text">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Thickness</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_border_Thickness" type="text">
                                         </div>
                                         <div>
                                             <div class="label_content">
                                                 <label>Radius</label>
                                             </div>
-                                            <input type="text">
+                                            <input id="inputContainer_Content_Layers_Select_border_Radius"  type="text">
                                         </div>
                                     </div>
                                 </div>

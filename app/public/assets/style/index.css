@@ -1911,6 +1911,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+  align-items: center;
 }
 .inputContainer .Container .body .content .layers .left .list {
   display: flex;
@@ -1953,23 +1954,24 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
 }
 .inputContainer .Container .body .content .layers .rigth {
   position: relative;
+  margin: 3px;
 }
 .inputContainer .Container .body .content .layers .rigth h1 {
-  font-size: 0.8rem;
-  padding: 5px;
-  color: #002b6c;
+  font-size: 1.5rem;
+  padding: 10px 5px;
+  color: #ffffff;
+  background: #1e2328;
 }
 .inputContainer .Container .body .content .layers .rigth button {
   position: absolute;
   transform: translateY(-50%) translateX(50%);
-  top: 2px;
-  right: 20px;
+  top: 10px;
+  right: 25px;
   font-size: 0.8rem;
   padding: 5px;
   border: 0;
 }
 .inputContainer .Container .body .content .layers .rigth .mode {
-  margin: 3px;
   border: #1e2328 solid 1px;
   padding: 10px;
   background: #ECECEC;
@@ -1987,6 +1989,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   font-weight: 600;
   padding-bottom: 15px;
   text-decoration-line: underline;
+  transition: 0.5s ease;
 }
 .inputContainer .Container .body .content .layers .rigth .mode .mode_header button {
   position: absolute;
