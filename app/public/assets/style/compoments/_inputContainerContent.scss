@@ -242,13 +242,14 @@ label {
 
     .rigth {
         position: relative;
-        h1{
+
+        h1 {
             font-size: 0.8rem;
             padding: 5px;
             color: $background_video;
         }
 
-        button{
+        button {
             position: absolute;
             transform: translateY(-50%) translateX(50%);
             top: 2px;
@@ -264,7 +265,7 @@ label {
             padding: 10px;
             background: $color-muted;
 
-            .mode_header{
+            .mode_header {
                 @include center;
                 position: relative;
 
@@ -277,7 +278,7 @@ label {
                     text-decoration-line: underline
                 }
 
-                button{
+                button {
                     position: absolute;
                     transform: translateY(-50%) translateX(50%);
                     top: 0;
@@ -286,7 +287,7 @@ label {
                     padding: 5px;
                     border: 0;
                 }
-    
+
 
             }
 
@@ -323,4 +324,18 @@ label {
     }
 
 
+}
+
+.text {
+    background-color: red;
+    .GeneralContainer {
+        ul {
+            li {
+                h3 {
+                    color: $background_item;
+                    padding: 10px;
+                }
+            }
+        }
+    }
 }

@@ -2026,6 +2026,13 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   width: 100px;
   background: #ffffff;
 }
+.inputContainer .Container .body .content .text {
+  background-color: red;
+}
+.inputContainer .Container .body .content .text .GeneralContainer ul li h3 {
+  color: #0a0f14;
+  padding: 10px;
+}
 
 .closeButton {
   cursor: pointer;
