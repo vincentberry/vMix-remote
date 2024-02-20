@@ -141,7 +141,7 @@ function processPageSources_updateText(textItems) {
     const htmlTextItems = textItems.map((item, index) => `
         <li>
             <h3>${item.name}</h3>
-            <input type="text" ${item.value}>s
+            <input id="gt_text_${item.index}" type="text" value="${item.value}" onclick="processPageSources_updateText_vmix(this)">
         </li>
     `);
 
@@ -254,24 +254,8 @@ function processPageSources_updateInput_layers(xmlDoc) {
     }
 }
 
-function changeMenu(menuName) {
-    // Liste des menus et de leurs correspondances avec les IDs des éléments HTML
-    const menuMapping = {
-        'general': 'general',
-        'list': 'list',
-        'color_correction': 'color_correction',
-        'layers': 'layers'
-    };
-
-    // Réinitialiser toutes les classes à une chaîne vide
-    for (const id in menuMapping) {
-        document.getElementById('inputContainer_nav_' + menuMapping[id]).className = '';
-        document.getElementById('inputContainer_content_' + menuMapping[id]).style.display = "none";
-    }
-
-    // Définir la classe "active" sur l'élément correspondant au menu sélectionné
-    document.getElementById('inputContainer_nav_' + menuMapping[menuName]).className = 'active';
-    document.getElementById('inputContainer_content_' + menuMapping[menuName]).style.display = "";
+function processPageSources_updateText_vmix(select) {
+    console.log(select);
 }
 
 //custom envoi vmix
@@ -287,7 +271,6 @@ document.getElementById('inputContainer_InputName').addEventListener('blur', fun
     ApiVmixSend('SetInputName', inputSelect, inputValue);
     inputContainer_InputName_No_Focus = true;
 });
-
 
 // inputContainer_InputLoop
 document.getElementById('inputContainer_InputLoop').addEventListener('click', function () {
