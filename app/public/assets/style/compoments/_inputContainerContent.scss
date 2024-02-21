@@ -326,16 +326,21 @@ label {
 
 }
 
-.text {
-    background-color: red;
+.GT {
+    
+    overflow-y: scroll;
     .GeneralContainer {
         ul {
             li {
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 h3 {
+                    font-size: 0.8rem;
                     color: $background_item;
                     padding: 10px;
+                }
+                input{
+                    width: calc(100% - 10px);
                 }
             }
         }
