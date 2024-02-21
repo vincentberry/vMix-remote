@@ -30,7 +30,6 @@ function processPageSources(xmlDoc) {
 
         // Obtenir le texte de l'élément <input>
         const inputText = input.textContent.trim();
-
         // Obtenir l'élément GT <text> et son contenu
         if (input.querySelector('text')) {
             const textItems = Array.from(input.querySelectorAll('text')).map(item => ({
@@ -38,8 +37,17 @@ function processPageSources(xmlDoc) {
                 name: item.getAttribute('name'),
                 value: item.textContent.trim()
             }));
+            if(input.querySelector('image')){
+                var ImageItems = Array.from(input.querySelectorAll('image')).map(item => ({
+                    index: item.getAttribute('index'),
+                    name: item.getAttribute('name'),
+                    value: item.textContent.trim()
+                }));
+            }
+       
             const inputContainer_content_text_ul = document.getElementById('inputContainer_content_text_ul');
             updateValue(inputContainer_content_text_ul, processPageSources_updateText(textItems), "");
+            updateValue(inputContainer_content_text_ul, processPageSources_updateText(ImageItems), "");
             document.getElementById('inputContainer_nav_text').style = ""
         } else {
             document.getElementById('inputContainer_nav_text').style.display = "none"
