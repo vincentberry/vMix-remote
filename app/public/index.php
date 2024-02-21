@@ -116,9 +116,7 @@ require $Dir_inc . 'vmix_script.php';
                                 </ul>
                             </div>
                         </div>
-                        <div id="inputContainer_content_text" class="text" style="display:none;">
-                            <div class="head">
-                            </div>
+                        <div id="inputContainer_content_text" class="GT" style="display:none;">
                             <div class="GeneralContainer">
                                 <ul id="inputContainer_content_text_ul">
                                 </ul>
