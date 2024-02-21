@@ -2027,16 +2027,20 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   width: 100px;
   background: #ffffff;
 }
-.inputContainer .Container .body .content .text {
-  background-color: red;
+.inputContainer .Container .body .content .GT {
+  overflow-y: scroll;
 }
-.inputContainer .Container .body .content .text .GeneralContainer ul li {
+.inputContainer .Container .body .content .GT .GeneralContainer ul li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
-.inputContainer .Container .body .content .text .GeneralContainer ul li h3 {
+.inputContainer .Container .body .content .GT .GeneralContainer ul li h3 {
+  font-size: 0.8rem;
   color: #0a0f14;
   padding: 10px;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer ul li input {
+  width: calc(100% - 10px);
 }
 
 .closeButton {
