@@ -160,7 +160,7 @@ button.btn-succer:hover {
   background: #a07c39;
 }
 
-select, input {
+select, input, textarea {
   border-radius: 10px;
   background: #616161;
   padding: 10px;
@@ -1686,7 +1686,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
     overflow-y: scroll;
   }
 }
-.inputContainer .Container .body .content input {
+.inputContainer .Container .body .content input, .inputContainer .Container .body .content textarea {
   background: #ece9e9;
   border: 1px solid #1e2328;
   border-radius: 0;
@@ -2029,18 +2029,25 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
 }
 .inputContainer .Container .body .content .GT {
   overflow-y: scroll;
+  height: 100%;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer {
+  padding-bottom: 35px;
 }
 .inputContainer .Container .body .content .GT .GeneralContainer ul li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 150px 1fr;
   align-items: center;
+  margin-bottom: 5px;
 }
 .inputContainer .Container .body .content .GT .GeneralContainer ul li h3 {
   font-size: 0.8rem;
   color: #0a0f14;
   padding: 10px;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer ul li input {
+.inputContainer .Container .body .content .GT .GeneralContainer ul li textarea {
   width: calc(100% - 10px);
+  padding: 10px;
 }
 
 .closeButton {
