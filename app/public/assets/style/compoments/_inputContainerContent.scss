@@ -1,4 +1,4 @@
-input {
+input, textarea{
     background: $inputContainer_input;
     border: 1px solid $background;
     border-radius: 0;
@@ -329,20 +329,25 @@ label {
 .GT {
     
     overflow-y: scroll;
+    height: 100%;
     .GeneralContainer {
         ul {
             li {
-                display: flex;
+                display: grid;
+                grid-template-columns: 150px 1fr;
                 align-items: center;
+                margin-bottom: 5px;
                 h3 {
                     font-size: 0.8rem;
                     color: $background_item;
                     padding: 10px;
                 }
-                input{
+                textarea{
                     width: calc(100% - 10px);
+                    padding: 10px;
                 }
             }
         }
+        padding-bottom: 35px;
     }
 }
