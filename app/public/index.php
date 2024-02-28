@@ -237,7 +237,7 @@ require $Dir_inc . 'vmix_script.php';
                                 </div>
                             </div>
                             <div class="rigth">
-                                <h1 id="inputContainer_Content_Layers_Select"></h1>
+                                <h1 id="inputContainer_Content_Layers_Select">-</h1>
                                 <button>90°</button>
                                 <div class="mode">
                                     <div class="mode_header">
