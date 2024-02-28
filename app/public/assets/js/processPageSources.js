@@ -28,26 +28,29 @@ function processPageSources(xmlDoc) {
         const gainDb = input.getAttribute('gainDb');
         const selectedIndex = input.getAttribute('selectedIndex');
 
-        // Obtenir le texte de l'élément <input>
-        const inputText = input.textContent.trim();
+        var allItems = [];
         // Obtenir l'élément GT <text> et son contenu
         if (input.querySelector('text')) {
-            const textItems = Array.from(input.querySelectorAll('text')).map(item => ({
+            var TextItems = Array.from(input.querySelectorAll('text')).map(item => ({
                 index: item.getAttribute('index'),
                 name: item.getAttribute('name'),
+                type: item.getAttribute('Text'),
                 value: item.textContent.trim()
             }));
             if(input.querySelector('image')){
                 var ImageItems = Array.from(input.querySelectorAll('image')).map(item => ({
                     index: item.getAttribute('index'),
                     name: item.getAttribute('name'),
+                    type: item.getAttribute('Image'),
                     value: item.textContent.trim()
                 }));
             }
+            var allItems = [];
+            allItems = allItems.concat(TextItems);
+            allItems = allItems.concat(ImageItems);
        
             const inputContainer_content_text_ul = document.getElementById('inputContainer_content_text_ul');
-            updateValue(inputContainer_content_text_ul, processPageSources_updateText(textItems), "");
-            updateValue(inputContainer_content_text_ul, processPageSources_updateText(ImageItems), "");
+            updateValue(inputContainer_content_text_ul, processPageSources_updateText(allItems), "");
             document.getElementById('inputContainer_nav_text').style = ""
         } else {
             document.getElementById('inputContainer_nav_text').style.display = "none"
@@ -149,7 +152,7 @@ function processPageSources_updateText(textItems) {
     const htmlTextItems = textItems.map((item, index) => `
         <li>
             <h3>${item.name}</h3>
-            <input id="gt_text_${item.index}" type="text" value="${item.value}" onclick="processPageSources_updateText_vmix(this)">
+            <textarea id="gt_text_${item.index}" type="text" value="${item.value}" onblur="ApiVmixSend('Set${type}','${inputSelect}', this.value'&SelectedIndex=${index + 1}')">${item.value}</textarea>
         </li>
     `);
 
@@ -260,10 +263,6 @@ function processPageSources_updateInput_layers(xmlDoc) {
             });
         }
     }
-}
-
-function processPageSources_updateText_vmix(select) {
-    console.log(select);
 }
 
 //custom envoi vmix
