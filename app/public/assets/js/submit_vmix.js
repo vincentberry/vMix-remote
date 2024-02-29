@@ -1,11 +1,11 @@
-function ConfirmApiVmixSend(message, command, input = 0, value = 0, duration = 0) {
+function ConfirmApiVmixSend(message, command, input = 0, value = 0, duration = 0, selectedName = 0, selectedIndex = 0) {
     let result = confirm(message);
     if (result == true) {
-        ApiVmixSend(command, input, value, duration)
+        ApiVmixSend(command, input, value, duration, selectedName, selectedIndex)
     }
 }
 
-function ApiVmixSend(command, input = 0, value = 0, duration = 0) {
+function ApiVmixSend(command, input = 0, value = 0, duration = 0, selectedName = 0, selectedIndex = 0) {
 
     // Construire la requête à envoyer à vMix
     let queryString = `session_vmix=${document.getElementById('vmix_connect').value}&command=${encodeURIComponent(command)}`;
@@ -23,6 +23,14 @@ function ApiVmixSend(command, input = 0, value = 0, duration = 0) {
         queryString += `&duration=${encodeURIComponent(duration)}`;
     }
 
+    if (selectedName !== undefined) {
+        queryString += `&selectedName=${encodeURIComponent(selectedName)}`;
+    }
+
+    if (selectedIndex !== undefined) {
+        queryString += `&selectedIndex=${encodeURIComponent(selectedIndex)}`;
+    }
+    
     var xhr = getHttpRequest()
 
     xhr.onreadystatechange = function () {

@@ -11,8 +11,10 @@ if (!empty($_GET["command"]) && !empty($_GET["session_vmix"])) {
     $input = !empty($_GET["input"]) ? $_GET["input"] : 0;
     $value = !empty($_GET["value"]) ? $_GET["value"] : 0;
     $duration = !empty($_GET["duration"]) ? $_GET["duration"] : 0;
-
-    $req = db_insert::new_command($session_vmix, $command, $input, $value, $duration);
+    $selectedName = !empty($_GET["selectedName"]) ? $_GET["selectedName"] : 0;
+    $selectedIndex = !empty($_GET["selectedIndex"]) ? $_GET["selectedIndex"] : 0;
+    
+    $req = db_insert::new_command($session_vmix, $command, $input, $value, $duration, $selectedName, $selectedIndex);
     echo json_encode(array("Valid" => "Command $req bien envoyée ! Elle va bientôt être exécutée !"));
     die();
 }
