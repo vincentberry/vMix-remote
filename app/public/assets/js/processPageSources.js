@@ -153,7 +153,7 @@ function processPageSources_updateText(textItems) {
     const htmlTextItems = textItems.map((item, index) => `
         <li>
             <h3>${item.name}</h3>
-            <textarea id="gt_text_${item.index}" type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value + '&SelectedIndex=${index + 1}')">${item.value}</textarea>
+            <textarea id="gt_text_${item.index}" type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value, null,'${item.name}')">${item.value}</textarea>
         </li>
     `);
 
