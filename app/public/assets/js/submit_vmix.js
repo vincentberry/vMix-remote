@@ -36,9 +36,9 @@ function ApiVmixSend(command, input = 0, value = 0, duration = 0, selectedName =
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                AlertPopup(JSON.parse(xhr.responseText)['Valid'] + queryString )
-            } else {
-                AlertPopup(JSON.parse(xhr.responseText)['error'])
+                createNotification('success', 'Validation réussie', JSON.parse(xhr.responseText)['Valid'] + queryString);
+            } else {               
+                createNotification('error', 'Erreur', JSON.parse(xhr.responseText)['error']);
             }
         }
     }
@@ -46,9 +46,4 @@ function ApiVmixSend(command, input = 0, value = 0, duration = 0, selectedName =
     xhr.open('GET', "/api/send_command?" + queryString, true)
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
     xhr.send()
-}
-
-function AlertPopup(data) {
-    console.log(data);
-    window.alert(data);
 }

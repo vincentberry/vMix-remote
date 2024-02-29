@@ -5,6 +5,7 @@ require $Dir_inc . 'vmix_script.php';
 ?>
 
 <body>
+    <div id="notification-container"></div>
     <section class="new_session">
         <img src="./assets/icon/VMIX REMOTE.svg" alt="">
         <h1>WELCOME TO REMOTE VMIX</h1>
@@ -25,6 +26,7 @@ require $Dir_inc . 'vmix_script.php';
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
 <script src="./assets/js/lobby.js"></script>
 <script src="./assets/js/copy.js"></script>
+<script src="./assets/js/notification.js"></script>
 <script>
     document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
     const vmix_connect_param = get_vmix_connect_param();

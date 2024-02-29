@@ -48,6 +48,7 @@ require $Dir_inc . 'vmix_script.php';
     </nav>
     <!-- <div class="loader" id = loader></div> -->
     <main id="main" class="connect">
+        <div id="notification-container"></div>
         <div class="tooltip" id="tooltip-volume">dddd</div>
         <section class="center">
             <div class="ContainerCommandSelector">
@@ -350,6 +351,7 @@ require $Dir_inc . 'vmix_script.php';
 <!-- Script JavaScript pour récupérer le fichier XML et générer les éléments -->
 <script src="./assets/js/app.js"></script>
 <script src="./assets/js/copy.js"></script>
+<script src="./assets/js/notification.js"></script>
 <script src="./assets/js/processSettings.js"></script>
 <script src="./assets/js/processAudioSources.js"></script>
 <script src="./assets/js/processAudioBus.js"></script>

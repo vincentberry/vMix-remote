@@ -66,9 +66,9 @@ function chargerFichierXML() {
                 window.location.href = JSON.parse(xhr.responseText)['redirect'];
             } else {
                 if (JSON.parse(xhr.responseText)['error']) {
-                    AlertPopup(JSON.parse(xhr.responseText)['error'])
+                    createNotification('error', 'Erreur', JSON.parse(xhr.responseText)['error']);
                 } else if (JSON.parse(xhr.responseText)['reset']) {
-                    AlertPopup(JSON.parse(xhr.responseText)['reset'])
+                    createNotification('warning', 'Attention', JSON.parse(xhr.responseText)['reset']);
                     document.getElementById('vmix_connect').value = "N"
                     update_url("N");
                 }
