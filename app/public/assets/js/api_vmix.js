@@ -53,11 +53,22 @@ function updateCommandDetails() {
     if (selectedCommand.hasDuration) {
         commandDetailsContainer.innerHTML += `
             <label for="durationInput">Duration:</label>
-            <input type="text" id="valueInput" placeholder="Enter duration">
+            <input type="text" id="durationInput" placeholder="Enter duration">
         `;
     }else{
         commandDetailsContainer.innerHTML += `
         <input type="text" style="display: none;" id="durationInput" placeholder="Enter duration">
+    `;
+    }
+
+    if (selectedCommand.hasSelectedName) {
+        commandDetailsContainer.innerHTML += `
+            <label for="valueSelectedName">SelectedName :</label>
+            <input type="text" id="valueSelectedName" placeholder="test.text">
+        `;
+    }else{
+        commandDetailsContainer.innerHTML += `
+        <input type="text" style="display: none;" id="valueSelectedName" placeholder="test.text">
     `;
     }
 
@@ -70,5 +81,6 @@ function sendCommand() {
     const inputSelector = document.getElementById('inputSelector').value;
     const valueInput = document.getElementById('valueInput').value;
     const durationInput = document.getElementById('durationInput').value;
-    ApiVmixSend(commandSelector,inputSelector,valueInput,durationInput)
+    const valueSelectedName = document.getElementById('valueSelectedName').value;
+    ApiVmixSend(commandSelector,inputSelector,valueInput,durationInput, valueSelectedName)
 }
