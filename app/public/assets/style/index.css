@@ -1617,6 +1617,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   bottom: 10px;
   right: 10px;
   max-width: 300px;
+  z-index: 20000;
 }
 #notification-container .notification {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
