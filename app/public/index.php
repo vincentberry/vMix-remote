@@ -82,7 +82,7 @@ require $Dir_inc . 'vmix_script.php';
                     <div id="inputContainer_nav" class="nav">
                         <button id="inputContainer_nav_general" class="active" onclick="changeMenu('general')">General</button>
                         <button id="inputContainer_nav_list" onclick="changeMenu('list')">List</button>
-                        <button id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
+                        <button style="display:none;" id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
                         <button id="inputContainer_nav_text" onclick="changeMenu('text')">GT Title</button>
                     </div>
@@ -90,7 +90,7 @@ require $Dir_inc . 'vmix_script.php';
                         <div id="inputContainer_content_general" class="general">
                             <div class="head">
                                 <h1 for="inputContainer_InputType"> </h1>
-                                <button disabled>CHANGE</button>
+                                <button onclick="processPageSources_remove()">REMOVE</button>
                             </div>
                             <div class="GeneralContainer">
                                 <div>
@@ -104,6 +104,12 @@ require $Dir_inc . 'vmix_script.php';
                                 <div>
                                     <label for="inputContainer_InputLoop">Loop</label>
                                     <input id="inputContainer_InputLoop" type="checkbox">
+                                </div>
+                                <div>
+                                    <button onclick="ApiVmixSend('Restart', inputSelect); closeEdit()">RESTART</button>
+                                    <button onclick="ApiVmixSend('ResetInput', inputSelect); closeEdit()">RESET INPUT</button>
+                                    <button onclick="ApiVmixSend('DeinterlaceOn', inputSelect); closeEdit()">Deinterlace On</button>
+                                    <button onclick="ApiVmixSend('DeinterlaceOff', inputSelect); closeEdit()">Deinterlace Off</button>
                                 </div>
                             </div>
                         </div>
@@ -237,7 +243,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '10')" class="off">OFF</button>
                                 </div>
                             </div>
-                            <div class="rigth">
+                            <div class="rigth" style="display:none;">
                                 <h1 id="inputContainer_Content_Layers_Select">-</h1>
                                 <button>90°</button>
                                 <div class="mode">
