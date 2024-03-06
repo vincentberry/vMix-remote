@@ -42,9 +42,9 @@ function chargerFichierXML() {
                 }
             } else {
                 if (JSON.parse(xhr.responseText)['error']) {
-                    AlertPopup(JSON.parse(xhr.responseText)['error'])
+                    createNotification('error', 'Erreur', JSON.parse(xhr.responseText)['error']);
                 } else if (JSON.parse(xhr.responseText)['reset']) {
-                    AlertPopup(JSON.parse(xhr.responseText)['reset'])
+                    createNotification('warning', 'Attention', JSON.parse(xhr.responseText)['reset']);
                     document.getElementById('vmix_connect').value = "N"
                 }
 
@@ -103,11 +103,6 @@ function get_vmix_connect_param() {
         // Le paramètre vmix_connect n'existe pas dans l'URL
         return null;
     }
-}
-
-function AlertPopup(data) {
-    console.log(data);
-    window.alert(data);
 }
 
 // Charger le fichier XML et générer les éléments HTML au chargement de la page

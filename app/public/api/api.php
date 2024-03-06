@@ -24,8 +24,10 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
                 $input = $item["input"];
                 $value = $item["value"];
                 $duration = $item["duration"];
+                $selectedName = $item["selectedName"];
+                $selectedIndex = $item["selectedIndex"];
                 // Accéder aux valeurs individuelles
-                $envoi_vmix = $envoi_vmix . "$command~ $input~ $value~ $duration!";
+                $envoi_vmix = $envoi_vmix . "$command~ $input~ $value~ $duration~ $selectedName~ $selectedIndex!";
                 db_insert::delete_vmix_command($item["id"]);
                 
             }

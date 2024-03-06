@@ -15,6 +15,8 @@ class Database{
                             `input` TEXT DEFAULT '0',
                             `duration` TEXT DEFAULT '0',
                             `value` TEXT DEFAULT '0',
+                            `selectedName` TEXT DEFAULT '0',
+                            `selectedIndex` TEXT DEFAULT '0',
                             `push_vmix` INTEGER NOT NULL DEFAULT 0);"                                          
         );
     }

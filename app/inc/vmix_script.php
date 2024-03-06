@@ -30,8 +30,8 @@
         Dim RESP As Byte()
         Dim conected As String = userurl & p & u
         Try
-        RESP = W.UploadValues(con, NC)
-        R = System.Text.Encoding.ASCII.GetString(RESP)
+                RESP = W.UploadValues(con, NC)
+                R = System.Text.Encoding.ASCII.GetString(RESP)
         Dim rawCommand As string = R
         ' Afficher la réponse
 
@@ -40,26 +40,28 @@
         Dim command
         ' Parcourir chaque commande dans le tableau
         For Each command In commands
-        Dim commandParts As String() = command.Split("~"c)
-        If commandParts.Length = 4 Then
-        Dim functionType As String = commandParts(0).Trim()
-        Dim inputParam As String = commandParts(1).Trim()
-        Dim valueParam As String = commandParts(2).Trim()
-        Dim durationParam As String = commandParts(3).Trim()
+                Dim commandParts As String() = command.Split("~"c)
+                If commandParts.Length = 6 Then
+                        Dim functionType As String = commandParts(0).Trim()
+                        Dim inputParam As String = commandParts(1).Trim()
+                        Dim valueParam As String = commandParts(2).Trim()
+                        Dim durationParam As String = commandParts(3).Trim()
+                        Dim selectedNameParam As String = commandParts(4).Trim()
+                        Dim selectedIndexParam As String = commandParts(5).Trim()
+                        
+                        ' Appeler la fonction VMix avec les paramètres appropriés
+                        API.Function(functionType, Input:=inputParam, Value:=valueParam, Duration:=durationParam, selectedName:=selectedNameParam, selectedIndex:=selectedIndexParam)
 
-        ' Appeler la fonction VMix avec les paramètres appropriés
-        API.Function(functionType, Input:=inputParam, Value:=valueParam, Duration:=durationParam)
+                                If functionType = "session_delay" Then
+                                session_delay = valueParam
+                                End If
 
-        If functionType = "session_delay" Then
-        session_delay = valueParam
-        End If
-
-        'Console.WriteLine(functionType)
-        Elseif Not String.IsNullOrEmpty(rawCommand) Then
-        'Console.WriteLine(rawCommand)
-        Else
-        'Console.WriteLine("La commande VMix est mal formée.")
-        End If
+                        'Console.WriteLine(functionType)
+                Elseif Not String.IsNullOrEmpty(rawCommand) Then
+                        'Console.WriteLine(rawCommand)
+                Else
+                        'Console.WriteLine("La commande VMix est mal formée.")
+                End If
         Next
 
 

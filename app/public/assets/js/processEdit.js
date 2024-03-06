@@ -31,3 +31,11 @@ function processPageSources_list_addItem() {
                 <button onclick="closeEdit()" class="cancel">Cancel </button>`;
     OpenEdit(nouveauDiv);
 }
+
+function processPageSources_remove() {
+    // Créez un nouvel élément div à partir de la chaîne de caractères
+    nouveauDiv = `<h1>REMOVE INPUT</h1>
+                <button onclick="ApiVmixSend('RemoveInput','${inputSelect}'); closeEdit()" class="valid">Valid</button>
+                <button onclick="closeEdit()" class="cancel">Cancel </button>`;
+    OpenEdit(nouveauDiv);
+}

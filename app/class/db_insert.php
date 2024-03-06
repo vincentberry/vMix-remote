@@ -2,14 +2,16 @@
 
 class db_insert{
 
-    public static function new_command($session_vmix, $command, $input, $value, $duration){
+    public static function new_command($session_vmix, $command, $input, $value, $duration, $selectedName, $selectedIndex){
 
-        App::getDatabase()->query('INSERT INTO command(date_time, session_vmix, command, input, value, duration) VALUES(CURRENT_TIMESTAMP, ?, ?,?,?,?)', [
+        App::getDatabase()->query('INSERT INTO command(date_time, session_vmix, command, input, value, duration, selectedName, selectedIndex) VALUES(CURRENT_TIMESTAMP, ?, ?,?,?,?,?,?)', [
             $session_vmix,
             $command, 
             $input, 
             $value, 
             $duration,
+            $selectedName, 
+            $selectedIndex,
             ]
         );
         return App::getDatabase()->lastInsertId();

@@ -28,34 +28,35 @@ function processPageSources(xmlDoc) {
         const gainDb = input.getAttribute('gainDb');
         const selectedIndex = input.getAttribute('selectedIndex');
 
-        var allItems = [];
+
         // Obtenir l'élément GT <text> et son contenu
-        if (input.querySelector('text')) {
-            var TextItems = Array.from(input.querySelectorAll('text')).map(item => ({
-                index: item.getAttribute('index'),
-                name: item.getAttribute('name'),
-                type: item.getAttribute('Text'),
-                value: item.textContent.trim()
-            }));
-            if(input.querySelector('image')){
+        if (input.querySelector('text') || input.querySelector('image')) {
+            var allItems = [];
+            if (input.querySelector('text')) {
+                var TextItems = Array.from(input.querySelectorAll('text')).map(item => ({
+                    index: item.getAttribute('index'),
+                    name: item.getAttribute('name'),
+                    type: "Text",
+                    value: item.textContent.trim()
+                }));
+                allItems = allItems.concat(TextItems);
+            }
+            if (input.querySelector('image')) {
                 var ImageItems = Array.from(input.querySelectorAll('image')).map(item => ({
                     index: item.getAttribute('index'),
                     name: item.getAttribute('name'),
-                    type: item.getAttribute('Image'),
+                    type: "Image",
                     value: item.textContent.trim()
                 }));
+                allItems = allItems.concat(ImageItems);
             }
-            var allItems = [];
-            allItems = allItems.concat(TextItems);
-            allItems = allItems.concat(ImageItems);
-       
             const inputContainer_content_text_ul = document.getElementById('inputContainer_content_text_ul');
             updateValue(inputContainer_content_text_ul, processPageSources_updateText(allItems), "");
             document.getElementById('inputContainer_nav_text').style = ""
         } else {
             document.getElementById('inputContainer_nav_text').style.display = "none"
         }
-        
+
         // Obtenir l'élément <list> et son contenu
         if (input.querySelector('list')) {
             const listElement = input.querySelector('list');
@@ -83,18 +84,20 @@ function processPageSources(xmlDoc) {
         // Fonction pour mettre à jour une valeur si elle est différente et non vide
         function updateValue(element, attribute, defaultValue) {
             const attributeValue = attribute.trim();
-            const currentValue = element.value || element.innerHTML || element.checked.toString();
+            if (element && (element.value || element.innerHTML || (element.checked !== undefined && element.checked.toString()))) {
+                const currentValue = element.value || element.innerHTML || element.checked.toString();
 
-            if (attributeValue !== "" && attributeValue !== currentValue) {
-                element.value = element.innerHTML = attributeValue;
-                if (element.type === 'checkbox') {
-                    element.checked = (defaultValue.toLowerCase() === 'true');
-                }
-            } else if (attributeValue === "" && defaultValue !== undefined) {
-                // Mettre la valeur par défaut si l'attribut est vide
-                element.value = element.innerHTML = defaultValue;
-                if (element.type === 'checkbox') {
-                    element.checked = (defaultValue.toLowerCase() === 'true');
+                if (attributeValue !== "" && attributeValue !== currentValue) {
+                    element.value = element.innerHTML = attributeValue;
+                    if (element.type === 'checkbox') {
+                        element.checked = (defaultValue.toLowerCase() === 'true');
+                    }
+                } else if (attributeValue === "" && defaultValue !== undefined) {
+                    // Mettre la valeur par défaut si l'attribut est vide
+                    element.value = element.innerHTML = defaultValue;
+                    if (element.type === 'checkbox') {
+                        element.checked = (defaultValue.toLowerCase() === 'true');
+                    }
                 }
             }
         }
@@ -107,11 +110,11 @@ function processPageSources(xmlDoc) {
         }
         updateValue(inputContainer_InputLoop, loop, "Off");
 
-        inputContainer_header =  `Input ${number}: ${document.getElementById("inputContainer_InputName").value}`;
+        inputContainer_header = `Input ${number}: ${document.getElementById("inputContainer_InputName").value}`;
         if (document.getElementById("inputContainer_header").innerHTML !== inputContainer_header) {
             document.getElementById("inputContainer_header").innerHTML = inputContainer_header;
         }
-        
+
     }
 };
 
@@ -152,7 +155,7 @@ function processPageSources_updateText(textItems) {
     const htmlTextItems = textItems.map((item, index) => `
         <li>
             <h3>${item.name}</h3>
-            <textarea id="gt_text_${item.index}" type="text" value="${item.value}" onblur="ApiVmixSend('Set${type}','${inputSelect}', this.value'&SelectedIndex=${index + 1}')">${item.value}</textarea>
+            <textarea id="gt_text_${item.index}" type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value, '','${item.name}', '${index}')">${item.value}</textarea>
         </li>
     `);
 
@@ -171,31 +174,31 @@ function processPageSources_updateLayers(inputSource) {
                 const overlayKey = overlay.getAttribute('key');
                 document.getElementById('inputContainer_List_Layers_' + overlayIndex).value = overlayKey;
                 document.getElementById('inputContainer_List_Layers_' + i).value = "";
-                document.getElementById('inputContainer_Content_Layers_Select').textContent = "Layer " +  (parseInt(PageSources_LayersSelect) + 1).toString();
-                if(PageSources_LayersSelect === overlayIndex && inputContainer_LayersSelect_No_Focus){
+                document.getElementById('inputContainer_Content_Layers_Select').textContent = "Layer " + (parseInt(PageSources_LayersSelect) + 1).toString();
+                if (PageSources_LayersSelect === overlayIndex && inputContainer_LayersSelect_No_Focus) {
                     const positionElement = overlay.getElementsByTagName('position')[0];
-                    if (positionElement){
+                    if (positionElement) {
                         document.getElementById('inputContainer_Content_Layers_Select_move_X').value = positionElement.getAttribute('X');
                         document.getElementById('inputContainer_Content_Layers_Select_move_Y').value = positionElement.getAttribute('Y');
                         document.getElementById('inputContainer_Content_Layers_Select_move_Width').value = positionElement.getAttribute('width');
                         document.getElementById('inputContainer_Content_Layers_Select_move_Height').value = positionElement.getAttribute('height');
-                    }else{
+                    } else {
                         document.getElementById('inputContainer_Content_Layers_Select_move_X').value = "";
                         document.getElementById('inputContainer_Content_Layers_Select_move_Y').value = "";
                         document.getElementById('inputContainer_Content_Layers_Select_move_Width').value = "";
-                        document.getElementById('inputContainer_Content_Layers_Select_move_Height').value = ""; 
+                        document.getElementById('inputContainer_Content_Layers_Select_move_Height').value = "";
                     }
                     const cropElement = overlay.getElementsByTagName('position')[0];
-                    if (cropElement){
+                    if (cropElement) {
                         document.getElementById('inputContainer_Content_Layers_Select_crop_X1').value = cropElement.getAttribute('X1');
                         document.getElementById('inputContainer_Content_Layers_Select_crop_Y1').value = cropElement.getAttribute('Y1');
                         document.getElementById('inputContainer_Content_Layers_Select_crop_X2').value = cropElement.getAttribute('X2');
                         document.getElementById('inputContainer_Content_Layers_Select_crop_Y2').value = cropElement.getAttribute('Y2');
-                    }else{
+                    } else {
                         document.getElementById('inputContainer_Content_Layers_Select_crop_X1').value = "";
                         document.getElementById('inputContainer_Content_Layers_Select_crop_Y1').value = "";
                         document.getElementById('inputContainer_Content_Layers_Select_crop_X2').value = "";
-                        document.getElementById('inputContainer_Content_Layers_Select_crop_Y2').value = ""; 
+                        document.getElementById('inputContainer_Content_Layers_Select_crop_Y2').value = "";
                     }
                 }
             });
