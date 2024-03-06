@@ -84,7 +84,7 @@ function processPageSources(xmlDoc) {
         // Fonction pour mettre à jour une valeur si elle est différente et non vide
         function updateValue(element, attribute, defaultValue) {
             const attributeValue = attribute.trim();
-            if (element.value || element.innerHTML || element.checked.toString()) {
+            if (element && (element.value || element.innerHTML || (element.checked !== undefined && element.checked.toString()))) {
                 const currentValue = element.value || element.innerHTML || element.checked.toString();
 
                 if (attributeValue !== "" && attributeValue !== currentValue) {
