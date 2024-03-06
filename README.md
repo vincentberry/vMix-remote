@@ -3,7 +3,7 @@
 ## Objective
 
 Take full control of the vMix software remotely without the need to open ports on your network using our web application. Our solution is built on a dedicated Docker server, for which a Docker image is available.
-([DEMO](https://hub.docker.com/r/vincentberry/vmix-remote](http://vmixremotedemo.servehttp.com/)))
+([DEMO](http://vmixremotedemo.servehttp.com/))
 ## Key Features
 
 1. **Remote control of vMix software**
