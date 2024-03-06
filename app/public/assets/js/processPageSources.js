@@ -28,7 +28,7 @@ function processPageSources(xmlDoc) {
         const gainDb = input.getAttribute('gainDb');
         const selectedIndex = input.getAttribute('selectedIndex');
 
-      
+
         // Obtenir l'élément GT <text> et son contenu
         if (input.querySelector('text') || input.querySelector('image')) {
             var allItems = [];
@@ -84,18 +84,20 @@ function processPageSources(xmlDoc) {
         // Fonction pour mettre à jour une valeur si elle est différente et non vide
         function updateValue(element, attribute, defaultValue) {
             const attributeValue = attribute.trim();
-            const currentValue = element.value || element.innerHTML || element.checked.toString();
+            if (element.value || element.innerHTML || element.checked.toString()) {
+                const currentValue = element.value || element.innerHTML || element.checked.toString();
 
-            if (attributeValue !== "" && attributeValue !== currentValue) {
-                element.value = element.innerHTML = attributeValue;
-                if (element.type === 'checkbox') {
-                    element.checked = (defaultValue.toLowerCase() === 'true');
-                }
-            } else if (attributeValue === "" && defaultValue !== undefined) {
-                // Mettre la valeur par défaut si l'attribut est vide
-                element.value = element.innerHTML = defaultValue;
-                if (element.type === 'checkbox') {
-                    element.checked = (defaultValue.toLowerCase() === 'true');
+                if (attributeValue !== "" && attributeValue !== currentValue) {
+                    element.value = element.innerHTML = attributeValue;
+                    if (element.type === 'checkbox') {
+                        element.checked = (defaultValue.toLowerCase() === 'true');
+                    }
+                } else if (attributeValue === "" && defaultValue !== undefined) {
+                    // Mettre la valeur par défaut si l'attribut est vide
+                    element.value = element.innerHTML = defaultValue;
+                    if (element.type === 'checkbox') {
+                        element.checked = (defaultValue.toLowerCase() === 'true');
+                    }
                 }
             }
         }
