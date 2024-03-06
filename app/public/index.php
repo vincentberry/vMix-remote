@@ -82,7 +82,7 @@ require $Dir_inc . 'vmix_script.php';
                     <div id="inputContainer_nav" class="nav">
                         <button id="inputContainer_nav_general" class="active" onclick="changeMenu('general')">General</button>
                         <button id="inputContainer_nav_list" onclick="changeMenu('list')">List</button>
-                        <button style="display:none;" id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
+                        <button id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
                         <button id="inputContainer_nav_text" onclick="changeMenu('text')">GT Title</button>
                     </div>
@@ -243,7 +243,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '10')" class="off">OFF</button>
                                 </div>
                             </div>
-                            <div class="rigth" style="display:none;">
+                            <div class="rigth">
                                 <h1 id="inputContainer_Content_Layers_Select">-</h1>
                                 <button>90°</button>
                                 <div class="mode">
