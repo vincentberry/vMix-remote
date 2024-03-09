@@ -31,7 +31,7 @@
         Dim conected As String = userurl & p & u
         Try
                 RESP = W.UploadValues(con, NC)
-                R = System.Text.Encoding.ASCII.GetString(RESP)
+                R = System.Text.Encoding.UTF8.GetString(RESP)
         Dim rawCommand As string = R
         ' Afficher la réponse
 
