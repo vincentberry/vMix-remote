@@ -2100,21 +2100,27 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   width: 100%;
   padding: 10px;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color {
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: flex-end;
   align-items: stretch;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown h4 {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown h4,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color h4 {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 10px;
   color: #0a0f14;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown button {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown button,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2123,10 +2129,12 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   padding: 5px;
   margin: 2px;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown button:hover {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown button:hover,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color button:hover {
   background: #616161;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown .play::before {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown .play::before,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color .play::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -2140,7 +2148,8 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   -moz-osx-font-smoothing: grayscale;
   content: url(/assets/icon/play3.svg);
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown .pause::before {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown .pause::before,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color .pause::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -2154,7 +2163,8 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   -moz-osx-font-smoothing: grayscale;
   content: url(/assets/icon/pause2.svg);
 }
-.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown .reset::before {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown .reset::before,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color .reset::before {
   display: inline-block;
   font-family: "Pe-icon-7-stroke";
   speak: none;
@@ -2167,6 +2177,16 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: url(/assets/icon/stop2.svg);
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown .input_color,
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color .input_color {
+  width: 150px;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown {
+  justify-content: flex-end;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color {
+  justify-content: flex-start;
 }
 
 .closeButton {

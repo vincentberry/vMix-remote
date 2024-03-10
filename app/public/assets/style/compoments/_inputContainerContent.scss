@@ -365,10 +365,11 @@ label {
             }
         }
 
-        #inputContainer_content_gt_value{
-            .gt_text{
+        #inputContainer_content_gt_value {
+            .gt_text {
                 display: none;
-                &.active{
+
+                &.active {
                     display: block;
                 }
 
@@ -378,44 +379,60 @@ label {
                     padding: 10px;
                 }
 
-                .countdown{
-                    @include center;
-                    justify-content: flex-end;
-                    align-items: stretch;
+                .bottum {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
 
-                    h4{
+                    .countdown,
+                    .color {
                         @include center;
-                        margin-right: 10px;
-                        color: $background_item;
-                    }
+                        align-items: stretch;
 
-                    button{
-                        @include center;
-                        color: $background_item;
-                        background: $color-muted;
-                        padding: 5px;
-                        margin: 2px;
-                        &:hover{
-                            background: $primary-btn;
+                        h4 {
+                            @include center;
+                            margin-right: 10px;
+                            color: $background_item;
+                        }
+
+                        button {
+                            @include center;
+                            color: $background_item;
+                            background: $color-muted;
+                            padding: 5px;
+                            margin: 2px;
+
+                            &:hover {
+                                background: $primary-btn;
+                            }
+                        }
+
+                        .play {
+                            @include icon($icon-play3);
+                        }
+
+                        .pause {
+                            @include icon($icon-pause2);
+                        }
+
+                        .reset {
+                            @include icon($icon-stop2);
+                        }
+
+                        .input_color{
+                            width: 150px;
                         }
                     }
-
-                    .play{
-                        @include icon($icon-play3);
-                    }
                     
-                    .pause{
-                        @include icon($icon-pause2);
+                    .countdown{
+                        justify-content: flex-end;
                     }
-
-                    .reset{
-                        @include icon($icon-stop2);
+                    .color {
+                        justify-content: flex-start;
                     }
                 }
             }
 
 
-    
         }
 
 
