@@ -32,6 +32,29 @@ function processPageSources_list_addItem() {
     OpenEdit(nouveauDiv);
 }
 
+function processPageSources_gt_countdown_settings() {
+    // Créez un nouvel élément div à partir de la chaîne de caractères
+    nouveauDiv = `<h1>Counrdown Settings</h1>
+                <div>
+                    <label>Duration</label>
+                    <input type="text" id="processPageSources_list_addItem_patch" value="">
+                </div>
+                <div>
+                    <label>Stop Time</label>
+                    <input type="text" id="processPageSources_list_addItem_patch" value="">
+                </div>
+                <div>
+                    <label>Display Format</label>
+                    <input type="text" id="processPageSources_list_addItem_patch" value="">
+                </div>
+                <div>
+                    <label>Current Time</label>
+                    <input type="text" id="processPageSources_list_addItem_patch" value="">
+                </div>
+                <button onclick="closeEdit()" class="cancel">Cancel </button>`;
+    OpenEdit(nouveauDiv);
+}
+
 function processPageSources_remove() {
     // Créez un nouvel élément div à partir de la chaîne de caractères
     nouveauDiv = `<h1>REMOVE INPUT</h1>

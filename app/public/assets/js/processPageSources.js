@@ -1,6 +1,7 @@
 var inputContainer_InputName_No_Focus = true;
 var inputContainer_LayersSelect_No_Focus = true;
 var PageSources_LayersSelect = "0";
+var PageSources_GtSelect = 0;
 
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processPageSources(xmlDoc) {
@@ -50,11 +51,13 @@ function processPageSources(xmlDoc) {
                 }));
                 allItems = allItems.concat(ImageItems);
             }
-            const inputContainer_content_text_ul = document.getElementById('inputContainer_content_text_ul');
-            updateValue(inputContainer_content_text_ul, processPageSources_updateText(allItems), "");
-            document.getElementById('inputContainer_nav_text').style = ""
+            const inputContainer_content_gt_nav = document.getElementById('inputContainer_content_gt_nav');
+            updateValue(inputContainer_content_gt_nav, processPageSources_updateGT_nav(allItems), "");
+            const inputContainer_content_gt_value = document.getElementById('inputContainer_content_gt_value');
+            updateValue(inputContainer_content_gt_value, processPageSources_updateGT_text(allItems), "");
+            document.getElementById('inputContainer_nav_gt').style = ""
         } else {
-            document.getElementById('inputContainer_nav_text').style.display = "none"
+            document.getElementById('inputContainer_nav_gt').style.display = "none"
         }
 
         // Obtenir l'élément <list> et son contenu
@@ -86,7 +89,7 @@ function processPageSources(xmlDoc) {
             const attributeValue = attribute.trim();
             if (element && (element.value || element.innerHTML || (element.checked !== undefined && element.checked.toString()))) {
                 const currentValue = element.value || element.innerHTML || element.checked.toString();
-
+               
                 if (attributeValue !== "" && attributeValue !== currentValue) {
                     element.value = element.innerHTML = attributeValue;
                     if (element.type === 'checkbox') {
@@ -121,6 +124,7 @@ function processPageSources(xmlDoc) {
 function closePageInput(key) {
     // Get the parent div and hide it
     insputSelect = "";
+    PageSources_GtSelect = 0;
     document.getElementById("inputsContainer").classList.add("disabled");
 }
 
@@ -150,19 +154,54 @@ function processPageSources_updateList(listItems) {
     return htmlString;
 }
 
-function processPageSources_updateText(textItems) {
+function processPageSources_updateGT_nav(textItems) {
     // Utiliser la méthode map pour créer un tableau de chaînes HTML
     const htmlTextItems = textItems.map((item, index) => `
-        <li>
+        <li  id="gt_nav_${index}" class="gt_nav ${(parseInt(PageSources_GtSelect)).toString() === parseInt((index)).toString()  ? 'active' : ''}" onclick="processPageSources_updateGT_nav_select(this, '${index}')">
             <h3>${item.name}</h3>
-            <textarea id="gt_text_${item.index}" type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value, '','${item.name}', '${index}')">${item.value}</textarea>
         </li>
     `);
-
     // Joindre les chaînes HTML pour obtenir une seule chaîne
     const htmlString = htmlTextItems.join('');
 
     return htmlString;
+}
+
+function processPageSources_updateGT_text(textItems){
+    // Utiliser la méthode map pour créer un tableau de chaînes HTML
+    const htmlTextItems = textItems.map((item, index) => `
+        <div id="gt_text_${index}" class="gt_text ${(parseInt(PageSources_GtSelect)).toString() === parseInt((index)).toString()  ? 'active' : ''}">
+            <textarea type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value, '','${item.name}', '${index}')">${item.value}</textarea>
+            <div class="countdown">
+                <h4>Countdown</h4>
+                <button class="play" onclick="ApiVmixSend('StartCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
+                <button class="pause" onclick="ApiVmixSend('PauseCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
+                <button class="reset" onclick="ApiVmixSend('StopCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
+                <button style="display:none;" onclick="processPageSources_gt_countdown_settings()">Settings</button>
+            </div>
+        </div>
+    `);
+    // Joindre les chaînes HTML pour obtenir une seule chaîne
+    const htmlString = htmlTextItems.join('');
+   
+    return htmlString;
+}
+
+function processPageSources_updateGT_nav_select(element, index) {
+    PageSources_GtSelect = index;
+    document.getElementById("gt_nav_"+ index).classList.remove('active')
+    
+    // Retirer la classe "active" de tous les éléments <li>
+    const allNavItems = document.querySelectorAll('.gt_nav');
+    allNavItems.forEach(navItem => navItem.classList.remove('active'));
+
+    // Ajouter la classe "active" à l'élément <li> cliqué
+    element.classList.add('active');
+    // Mettre à jour le textarea correspondant avec les données de l'item
+    const allTextItems = document.querySelectorAll('.gt_text');
+    allTextItems.forEach(navItem => navItem.classList.remove('active'));
+
+    document.getElementById('gt_text_'+index).classList.add('active');
 }
 
 function processPageSources_updateLayers(inputSource) {
@@ -215,7 +254,7 @@ function changeMenu(menuName) {
         'list': 'list',
         'color_correction': 'color_correction',
         'layers': 'layers',
-        'text': 'text'
+        'gt': 'gt'
     };
 
     // Réinitialiser toutes les classes à une chaîne vide

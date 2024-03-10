@@ -1717,7 +1717,8 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
     overflow-y: scroll;
   }
 }
-.inputContainer .Container .body .content input, .inputContainer .Container .body .content textarea {
+.inputContainer .Container .body .content input,
+.inputContainer .Container .body .content textarea {
   background: #ece9e9;
   border: 1px solid #1e2328;
   border-radius: 0;
@@ -2061,26 +2062,111 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
   background: #ffffff;
 }
 .inputContainer .Container .body .content .GT {
-  overflow-y: scroll;
   height: 100%;
 }
 .inputContainer .Container .body .content .GT .GeneralContainer {
-  padding-bottom: 35px;
-}
-.inputContainer .Container .body .content .GT .GeneralContainer ul li {
   display: grid;
   grid-template-columns: 150px 1fr;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_nav {
+  overflow-y: scroll;
+  height: 475px;
+  background: #1e2328;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_nav li {
   align-items: center;
-  margin-bottom: 5px;
+  cursor: pointer;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer ul li h3 {
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_nav li:hover {
+  background: #0a0f14;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_nav li.active {
+  background: #41ae46;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_nav li h3 {
+  word-break: break-all;
   font-size: 0.8rem;
-  color: #0a0f14;
+  color: #ffffff;
   padding: 10px;
 }
-.inputContainer .Container .body .content .GT .GeneralContainer ul li textarea {
-  width: calc(100% - 10px);
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text {
+  display: none;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text.active {
+  display: block;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text textarea {
+  height: 200px;
+  width: 100%;
   padding: 10px;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  color: #0a0f14;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0a0f14;
+  background: #ECECEC;
+  padding: 5px;
+  margin: 2px;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown button:hover {
+  background: #616161;
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown .play::before {
+  display: inline-block;
+  font-family: "Pe-icon-7-stroke";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: url(/assets/icon/play3.svg);
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown .pause::before {
+  display: inline-block;
+  font-family: "Pe-icon-7-stroke";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: url(/assets/icon/pause2.svg);
+}
+.inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .countdown .reset::before {
+  display: inline-block;
+  font-family: "Pe-icon-7-stroke";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: url(/assets/icon/stop2.svg);
 }
 
 .closeButton {
