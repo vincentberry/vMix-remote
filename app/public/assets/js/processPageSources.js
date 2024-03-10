@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (clickCount_closePageInput === true){
                 closePageInput("");
             }
-            clickCount_closePageInput = true;
+            clickCount_closePageInput = false;
         }
     }
       // Fermer la popup lors du clic à l'extérieur de la popup
