@@ -47,9 +47,18 @@ function processPageSources(xmlDoc) {
                     index: item.getAttribute('index'),
                     name: item.getAttribute('name'),
                     type: "Image",
-                    value: item.textContent.trim()
+                    value: item.textContent.trim().replace(/^file:\/\/\//, '')
                 }));
                 allItems = allItems.concat(ImageItems);
+            }
+            if (input.querySelector('color')) {
+                var ColorItems = Array.from(input.querySelectorAll('color')).map(item => ({
+                    index: item.getAttribute('index'),
+                    name: item.getAttribute('name'),
+                    type: "Color",
+                    value: item.textContent.trim()
+                }));
+                allItems = allItems.concat(ColorItems);
             }
             const inputContainer_content_gt_nav = document.getElementById('inputContainer_content_gt_nav');
             updateValue(inputContainer_content_gt_nav, processPageSources_updateGT_nav(allItems), "");
@@ -172,14 +181,26 @@ function processPageSources_updateGT_text(textItems){
     const htmlTextItems = textItems.map((item, index) => `
         <div id="gt_text_${index}" class="gt_text ${(parseInt(PageSources_GtSelect)).toString() === parseInt((index)).toString()  ? 'active' : ''}">
             <textarea type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value, '','${item.name}', '${index}')">${item.value}</textarea>
-            <div class="countdown">
-                <h4>Countdown</h4>
-                <button class="play" onclick="ApiVmixSend('StartCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
-                <button class="pause" onclick="ApiVmixSend('PauseCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
-                <button class="reset" onclick="ApiVmixSend('StopCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
-                <button style="display:none;" onclick="processPageSources_gt_countdown_settings()">Settings</button>
-            </div>
+            <div class="bottum">
+            ${
+                item.type === "Text" ?
+                `
+                <div class="color">
+                    <h4>Color</h4>
+                    <input class="input_color" placeholder="#xxxxxx" pattern="^#([A-Fa-f0-9]{6})$" onblur="ApiVmixSend('SetTextColour','${inputSelect}', this.value, '','${item.name}', '${index}')">
+                </div>
+                <div class="countdown">
+                    <h4>Countdown</h4>
+                    <button class="play" onclick="ApiVmixSend('StartCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
+                    <button class="pause" onclick="ApiVmixSend('PauseCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
+                    <button class="reset" onclick="ApiVmixSend('StopCountdown','${inputSelect}','', '','${item.name}', '${index}')"></button>
+                    <button onclick="processPageSources_gt_countdown_settings('${item.name}', '${index}')">Settings</button>
+                </div>
+                `
+                : ''
+            }
         </div>
+    </div>
     `);
     // Joindre les chaînes HTML pour obtenir une seule chaîne
     const htmlString = htmlTextItems.join('');
