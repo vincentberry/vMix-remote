@@ -32,27 +32,35 @@ function processPageSources_list_addItem() {
     OpenEdit(nouveauDiv);
 }
 
-function processPageSources_gt_countdown_settings() {
+function processPageSources_gt_countdown_settings(name, index) {
     // Créez un nouvel élément div à partir de la chaîne de caractères
     nouveauDiv = `<h1>Counrdown Settings</h1>
                 <div>
                     <label>Duration</label>
-                    <input type="text" id="processPageSources_list_addItem_patch" value="">
-                </div>
-                <div>
-                    <label>Stop Time</label>
-                    <input type="text" id="processPageSources_list_addItem_patch" value="">
-                </div>
-                <div>
-                    <label>Display Format</label>
-                    <input type="text" id="processPageSources_list_addItem_patch" value="">
+                    <input type="text" id="countdown_SetCountdown" placeholder="00:00:00" pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$">
+                    <button onclick="validateCountdown('SetCountdown','${name}', '${index}')">valid</button>
                 </div>
                 <div>
                     <label>Current Time</label>
-                    <input type="text" id="processPageSources_list_addItem_patch" value="">
+                    <input type="text" id="countdown_ChangeCountdown" placeholder="00:00:00" pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$">
+                    <button onclick="validateCountdown('ChangeCountdown','${name}', '${index}')">valid</button>
                 </div>
                 <button onclick="closeEdit()" class="cancel">Cancel </button>`;
     OpenEdit(nouveauDiv);
+}
+
+function validateCountdown(command ,name, index) {
+    var inputElement = document.getElementById('countdown_'+ command);
+    var pattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
+
+    // Check if the input value matches the pattern
+    if (pattern.test(inputElement.value)) {
+        // Perform the desired action (e.g., trigger ApiVmixSend)
+        ApiVmixSend(command, inputSelect, inputElement.value, '', name, index);
+    } else {
+        // Alert the user or handle the invalid input in some way
+        alert("Invalid input. Please enter a valid time format (HH:mm:ss).");
+    }
 }
 
 function processPageSources_remove() {
