@@ -73,7 +73,7 @@ require $Dir_inc . 'vmix_script.php';
             </div>
         </section>
         <div id="inputsContainer" class="inputContainer disabled">
-            <div class="Container">
+            <div id="inputsContainer_Container" class="Container">
                 <div class="header">
                     <h1 id="inputContainer_header"> </h1>
                     <span class="closeButton" onclick="closePageInput(this)">✖</span>

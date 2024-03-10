@@ -2,6 +2,7 @@ var inputContainer_InputName_No_Focus = true;
 var inputContainer_LayersSelect_No_Focus = true;
 var PageSources_LayersSelect = "0";
 var PageSources_GtSelect = 0;
+var clickCount_closePageInput = false;
 
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processPageSources(xmlDoc) {
@@ -134,12 +135,29 @@ function closePageInput(key) {
     // Get the parent div and hide it
     insputSelect = "";
     PageSources_GtSelect = 0;
+    clickCount_closePageInput = false;
     document.getElementById("inputsContainer").classList.add("disabled");
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var popup = document.getElementById('inputsContainer_Container');
+    function closePageInput_handleDocumentClick(event) {
+        // Vérifier si l'élément cliqué est en dehors de la popup
+        if (!popup.contains(event.target) && !document.getElementById('inputsContainer').classList.contains('disabled')) {
+            if (clickCount_closePageInput === true){
+                closePageInput("");
+            }
+            clickCount_closePageInput = true;
+        }
+    }
+      // Fermer la popup lors du clic à l'extérieur de la popup
+      document.addEventListener('click', closePageInput_handleDocumentClick);
+});
 
 function OpenPageInput(key) {
     // Get the parent div and hide it
     inputSelect = key;
+    clickCount_closePageInput = false;
     processPageSources(XmlFile);
     processPageSources_updateInput_layers(XmlFile);
     changeMenu('general');
