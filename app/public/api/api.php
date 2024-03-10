@@ -26,16 +26,25 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
                 $duration = $item["duration"];
                 $selectedName = $item["selectedName"];
                 $selectedIndex = $item["selectedIndex"];
-                // Accéder aux valeurs individuelles
-                $envoi_vmix = $envoi_vmix . "$command~ $input~ $value~ $duration~ $selectedName~ $selectedIndex!";
+
+                // Build the XML command string
+                $envoi_vmix .= '<command> ';
+                $envoi_vmix .= '<functionType>' . $command . '</functionType>';
+                $envoi_vmix .= '<inputParam>' . $input . '</inputParam>';
+                $envoi_vmix .= '<durationParam>' . $duration . '</durationParam>';
+                $envoi_vmix .= '<selectedNameParam>' . $selectedName . '</selectedNameParam>';
+                $envoi_vmix .= '<selectedIndexParam>' . $selectedIndex . '</selectedIndexParam>';
+                $envoi_vmix .= '<valueParam>' . $value . '</valueParam>';
+                $envoi_vmix .= '</command>';
+
                 db_insert::delete_vmix_command($item["id"]);
                 
             }
         
-            echo $envoi_vmix;
+            echo '<commands>' . $envoi_vmix . '</commands>';
             die();
         }
-        echo "Pas de nouvelle command";
+        echo "<message>No new order</message>";
         die();
     }
 }
