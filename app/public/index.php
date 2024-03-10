@@ -84,7 +84,7 @@ require $Dir_inc . 'vmix_script.php';
                         <button id="inputContainer_nav_list" onclick="changeMenu('list')">List</button>
                         <button id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
-                        <button id="inputContainer_nav_text" onclick="changeMenu('text')">GT Title</button>
+                        <button id="inputContainer_nav_gt" onclick="changeMenu('gt')">GT Title</button>
                     </div>
                     <div class="content">
                         <div id="inputContainer_content_general" class="general">
@@ -123,10 +123,12 @@ require $Dir_inc . 'vmix_script.php';
                                 </ul>
                             </div>
                         </div>
-                        <div id="inputContainer_content_text" class="GT" style="display:none;">
+                        <div id="inputContainer_content_gt" class="GT" style="display:none;">
                             <div class="GeneralContainer">
-                                <ul id="inputContainer_content_text_ul">
+                                <ul id="inputContainer_content_gt_nav">
                                 </ul>
+                                <div id="inputContainer_content_gt_value">                         
+                                </div>
                             </div>
                         </div>
                         <div id="inputContainer_content_color_correction" style="display:none;"></div>
