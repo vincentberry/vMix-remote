@@ -187,7 +187,9 @@ function processPageSources_updateGT_text(textItems){
                 `
                 <div class="color">
                     <h4>Color</h4>
-                    <input class="input_color" placeholder="#xxxxxx" pattern="^#([A-Fa-f0-9]{6})$" onblur="ApiVmixSend('SetTextColour','${inputSelect}', this.value, '','${item.name}', '${index}')">
+                    <input class="input_color" placeholder="#xxxxxx" type="color" pattern="^#([A-Fa-f0-9]{6})$" onblur="ApiVmixSend('SetTextColour','${inputSelect}', this.value, '','${item.name}', '${index}')">
+                    <h4>Ticker Speed</h4>
+                    <input class="input_color" placeholder="0-100" type="number" pattern="^([0-9]{3})$" onblur="ApiVmixSend('SetTickerSpeed','${inputSelect}', this.value, '','${item.name}', '${index}')">
                 </div>
                 <div class="countdown">
                     <h4>Countdown</h4>

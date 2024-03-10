@@ -2181,6 +2181,7 @@ nav div .statut_vmix_contener .statut_vmix .activeContainer div.active {
 .inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown .input_color,
 .inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .color .input_color {
   width: 150px;
+  margin-right: 7px;
 }
 .inputContainer .Container .body .content .GT .GeneralContainer #inputContainer_content_gt_value .gt_text .bottum .countdown {
   justify-content: flex-end;
