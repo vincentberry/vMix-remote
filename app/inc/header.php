@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="En">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,8 +12,8 @@
     // <link rel="stylesheet" href="../css/fonts/Roboto-Regular.ttf">-->
 
     <!--meta SEO-->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Take full control of the vMix software remotely without the need to open ports on your network using our web application.">
+    <meta name="author" content="Vincent Berry">
     <meta name="keyword" content="">
 
     <title>REMOTE VMIX</title>
