@@ -17,7 +17,7 @@ jobs:
 
     - name: Install OCI CLI
       run: |
-        curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh | bash
+        curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh | bash -s -- --accept-all-defaults
         sudo mv $HOME/bin/oci /usr/bin/oci
 
     - name: docker login
