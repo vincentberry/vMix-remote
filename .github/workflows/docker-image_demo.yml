@@ -15,11 +15,6 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Install OCI CLI
-      run: |
-        curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh | bash -s -- --accept-all-defaults
-        sudo mv $HOME/bin/oci /usr/bin/oci
-
     - name: docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -35,9 +30,3 @@ jobs:
 
     - name: Sleep 2 minute
       run: sleep 120
-
-    - name: Restart OCI VM
-      env:
-        OCI_CLI_CONFIG_FILE: ${{ secrets.OCI_CLI_CONFIG_FILE }}
-        INSTANCE_ID: ${{ secrets.OCI_INSTANCE_ID }}
-      run: oci compute instance action --action SOFTRESET --instance-id $INSTANCE_ID --config-file $OCI_CLI_CONFIG_FILE
