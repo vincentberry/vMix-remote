@@ -1,0 +1,37 @@
+name: dockerhub_dev
+
+on:
+  push:
+    branches:  
+      - dev
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+        
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag vincentberry/vmix-remote:demo 
+      
+    - name: Docker Push
+      run: docker push --all-tags vincentberry/vmix-remote
+
+    - name: Sleep 2 minute
+      run: sleep 120
+
+    - name: Restart OCI VM
+      env:
+        OCI_CLI_CONFIG_FILE: ${{ secrets.OCI_CLI_CONFIG_FILE }}
+        INSTANCE_ID: ${{ secrets.OCI_INSTANCE_ID }}
+      run: oci compute instance action --action SOFTRESET --instance-id $INSTANCE_ID --config-file $OCI_CLI_CONFIG_FILE
