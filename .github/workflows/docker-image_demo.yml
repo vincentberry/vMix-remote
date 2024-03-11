@@ -1,9 +1,9 @@
-name: dockerhub_dev
+name: dockerhub_demo
 
 on:
   push:
     branches:  
-      - dev
+      - demo
 
 jobs:
 
