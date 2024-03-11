@@ -27,6 +27,3 @@ jobs:
       
     - name: Docker Push
       run: docker push --all-tags vincentberry/vmix-remote
-
-    - name: Sleep 2 minute
-      run: sleep 120
