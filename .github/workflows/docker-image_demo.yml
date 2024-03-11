@@ -14,6 +14,12 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
+
+    - name: Install OCI CLI
+      run: |
+        curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh | bash
+        sudo mv $HOME/bin/oci /usr/bin/oci
+
     - name: docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
