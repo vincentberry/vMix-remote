@@ -25,7 +25,7 @@ jobs:
 
     - name: Compile SCSS
       run: |
-        sass /app/public/assets/style/index.scss /app/public/assets/style/index.css
+        sass app/public/assets/style/index.scss app/public/assets/style/index.css
 
     - name: docker login
       env:
