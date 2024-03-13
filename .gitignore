@@ -9,3 +9,10 @@
 /app/db/
 .vscode/
 database.sqlite
+
+# Ignore les fichiers générés par SCSS
+*.css
+*.css.map
+
+# Ignore les fichiers générés par Sass/SCSS
+.sass-cache/
