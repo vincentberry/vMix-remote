@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "outDir": "./app/public/assets/js",
+      "strict": true,
+    },
+    "include": [
+      "./app/src/assets/typescript/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}
