@@ -1,6 +1,7 @@
-
-function createNotification(type, title, description) {
+function createNotification(type: string, title: string, description: string) {
     const notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) return;
+
     const notification = document.createElement('div');
     notification.className = `notification ${type} in`;
 
@@ -24,5 +25,5 @@ function createNotification(type, title, description) {
         setTimeout(() => {
             notification.remove();
         }, 500);
-    }, 3000); // 5 seconds timeout
+    }, 3000); // 3 seconds timeout
 }
