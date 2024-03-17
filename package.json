@@ -1,8 +1,10 @@
 {
   "devDependencies": {
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "typescript": "^5.4.2"
   },
   "dependencies": {
+    "sass": "^1.72.0",
     "typescript": "^5.4.2"
   },
   "name": "vmix-remote",
