@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "ES2016",
       "outDir": "./app/public/assets/js",
-      "strict": true,
+      "strict": false,
     },
     "include": [
       "./app/src/assets/typescript/**/*.ts"
