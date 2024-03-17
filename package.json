@@ -12,8 +12,11 @@
   "version": "1.0.0",
   "main": "index.php",
   "scripts": {
+    "build-prod": "npm run compile-scss && npm run compile-ts && npm run clean-src",
+    "build-dev": "npm run compile-scss && npm run compile-ts",
     "compile-scss": "sass app/src/assets/scss/index.scss app/public/assets/style/index.css",
-    "compile-ts": "tsc"
+    "compile-ts": "tsc",
+    "clean-src": "rm -rf app/src"
   },
   "repository": {
     "type": "git",
