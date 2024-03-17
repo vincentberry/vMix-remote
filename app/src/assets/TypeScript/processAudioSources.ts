@@ -1,16 +1,16 @@
 // Fonction pour traiter les sources audio
-function processAudioSources(xmlDoc) {
+function processAudioSources(xmlDoc: Document): void {
 
     const audioSources = xmlDoc.querySelectorAll('input[muted]');
-    const container = document.getElementById('audioSourcesContainer');
+    let container: HTMLElement = document.getElementById('audioSourcesContainer') as HTMLElement;
 
     // Parcourir toutes les sources audio
     audioSources.forEach(audioSource => {
         // Récupérer la clé unique de la source audio
-        const key = audioSource.getAttribute('key');
+        const key: string | null = audioSource.getAttribute('key');
 
         // Vérifier si une source audio avec la même clé existe déjà dans le conteneur
-        const existingAudioSource = document.querySelector(`.audio-source[data-key="${key}"]`);
+        const existingAudioSource = document.querySelector(`.audio-source[data-key="${key}"]`) as HTMLElement;
 
         // Si la source audio existe déjà, la mettre à jour
         if (existingAudioSource) {
@@ -45,19 +45,16 @@ function processAudioSources(xmlDoc) {
 }
 
 // Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
-function getAudioSourceHTML(audioSource) {
-    const key = audioSource.getAttribute('key');
-    const title = audioSource.getAttribute('title');
+function getAudioSourceHTML(audioSource: Element): string {
+    const key: string = audioSource.getAttribute('key');
+    const title: string = audioSource.getAttribute('title');
     const muted = audioSource.getAttribute('muted') === 'True';
     const volume = Math.pow(parseFloat(audioSource.getAttribute('volume')) * 1000000, 0.25);
     const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(audioSource.getAttribute('volume')))) / 100);
     const gainDb = parseFloat(audioSource.getAttribute('gainDb'));
-    //const balance = parseFloat(audioSource.getAttribute('balance'));
-    //const soloPFL = audioSource.getAttribute('soloPFL') === 'True';
     const solo = audioSource.getAttribute('solo') === 'True';
     const audiobusses = audioSource.getAttribute('audiobusses');
-    //const meterF1 = parseFloat(audioSource.getAttribute('meterF1'));
-    //const meterF2 = parseFloat(audioSource.getAttribute('meterF2'));
+
     const audioBussesHTML = activatedBuses.map((activatedBus, index) => {
         let active = 'false';
 
@@ -73,6 +70,7 @@ function getAudioSourceHTML(audioSource) {
             return `<p class="bus ${active}" onclick="ApiVmixSend('AudioBus','${key}','${activatedBus}')">${activatedBus}</p>`;
         }
     }).join('');
+
     return `
                     <h2>${title}</h2>
                     <div class="master">

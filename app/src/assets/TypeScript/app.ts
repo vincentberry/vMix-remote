@@ -1,0 +1,260 @@
+let activatedBuses: any[] = [];
+let inputArray: any[] = [];
+let previewNumber: number | undefined;
+let inputSelect: string | null = null; // Définissez le type approprié pour inputSelect
+let activeNumber: number | undefined;
+let activeOverlay1: number | undefined;
+let activeOverlay2: number | undefined;
+let activeOverlay3: number | undefined;
+let activeOverlay4: number | undefined;
+let XmlFile: Document | undefined; // Définissez le type approprié pour XmlFile
+
+const getHttpRequest = (): XMLHttpRequest | false => {
+    let httpRequest: XMLHttpRequest | false = false;
+
+    if (window.XMLHttpRequest) { // Mozilla, Safari,...
+        httpRequest = new XMLHttpRequest();
+        if (httpRequest.overrideMimeType) {
+            httpRequest.overrideMimeType('text/xml');
+        }
+    }
+    else if (window.ActiveXObject) { // IE
+        try {
+            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e) {
+            try {
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) { }
+        }
+    }
+
+    if (!httpRequest) {
+        alert('Abandon :( Impossible de créer une instance XMLHTTP');
+        return false;
+    }
+
+    return httpRequest;
+};
+
+
+let init = 1;
+function chargerFichierXML() {
+
+    const xhr = getHttpRequest();
+    const vmixConnect = document.getElementById('vmix_connect') as HTMLInputElement | null;
+    if (xhr) {
+        xhr.onreadystatechange = function () {
+
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let data = xhr.responseText;
+                    if (vmixConnect!.value === "N") {
+                        new_session(data);
+                        reset_session();
+                        let vmix_connect_param = get_vmix_connect_param();
+                        if (vmix_connect_param && init === 1) {
+                            vmixConnect!.value = vmix_connect_param;
+                            init = 0;
+                        } else {
+                            update_url("N");
+                        }
+                    } else {
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(data, 'text/xml');
+                        let vmixElement: Element | null = xmlDoc.querySelector('vmix');
+                        let vmixDocument: Document | null = null;
+
+                        if (vmixElement) {
+                            // Créer un nouveau document
+                            vmixDocument = document.implementation.createDocument(null, null, null);
+
+                            // Importer l'élément dans le document
+                            vmixDocument.appendChild(vmixDocument.importNode(vmixElement, true));
+                        }
+                        if (xmlDoc.querySelector('session_delay')!.textContent === "1000") {
+                            document.getElementById('fast')!.className = "on";
+                        } else {
+                            document.getElementById('fast')!.className = "off";
+                        }
+                        processSettings(vmixDocument);
+                        processVideoSources(vmixDocument);
+                        processAudioBuses(vmixDocument);
+                        processAudioSources(vmixDocument);
+                        processPageSources(vmixDocument);
+                        XmlFile = vmixDocument;
+                        update_url(vmixConnect!.value);
+                    }
+                } else if (xhr.status === 301) {
+                    window.location.href = JSON.parse(xhr.responseText)['redirect'];
+                } else {
+                    if (JSON.parse(xhr.responseText)['error']) {
+                        createNotification('error', 'Erreur', JSON.parse(xhr.responseText)['error']);
+                    } else if (JSON.parse(xhr.responseText)['reset']) {
+                        createNotification('warning', 'Attention', JSON.parse(xhr.responseText)['reset']);
+                        vmixConnect!.value = "N"
+                        update_url("N");
+                    }
+
+                }
+            }
+
+        };
+        xhr.open('GET', "/api/connect?session_vmix=" + vmixConnect!.value, true);
+        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+        xhr.send();
+    } else {
+        console.error('Unable to create an XMLHttpRequest instance.');
+    }
+}
+
+function new_session_send() {
+    const xhr = getHttpRequest();
+    if (xhr) {
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    new_session(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.open('GET', "/api/connect?session_vmix=N", true);
+        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+        xhr.send();
+    } else {
+        console.error('Unable to create an XMLHttpRequest instance.');
+    }
+}
+
+function reset_session() {
+    activatedBuses = [];
+    inputArray = [];
+    previewNumber = undefined;
+    activeNumber = undefined;
+    activeOverlay1 = undefined;
+    activeOverlay2 = undefined;
+    activeOverlay3 = undefined;
+    activeOverlay4 = undefined;
+    document.getElementById('projetName')!.textContent = "";
+    updateCheckboxClass('streaming', false);
+    updateCheckboxClass('recording', false);
+    updateCheckboxClass('external', false);
+    updateCheckboxClass('fullscreen', false);
+
+    const videoSourcesContainer = document.getElementById('videoSourcesContainer');
+    // Supprimer les éléments existants dans le conteneur de sortie
+    while (videoSourcesContainer!.firstChild) {
+        videoSourcesContainer!.removeChild(videoSourcesContainer!.firstChild);
+    }
+    const audioBusesContainer = document.getElementById('audioBusesContainer');
+    // Supprimer les éléments existants dans le conteneur de sortie
+    while (audioBusesContainer!.firstChild) {
+        audioBusesContainer!.removeChild(audioBusesContainer!.firstChild);
+    }
+    const audioSourcesContainer = document.getElementById('audioSourcesContainer');
+    // Supprimer les éléments existants dans le conteneur de sortie
+    while (audioSourcesContainer!.firstChild) {
+        audioSourcesContainer!.removeChild(audioSourcesContainer!.firstChild);
+    }
+}
+
+function new_session(data: string) {
+
+    // Récupérer l'élément <select> par son ID
+    const selectElement = document.getElementById('vmix_connect') as HTMLSelectElement;
+    const files = JSON.parse(data);
+
+    // Stocker les identifiants des options actuelles
+    const currentOptions = Array.from(selectElement.options).map(option => option.value);
+
+    for (let i = 0; i < files.length; i++) {
+        const fileId = files[i]['id'];
+
+        // Vérifier si l'option existe déjà
+        if (!optionExists(fileId)) {
+            console.log("new connection: " + fileId);
+            const option = document.createElement('option');
+            option.value = fileId;
+            option.textContent = files[i]['name'] + "_" + fileId;
+            selectElement.appendChild(option);
+        }
+    }
+
+    // Supprimer les options qui ne sont plus présentes
+    for (let i = 0; i < currentOptions.length; i++) {
+        if (!files.some(file => file.id === currentOptions[i]) && currentOptions[i] != "N") {
+            // L'option n'est plus présente, la supprimer
+            const optionToRemove = selectElement.querySelector(`[value="${currentOptions[i]}"]`) as HTMLOptionElement;
+            if (optionToRemove) {
+                const index = Array.from(selectElement.options).indexOf(optionToRemove);
+                if (index !== -1) {
+                    selectElement.remove(index);
+                }
+            }
+        }
+    }
+
+    // Fonction pour vérifier si une option existe déjà
+    function optionExists(value: string) {
+        for (let i = 0; i < selectElement.options.length; i++) {
+            if (selectElement.options[i].value === value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}
+
+function update_url(paramValue: string) {
+    let currentUrl = window.location.href;
+    let paramName = 'vmix_connect';
+    let regex = new RegExp(`([?&])${paramName}=.*?(&|$)`, 'i');
+    let paramExists = currentUrl.match(regex);
+
+    // Vérifiez si le paramètre existe et a une valeur différente
+    if (paramExists) {
+        let existingValue = currentUrl.match(regex)![0].split('=')[1];
+        if (existingValue !== paramValue) {
+            // Mettez à jour la valeur du paramètre existant
+            let newUrl = currentUrl.replace(regex, `$1${paramName}=${paramValue}$2`);
+            window.history.replaceState({}, '', newUrl);
+        }
+    } else {
+        // Ajoutez le paramètre à l'URL s'il n'existe pas
+        let separator = currentUrl.includes('?') ? '&' : '?';
+        let newUrl = currentUrl + separator + `${paramName}=${paramValue}`;
+        window.history.pushState({}, '', newUrl);
+    }
+}
+
+function get_vmix_connect_param() {
+    let currentUrl = window.location.href;
+    let paramName = 'vmix_connect';
+    let regex = new RegExp(`[?&]${paramName}=([^&]*)`, 'i');
+    let match = currentUrl.match(regex);
+
+    if (match) {
+        // La valeur du paramètre vmix_connect existe dans l'URL
+        return decodeURIComponent(match[1]);
+    } else {
+        // Le paramètre vmix_connect n'existe pas dans l'URL
+        return null;
+    }
+}
+
+function Session_delay() {
+    if (document.getElementById('fast')!.className == "on") {
+        ConfirmApiVmixSend("Are you sure you want to switch to slow mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", "", "30000");
+    } else {
+        ConfirmApiVmixSend("Are you sure you want to switch to fast mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", "", "1000");
+    }
+
+}
+
+
+// Charger le fichier XML et générer les éléments HTML au chargement de la page
+window.onload = chargerFichierXML;
+setInterval(chargerFichierXML, 1000);
