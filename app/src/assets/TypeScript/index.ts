@@ -1,0 +1,12 @@
+//index.php
+import "./assets/js/app"
+import "./assets/js/copy"
+import "./assets/js/notification"
+import "./assets/js/processSettings"
+import "./assets/js/processAudioSources"
+import "./assets/js/processAudioBus"
+import "./assets/js/processVideoSources"
+import "./assets/js/processPageSources"
+import "./assets/js/processEdit"
+import "./assets/js/api_vmix"
+import "./assets/js/submit_vmix"
