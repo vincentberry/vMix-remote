@@ -6,7 +6,7 @@ let clickCount_closePageInput: boolean = false;
 
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processPageSources(xmlDoc: Document) {
-    const inputSelect = ""; // Vous devez définir cette variable
+    
     if (inputSelect) {
         const input = xmlDoc.querySelector(`input[key="${inputSelect}"]`);
 
