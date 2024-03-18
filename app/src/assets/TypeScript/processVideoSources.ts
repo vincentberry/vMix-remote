@@ -2,35 +2,40 @@ function processVideoSources(xmlDoc: Document): void {
 
     const videoSources = xmlDoc.querySelectorAll('input');
     const container = document.getElementById('videoSourcesContainer');
+    if (container) {
+        // Parcourir toutes les sources video
+        videoSources.forEach(videoSource => {
+            // Récupérer la clé unique de la source video
+            const key = videoSource.getAttribute('key');
 
-    // Parcourir toutes les sources video
-    videoSources.forEach(videoSource => {
-        // Récupérer la clé unique de la source video
-        const key = videoSource.getAttribute('key');
+            // Vérifier si une source video avec la même clé existe déjà dans le conteneur
+            const existingAudioSource = document.querySelector(`.video-source[data-key="${key}"]`);
 
-        // Vérifier si une source video avec la même clé existe déjà dans le conteneur
-        const existingAudioSource = document.querySelector(`.video-source[data-key="${key}"]`);
+            // Si la source video existe déjà, la mettre à jour
+            if (existingAudioSource) {
+                // Mettre à jour les informations nécessaires
+                const VideoSourceHTML = getVideoSourceHTML(videoSource);
+                if (existingAudioSource.innerHTML != VideoSourceHTML) {
+                    existingAudioSource.innerHTML = VideoSourceHTML;
+                }
+            } else if(key){
+                // Créer une nouvelle div pour la source video
+                const newDivElement = document.createElement('div');
+                newDivElement.className = 'video-source';
+                newDivElement.setAttribute('data-key', key);
 
-        // Si la source video existe déjà, la mettre à jour
-        if (existingAudioSource) {
-            // Mettre à jour les informations nécessaires
-            const VideoSourceHTML = getVideoSourceHTML(videoSource);
-            if (existingAudioSource.innerHTML != VideoSourceHTML) {
-                existingAudioSource.innerHTML = VideoSourceHTML;
+                // Remplir la div avec les informations
+                newDivElement.innerHTML = getVideoSourceHTML(videoSource);
+
+                // Ajouter la nouvelle div au conteneur
+                container.appendChild(newDivElement);
             }
-        } else {
-            // Créer une nouvelle div pour la source video
-            const newDivElement = document.createElement('div');
-            newDivElement.className = 'video-source';
-            newDivElement.setAttribute('data-key', key);
+        });
+    }{
+        console.error("The container element 'videoSourcesContainer' was not found.");
+    }
 
-            // Remplir la div avec les informations
-            newDivElement.innerHTML = getVideoSourceHTML(videoSource);
 
-            // Ajouter la nouvelle div au conteneur
-            container.appendChild(newDivElement);
-        }
-    });
 }
 
 // Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
@@ -39,35 +44,37 @@ function getVideoSourceHTML(videoSource: Element): string {
     const title = videoSource.getAttribute('title');
     const number = videoSource.getAttribute('number');
     const type = videoSource.getAttribute('type');
-    let tally = "";
-    let tallyOverlay1: string;
-    let tallyOverlay2: string;
-    let tallyOverlay3: string;
-    let tallyOverlay4: string;
+    let tally: string = "";
+    let tallyOverlay1: string = "";
+    let tallyOverlay2: string = "";
+    let tallyOverlay3: string = "";
+    let tallyOverlay4: string = "";
 
-    // Ajouter la classe "preview" si le nombre correspond à previewNumber
-    if (parseInt(number) === previewNumber) {
-        tally = "preview";
-    }
-    // Ajouter la classe "program" si le nombre correspond à previewNumber
-    if (parseInt(number) === activeNumber) {
-        tally = 'program';
-    }
-    // Ajouter la classe "preview" si le nombre correspond à previewNumber
-    if (parseInt(number) === activeOverlay1) {
-        tallyOverlay1 = "program";
-    }
-    // Ajouter la classe "program" si le nombre correspond à previewNumber
-    if (parseInt(number) === activeOverlay2) {
-        tallyOverlay2 = 'program';
-    }
-    // Ajouter la classe "preview" si le nombre correspond à previewNumber
-    if (parseInt(number) === activeOverlay3) {
-        tallyOverlay3 = "program";
-    }
-    // Ajouter la classe "program" si le nombre correspond à previewNumber
-    if (parseInt(number) === activeOverlay4) {
-        tallyOverlay4 = 'program';
+    if (number) {
+        // Ajouter la classe "preview" si le nombre correspond à previewNumber
+        if (parseInt(number) === previewNumber) {
+            tally = "preview";
+        }
+        // Ajouter la classe "program" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeNumber) {
+            tally = 'program';
+        }
+        // Ajouter la classe "preview" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay1) {
+            tallyOverlay1 = "program";
+        }
+        // Ajouter la classe "program" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay2) {
+            tallyOverlay2 = 'program';
+        }
+        // Ajouter la classe "preview" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay3) {
+            tallyOverlay3 = "program";
+        }
+        // Ajouter la classe "program" si le nombre correspond à previewNumber
+        if (parseInt(number) === activeOverlay4) {
+            tallyOverlay4 = 'program';
+        }
     }
 
     return `
