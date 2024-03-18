@@ -15,17 +15,6 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Install Node.js and npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-
-      - name: Install npm dependencies
-        run: npm install
-    
-      - name: Run npm build script
-        run: npm run build-prod
-
       - name: docker login
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}

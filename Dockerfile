@@ -1,5 +1,18 @@
+FROM node:14 AS build
+ARG NODE_ENV
+WORKDIR /build
+
+COPY ./ /build
+
+RUN npm install
+RUN npm install typescript
+
+
+RUN npm run build-${NODE_ENV}
+
 FROM php:apache
 
+ARG NODE_ENV
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 EXPOSE 80
@@ -20,7 +33,7 @@ RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
 # Apache
 COPY config/prod/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf
 COPY /config/prod/apache2/sites-enabled /etc/apache2/sites-enabled/
-COPY app/ /var/www/html/
+COPY --from=build /build/app/ /var/www/html/
 
 RUN mkdir -p /var/www/html/file/
 RUN mkdir -p /var/www/html/db/
