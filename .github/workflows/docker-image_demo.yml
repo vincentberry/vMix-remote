@@ -20,12 +20,11 @@ jobs:
         with:
           node-version: '14'
   
-      - name: Install Sass
-        run: npm install -g sass
-  
-      - name: Compile SCSS
-        run: |
-          sass app/public/assets/style/index.scss app/public/assets/style/index.css
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Run npm build script
+        run: npm run build-prod
   
       - name: docker login
         env:
