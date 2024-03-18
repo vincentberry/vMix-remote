@@ -9,7 +9,7 @@ function processPageSources(xmlDoc: Document) {
     
     if (inputSelect) {
         const input = xmlDoc.querySelector(`input[key="${inputSelect}"]`);
-
+        
         // Obtenir les attributs de l'élément <input>
         const key = input.getAttribute('key');
         const number = input.getAttribute('number');
@@ -95,18 +95,18 @@ function processPageSources(xmlDoc: Document) {
         const inputContainer_InputLoop = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
 
         // Fonction pour mettre à jour une valeur si elle est différente et non vide
-        function updateValue(element: HTMLElement, attribute: string, defaultValue: string) {
+        function updateValue(element: HTMLElement, attribute: string, defaultValue: string | null = null) {
             const attributeValue = attribute.trim();
-            if (element && (element.textContent || (element as HTMLInputElement).value || (element as HTMLInputElement).checked)) {
-                const currentValue = (element.textContent || (element as HTMLInputElement).value || (element as HTMLInputElement).checked.toString()).trim();
+            if (element && ((element as HTMLInputElement).value || element.innerHTML || ( (element as HTMLInputElement).checked !== undefined &&  (element as HTMLInputElement).checked.toString()))) {  
+                const currentValue = (element as HTMLInputElement).value || element.innerHTML || (element as HTMLInputElement).checked.toString();
                 if (attributeValue !== "" && attributeValue !== currentValue) {
-                    element.textContent = (element as HTMLInputElement).value = attributeValue;
+                    (element as HTMLInputElement).value = element.innerHTML = attributeValue;
                     if ((element as HTMLInputElement).type === 'checkbox') {
                         (element as HTMLInputElement).checked = (defaultValue.toLowerCase() === 'true');
                     }
                 } else if (attributeValue === "" && defaultValue !== undefined) {
                     // Mettre la valeur par défaut si l'attribut est vide
-                    element.textContent = (element as HTMLInputElement).value = defaultValue;
+                    (element as HTMLInputElement).value = element.innerHTML = defaultValue;
                     if ((element as HTMLInputElement).type === 'checkbox') {
                         (element as HTMLInputElement).checked = (defaultValue.toLowerCase() === 'true');
                     }
@@ -115,12 +115,12 @@ function processPageSources(xmlDoc: Document) {
         }
 
         // Utilisation de la fonction pour mettre à jour les éléments
-        updateValue(inputContainer_InputId, key, "");
-        updateValue(inputContainer_InputType!, type!, "");
+        updateValue(inputContainer_InputId, key);
+        updateValue(inputContainer_InputType, type);
         if (inputContainer_InputName_No_Focus) {
-            updateValue(inputContainer_InputName, shortTitle!, "");
+            updateValue(inputContainer_InputName, shortTitle);
         }
-        updateValue(inputContainer_InputLoop, loop!, "Off");
+        updateValue(inputContainer_InputLoop, loop, "Off");
 
         const inputContainer_header = `Input ${number}: ${inputContainer_InputName.value}`;
         if (document.getElementById("inputContainer_header")!.innerHTML !== inputContainer_header) {
