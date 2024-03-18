@@ -38,7 +38,6 @@ COPY app/src/inc/${NODE_ENV}/ /var/www/html/inc/
 
 RUN rm -rf /var/www/html/src
 
-RUN rm -rf /var/www/html/src
 RUN mkdir -p /var/www/html/file/
 RUN mkdir -p /var/www/html/db/
 RUN chmod -R 777 /var/www/html/db/
