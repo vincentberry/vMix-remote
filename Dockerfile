@@ -1,6 +1,7 @@
 FROM php:apache
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ARG NODE_ENV
 
 EXPOSE 80
 WORKDIR /var/www/html/
@@ -18,9 +19,12 @@ RUN apt-get update -qq && \
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
 
 # Apache
-COPY config/prod/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf
-COPY /config/prod/apache2/sites-enabled /etc/apache2/sites-enabled/
+COPY config/${NODE_ENV}/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf
+COPY /config/${NODE_ENV}/apache2/sites-enabled /etc/apache2/sites-enabled/
 COPY app/ /var/www/html/
+COPY app/src/inc/${NODE_ENV}/ /var/www/html/inc/
+
+RUN rm -rf /var/www/html/src
 
 RUN mkdir -p /var/www/html/file/
 RUN mkdir -p /var/www/html/db/
