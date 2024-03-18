@@ -6,127 +6,142 @@ let clickCount_closePageInput: boolean = false;
 
 // Fonction pour convertir le XML en HTML et l'ajouter à la page
 function processPageSources(xmlDoc: Document) {
-    
+
     if (inputSelect) {
         const input = xmlDoc.querySelector(`input[key="${inputSelect}"]`);
-        
-        // Obtenir les attributs de l'élément <input>
-        const key = input.getAttribute('key');
-        const number = input.getAttribute('number');
-        const type = input.getAttribute('type');
-        const title = input.getAttribute('title');
-        const shortTitle = input.getAttribute('shortTitle');
-        const state = input.getAttribute('state');
-        const position = input.getAttribute('position');
-        const duration = input.getAttribute('duration');
-        const loop = input.getAttribute('loop');
-        const muted = input.getAttribute('muted');
-        const volume = input.getAttribute('volume');
-        const balance = input.getAttribute('balance');
-        const solo = input.getAttribute('solo');
-        const soloPFL = input.getAttribute('soloPFL');
-        const audiobusses = input.getAttribute('audiobusses');
-        const meterF1 = input.getAttribute('meterF1');
-        const meterF2 = input.getAttribute('meterF2');
-        const gainDb = input.getAttribute('gainDb');
-        const selectedIndex = input.getAttribute('selectedIndex');
+        if (input) {
+            // Obtenir les attributs de l'élément <input>
+            const key = input.getAttribute('key') || "";
+            const number = input.getAttribute('number');
+            const type = input.getAttribute('type') || "";
+            const title = input.getAttribute('title') || "";
+            const shortTitle = input.getAttribute('shortTitle') || "";
+            const state = input.getAttribute('state');
+            const position = input.getAttribute('position');
+            const duration = input.getAttribute('duration');
+            const loop = input.getAttribute('loop') || "";
+            const muted = input.getAttribute('muted');
+            const volume = input.getAttribute('volume');
+            const balance = input.getAttribute('balance');
+            const solo = input.getAttribute('solo');
+            const soloPFL = input.getAttribute('soloPFL');
+            const audiobusses = input.getAttribute('audiobusses');
+            const meterF1 = input.getAttribute('meterF1');
+            const meterF2 = input.getAttribute('meterF2');
+            const gainDb = input.getAttribute('gainDb');
+            const selectedIndex = input.getAttribute('selectedIndex');
 
-        // Obtenir l'élément GT <text> et son contenu
-        if (input.querySelector('text') || input.querySelector('image')) {
-            let allItems: { index: string, name: string, type: string, value: string }[] = [];
-            if (input.querySelector('text')) {
-                const TextItems = Array.from(input.querySelectorAll('text')).map(item => ({
-                    index: item.getAttribute('index')!,
-                    name: item.getAttribute('name')!,
-                    type: "Text",
-                    value: item.textContent!.trim()
-                }));
-                allItems = allItems.concat(TextItems);
+            // Obtenir l'élément GT <text> et son contenu
+            if (input.querySelector('text') || input.querySelector('image')) {
+                let allItems: { index: string, name: string, type: string, value: string }[] = [];
+                if (input.querySelector('text')) {
+                    const TextItems = Array.from(input.querySelectorAll('text')).map(item => ({
+                        index: item.getAttribute('index')!,
+                        name: item.getAttribute('name')!,
+                        type: "Text",
+                        value: item.textContent!.trim()
+                    }));
+                    allItems = allItems.concat(TextItems);
+                }
+                if (input.querySelector('image')) {
+                    const ImageItems = Array.from(input.querySelectorAll('image')).map(item => ({
+                        index: item.getAttribute('index')!,
+                        name: item.getAttribute('name')!,
+                        type: "Image",
+                        value: item.textContent!.trim().replace(/^file:\/\/\//, '')
+                    }));
+                    allItems = allItems.concat(ImageItems);
+                }
+                if (input.querySelector('color')) {
+                    const ColorItems = Array.from(input.querySelectorAll('color')).map(item => ({
+                        index: item.getAttribute('index')!,
+                        name: item.getAttribute('name')!,
+                        type: "Color",
+                        value: item.textContent!.trim()
+                    }));
+                    allItems = allItems.concat(ColorItems);
+                }
+                const inputContainer_content_gt_nav = document.getElementById('inputContainer_content_gt_nav');
+                if (inputContainer_content_gt_nav) {
+                    updateValue(inputContainer_content_gt_nav, processPageSources_updateGT_nav(allItems), "");
+
+                }
+                const inputContainer_content_gt_value = document.getElementById('inputContainer_content_gt_value');
+                if (inputContainer_content_gt_value) {
+                    updateValue(inputContainer_content_gt_value, processPageSources_updateGT_text(allItems), "");
+                }
+                document.getElementById('inputContainer_nav_gt')!.style.display = "";
+            } else {
+                document.getElementById('inputContainer_nav_gt')!.style.display = "none";
             }
-            if (input.querySelector('image')) {
-                const ImageItems = Array.from(input.querySelectorAll('image')).map(item => ({
-                    index: item.getAttribute('index')!,
-                    name: item.getAttribute('name')!,
-                    type: "Image",
-                    value: item.textContent!.trim().replace(/^file:\/\/\//, '')
+
+            // Obtenir l'élément <list> et son contenu
+            if (input.querySelector('list')) {
+                const listElement = input.querySelector('list')!;
+                const listItems = Array.from(listElement.querySelectorAll('item')).map(item => ({
+                    selected: item.getAttribute('selected') === 'true',
+                    value: item.textContent!.trim(),
+                    enabled: (item.getAttribute('enabled') !== null && item.getAttribute('enabled') !== '') ? item.getAttribute('enabled')! : 'checked'
                 }));
-                allItems = allItems.concat(ImageItems);
+                const inputContainer_content_list_ul = document.getElementById('inputContainer_content_list_ul');
+                updateValue(inputContainer_content_list_ul!, processPageSources_updateList(listItems), "");
+                document.getElementById('inputContainer_nav_list')!.style.display = "";
+            } else {
+                document.getElementById('inputContainer_nav_list')!.style.display = "none";
             }
-            if (input.querySelector('color')) {
-                const ColorItems = Array.from(input.querySelectorAll('color')).map(item => ({
-                    index: item.getAttribute('index')!,
-                    name: item.getAttribute('name')!,
-                    type: "Color",
-                    value: item.textContent!.trim()
-                }));
-                allItems = allItems.concat(ColorItems);
-            }
-            const inputContainer_content_gt_nav = document.getElementById('inputContainer_content_gt_nav');
-            updateValue(inputContainer_content_gt_nav, processPageSources_updateGT_nav(allItems), "");
-            const inputContainer_content_gt_value = document.getElementById('inputContainer_content_gt_value');
-            updateValue(inputContainer_content_gt_value, processPageSources_updateGT_text(allItems), "");
-            document.getElementById('inputContainer_nav_gt')!.style.display = "";
-        } else {
-            document.getElementById('inputContainer_nav_gt')!.style.display = "none";
-        }
 
-        // Obtenir l'élément <list> et son contenu
-        if (input.querySelector('list')) {
-            const listElement = input.querySelector('list')!;
-            const listItems = Array.from(listElement.querySelectorAll('item')).map(item => ({
-                selected: item.getAttribute('selected') === 'true',
-                value: item.textContent!.trim(),
-                enabled: (item.getAttribute('enabled') !== null && item.getAttribute('enabled') !== '') ? item.getAttribute('enabled')! : 'checked'
-            }));
-            const inputContainer_content_list_ul = document.getElementById('inputContainer_content_list_ul');
-            updateValue(inputContainer_content_list_ul!, processPageSources_updateList(listItems), "");
-            document.getElementById('inputContainer_nav_list')!.style.display = "";
-        } else {
-            document.getElementById('inputContainer_nav_list')!.style.display = "none";
-        }
+            processPageSources_updateLayers(input);
+            processPageSources_updateInput_layers(xmlDoc);
 
-        processPageSources_updateLayers(input);
-        processPageSources_updateInput_layers(xmlDoc);
+            // Supposons également que vous avez déjà obtenu la référence aux éléments HTML du formulaire
+            const inputContainer_InputId = document.getElementById('inputContainer_InputId') as HTMLInputElement;
+            const inputContainer_InputType = document.querySelector('h1[for="inputContainer_InputType"]') as HTMLInputElement;
+            const inputContainer_InputName = document.getElementById('inputContainer_InputName') as HTMLInputElement;
+            const inputContainer_InputLoop = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
 
-        // Supposons également que vous avez déjà obtenu la référence aux éléments HTML du formulaire
-        const inputContainer_InputId = document.getElementById('inputContainer_InputId') as HTMLInputElement;
-        const inputContainer_InputType = document.querySelector('h1[for="inputContainer_InputType"]') as HTMLInputElement;
-        const inputContainer_InputName = document.getElementById('inputContainer_InputName') as HTMLInputElement;
-        const inputContainer_InputLoop = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
+            // Fonction pour mettre à jour une valeur si elle est différente et non vide
+            function updateValue(element: HTMLElement, attribute: string, defaultValue: string | null = null) {
+                const attributeValue = attribute.trim();
+                if (element && ((element as HTMLInputElement).value || element.innerHTML || ((element as HTMLInputElement).checked !== undefined && (element as HTMLInputElement).checked.toString()))) {
+                    const currentValue = (element as HTMLInputElement).value || element.innerHTML || (element as HTMLInputElement).checked.toString();
+                    if (attributeValue !== "" && attributeValue !== currentValue) {
+                        (element as HTMLInputElement).value = element.innerHTML = attributeValue;
+                        if ((element as HTMLInputElement).type === 'checkbox' && defaultValue) {
+                            (element as HTMLInputElement).checked = (defaultValue.toLowerCase() === 'true');
+                        }
+                    } else if (attributeValue === "" && defaultValue !== undefined) {
+                        // Mettre la valeur par défaut si l'attribut est vide
+                        (element as HTMLInputElement).value = element.innerHTML ?? defaultValue;
 
-        // Fonction pour mettre à jour une valeur si elle est différente et non vide
-        function updateValue(element: HTMLElement, attribute: string, defaultValue: string | null = null) {
-            const attributeValue = attribute.trim();
-            if (element && ((element as HTMLInputElement).value || element.innerHTML || ( (element as HTMLInputElement).checked !== undefined &&  (element as HTMLInputElement).checked.toString()))) {  
-                const currentValue = (element as HTMLInputElement).value || element.innerHTML || (element as HTMLInputElement).checked.toString();
-                if (attributeValue !== "" && attributeValue !== currentValue) {
-                    (element as HTMLInputElement).value = element.innerHTML = attributeValue;
-                    if ((element as HTMLInputElement).type === 'checkbox') {
-                        (element as HTMLInputElement).checked = (defaultValue.toLowerCase() === 'true');
-                    }
-                } else if (attributeValue === "" && defaultValue !== undefined) {
-                    // Mettre la valeur par défaut si l'attribut est vide
-                    (element as HTMLInputElement).value = element.innerHTML = defaultValue;
-                    if ((element as HTMLInputElement).type === 'checkbox') {
-                        (element as HTMLInputElement).checked = (defaultValue.toLowerCase() === 'true');
+                        if ((element as HTMLInputElement).type === 'checkbox') {
+                            // Use nullish coalescing operator to provide a default value
+                            const defaultChecked = defaultValue ? defaultValue.toLowerCase() === 'true' : false;
+                            (element as HTMLInputElement).checked = defaultChecked;
+                        }
                     }
                 }
             }
-        }
 
-        // Utilisation de la fonction pour mettre à jour les éléments
-        updateValue(inputContainer_InputId, key);
-        updateValue(inputContainer_InputType, type);
-        if (inputContainer_InputName_No_Focus) {
-            updateValue(inputContainer_InputName, shortTitle);
-        }
-        updateValue(inputContainer_InputLoop, loop, "Off");
+            // Utilisation de la fonction pour mettre à jour les éléments
+            updateValue(inputContainer_InputId, key);
+            updateValue(inputContainer_InputType, type);
+            if (inputContainer_InputName_No_Focus) {
+                updateValue(inputContainer_InputName, shortTitle);
+            }
+            updateValue(inputContainer_InputLoop, loop, "Off");
 
-        const inputContainer_header = `Input ${number}: ${inputContainer_InputName.value}`;
-        if (document.getElementById("inputContainer_header")!.innerHTML !== inputContainer_header) {
-            document.getElementById("inputContainer_header")!.innerHTML = inputContainer_header;
-        }
+            const inputContainer_header = `Input ${number}: ${inputContainer_InputName.value}`;
+            if (document.getElementById("inputContainer_header")!.innerHTML !== inputContainer_header) {
+                document.getElementById("inputContainer_header")!.innerHTML = inputContainer_header;
+            }
 
+        } else {
+            // Handle the case when inputSelect is truthy but input is falsy
+            console.error(`No input found for key "${inputSelect}"`);
+        }
+    } else {
+        // Handle the case when inputSelect is falsy
+        console.error("No inputSelect provided");
     }
 }
 
@@ -143,24 +158,30 @@ document.addEventListener('DOMContentLoaded', function () {
     function closePageInput_handleDocumentClick(event: MouseEvent) {
         // Vérifier si l'élément cliqué est en dehors de la popup
         if (!popup!.contains(event.target as Node) && !document.getElementById('inputsContainer')!.classList.contains('disabled')) {
-            if (clickCount_closePageInput === true){
+            if (clickCount_closePageInput === true) {
                 closePageInput("");
             }
             clickCount_closePageInput = false;
         }
     }
-      // Fermer la popup lors du clic à l'extérieur de la popup
-      document.addEventListener('click', closePageInput_handleDocumentClick);
+    // Fermer la popup lors du clic à l'extérieur de la popup
+    document.addEventListener('click', closePageInput_handleDocumentClick);
 });
 
 function OpenPageInput(key: string) {
     // Get the parent div and hide it
     inputSelect = key;
     clickCount_closePageInput = false;
-    processPageSources(XmlFile); // Vous devez définir XmlFile
-    processPageSources_updateInput_layers(XmlFile); // Vous devez définir XmlFile
-    changeMenu('general');
-    document.getElementById("inputsContainer").classList.remove("disabled");
+    const inputsContainer = document.getElementById("inputsContainer");
+    if (XmlFile && inputsContainer) {
+        processPageSources(XmlFile); // Vous devez définir XmlFile
+        processPageSources_updateInput_layers(XmlFile); // Vous devez définir XmlFile
+        changeMenu('general');
+        inputsContainer.classList.remove("disabled");
+    } else {
+        console.error(`Element with ID 'inputsContainer' or 'XmlFile' not found.`);
+    }
+
 }
 
 function processPageSources_updateList(listItems: { selected: boolean, value: string, enabled: string }[]) {
@@ -182,7 +203,7 @@ function processPageSources_updateList(listItems: { selected: boolean, value: st
 function processPageSources_updateGT_nav(textItems: { index: string, name: string, type: string, value: string }[]) {
     // Utiliser la méthode map pour créer un tableau de chaînes HTML
     const htmlTextItems = textItems.map((item, index) => `
-        <li  id="gt_nav_${index}" class="gt_nav ${(PageSources_GtSelect).toString() === (index).toString()  ? 'active' : ''}" onclick="processPageSources_updateGT_nav_select(this, '${index}')">
+        <li  id="gt_nav_${index}" class="gt_nav ${(PageSources_GtSelect).toString() === (index).toString() ? 'active' : ''}" onclick="processPageSources_updateGT_nav_select(this, '${index}')">
             <h3>${item.name}</h3>
         </li>
     `);
@@ -192,15 +213,14 @@ function processPageSources_updateGT_nav(textItems: { index: string, name: strin
     return htmlString;
 }
 
-function processPageSources_updateGT_text(textItems: { index: string, name: string, type: string, value: string }[]){
+function processPageSources_updateGT_text(textItems: { index: string, name: string, type: string, value: string }[]) {
     // Utiliser la méthode map pour créer un tableau de chaînes HTML
     const htmlTextItems = textItems.map((item, index) => `
-        <div id="gt_text_${index}" class="gt_text ${(PageSources_GtSelect).toString() === (index).toString()  ? 'active' : ''}">
+        <div id="gt_text_${index}" class="gt_text ${(PageSources_GtSelect).toString() === (index).toString() ? 'active' : ''}">
             <textarea type="text" value="${item.value}" onblur="ApiVmixSend('Set${item.type}','${inputSelect}', this.value, '','${item.name}', '${index}')">${item.value}</textarea>
             <div class="bottum">
-            ${
-                item.type === "Text" ?
-                `
+            ${item.type === "Text" ?
+            `
                 <div class="color">
                     <h4>Color</h4>
                     <input class="input_color" placeholder="#xxxxxx" type="color" pattern="^#([A-Fa-f0-9]{6})$" onblur="ApiVmixSend('SetTextColour','${inputSelect}', this.value, '','${item.name}', '${index}')">
@@ -215,21 +235,21 @@ function processPageSources_updateGT_text(textItems: { index: string, name: stri
                     <button onclick="processPageSources_gt_countdown_settings('${item.name}', '${index}')">Settings</button>
                 </div>
                 `
-                : ''
-            }
+            : ''
+        }
         </div>
     </div>
     `);
     // Joindre les chaînes HTML pour obtenir une seule chaîne
     const htmlString = htmlTextItems.join('');
-   
+
     return htmlString;
 }
 
 function processPageSources_updateGT_nav_select(element: HTMLElement, index: string) {
     PageSources_GtSelect = parseInt(index);
-    document.getElementById("gt_nav_"+ index)!.classList.remove('active');
-    
+    document.getElementById("gt_nav_" + index)!.classList.remove('active');
+
     // Retirer la classe "active" de tous les éléments <li>
     const allNavItems = document.querySelectorAll('.gt_nav');
     allNavItems.forEach(navItem => navItem.classList.remove('active'));
@@ -240,7 +260,7 @@ function processPageSources_updateGT_nav_select(element: HTMLElement, index: str
     const allTextItems = document.querySelectorAll('.gt_text');
     allTextItems.forEach(navItem => navItem.classList.remove('active'));
 
-    document.getElementById('gt_text_'+index)!.classList.add('active');
+    document.getElementById('gt_text_' + index)!.classList.add('active');
 }
 
 function processPageSources_updateLayers(inputSource: Element) {
@@ -354,22 +374,34 @@ document.getElementById('inputContainer_InputName')?.addEventListener('focus', (
 
 // inputContainer_InputName (Sortie)
 document.getElementById('inputContainer_InputName')?.addEventListener('blur', () => {
-    const inputValue = (document.getElementById('inputContainer_InputName') as HTMLInputElement)?.value;
-    ApiVmixSend('SetInputName', inputSelect, inputValue);
-    inputContainer_InputName_No_Focus = true;
+    if (inputSelect) {
+        const inputValue = (document.getElementById('inputContainer_InputName') as HTMLInputElement)?.value;
+        ApiVmixSend('SetInputName', inputSelect, inputValue);
+        inputContainer_InputName_No_Focus = true;
+    } else {
+        console.error("inputSelect not found.");
+    }
 });
 
 // inputContainer_InputLoop
 document.getElementById('inputContainer_InputLoop')?.addEventListener('click', () => {
-    const inputLoopCheckbox = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
-    if (inputLoopCheckbox.checked) {
-        ApiVmixSend('LoopOn', inputSelect);
+    if (inputSelect) {
+        const inputLoopCheckbox = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
+        if (inputLoopCheckbox.checked) {
+            ApiVmixSend('LoopOn', inputSelect);
+        } else {
+            ApiVmixSend('LoopOff', inputSelect);
+        }
     } else {
-        ApiVmixSend('LoopOff', inputSelect);
+        console.error("inputSelect not found.");
     }
 });
 
 // inputContainer_listShuffle
 document.getElementById('inputContainer_listShuffle')?.addEventListener('click', () => {
-    ApiVmixSend('ListShuffle', inputSelect);
+    if (inputSelect) {
+        ApiVmixSend('ListShuffle', inputSelect);
+    } else {
+        console.error("inputSelect not found.");
+    }
 });

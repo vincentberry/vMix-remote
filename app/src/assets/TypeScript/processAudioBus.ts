@@ -49,14 +49,17 @@ function processAudioBuses(xmlDoc: Document) {
 
 // Fonction pour obtenir le HTML d'un bus audio à partir de l'élément XML
 function getAudioBusHTML(audioBus: Element) {
-    // Adapté à votre structure XML réelle
+
+    const meterF1String: string = audioBus.getAttribute('meterF1')|| "0";
+    const meterF2String = audioBus.getAttribute('meterF2')|| "0";
+    const volumeString = audioBus.getAttribute('volume')|| "0";
     // Vous devrez extraire les attributs et valeurs selon votre structure exacte
     const busName = audioBus.tagName;
-    const volume = Math.pow(parseFloat(audioBus.getAttribute('volume')) * 1000000, 0.25);
-    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(audioBus.getAttribute('volume')))) / 100);
+    const volume = Math.pow(parseFloat(volumeString) * 1000000, 0.25);
+    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(volumeString))) / 100);
     const muted = audioBus.getAttribute('muted') === 'True';
-    const meterF1 = parseFloat(audioBus.getAttribute('meterF1'));
-    const meterF2 = parseFloat(audioBus.getAttribute('meterF2'));
+    const meterF1 = parseFloat(meterF1String);
+    const meterF2 = parseFloat(meterF2String);
     const sendToMaster = audioBus.getAttribute('sendToMaster') === 'True';
     let busCommand = `'BusXAudio',undefined,'${busName.charAt(busName.length - 1)}'`
     if (busName.toLowerCase() === "master") {
@@ -95,7 +98,7 @@ function getAudioBusHTML(audioBus: Element) {
 }
 
 function showGainDb(sliderId: string) {
-    var tooltip = document.getElementById('tooltip-volume');
+    var tooltip = document.getElementById('tooltip-volume') as HTMLElement;
     tooltip.classList.add('affiche');
 
     // Mettre à jour le tooltip lorsque le curseur se déplace
@@ -119,7 +122,7 @@ function showGainDb(sliderId: string) {
 }
 
 function showVolume(sliderId: string) {
-    var tooltip = document.getElementById('tooltip-volume');
+    var tooltip = document.getElementById('tooltip-volume') as HTMLElement;
     tooltip.classList.add('affiche');
 
     // Mettre à jour le tooltip lorsque le curseur se déplace
@@ -147,7 +150,7 @@ function showVolume(sliderId: string) {
 }
 
 function hideTooltip(sliderId: string) {
-    var tooltip = document.getElementById('tooltip-volume');
+    var tooltip = document.getElementById('tooltip-volume') as HTMLElement ;
     tooltip.classList.remove('affiche');
 
     // Arrêter de mettre à jour le tooltip lorsque le curseur ne survole pas le range

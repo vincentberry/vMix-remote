@@ -19,7 +19,7 @@ function processAudioSources(xmlDoc: Document): void {
             if (existingAudioSource.innerHTML != AudioSourceHTML) {
                 existingAudioSource.innerHTML = AudioSourceHTML;
             }
-        } else {
+        } else if(key){
             // Créer une nouvelle div pour la source audio
             const newDivElement = document.createElement('div');
             newDivElement.className = 'audio-source';
@@ -46,14 +46,16 @@ function processAudioSources(xmlDoc: Document): void {
 
 // Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
 function getAudioSourceHTML(audioSource: Element): string {
-    const key: string = audioSource.getAttribute('key');
-    const title: string = audioSource.getAttribute('title');
+    const gainDbString = audioSource.getAttribute('gainDb')|| "0";
+    const volumeString = audioSource.getAttribute('volume')|| "0";
+    const key = audioSource.getAttribute('key');
+    const title = audioSource.getAttribute('title');
     const muted = audioSource.getAttribute('muted') === 'True';
-    const volume = Math.pow(parseFloat(audioSource.getAttribute('volume')) * 1000000, 0.25);
-    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(audioSource.getAttribute('volume')))) / 100);
-    const gainDb = parseFloat(audioSource.getAttribute('gainDb'));
+    const volume = Math.pow(parseFloat(volumeString) * 1000000, 0.25);
+    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(volumeString))) / 100);
+    const gainDb = parseFloat(gainDbString);
     const solo = audioSource.getAttribute('solo') === 'True';
-    const audiobusses = audioSource.getAttribute('audiobusses');
+    const audiobusses = audioSource.getAttribute('audiobusses')|| "";
 
     const audioBussesHTML = activatedBuses.map((activatedBus, index) => {
         let active = 'false';

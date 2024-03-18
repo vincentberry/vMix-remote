@@ -1,22 +1,33 @@
 function closeEdit() {
     // Obtenir le div parent et le masquer
-    document.getElementById("EditContainer").classList.add("disabled");
+    const editContainer = document.getElementById("EditContainer");
+    if (editContainer !== null) {
+        editContainer.classList.add("disabled");
+    } else {
+        console.error("EditContainer not found.");
+    }
 }
 
-function OpenEdit(HTML) {
+function OpenEdit(HTML: string) {
     const ancienConteneur = document.getElementById("EditContainerContainer");
-    if (ancienConteneur) {
+    if (ancienConteneur !== null) {
         ancienConteneur.remove();
     }
 
-    // Créer un nouvel élément div
+    // Create a new div element
     const nouveauDiv = document.createElement('div');
     nouveauDiv.className = "Container";
     nouveauDiv.id = "EditContainerContainer";
     nouveauDiv.innerHTML = `<span class="closeButton" onclick="closeEdit()">✖</span> <div class="body">${HTML}</div>`;
 
-    document.getElementById("EditContainer").appendChild(nouveauDiv);
-    document.getElementById("EditContainer").classList.remove("disabled");
+    // Append the new div to the EditContainer
+    const editContainer = document.getElementById("EditContainer");
+    if (editContainer !== null) {
+        editContainer.appendChild(nouveauDiv);
+        editContainer.classList.remove("disabled");
+    } else {
+        console.error("EditContainer not found.");
+    }
 }
 
 function processPageSources_list_addItem() {
@@ -55,7 +66,7 @@ function validateCountdown(command: string, name: string, index: string) {
     // Vérifier si la valeur d'entrée correspond au modèle
     if (pattern.test((inputElement as HTMLInputElement).value)) {
         // Effectuer l'action souhaitée (par exemple, déclencher ApiVmixSend)
-        ApiVmixSend(command, inputSelect, (inputElement as HTMLInputElement).value, '', name, index);
+        ApiVmixSend(command, inputSelect || "", (inputElement as HTMLInputElement).value, '', name, index);
     } else {
         // Avertir l'utilisateur ou gérer l'entrée invalide d'une autre manière
         alert("Entrée invalide. Veuillez saisir un format d'heure valide (HH:mm:ss).");
