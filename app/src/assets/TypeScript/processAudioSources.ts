@@ -59,7 +59,7 @@ function getAudioSourceHTML(audioSource: Element): string {
         let active = 'false';
 
         for (let i = 0; i < audiobusses.length; i++) {
-            if (audiobusses[i] === activatedBus || (audiobusses[i] === "master" && activatedBus === "M")) {
+            if (audiobusses[i] === activatedBus || (audiobusses[i] === "M" && activatedBus === "master")) {
                 active = 'true';
             }
         }
