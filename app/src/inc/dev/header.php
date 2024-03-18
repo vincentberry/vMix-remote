@@ -22,6 +22,18 @@
     <link rel="stylesheet" type="text/css" href="./assets/style/index.css" />
 
 </head>
-<div class="info">
+<div class="info" id="Build_info_div" style="position: fixed; bottom: 0px; width: 100%; z-index: 111; opacity: 0.9;transition: opacity 0.5s ease; pointer-events: none; ">
     <h2>It's the development version</h2>
 </div>
+<script>
+function showOverlay() {
+    const overlay = document.getElementById('Build_info_div');
+        overlay.style.opacity = '0.9'
+    setTimeout(function() {
+        overlay.style.opacity = '0'
+    }, 10000); // 10 secondes
+}
+
+// Appeler la fonction pour afficher l'overlay toutes les 1 minute
+setInterval(showOverlay, 30000); // 30 secondes
+</script>
