@@ -1,8 +1,7 @@
 // Fonction pour traiter les bus audio
-function processAudioBuses(xmlDoc) {
-
+function processAudioBuses(xmlDoc: Document) {
     const audioBuses = xmlDoc.querySelectorAll('audio > *');
-    const container = document.getElementById('audioBusesContainer');
+    const container = document.getElementById('audioBusesContainer') as HTMLElement;
 
     // Parcourir tous les bus audio
     audioBuses.forEach(audioBus => {
@@ -15,7 +14,7 @@ function processAudioBuses(xmlDoc) {
         if (existingAudioBus) {
             // Mettre à jour les informations nécessaires
             const AudioBusHTML = getAudioBusHTML(audioBus);
-            if (existingAudioBus.innerHTML != AudioBusHTML) {
+            if (existingAudioBus.innerHTML !== AudioBusHTML) {
                 existingAudioBus.innerHTML = AudioBusHTML;
             }
         } else {
@@ -28,7 +27,6 @@ function processAudioBuses(xmlDoc) {
             } else {
                 activatedBuses.push(busName.charAt(busName.length - 1));
             }
-
 
             // Remplir la div avec les informations
             newDivElement.innerHTML = getAudioBusHTML(audioBus);
@@ -50,15 +48,18 @@ function processAudioBuses(xmlDoc) {
 }
 
 // Fonction pour obtenir le HTML d'un bus audio à partir de l'élément XML
-function getAudioBusHTML(audioBus) {
-    // Adapté à votre structure XML réelle
+function getAudioBusHTML(audioBus: Element) {
+
+    const meterF1String: string = audioBus.getAttribute('meterF1')|| "0";
+    const meterF2String = audioBus.getAttribute('meterF2')|| "0";
+    const volumeString = audioBus.getAttribute('volume')|| "0";
     // Vous devrez extraire les attributs et valeurs selon votre structure exacte
     const busName = audioBus.tagName;
-    const volume = Math.pow(parseFloat(audioBus.getAttribute('volume')) * 1000000, 0.25);
-    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(audioBus.getAttribute('volume')))) / 100);
+    const volume = Math.pow(parseFloat(volumeString) * 1000000, 0.25);
+    const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(volumeString))) / 100);
     const muted = audioBus.getAttribute('muted') === 'True';
-    const meterF1 = parseFloat(audioBus.getAttribute('meterF1'));
-    const meterF2 = parseFloat(audioBus.getAttribute('meterF2'));
+    const meterF1 = parseFloat(meterF1String);
+    const meterF2 = parseFloat(meterF2String);
     const sendToMaster = audioBus.getAttribute('sendToMaster') === 'True';
     let busCommand = `'BusXAudio',undefined,'${busName.charAt(busName.length - 1)}'`
     if (busName.toLowerCase() === "master") {
@@ -96,43 +97,44 @@ function getAudioBusHTML(audioBus) {
             `;
 }
 
-function showGainDb(sliderId) {
-    var tooltip = document.getElementById('tooltip-volume');
+function showGainDb(sliderId: string) {
+    var tooltip = document.getElementById('tooltip-volume') as HTMLElement;
     tooltip.classList.add('affiche');
 
     // Mettre à jour le tooltip lorsque le curseur se déplace
     document.addEventListener('mousemove', function (event) {
-        var range = document.getElementById(sliderId);
+        var range = document.getElementById(sliderId) as HTMLInputElement;
+        if (range) {
+            var tooltipPosition = range.getBoundingClientRect();
+            const volumeDB = parseFloat(range.value);
+            tooltip.textContent = "+" + Math.floor(volumeDB) + " db";
 
-        var tooltipPosition = range.getBoundingClientRect();
-        const volumeDB = parseFloat(document.getElementById(sliderId).value);
-        tooltip.textContent = "+" + Math.floor(volumeDB) + " db";
+            // Positionner l'info-bulle en fonction de la position de la souris
+            var rect = range.getBoundingClientRect();
+            var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Positionner l'info-bulle en fonction de la position de la souris
-        var rect = range.getBoundingClientRect();
-        var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Positionner l'info-bulle
-        tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
-        tooltip.style.top = event.clientY + scrollTop - 10 + 'px'; // Ajuster la position verticale si nécessaire
+            // Positionner l'info-bulle
+            tooltip.style.left = event.clientX + scrollLeft + 15 + 'px';
+            tooltip.style.top = event.clientY + scrollTop - 10 + 'px'; // Ajuster la position verticale si nécessaire
+        }
     });
 }
 
-function showVolume(sliderId) {
-    var tooltip = document.getElementById('tooltip-volume');
+function showVolume(sliderId: string) {
+    var tooltip = document.getElementById('tooltip-volume') as HTMLElement;
     tooltip.classList.add('affiche');
 
     // Mettre à jour le tooltip lorsque le curseur se déplace
     document.addEventListener('mousemove', function (event) {
-        var range = document.getElementById(sliderId);
+        var range = document.getElementById(sliderId) as HTMLInputElement;
         if (range) {
             var tooltipPosition = range.getBoundingClientRect();
-            const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(document.getElementById(sliderId).value))) / 100);
-            if (volumeDB != -Infinity) {
+            const volumeDB = 20 * Math.log10(Math.min(100, Math.max(0, parseFloat(range.value))) / 100);
+            if (!isNaN(volumeDB)) {
                 tooltip.textContent = Math.floor(volumeDB) + " db";
             } else {
-                tooltip.textContent = "-∞ db"
+                tooltip.textContent = "-∞ db";
             }
 
             // Positionner l'info-bulle en fonction de la position de la souris
@@ -147,8 +149,8 @@ function showVolume(sliderId) {
     });
 }
 
-function hideTooltip(sliderId) {
-    var tooltip = document.getElementById('tooltip-volume');
+function hideTooltip(sliderId: string) {
+    var tooltip = document.getElementById('tooltip-volume') as HTMLElement ;
     tooltip.classList.remove('affiche');
 
     // Arrêter de mettre à jour le tooltip lorsque le curseur ne survole pas le range

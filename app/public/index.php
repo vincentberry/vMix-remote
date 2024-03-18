@@ -369,18 +369,6 @@ require $Dir_inc . 'vmix_script.php';
 <script src="./assets/js/api_vmix.js"></script>
 <script src="./assets/js/submit_vmix.js"></script>
 <script>
-    let activatedBuses = [];
-    var commands;
-    var inputArray = [];
-    var previewNumber;
-    var inputSelect;
-    var activeNumber;
-    var activeOverlay1;
-    var activeOverlay2;
-    var activeOverlay3;
-    var activeOverlay4;
-    var XmlFile;
-
     document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
     const vmix_connect_param = get_vmix_connect_param();
     if (vmix_connect_param === null) {

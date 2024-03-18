@@ -16,3 +16,10 @@ database.sqlite
 
 # Ignore les fichiers générés par Sass/SCSS
 .sass-cache/
+/app/public/assets/style
+/app/public/assets/js
+
+
+#npm ignore
+/node_modules
+package-lock.json

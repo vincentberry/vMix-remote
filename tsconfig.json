@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "ES2016",
+      "outDir": "app/public/assets/js",
+      "strict": true,
+    },
+    "include": [
+      "app/src/assets/TypeScript/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}

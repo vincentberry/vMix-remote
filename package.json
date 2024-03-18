@@ -1,5 +1,31 @@
 {
-    "devDependencies": {
-        "sass": "^1.71.1"
-    }
+  "devDependencies": {
+    "sass": "^1.72.0",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "sass": "^1.72.0",
+    "typescript": "^5.4.2"
+  },
+  "name": "vmix-remote",
+  "description": "Take full control of the vMix software remotely without the need to open ports on your network using our web application. Our solution is built on a dedicated Docker server, for which a Docker image is available.\r ([DEMO](http://vmixremotedemo.servehttp.com/))\r ## Key Features",
+  "version": "1.0.0",
+  "main": "index.php",
+  "scripts": {
+    "build-prod": "npm run compile-scss && npm run compile-ts",
+    "build-dev": "npm run compile-scss && npm run compile-ts",
+    "build-demo": "npm run compile-scss && npm run compile-ts",
+    "compile-scss": "sass app/src/assets/scss/index.scss app/public/assets/style/index.css",
+    "compile-ts": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentberry/vmix-remote.git"
+  },
+  "author": "Vincent Berry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincentberry/vmix-remote/issues"
+  },
+  "homepage": "https://github.com/vincentberry/vmix-remote#readme"
 }

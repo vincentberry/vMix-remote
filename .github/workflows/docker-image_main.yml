@@ -15,18 +15,6 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Install Node.js and npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-
-      - name: Install Sass
-        run: npm install -g sass
-
-      - name: Compile SCSS
-        run: |
-          sass app/public/assets/style/index.scss app/public/assets/style/index.css
-
       - name: docker login
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
