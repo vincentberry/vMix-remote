@@ -64,26 +64,29 @@ function chargerFichierXML() {
                         const parser = new DOMParser();
                         const xmlDoc = parser.parseFromString(data, 'text/xml');
                         let vmixElement: Element | null = xmlDoc.querySelector('vmix');
-                        let vmixDocument: Document | null = null;
+                       
 
                         if (vmixElement) {
+                            let vmixDocument: Document;
                             // Créer un nouveau document
                             vmixDocument = document.implementation.createDocument(null, null, null);
 
                             // Importer l'élément dans le document
                             vmixDocument.appendChild(vmixDocument.importNode(vmixElement, true));
+
+                            processSettings(vmixDocument);
+                            processVideoSources(vmixDocument);
+                            processAudioBuses(vmixDocument);
+                            processAudioSources(vmixDocument);
+                            processPageSources(vmixDocument);
+                            XmlFile = vmixDocument;
+                            
                         }
                         if (xmlDoc.querySelector('session_delay')!.textContent === "1000") {
                             document.getElementById('fast')!.className = "on";
                         } else {
                             document.getElementById('fast')!.className = "off";
                         }
-                        processSettings(vmixDocument);
-                        processVideoSources(vmixDocument);
-                        processAudioBuses(vmixDocument);
-                        processAudioSources(vmixDocument);
-                        processPageSources(vmixDocument);
-                        XmlFile = vmixDocument;
                         update_url(vmixConnect!.value);
                     }
                 } else if (xhr.status === 301) {
@@ -184,7 +187,7 @@ function new_session(data: string) {
 
     // Supprimer les options qui ne sont plus présentes
     for (let i = 0; i < currentOptions.length; i++) {
-        if (!files.some(file => file.id === currentOptions[i]) && currentOptions[i] != "N") {
+        if (!files.some((file: { id: string; }) => file.id === currentOptions[i]) && currentOptions[i] != "N") {
             // L'option n'est plus présente, la supprimer
             const optionToRemove = selectElement.querySelector(`[value="${currentOptions[i]}"]`) as HTMLOptionElement;
             if (optionToRemove) {
