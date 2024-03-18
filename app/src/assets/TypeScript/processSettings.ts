@@ -1,27 +1,30 @@
 function processSettings(xmlDoc: Document): void {
-        previewNumber = parseInt(xmlDoc.querySelector('preview')?.textContent || "");
-        activeNumber = parseInt(xmlDoc.querySelector('active')?.textContent || "");
-        activeOverlay1 = parseInt(xmlDoc.querySelector('overlay[number="1"]')?.textContent || "");
-        activeOverlay2 = parseInt(xmlDoc.querySelector('overlay[number="2"]')?.textContent || "");
-        activeOverlay3 = parseInt(xmlDoc.querySelector('overlay[number="3"]')?.textContent || "");
-        activeOverlay4 = parseInt(xmlDoc.querySelector('overlay[number="4"]')?.textContent || "");
-    
-        if (xmlDoc.querySelector('preset')) {
-            const projectName = xmlDoc.querySelector('preset')?.textContent || "".split(/[\\/]/);
+    previewNumber = parseInt(xmlDoc.querySelector('preview')?.textContent || "");
+    activeNumber = parseInt(xmlDoc.querySelector('active')?.textContent || "");
+    activeOverlay1 = parseInt(xmlDoc.querySelector('overlay[number="1"]')?.textContent || "");
+    activeOverlay2 = parseInt(xmlDoc.querySelector('overlay[number="2"]')?.textContent || "");
+    activeOverlay3 = parseInt(xmlDoc.querySelector('overlay[number="3"]')?.textContent || "");
+    activeOverlay4 = parseInt(xmlDoc.querySelector('overlay[number="4"]')?.textContent || "");
+    const presetElement = xmlDoc.querySelector('preset');
+    if (presetElement) {
+        const presetElement_textContent = presetElement.textContent
+        if (presetElement_textContent) {
+            const projectName = presetElement_textContent.split(/[\\/]/);
             const projectNameText = projectName[projectName.length - 1].split('.')[0];
             const projectNameElement = document.getElementById('projetName');
             if (projectNameElement) {
                 projectNameElement.textContent = projectNameText;
             }
         }
-    
-        updateCheckboxClass('streaming', JSON.parse(xmlDoc.querySelector('streaming')?.textContent || "".trim().toLowerCase( )), xmlDoc);
-        updateCheckboxClass('recording', JSON.parse(xmlDoc.querySelector('recording')?.textContent || "".trim().toLowerCase()), xmlDoc);
-        updateCheckboxClass('external', JSON.parse(xmlDoc.querySelector('external')?.textContent || "".trim().toLowerCase() ), xmlDoc);
-        updateCheckboxClass('fullscreen', JSON.parse(xmlDoc.querySelector('fullscreen')?.textContent || "".trim().toLowerCase()), xmlDoc);
+    }
+
+    updateCheckboxClass('streaming', JSON.parse(xmlDoc.querySelector('streaming')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
+    updateCheckboxClass('recording', JSON.parse(xmlDoc.querySelector('recording')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
+    updateCheckboxClass('external', JSON.parse(xmlDoc.querySelector('external')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
+    updateCheckboxClass('fullscreen', JSON.parse(xmlDoc.querySelector('fullscreen')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);    
 }
 
-function updateCheckboxClass(checkboxId: string, className: boolean,xmlDoc: Document | null = null): void {
+function updateCheckboxClass(checkboxId: string, className: boolean, xmlDoc: Document | null = null): void {
 
     if (className && xmlDoc) {
         // La case à cocher est cochée, ajouter la classe

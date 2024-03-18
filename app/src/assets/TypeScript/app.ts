@@ -78,7 +78,9 @@ function chargerFichierXML() {
                             processVideoSources(vmixDocument);
                             processAudioBuses(vmixDocument);
                             processAudioSources(vmixDocument);
-                            processPageSources(vmixDocument);
+                            if(inputSelect){
+                                processPageSources(vmixDocument);
+                            }
                             XmlFile = vmixDocument;
                             
                         }

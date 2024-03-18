@@ -31,11 +31,7 @@ function processVideoSources(xmlDoc: Document): void {
                 container.appendChild(newDivElement);
             }
         });
-    }{
-        console.error("The container element 'videoSourcesContainer' was not found.");
     }
-
-
 }
 
 // Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
