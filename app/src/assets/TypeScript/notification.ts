@@ -1,6 +1,6 @@
 function createNotification(type: string, title: string, description: string) {
     const notificationContainer = document.getElementById('notification-container');
-    if (notificationContainer !== null) {
+    if (notificationContainer) {
         const notification = document.createElement('div');
         notification.className = `notification ${type} in`;
 
