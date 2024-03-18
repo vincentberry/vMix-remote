@@ -10,7 +10,7 @@ require $Dir_inc . 'vmix_script.php';
         <img src="./assets/icon/VMIX REMOTE.svg" alt="">
         <h1>WELCOME TO REMOTE VMIX</h1>
         <div class="list">
-            <select name="vmix_connect" onclick="chargerFichierXML()" id="vmix_connect">
+            <select name="vmix_connect" onclick="chargerFichierXML_lobby()" id="vmix_connect">
                 <option value="N">--Please choose the vmix--</option>
             </select>
         </div>
@@ -30,7 +30,7 @@ require $Dir_inc . 'vmix_script.php';
 <script src="./assets/js/notification.js"></script>
 <script>
     document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
-    const vmix_connect_param = get_vmix_connect_param();
+    const vmix_connect_param = get_vmix_connect_param_lobby();
     if (vmix_connect_param) {
         window.location.href = '/?vmix_connect=' + vmix_connect_param;
     }

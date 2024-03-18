@@ -1,15 +1,17 @@
+let commands: any[]; // Type any utilisé temporairement, vous devriez définir un type spécifique pour vos données
+
 // Charger le fichier JSON
 fetch('api_vmix.json')
     .then(response => response.json())
-    .then(data => {
+    .then((data: any[]) => {
         commands = data; // Assigner les données à la variable commands
         // Générer les options du menu déroulant
-        const commandSelector = document.getElementById('commandSelector');
+        const commandSelector = document.getElementById('commandSelector') as HTMLSelectElement;
         commands.forEach(command => {
             const option = document.createElement('option');
             option.value = command.name;
             option.text = command.name;
-            if (option.hasSelectedName !== 1) {
+            if (!option.selected) {
                 commandSelector.appendChild(option);
             }
         });
@@ -21,9 +23,9 @@ fetch('api_vmix.json')
 
 // Mettre à jour les détails de la commande lorsqu'une nouvelle commande est sélectionnée
 function updateCommandDetails() {
-    const commandSelector = document.getElementById('commandSelector');
+    const commandSelector = document.getElementById('commandSelector') as HTMLSelectElement;
     const selectedCommandName = commandSelector.value;
-    const commandDetailsContainer = document.getElementById('commandDetails');
+    const commandDetailsContainer = document.getElementById('commandDetails') as HTMLElement;
     commandDetailsContainer.innerHTML = "";
     // Trouver la commande sélectionnée dans le JSON
     const selectedCommand = commands.find(command => command.name === selectedCommandName);
@@ -77,10 +79,11 @@ function updateCommandDetails() {
 
 // Fonction pour envoyer la commande
 function sendCommand() {
-    const commandSelector = document.getElementById('commandSelector').value;
-    const inputSelector = document.getElementById('inputSelector').value;
-    const valueInput = document.getElementById('valueInput').value;
-    const durationInput = document.getElementById('durationInput').value;
-    const valueSelectedName = document.getElementById('valueSelectedName').value;
-    ApiVmixSend(commandSelector,inputSelector,valueInput,durationInput, valueSelectedName)
+    const commandSelector = (document.getElementById('commandSelector') as HTMLSelectElement).value;
+    const inputSelector = (document.getElementById('inputSelector') as HTMLInputElement).value;
+    const valueInput = (document.getElementById('valueInput') as HTMLInputElement).value;
+    const durationInput = (document.getElementById('durationInput') as HTMLInputElement).value;
+    const valueSelectedName = (document.getElementById('valueSelectedName') as HTMLInputElement).value;
+    // Appeler la fonction d'envoi de l'API vMix avec les paramètres appropriés
+    ApiVmixSend(commandSelector, inputSelector, valueInput, durationInput, valueSelectedName);
 }
