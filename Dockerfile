@@ -31,10 +31,14 @@ RUN apt-get update -qq && \
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
 
 # Apache
-COPY config/prod/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf
-COPY /config/prod/apache2/sites-enabled /etc/apache2/sites-enabled/
+COPY config/${NODE_ENV}/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf
+COPY /config/${NODE_ENV}/apache2/sites-enabled /etc/apache2/sites-enabled/
 COPY --from=build /build/app/ /var/www/html/
+COPY app/src/inc/${NODE_ENV}/ /var/www/html/inc/
 
+RUN rm -rf /var/www/html/src
+
+RUN rm -rf /var/www/html/src
 RUN mkdir -p /var/www/html/file/
 RUN mkdir -p /var/www/html/db/
 RUN chmod -R 777 /var/www/html/db/
