@@ -9,3 +9,17 @@
 /app/db/
 .vscode/
 database.sqlite
+
+# Ignore les fichiers générés par SCSS
+*.css
+*.css.map
+
+# Ignore les fichiers générés par Sass/SCSS
+.sass-cache/
+/app/public/assets/style
+/app/public/assets/js
+
+
+#npm ignore
+/node_modules
+package-lock.json

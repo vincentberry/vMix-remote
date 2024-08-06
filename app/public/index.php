@@ -73,7 +73,7 @@ require $Dir_inc . 'vmix_script.php';
             </div>
         </section>
         <div id="inputsContainer" class="inputContainer disabled">
-            <div class="Container">
+            <div id="inputsContainer_Container" class="Container">
                 <div class="header">
                     <h1 id="inputContainer_header"> </h1>
                     <span class="closeButton" onclick="closePageInput(this)">✖</span>
@@ -82,9 +82,9 @@ require $Dir_inc . 'vmix_script.php';
                     <div id="inputContainer_nav" class="nav">
                         <button id="inputContainer_nav_general" class="active" onclick="changeMenu('general')">General</button>
                         <button id="inputContainer_nav_list" onclick="changeMenu('list')">List</button>
-                        <button style="display:none;" id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
+                        <button id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
-                        <button id="inputContainer_nav_text" onclick="changeMenu('text')">GT Title</button>
+                        <button id="inputContainer_nav_gt" onclick="changeMenu('gt')">GT Title</button>
                     </div>
                     <div class="content">
                         <div id="inputContainer_content_general" class="general">
@@ -123,10 +123,12 @@ require $Dir_inc . 'vmix_script.php';
                                 </ul>
                             </div>
                         </div>
-                        <div id="inputContainer_content_text" class="GT" style="display:none;">
+                        <div id="inputContainer_content_gt" class="GT" style="display:none;">
                             <div class="GeneralContainer">
-                                <ul id="inputContainer_content_text_ul">
+                                <ul id="inputContainer_content_gt_nav">
                                 </ul>
+                                <div id="inputContainer_content_gt_value">                         
+                                </div>
                             </div>
                         </div>
                         <div id="inputContainer_content_color_correction" style="display:none;"></div>
@@ -243,7 +245,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '10')" class="off">OFF</button>
                                 </div>
                             </div>
-                            <div class="rigth" style="display:none;">
+                            <div class="rigth">
                                 <h1 id="inputContainer_Content_Layers_Select">-</h1>
                                 <button>90°</button>
                                 <div class="mode">
@@ -367,18 +369,6 @@ require $Dir_inc . 'vmix_script.php';
 <script src="./assets/js/api_vmix.js"></script>
 <script src="./assets/js/submit_vmix.js"></script>
 <script>
-    let activatedBuses = [];
-    var commands;
-    var inputArray = [];
-    var previewNumber;
-    var inputSelect;
-    var activeNumber;
-    var activeOverlay1;
-    var activeOverlay2;
-    var activeOverlay3;
-    var activeOverlay4;
-    var XmlFile;
-
     document.getElementById("urlserverscriptmvix").textContent = window.location.origin;
     const vmix_connect_param = get_vmix_connect_param();
     if (vmix_connect_param === null) {

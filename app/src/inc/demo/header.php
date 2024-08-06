@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="En">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +23,7 @@
 
 </head>
 <div class="info" id="Build_info_div" style="position: fixed; bottom: 0px; width: 100%; z-index: 111; opacity: 0.9;transition: opacity 0.5s ease; pointer-events: none; ">
-    <h2>No Build version</h2>
+    <h2>This is a demonstration version. Not for production use.</h2>
 </div>
 <script>
 function showOverlay() {

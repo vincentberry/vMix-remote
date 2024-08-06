@@ -1,9 +1,9 @@
-name: dockerhub_main
+name: dockerhub_demo
 
 on:
-  release:
-    types:
-      - created
+  push:
+    branches:  
+      - demo
 
 jobs:
 
@@ -14,19 +14,16 @@ jobs:
     steps:
 
       - uses: actions/checkout@v2
-
+  
       - name: docker login
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-        
+          
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --build-arg NODE_ENV=prod --tag vincentberry/vmix-remote:latest 
+        run: docker build . --file Dockerfile --build-arg NODE_ENV=demo --tag vincentberry/vmix-remote:demo 
         
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --build-arg NODE_ENV=prod --tag vincentberry/vmix-remote:$(date +%s) 
-            
       - name: Docker Push
         run: docker push --all-tags vincentberry/vmix-remote
