@@ -20,6 +20,7 @@ EXPOSE 80
 WORKDIR /var/www/html/
 
 RUN apt-get update -qq && \
+    apt install libapache2-mod-brotli && \
     apt-get install -qy \
     git \
     gnupg \
@@ -44,6 +45,7 @@ RUN mkdir -p /var/www/html/db/
 RUN chmod -R 777 /var/www/html/db/
 RUN chmod -R 777 /var/www/html/file/
 RUN a2enmod rewrite
+RUN a2enmod brotli
 RUN a2enmod remoteip && \
     a2enconf swag && \
     /etc/init.d/apache2 restart
