@@ -3138,8 +3138,6 @@
         "name": "PreviewInput",
         "hasValue": 0,
         "hasInput": 1,
-        "hasMix": "Optional",
-        "mixNotes": "defaults to main output (Mix 0), specify Mix 0-3 if required.",
         "hasDuration": 0,
         "hasSelectedName": 0,
         "inputNotes": "",
@@ -3149,9 +3147,9 @@
         "valueParam2Notes": "",
         "valueParam3": "",
         "valueParam4": "",
-        "valueExample": "2",
+        "valueExample": "",
         "selectedNameExample": "",
-        "notes": "Send specified input to Preview. Specify mix number if not targeting mix 1.",
+        "notes": "Send specified input to Preview.",
         "version": 24,
         "group": "input"
     },
@@ -10697,7 +10695,7 @@
         "valueParam4": "Y2",
         "valueExample": "0.1,0.1,0.1,0.1",
         "selectedNameExample": "",
-        "notes": "Set crop of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1Crop</b>",
+        "notes": "Set crop of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10716,7 +10714,7 @@
         "valueParam4": "",
         "valueExample": "0.1",
         "selectedNameExample": "",
-        "notes": "Set X1 crop of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1CropX1</b>",
+        "notes": "Set X1 crop of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10735,7 +10733,7 @@
         "valueParam4": "",
         "valueExample": "0.1",
         "selectedNameExample": "",
-        "notes": "Set X2 crop of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1CropX2</b>",
+        "notes": "Set X2 crop of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10754,7 +10752,7 @@
         "valueParam4": "",
         "valueExample": "0.1",
         "selectedNameExample": "",
-        "notes": "Set Y1 crop of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1CropY1</b>",
+        "notes": "Set Y1 crop of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10773,7 +10771,7 @@
         "valueParam4": "",
         "valueExample": "0.1",
         "selectedNameExample": "",
-        "notes": "Set Y2 crop of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1CropY2</b>",
+        "notes": "Set Y2 crop of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10792,7 +10790,7 @@
         "valueParam4": "",
         "valueExample": "1000",
         "selectedNameExample": "",
-        "notes": "Set height of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1Height</b>",
+        "notes": "Set height of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10811,7 +10809,7 @@
         "valueParam4": "",
         "valueExample": "1000",
         "selectedNameExample": "",
-        "notes": "Set width of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1Width</b>",
+        "notes": "Set width of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10830,7 +10828,7 @@
         "valueParam4": "",
         "valueExample": "1000",
         "selectedNameExample": "",
-        "notes": "Set X position of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1PanX</b>",
+        "notes": "Set X position of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10849,7 +10847,7 @@
         "valueParam4": "",
         "valueExample": "1000",
         "selectedNameExample": "",
-        "notes": "Set Y position of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1PanY</b>",
+        "notes": "Set Y position of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10861,14 +10859,14 @@
         "mixNotes": "",
         "inputNotes": "",
         "valueParam1": "X",
-        "valueParam1Notes": "Left edge of rectangle - pixels from left edge of background layer",
+        "valueParam1Notes": "Range -2 (left) to 2 (right)",
         "valueParam2": "Y",
-        "valueParam2Notes": "Top edge of rectangle - pixels from top edge of background layer",
+        "valueParam2Notes": "Range -2 (bottom) to 2 (top)",
         "valueParam3": "width",
         "valueParam4": "height",
-        "valueExample": "100,100,192,108",
+        "valueExample": "1.2,1.2,100,100",
         "selectedNameExample": "",
-        "notes": "Set rectangle of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1Rectangle</b>",
+        "notes": "Set rectangle of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10887,7 +10885,7 @@
         "valueParam4": "",
         "valueExample": "1000",
         "selectedNameExample": "",
-        "notes": "Set X value of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1X</b>",
+        "notes": "Set X value of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10906,7 +10904,7 @@
         "valueParam4": "",
         "valueExample": "1000",
         "selectedNameExample": "",
-        "notes": "Set Y value of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1Y</b>",
+        "notes": "Set Y value of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -10925,7 +10923,7 @@
         "valueParam4": "",
         "valueExample": "3",
         "selectedNameExample": "",
-        "notes": "Set zoom value of input layer. Replace [X] (including square brackets) with layer number, range 1-10. Example: <b>SetLayer1Zoom</b>",
+        "notes": "Set zoom value of input layer. Replace [X] with layer number, range 1-10.",
         "version": 27,
         "group": "layers"
     },
@@ -11175,24 +11173,5 @@
         "notes": "Move back or forward through event list by specified number of events.",
         "version": 27,
         "group": "replay"
-    },
-    {
-        "name": "SetLayer",
-        "hasValue": 1,
-        "hasInput": 1,
-        "hasSelectedName": 0,
-        "mixNotes": "",
-        "inputNotes": "Target input",
-        "valueParam1": "Index",
-        "valueParam1Notes": "Layer index 1-10",
-        "valueParam2": "Source input",
-        "valueParam2Notes": "Input number to place in layer",
-        "valueParam3": "",
-        "valueParam4": "",
-        "valueExample": "4,31",
-        "selectedNameExample": "",
-        "notes": "Place content from the source input into specified layer on the target input. Example will place input 31 into layer 4 on the target input.",
-        "version": 24,
-        "group": "layers"
     }
 ]
