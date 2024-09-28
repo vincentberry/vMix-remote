@@ -276,17 +276,18 @@ function processPageSources_updateLayers(inputSource: Element) {
                 if (PageSources_LayersSelect === overlayIndex && inputContainer_LayersSelect_No_Focus) {
                     const positionElement = overlay.getElementsByTagName('position')[0];
                     if (positionElement) {
-                        (document.getElementById('inputContainer_Content_Layers_Select_move_X') as HTMLInputElement).value = positionElement.getAttribute('X')!;
-                        (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = positionElement.getAttribute('Y')!;
+                        (document.getElementById('inputContainer_Content_Layers_Select_move_X') as HTMLInputElement).value = positionElement.getAttribute('x')!;
+                        (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = positionElement.getAttribute('y')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Width') as HTMLInputElement).value = positionElement.getAttribute('width')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Height') as HTMLInputElement).value = positionElement.getAttribute('height')!;
+                        console.log()
                     } else {
                         (document.getElementById('inputContainer_Content_Layers_Select_move_X') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Width') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Height') as HTMLInputElement).value = "";
                     }
-                    const cropElement = overlay.getElementsByTagName('position')[0];
+                    const cropElement = overlay.getElementsByTagName('crop')[0];
                     if (cropElement) {
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_X1') as HTMLInputElement).value = cropElement.getAttribute('X1')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_Y1') as HTMLInputElement).value = cropElement.getAttribute('Y1')!;
