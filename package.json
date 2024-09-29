@@ -16,7 +16,9 @@
     "build-dev": "npm run compile-scss && npm run compile-ts",
     "build-demo": "npm run compile-scss && npm run compile-ts",
     "compile-scss": "sass app/src/assets/scss/index.scss app/public/assets/style/index.css",
-    "compile-ts": "tsc"
+    "compile-ts": "tsc",
+    "watch-scss": "sass --watch app/src/assets/scss/index.scss:app/public/assets/style/index.css",
+    "watch-ts": "tsc --watch"
   },
   "repository": {
     "type": "git",
