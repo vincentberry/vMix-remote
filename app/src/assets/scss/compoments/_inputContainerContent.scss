@@ -250,6 +250,26 @@ label {
             padding: 10px;
         }
 
+        .list {
+            button {
+                height: 100%;
+                padding: 5px 20px;
+                margin: 0px;
+                border: 0;
+                font-weight: 500;
+
+                &.on {
+                    padding: 5px 10px;
+                    background: $audio;
+                }
+
+                &.off {
+                    padding: 5px 10px;
+                    background: $color-danger;
+                }
+            }
+        }
+
         .mode_content {
             display: grid;
             grid-template-columns: 100px 200px 90px 90px;
@@ -276,6 +296,11 @@ label {
 
             button {
                 padding: 5px 15px;
+            }
+
+            &.border {
+                padding: 15px;
+                width: 100%;
             }
         }
     }

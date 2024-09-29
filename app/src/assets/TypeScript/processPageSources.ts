@@ -309,23 +309,41 @@ function processPageSources_updateLayers(inputSource: Element) {
                 if (PageSources_LayersSelect === overlayIndex && inputContainer_PositionSelect_No_Focus) {
                     PageSources_LayersSelectKey = overlayKey;
                     const positionElement = overlay.getElementsByTagName('position')[0];
-                    (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = positionElement.getAttribute('panX')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = positionElement.getAttribute('panY')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_zoom_X') as HTMLInputElement).value = positionElement.getAttribute('zoomX')|| '1';
-                    (document.getElementById('inputContainer_Content_Position_Select_zoom_Y') as HTMLInputElement).value = positionElement.getAttribute('zoomY')|| '1';
-                    (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = positionElement.getAttribute('panX')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = positionElement.getAttribute('panY')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_zoom_X-value') as HTMLInputElement).value = positionElement.getAttribute('zoomX')|| '1';
-                    (document.getElementById('inputContainer_Content_Position_Select_zoom_Y-value') as HTMLInputElement).value = positionElement.getAttribute('zoomY')|| '1';
+                    if (positionElement) {
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = positionElement.getAttribute('panX') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = positionElement.getAttribute('panY') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X') as HTMLInputElement).value = positionElement.getAttribute('zoomX') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = positionElement.getAttribute('panX') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = positionElement.getAttribute('panY') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X-value') as HTMLInputElement).value = positionElement.getAttribute('zoomX') || '1';
+                    } else {
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X-value') as HTMLInputElement).value = '1';
+                    }
                     const cropElement = overlay.getElementsByTagName('crop')[0];
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = cropElement.getAttribute('X1')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = cropElement.getAttribute('Y1')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = cropElement.getAttribute('X2')|| '1';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = cropElement.getAttribute('Y2')|| '1';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = cropElement.getAttribute('X1')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = cropElement.getAttribute('Y1')|| '0';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = cropElement.getAttribute('X2')|| '1';
-                    (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = cropElement.getAttribute('Y2')|| '1';
+                    if (cropElement) {
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = cropElement.getAttribute('X1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = cropElement.getAttribute('Y1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = cropElement.getAttribute('X2') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = cropElement.getAttribute('Y2') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = cropElement.getAttribute('X1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = cropElement.getAttribute('Y1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = cropElement.getAttribute('X2') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = cropElement.getAttribute('Y2') || '1';
+                    } else {
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = '1';
+                    }
                 }
             });
         } else {
@@ -423,63 +441,76 @@ function processPageSources_updateInput_Position(xmlDoc: Document) {
     }
 }
 
-    //custom envoi vmix
-    // inputContainer_InputName (Entrée)
-    document.getElementById('inputContainer_InputName')?.addEventListener('focus', () => {
-        inputContainer_InputName_No_Focus = false;
-    });
+//custom envoi vmix
+// inputContainer_InputName (Entrée)
+document.getElementById('inputContainer_InputName')?.addEventListener('focus', () => {
+    inputContainer_InputName_No_Focus = false;
+});
 
-    // inputContainer_InputName (Sortie)
-    document.getElementById('inputContainer_InputName')?.addEventListener('blur', () => {
-        if (inputSelect) {
-            const inputValue = (document.getElementById('inputContainer_InputName') as HTMLInputElement)?.value;
-            ApiVmixSend('SetInputName', inputSelect, inputValue);
-            inputContainer_InputName_No_Focus = true;
-        } else {
-            console.error("inputSelect not found.");
-        }
-    });
-
-    // inputContainer_InputLoop
-    document.getElementById('inputContainer_InputLoop')?.addEventListener('click', () => {
-        if (inputSelect) {
-            const inputLoopCheckbox = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
-            if (inputLoopCheckbox.checked) {
-                ApiVmixSend('LoopOn', inputSelect);
-            } else {
-                ApiVmixSend('LoopOff', inputSelect);
-            }
-        } else {
-            console.error("inputSelect not found.");
-        }
-    });
-
-    // inputContainer_listShuffle
-    document.getElementById('inputContainer_listShuffle')?.addEventListener('click', () => {
-        if (inputSelect) {
-            ApiVmixSend('ListShuffle', inputSelect);
-        } else {
-            console.error("inputSelect not found.");
-        }
-    });
-
-    // inputContainer_List_Position
-    document.getElementById('inputContainer_List_Position')?.addEventListener('change', () => {
-        const target = document.getElementById('inputContainer_List_Position') as HTMLSelectElement;
-        PageSources_LayersSelect = target.value;
-    });
-
-    // Utility function to get element with type assertion
-    function getElement<T extends HTMLElement>(id: string): T | null {
-        return document.getElementById(id) as T | null;
+// inputContainer_InputName (Sortie)
+document.getElementById('inputContainer_InputName')?.addEventListener('blur', () => {
+    if (inputSelect) {
+        const inputValue = (document.getElementById('inputContainer_InputName') as HTMLInputElement)?.value;
+        ApiVmixSend('SetInputName', inputSelect, inputValue);
+        inputContainer_InputName_No_Focus = true;
+    } else {
+        console.error("inputSelect not found.");
     }
+});
 
-    // Update values when sliders are moved
-    document.querySelectorAll<HTMLInputElement>('input[type="range"]').forEach((slider) => {
-        slider.addEventListener('input', function () {
-            const valueField = getElement<HTMLInputElement>(this.id + '-value');
-            if (valueField) {
-                valueField.value = this.value;
-            }
-        });
+// inputContainer_InputLoop
+document.getElementById('inputContainer_InputLoop')?.addEventListener('click', () => {
+    if (inputSelect) {
+        const inputLoopCheckbox = document.getElementById('inputContainer_InputLoop') as HTMLInputElement;
+        if (inputLoopCheckbox.checked) {
+            ApiVmixSend('LoopOn', inputSelect);
+        } else {
+            ApiVmixSend('LoopOff', inputSelect);
+        }
+    } else {
+        console.error("inputSelect not found.");
+    }
+});
+
+// inputContainer_listShuffle
+document.getElementById('inputContainer_listShuffle')?.addEventListener('click', () => {
+    if (inputSelect) {
+        ApiVmixSend('ListShuffle', inputSelect);
+    } else {
+        console.error("inputSelect not found.");
+    }
+});
+
+// inputContainer_List_Position
+document.getElementById('inputContainer_List_Position')?.addEventListener('change', () => {
+    const target = document.getElementById('inputContainer_List_Position') as HTMLSelectElement;
+    PageSources_LayersSelect = target.value;
+});
+
+// inputContainer_List_Position
+document.getElementById('inputContainer_Content_Position_resetall')?.addEventListener('click', () => {
+    if (inputSelect && PageSources_LayersSelect) {
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'Zoom', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'PanX', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'PanY', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropX1', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropY1', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropX2', inputSelect, '1')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropY2', inputSelect, '1')
+    }
+});
+
+// Utility function to get element with type assertion
+function getElement<T extends HTMLElement>(id: string): T | null {
+    return document.getElementById(id) as T | null;
+}
+
+// Update values when sliders are moved
+document.querySelectorAll<HTMLInputElement>('input[type="range"]').forEach((slider) => {
+    slider.addEventListener('input', function () {
+        const valueField = getElement<HTMLInputElement>(this.id + '-value');
+        if (valueField) {
+            valueField.value = this.value;
+        }
     });
+});

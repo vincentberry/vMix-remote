@@ -128,7 +128,7 @@ require $Dir_inc . 'vmix_script.php';
                             <div class="GeneralContainer">
                                 <ul id="inputContainer_content_gt_nav">
                                 </ul>
-                                <div id="inputContainer_content_gt_value">                         
+                                <div id="inputContainer_content_gt_value">
                                 </div>
                             </div>
                         </div>
@@ -152,39 +152,27 @@ require $Dir_inc . 'vmix_script.php';
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '1')" class="off">OFF</button>
                                 </div>
                                 <h1 id="inputContainer_Content_Position_Select">-</h1>
-                                <button>RESET ALL</button>
+                                <button id="inputContainer_Content_Position_resetall">RESET ALL</button>
                             </div>
                             <div class="grid">
                                 <div class="left">
                                     <div class="mode_content">
-                                        <label for="inputContainer_Content_Position_Select_zoom">Zoom:</label>
-                                        <input type="range"  onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, this.value)" id="inputContainer_Content_Position_Select_zoom" min="0" max="5" step="0.0001">
-                                        <input type="number"   onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, this.value)" id="inputContainer_Content_Position_Select_zoom-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, '0')">Reset</button>
-                                    </div>
-                                    <div class="mode_content">
-                                        <label for="inputContainer_Content_Position_Select_zoom_X">Zoom X:</label>
-                                        <input type="range"  onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'ZoomX', inputSelect, this.value)" id="inputContainer_Content_Position_Select_zoom_X" min="0" max="5" step="0.0001">
+                                        <label for="inputContainer_Content_Position_Select_zoom_X">Zoom:</label>
+                                        <input type="range" onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, this.value)" id="inputContainer_Content_Position_Select_zoom_X" min="0" max="5" step="0.0001">
                                         <input type="number" onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, this.value)" id="inputContainer_Content_Position_Select_zoom_X-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, '0')">Reset</button>
-                                    </div>
-                                    <div class="mode_content">
-                                        <label for="inputContainer_Content_Position_Select_zoom_Y">Zoom Y:</label>
-                                        <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_zoom_Y" min="0" max="5" step=0.0001">
-                                        <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, this.value)"type="number" id="inputContainer_Content_Position_Select_zoom_Y-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, '0')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'Zoom', inputSelect, '0')">Reset</button>
                                     </div>
                                     <div class="mode_content">
                                         <label for="inputContainer_Content_Position_Select_pan_X">Pan X:</label>
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanX', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_pan_X" min="-2" max="2" step="0.0001">
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanX', inputSelect, this.value)" type="number" id="inputContainer_Content_Position_Select_pan_X-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanX', inputSelect, '0')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanX', inputSelect, '0')">Reset</button>
                                     </div>
                                     <div class="mode_content">
                                         <label for="inputContainer_Content_Position_Select_pan_Y">Pan Y:</label>
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanY', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_pan_Y" min="-2" max="2" step="0.0001">
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanY', inputSelect, this.value)" type="number" id="inputContainer_Content_Position_Select_pan_Y-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanY', inputSelect, '0')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'PanY', inputSelect, '0')">Reset</button>
                                     </div>
                                 </div>
                                 <div class="rigth">
@@ -192,25 +180,39 @@ require $Dir_inc . 'vmix_script.php';
                                         <label for="inputContainer_Content_Position_Select_crop_X1">Crop X1:</label>
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX1', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_crop_X1" min="0" max="1" step="0.0001">
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX1', inputSelect, this.value)" type="number" id="inputContainer_Content_Position_Select_crop_X1-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX1', inputSelect, '0')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX1', inputSelect, '0')">Reset</button>
                                     </div>
                                     <div class="mode_content">
                                         <label for="inputContainer_Content_Position_Select_crop_Y1">Crop Y1:</label>
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY1', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_crop_Y1" min="0" max="1" step="0.0001">
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY1', inputSelect, this.value)" type="number" id="inputContainer_Content_Position_Select_crop_Y1-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY1', inputSelect, '0')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY1', inputSelect, '0')">Reset</button>
                                     </div>
                                     <div class="mode_content">
                                         <label for="inputContainer_Content_Position_Select_crop_X2">Crop X2:</label>
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX2', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_crop_X2" min="0" max="1" step="0.0001">
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX2', inputSelect, this.value)" type="number" id="inputContainer_Content_Position_Select_crop_X2-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX2', inputSelect, '1')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropX2', inputSelect, '1')">Reset</button>
                                     </div>
                                     <div class="mode_content">
                                         <label for="inputContainer_Content_Position_Select_crop_Y2">Crop Y2:</label>
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY2', inputSelect, this.value)" type="range" id="inputContainer_Content_Position_Select_crop_Y2" min="0" max="1" step="0.0001">
                                         <input onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY2', inputSelect, this.value)" type="number" id="inputContainer_Content_Position_Select_crop_Y2-value">
-                                        <button onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY2', inputSelect, '1')">Reset</button>
+                                        <button onclick="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'CropY2', inputSelect, '1')">Reset</button>
+                                    </div>
+                                    <div class="mode_content border" style="display:none;">
+                                        <div>
+                                            <label>Border</label>
+                                            <input id="inputContainer_Content_Position_Select_border-color" class="input_color" placeholder="#xxxxxx" type="color" pattern="^#([A-Fa-f0-9]{6})$" onblur="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'boder', inputSelect, this.value)">
+                                        </div>
+                                        <div>
+                                            <label for="inputContainer_Content_Position_Select_border-thickness">Thickness:</label>
+                                            <input type="number" id="inputContainer_Content_Position_Select_border-thickness" min="0" max="10" value="0" onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'boder', inputSelect, this.value)">
+                                        </div>
+                                        <div>
+                                            <label for="inputContainer_Content_Position_Select_border-radius">Radius:</label>
+                                            <input type="number" id="inputContainer_Content_Position_Select_border-radius" min="0" max="50" value="0" onchange="ApiVmixSend('SetLayer'+(parseInt(PageSources_LayersSelect.toString()) + 1) +'boder', inputSelect, this.value)">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +226,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '1,'+ this.value)" id="inputContainer_List_Layers_0">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '0'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '0'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '1')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '1')" class="off">OFF</button>
                                 </div>
@@ -235,7 +237,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '2,'+ this.value)" id="inputContainer_List_Layers_1">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '1'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '1'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '2')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '2')" class="off">OFF</button>
                                 </div>
@@ -246,7 +248,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '3,'+ this.value)" id="inputContainer_List_Layers_2">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '2'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '2'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '3')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '3')" class="off">OFF</button>
                                 </div>
@@ -257,7 +259,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '4,'+ this.value)" id="inputContainer_List_Layers_3">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '3'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '3'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '4')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '4')" class="off">OFF</button>
                                 </div>
@@ -268,7 +270,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '5,'+ this.value)" id="inputContainer_List_Layers_4">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '4'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '4'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '5')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '5')" class="off">OFF</button>
                                 </div>
@@ -279,7 +281,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '6,'+ this.value)" id="inputContainer_List_Layers_5">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '5'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '5'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '6')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '6')" class="off">OFF</button>
                                 </div>
@@ -290,7 +292,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '7,'+ this.value)" id="inputContainer_List_Layers_6">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '6'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '6'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '7')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '7')" class="off">OFF</button>
                                 </div>
@@ -301,7 +303,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer',inputSelect, '8,'+ this.value)" id="inputContainer_List_Layers_7">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '7'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '7'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '8')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '8')" class="off">OFF</button>
                                 </div>
@@ -312,7 +314,7 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '9,'+ this.value)" id="inputContainer_List_Layers_8">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '8'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '8'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '9')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '9')" class="off">OFF</button>
                                 </div>
@@ -323,14 +325,13 @@ require $Dir_inc . 'vmix_script.php';
                                     <select onchange="ApiVmixSend('SetLayer', inputSelect, '10,'+ this.value)" id="inputContainer_List_Layers_9">
                                         <option value="">None</option>
                                     </select>
-                                    <button onclick="PageSources_LayersSelect = '9'" >EDIT</button>
+                                    <button onclick="PageSources_LayersSelect = '9'">EDIT</button>
                                     <button onclick="ApiVmixSend('LayerOn', inputSelect, '10')" class="on">ON</button>
                                     <button onclick="ApiVmixSend('LayerOff', inputSelect, '10')" class="off">OFF</button>
                                 </div>
                             </div>
                             <div class="rigth">
                                 <h1 id="inputContainer_Content_Layers_Select">-</h1>
-                                <button>90°</button>
                                 <div class="mode">
                                     <div class="mode_header">
                                         <h3>MOVE</h3>
@@ -419,7 +420,7 @@ require $Dir_inc . 'vmix_script.php';
                                             <div class="label_content">
                                                 <label>Radius</label>
                                             </div>
-                                            <input id="inputContainer_Content_Layers_Select_border_Radius"  type="text">
+                                            <input id="inputContainer_Content_Layers_Select_border_Radius" type="text">
                                         </div>
                                     </div>
                                 </div>
