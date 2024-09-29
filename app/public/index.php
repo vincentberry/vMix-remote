@@ -83,6 +83,7 @@ require $Dir_inc . 'vmix_script.php';
                         <button id="inputContainer_nav_general" class="active" onclick="changeMenu('general')">General</button>
                         <button id="inputContainer_nav_list" onclick="changeMenu('list')">List</button>
                         <button id="inputContainer_nav_color_correction" onclick="changeMenu('color_correction')">Color Correction</button>
+                        <button id="inputContainer_nav_position" onclick="changeMenu('position')">Position</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
                         <button id="inputContainer_nav_gt" onclick="changeMenu('gt')">GT Title</button>
                     </div>
@@ -132,6 +133,86 @@ require $Dir_inc . 'vmix_script.php';
                             </div>
                         </div>
                         <div id="inputContainer_content_color_correction" style="display:none;"></div>
+                        <div id="inputContainer_content_position" class="position">
+                            <div class="list">
+                                <select id="inputContainer_List_Position">
+                                    <option id="inputContainer_List_Position_option_0" value="0">Layer 1</option>
+                                    <option id="inputContainer_List_Position_option_1" value="1">Layer 2</option>
+                                    <option id="inputContainer_List_Position_option_2" value="2">Layer 3</option>
+                                    <option id="inputContainer_List_Position_option_3" value="3">Layer 4</option>
+                                    <option id="inputContainer_List_Position_option_4" value="4">Layer 5</option>
+                                    <option id="inputContainer_List_Position_option_5" value="5">Layer 6</option>
+                                    <option id="inputContainer_List_Position_option_6" value="6">Layer 7</option>
+                                    <option id="inputContainer_List_Position_option_7" value="7">Layer 8</option>
+                                    <option id="inputContainer_List_Position_option_8" value="8">Layer 9</option>
+                                    <option id="inputContainer_List_Position_option_9" value="9">Layer 10</option>
+                                </select>
+                                <button onclick="ApiVmixSend('LayerOn', inputSelect, '1')" class="on">ON</button>
+                                <button onclick="ApiVmixSend('LayerOff', inputSelect, '1')" class="off">OFF</button>
+                                <h1 id="inputContainer_Content_Position_Select">-</h1>
+                                <button>RESET ALL</button>
+                            </div>
+                            <div class="grid">
+                                <div class="left">
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_zoom">Zoom:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_zoom" min="0" max="5" step="0.001" value="1">
+                                        <input type="text" id="inputContainer_Content_Position_Select_zoom-value" value="1" readonly>
+                                        <button id="reset-zoom">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_zoom_Z">Zoom X:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_zoom_Z" min="0" max="5" step="0.001" value="1">
+                                        <input type="text" id="inputContainer_Content_Position_Select_zoom_Z-value" value="1" readonly>
+                                        <button id="reset-zoom-x">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_zoom_Y">Zoom Y:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_zoom_Y" min="0" max="5" step="0.001" value="1">
+                                        <input type="text" id="inputContainer_Content_Position_Select_zoom_Y-value" value="1" readonly>
+                                        <button id="reset-zoom-y">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_pan_X">Pan X:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_pan_X" min="-2" max="2" step="0.001" value="0">
+                                        <input type="text" id="inputContainer_Content_Position_Select_pan_X-value" value="0">
+                                        <button id="reset-pan-x">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_pan_Y">Pan Y:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_pan_Y" min="-2" max="2" step="0.001" value="0">
+                                        <input type="text" id="inputContainer_Content_Position_Select_pan_Y-value" value="0">
+                                        <button id="reset-pan-y">Reset</button>
+                                    </div>
+                                </div>
+                                <div class="rigth">
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_crop_X1">Crop X1:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_crop_X1" min="0" max="1920" step="0.1" value="1">
+                                        <input type="text" id="inputContainer_Content_Position_Select_crop_X1-value" value="1" readonly>
+                                        <button id="reset-zoom">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_crop_Y1">Crop Y1:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_crop_Y1" min="0" max="1080" step="0.1" value="1">
+                                        <input type="text" id="inputContainer_Content_Position_Select_crop_Y1-value" value="1" readonly>
+                                        <button id="reset-zoom-x">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_crop_X2">Crop X2:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_crop_X2" min="0" max="1920" step="0.1" value="1">
+                                        <input type="text" id="inputContainer_Content_Position_Select_crop_X2-value" value="1" readonly>
+                                        <button id="reset-zoom-y">Reset</button>
+                                    </div>
+                                    <div class="mode_content">
+                                        <label for="inputContainer_Content_Position_Select_crop_Y2">Crop Y2:</label>
+                                        <input type="range" id="inputContainer_Content_Position_Select_crop_Y2" min="0" max="1080" step="0.1" value="0">
+                                        <input type="text" id="inputContainer_Content_Position_Select_crop_Y2-value" value="0">
+                                        <button id="reset-pan-x">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="inputContainer_content_layers" class="layers" style="display:none;">
                             <div class="left">
                                 <div class="list">

@@ -180,6 +180,89 @@ label {
     }
 }
 
+.position {
+
+    .list {
+        display: flex;
+        align-items: flex-start;
+        padding: 0;
+        margin: 2px;
+        height: 26px;
+
+        select {
+            padding: 4px;
+            width: 200px;
+            border-radius: 0;
+            height: 100%;
+        }
+
+        button {
+            height: 100%;
+            padding: 5px 20px;
+            margin: 0px;
+            border: 0;
+            font-weight: 500;
+
+            &.on {
+                padding: 5px 10px;
+                background: $audio;
+            }
+
+            &.off {
+                padding: 5px 10px;
+                background: $color-danger;
+            }
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @media (max-width: 1300px) {
+            grid-template-columns: 1fr;
+            margin-bottom: 50px;
+        }
+
+        .left .rigth {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .mode_content {
+            display: grid;
+            grid-template-columns: 100px 200px 50px 90px;
+            justify-items: end;
+            align-items: center;
+            height: 26px;
+            margin: 5px;
+
+            .label_content {
+                @include center;
+                width: 50px;
+                height: 100%;
+                background: $background;
+
+                label {
+                    color: $color-text;
+                }
+            }
+
+            input {
+                width: 100%;
+                background: $color-text;
+            }
+
+            button {
+                padding: 5px 15px;
+            }
+        }
+    }
+}
+
 .layers {
     display: grid;
     grid-template-columns: 500px 1fr;
@@ -418,15 +501,16 @@ label {
                             @include icon($icon-stop2);
                         }
 
-                        .input_color{
+                        .input_color {
                             width: 150px;
                             margin-right: 7px;
                         }
                     }
 
-                    .countdown{
+                    .countdown {
                         justify-content: flex-end;
                     }
+
                     .color {
                         justify-content: flex-start;
                     }

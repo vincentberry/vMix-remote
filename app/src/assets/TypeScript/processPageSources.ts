@@ -1,5 +1,6 @@
 let inputContainer_InputName_No_Focus: boolean = true;
 let inputContainer_LayersSelect_No_Focus: boolean = true;
+let inputContainer_PositionSelect_No_Focus: boolean = true;
 let PageSources_LayersSelect: string = "0";
 let PageSources_GtSelect: number = 0;
 let clickCount_closePageInput: boolean = false;
@@ -270,6 +271,7 @@ function processPageSources_updateLayers(inputSource: Element) {
             overlays.forEach(overlay => {
                 const overlayIndex = overlay.getAttribute('index');
                 const overlayKey = overlay.getAttribute('key');
+                //Mise à jours via onglet Layers
                 (document.getElementById('inputContainer_List_Layers_' + overlayIndex) as HTMLInputElement).value = overlayKey!;
                 (document.getElementById('inputContainer_List_Layers_' + i) as HTMLInputElement).value = "";
                 (document.getElementById('inputContainer_Content_Layers_Select') as HTMLInputElement).textContent = "Layer " + (parseInt(PageSources_LayersSelect) + 1).toString();
@@ -280,7 +282,6 @@ function processPageSources_updateLayers(inputSource: Element) {
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = positionElement.getAttribute('y')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Width') as HTMLInputElement).value = positionElement.getAttribute('width')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Height') as HTMLInputElement).value = positionElement.getAttribute('height')!;
-                        console.log()
                     } else {
                         (document.getElementById('inputContainer_Content_Layers_Select_move_X') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = "";
@@ -300,6 +301,50 @@ function processPageSources_updateLayers(inputSource: Element) {
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_Y2') as HTMLInputElement).value = "";
                     }
                 }
+                //Mise à jours via onglet Position
+                (document.getElementById('inputContainer_Content_Position_Select') as HTMLInputElement).textContent = "Layer " + (parseInt(PageSources_LayersSelect) + 1).toString();
+                if (PageSources_LayersSelect === overlayIndex && inputContainer_PositionSelect_No_Focus) {
+                    const positionElement = overlay.getElementsByTagName('position')[0];
+                    if (positionElement) {
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = positionElement.getAttribute('panX')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = positionElement.getAttribute('panY')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Z') as HTMLInputElement).value = positionElement.getAttribute('zoomX')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Y') as HTMLInputElement).value = positionElement.getAttribute('zoomY')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = positionElement.getAttribute('panX')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = positionElement.getAttribute('panY')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Z-value') as HTMLInputElement).value = positionElement.getAttribute('zoomX')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Y-value') as HTMLInputElement).value = positionElement.getAttribute('zoomY')!;
+                    } else {
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Z') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Y') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Z-value') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_Y-value') as HTMLInputElement).value = "";
+                    }
+                    const cropElement = overlay.getElementsByTagName('crop')[0];
+                    if (cropElement) {
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = cropElement.getAttribute('X1')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = cropElement.getAttribute('Y1')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = cropElement.getAttribute('X2')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = cropElement.getAttribute('Y2')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = cropElement.getAttribute('X1')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = cropElement.getAttribute('Y1')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = cropElement.getAttribute('X2')!;
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = cropElement.getAttribute('Y2')!;
+                    } else {
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = "";
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = "";
+                    }
+                }
             });
         } else {
             (document.getElementById('inputContainer_content_list_' + i) as HTMLInputElement).value = ""
@@ -313,6 +358,7 @@ function changeMenu(menuName: string) {
         'general': 'general',
         'list': 'list',
         'color_correction': 'color_correction',
+        'position': 'position',
         'layers': 'layers',
         'gt': 'gt'
     };
@@ -405,4 +451,25 @@ document.getElementById('inputContainer_listShuffle')?.addEventListener('click',
     } else {
         console.error("inputSelect not found.");
     }
+});
+
+// inputContainer_List_Position
+document.getElementById('inputContainer_List_Position')?.addEventListener('change', () => {
+    const target = document.getElementById('inputContainer_List_Position') as HTMLSelectElement;
+    PageSources_LayersSelect = target.value;
+});
+
+// Utility function to get element with type assertion
+function getElement<T extends HTMLElement>(id: string): T | null {
+    return document.getElementById(id) as T | null;
+}
+
+// Update values when sliders are moved
+document.querySelectorAll<HTMLInputElement>('input[type="range"]').forEach((slider) => {
+    slider.addEventListener('input', function() {
+        const valueField = getElement<HTMLInputElement>(this.id + '-value');
+        if (valueField) {
+            valueField.value = this.value;
+        }
+    });
 });
