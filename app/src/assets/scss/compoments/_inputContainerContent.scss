@@ -181,39 +181,57 @@ label {
 }
 
 .position {
-
-    .list {
+    .GeneralContainer {
         display: flex;
         align-items: flex-start;
-        padding: 0;
-        margin: 2px;
-        height: 26px;
+        align-items: center;
+        justify-content: space-between;
 
-        select {
-            padding: 4px;
-            width: 200px;
-            border-radius: 0;
-            height: 100%;
+        .list {
+
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            margin: 2px;
+            height: 26px;
+
+            select {
+                padding: 4px;
+                width: 200px;
+                border-radius: 0;
+                height: 100%;
+            }
+
+            button {
+                height: 100%;
+                padding: 5px 20px;
+                margin: 0px;
+                border: 0;
+                font-weight: 500;
+
+                &.on {
+                    padding: 5px 10px;
+                    background: $audio;
+                }
+
+                &.off {
+                    padding: 5px 10px;
+                    background: $color-danger;
+                }
+            }
+        }
+
+        h1 {
+            color: $background_item;
+            font-size: 1rem;
         }
 
         button {
-            height: 100%;
-            padding: 5px 20px;
-            margin: 0px;
-            border: 0;
-            font-weight: 500;
-
-            &.on {
-                padding: 5px 10px;
-                background: $audio;
-            }
-
-            &.off {
-                padding: 5px 10px;
-                background: $color-danger;
-            }
+            margin: 0;
+            padding: 5px 5px;
         }
     }
+
 
     .grid {
         display: grid;
@@ -234,7 +252,7 @@ label {
 
         .mode_content {
             display: grid;
-            grid-template-columns: 100px 200px 50px 90px;
+            grid-template-columns: 100px 200px 90px 90px;
             justify-items: end;
             align-items: center;
             height: 26px;
