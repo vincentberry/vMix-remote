@@ -1,3 +1,4 @@
+let vMixVersion: string
 let activatedBuses: any[] = [];
 let inputArray: any[] = [];
 let previewNumber: number | undefined;

@@ -17,6 +17,11 @@ function processSettings(xmlDoc: Document): void {
             }
         }
     }
+    const versionElement = xmlDoc.querySelector("version");
+    if (versionElement) {
+        const versionText = versionElement.textContent || "" ;
+        vMixVersion = versionText.split(".")[0];
+    }
 
     updateCheckboxClass('streaming', JSON.parse(xmlDoc.querySelector('streaming')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
     updateCheckboxClass('recording', JSON.parse(xmlDoc.querySelector('recording')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
