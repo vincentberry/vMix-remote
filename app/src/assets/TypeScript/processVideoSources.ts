@@ -1,15 +1,17 @@
+// Fonction pour traiter les sources video
 function processVideoSources(xmlDoc: Document): void {
 
     const videoSources = xmlDoc.querySelectorAll('input');
-    const container = document.getElementById('videoSourcesContainer');
+    let container: HTMLElement = document.getElementById('videoSourcesContainer') as HTMLElement;
+
     if (container) {
         // Parcourir toutes les sources video
         videoSources.forEach(videoSource => {
             // Récupérer la clé unique de la source video
-            const key = videoSource.getAttribute('key');
+            const key: string | null = videoSource.getAttribute('key');
 
             // Vérifier si une source video avec la même clé existe déjà dans le conteneur
-            const existingAudioSource = document.querySelector(`.video-source[data-key="${key}"]`);
+            const existingAudioSource = document.querySelector(`.video-source[data-key="${key}"]`) as HTMLElement;;
 
             // Si la source video existe déjà, la mettre à jour
             if (existingAudioSource) {
@@ -29,6 +31,16 @@ function processVideoSources(xmlDoc: Document): void {
 
                 // Ajouter la nouvelle div au conteneur
                 container.appendChild(newDivElement);
+            }
+        });
+
+        // Supprimer les sources audio qui n'existent plus
+        const existingVideoSources = document.querySelectorAll('.video-source');
+        existingVideoSources.forEach(existingVideoSource => {
+            const key = existingVideoSource.getAttribute('data-key');
+            const matchingVideoSource = xmlDoc.querySelector(`input[key="${key}"]`);
+            if (!matchingVideoSource) {
+                existingVideoSource.remove();
             }
         });
     }
@@ -90,5 +102,3 @@ function getVideoSourceHTML(videoSource: Element): string {
     </div>
 `;
 }
-
-
