@@ -260,6 +260,22 @@ function Session_delay() {
 
 }
 
+// Fonction pour comparer les versions
+function isVersionSupported(requiredVersion: string): boolean {
+    return parseFloat(vMixVersion) >= parseFloat(requiredVersion);
+}
+
+// Fonction pour masquer les éléments en fonction de la version
+function hideUnsupportedFeatures() {
+    const elements = document.querySelectorAll('[data-min-version]');
+
+    elements.forEach((element) => {
+        const minVersion = element.getAttribute("data-min-version");
+        if (minVersion && !isVersionSupported(minVersion)) {
+            (element as HTMLElement).style.display = "none";
+        }
+    });
+}
 
 // Charger le fichier XML et générer les éléments HTML au chargement de la page
 window.onload = chargerFichierXML;

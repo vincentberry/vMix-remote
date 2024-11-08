@@ -20,6 +20,11 @@
             font-size: 1rem;
         }
 
+        img{
+            height: 100%;
+            padding: 20%;
+        }
+
         // Styles pour la case à cocher
         input[type="checkbox"] {
             // Cacher la case à cocher native

@@ -25,6 +25,8 @@ require $Dir_inc . 'vmix_script.php';
                             <div id="statut_streaming1" class=""></div>
                             <div id="statut_streaming2" class=""></div>
                             <div id="statut_streaming3" class=""></div>
+                            <div id="statut_streaming4" class=""  data-min-version="28"></div>
+                            <div id="statut_streaming5" class=""  data-min-version="28"></div>
                         </div>
                     </div>
                     <div id="recording" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the recording?','StartStopRecording')" class="statut_vmix">
@@ -41,6 +43,9 @@ require $Dir_inc . 'vmix_script.php';
                     </div>
                     <div id="fullscreen" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the fullscreen?','Fullscreen')" class="statut_vmix">
                         <h1>fullscreen</h1>
+                    </div>
+                    <div id="settings" onclick="OpenPageSettings()" class="statut_vmix" data-min-version="28">
+                        <img src="./assets/icon/Settings.svg" class="video">
                     </div>
                 </div>
             </div>
@@ -430,6 +435,58 @@ require $Dir_inc . 'vmix_script.php';
                 </div>
             </div>
         </div>
+        <div id="SettingsContainer" class="inputContainer">
+            <div id="SettingsContainer_Container" class="Container">
+                <div class="header">
+                    <h1 id="SettingsContainer_header"> </h1>
+                    <span class="closeButton" onclick="closePageSettings(this)">✖</span>
+                </div>
+                <div class="body">
+                    <div id="SettingsContainer_nav" class="nav">
+                        <button id="SettingsContainer_nav_general" class="active" onclick="changeMenuSettings('general')">General</button>
+                        <button id="SettingsContainer_nav_list" onclick="changeMenuSettings('list')">List</button>
+                    </div>
+                    <div class="content">
+                        <div id="SettingsContainer_content_general" class="general">
+                            <div class="head">
+                                <h1 for="inputContainer_InputType"> </h1>
+                                <button onclick="processPageSources_remove()">REMOVE</button>
+                            </div>
+                            <div class="GeneralContainer">
+                                <div>
+                                    <label for="inputContainer_InputName">Name</label>
+                                    <input id="inputContainer_InputName" type="text">
+                                </div>
+                                <div>
+                                    <label for="inputContainer_InputId">Id</label>
+                                    <input id="inputContainer_InputId" type="text" disabled>
+                                </div>
+                                <div>
+                                    <label for="inputContainer_InputLoop">Loop</label>
+                                    <input id="inputContainer_InputLoop" type="checkbox">
+                                </div>
+                                <div>
+                                    <button onclick="ApiVmixSend('Restart', inputSelect); closeEdit()">RESTART</button>
+                                    <button onclick="ApiVmixSend('ResetInput', inputSelect); closeEdit()">RESET INPUT</button>
+                                    <button onclick="ApiVmixSend('DeinterlaceOn', inputSelect); closeEdit()">Deinterlace On</button>
+                                    <button onclick="ApiVmixSend('DeinterlaceOff', inputSelect); closeEdit()">Deinterlace Off</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="SettingsContainer_content_list" class="list" style="display:none;">
+                            <div class="head">
+                                <button onclick="processPageSources_list_addItem()"> Add</button>
+                                <button id="inputContainer_listShuffle">Shuffle</button>
+                            </div>
+                            <div class="GeneralContainer">
+                                <ul id="inputContainer_content_list_ul">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="EditContainer" class="EditContainer disabled">
         </div>
 
@@ -449,6 +506,7 @@ require $Dir_inc . 'vmix_script.php';
 <script src="./assets/js/processAudioBus.js"></script>
 <script src="./assets/js/processVideoSources.js"></script>
 <script src="./assets/js/processPageSources.js"></script>
+<script src="./assets/js/processPageSettings.js"></script>
 <script src="./assets/js/processEdit.js"></script>
 <script src="./assets/js/api_vmix.js"></script>
 <script src="./assets/js/submit_vmix.js"></script>
