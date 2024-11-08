@@ -1,29 +1,25 @@
 <?php
-
+define('PROJECT_ROOT', '/var/www/html');
 spl_autoload_register('app_autoload');
 
 function app_autoload($class){
-    $dirs = array(
-        '',
-    );
-    foreach( $dirs as $dir ) {
-        if (file_exists("../class/".$dir.$class.'.php')) {
-            require("../class/".$dir.$class.'.php');
+    $paths = [
+        PROJECT_ROOT  . "/class/$class.php",
+    ];
+    
+    foreach ($paths as $path) {
+        if (file_exists($path)) {
+            require $path;
+            checkAndCreateDirs([PROJECT_ROOT  . '/file', PROJECT_ROOT  . '/db']);
+            break;
         }
-        if (file_exists("../../class/".$dir.$class.'.php')) {
-            require("../../class/".$dir.$class.'.php');
-            $nomDossier = '../../file';
-            // Vérifier si le dossier n'existe pas
-            if (!is_dir($nomDossier)) {
-                // Créer le dossier
-                mkdir($nomDossier);
-            }
-            $nomDossier = '../../db';
-            // Vérifier si le dossier n'existe pas
-            if (!is_dir($nomDossier)) {
-                // Créer le dossier
-                mkdir($nomDossier);
-            }
+    }
+}
+
+function checkAndCreateDirs(array $dirs) {
+    foreach ($dirs as $dir) {
+        if (!is_dir($dir)) {
+            mkdir($dir);
         }
     }
 }
