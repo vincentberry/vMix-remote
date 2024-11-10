@@ -11,6 +11,7 @@ fetch('api_vmix.json')
             const option = document.createElement('option');
             option.value = command.name;
             option.text = command.name;
+            option.setAttribute('data-min-version', command.version);
             if (!option.selected) {
                 commandSelector.appendChild(option);
             }
