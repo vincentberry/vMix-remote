@@ -82,6 +82,10 @@ function chargerFichierXML() {
                             if(inputSelect){
                                 processPageSources(vmixDocument);
                             }
+                            const SettingsContainerSelect = document.getElementById('SettingsContainer');
+                            if (SettingsContainerSelect && !SettingsContainerSelect.classList.contains('display:none')){
+                                processPageSettings(vmixDocument);
+                            }
                             XmlFile = vmixDocument;
                             
                         }

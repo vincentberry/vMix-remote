@@ -1,4 +1,4 @@
-.inputContainer {
+.inputContainer, .SettingsContainer {
     position: fixed;
     top: 0;
     left: 0;
@@ -74,7 +74,15 @@
                 @media (max-width: 1300px) {
                     overflow-y: scroll;
                 }
-                @import "./inputContainerContent";
+
+                &.inputContainerContent{
+                    @import "./inputContainerContent";
+                }
+
+                &.SettingsContainerContent{
+                    @import "./SettingsContainerContent";
+                }
+    
             }
         }
 
