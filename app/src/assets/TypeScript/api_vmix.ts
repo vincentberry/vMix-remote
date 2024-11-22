@@ -74,6 +74,17 @@ function updateCommandDetails() {
         <input type="text" style="display: none;" id="valueSelectedName" placeholder="test.text">
     `;
     }
+    
+    if (selectedCommand.hasMix) {
+        commandDetailsContainer.innerHTML += `
+            <label for="valueMix">Mix :</label>
+            <input type="number" id="valueMix" placeholder="Enter Mix">
+        `;
+    }else{
+        commandDetailsContainer.innerHTML += `
+        <input type="number" style="display: none;" id="valueMix" placeholder="Enter Mix">
+    `;
+    }
 
     commandDetailsContainer.innerHTML += `<p>Notes: ${selectedCommand.notes}</p>`;
 }
@@ -85,6 +96,12 @@ function sendCommand() {
     const valueInput = (document.getElementById('valueInput') as HTMLInputElement).value;
     const durationInput = (document.getElementById('durationInput') as HTMLInputElement).value;
     const valueSelectedName = (document.getElementById('valueSelectedName') as HTMLInputElement).value;
+    // Gestion du Mix : Soustraire 1 si une valeur valide est entrée
+    const valueMixElement = document.getElementById('valueMix') as HTMLInputElement;
+    const valueMix = valueMixElement && valueMixElement.value !== "" 
+        ? (parseInt(valueMixElement.value, 10) - 1).toString() // Soustraire 1
+        : "0"; // Valeur par défaut si le champ est vide ou non valide
+
     // Appeler la fonction d'envoi de l'API vMix avec les paramètres appropriés
-    ApiVmixSend(commandSelector, inputSelector, valueInput, durationInput, valueSelectedName);
+    ApiVmixSend(commandSelector, inputSelector, valueInput, durationInput, valueSelectedName,"", valueMix);
 }
