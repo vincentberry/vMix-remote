@@ -26,6 +26,7 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
                 $duration = $item["duration"];
                 $selectedName = $item["selectedName"];
                 $selectedIndex = $item["selectedIndex"];
+                $Mix = $item["Mix"];
 
                 // Build the XML command string
                 $envoi_vmix .= '<command> ';
@@ -35,6 +36,7 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
                 $envoi_vmix .= '<selectedNameParam>' . $selectedName . '</selectedNameParam>';
                 $envoi_vmix .= '<selectedIndexParam>' . $selectedIndex . '</selectedIndexParam>';
                 $envoi_vmix .= '<valueParam>' . $value . '</valueParam>';
+                $envoi_vmix .= '<Mix>' . $Mix . '</Mix>';
                 $envoi_vmix .= '</command>';
 
                 db_insert::delete_vmix_command($item["id"]);
