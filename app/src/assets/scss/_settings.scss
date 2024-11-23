@@ -133,6 +133,10 @@ select, input, textarea{
     border: 1px solid $background_item;
 }
 
+select{
+    cursor:pointer;
+}
+
 .disabled{
     display: none;
 }

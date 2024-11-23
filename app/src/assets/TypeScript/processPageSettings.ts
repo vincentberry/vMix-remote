@@ -121,7 +121,7 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
         const options: HTMLOptionElement[] = [];
 
         // Options fixes
-        ["Output", "Preview", "Multiview", "Multiview2"].forEach(text => {
+        ["Output", "Preview", "MultiView", "MultiView2", "Replay"].forEach(text => {
             const option = document.createElement("option");
             option.value = text;
             option.textContent = text;
@@ -156,24 +156,32 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
 
         // Création du label de l'output
         htmlOutput += `<div class="Output_number"><label>${output.type.charAt(0).toUpperCase() + output.type.slice(1)} ${output.number}</label></div>`;
-
+        let command = 'SetOutput' + (index - 1);
+        if (output.type === "fullscreen"){
+            command = "SetOutputFullscreen" + (index + 1);
+            if(index == 0){
+                command = "SetOutputFullscreen";
+            }
+        }
         // Création du select de l'output avec les options
-        htmlOutput += `<select id="SettingsContainer_${output.type}_${index}">`;
+        htmlOutput += `<select id="SettingsContainer_${output.type}_${index}" onchange="processPageSettings_update_Output('${command}', this)">`;
 
         // Génération des options
         const options = generateSelectOptions();
         options.forEach(option => {
-            htmlOutput += `<option value="${option.value}">${option.textContent}</option>`;
-        });
+            // Vérifier si l'option correspond à la source sélectionnée
+            let isSelected = false;
+            if (
+                (output.source === "Mix" && output.mix && option.value === `Mix ${parseInt(output.mix) + 1}`) ||
+                (output.source === "Input" && output.inputNumber && option.value === `Input ${output.inputNumber}`) ||
+                (option.value === output.source)
+            ) {
+                isSelected = true;
+            }
 
-        // Définir la source sélectionnée en fonction des attributs source, mix, ou inputNumber
-        if (output.source === "Mix" && output.mix) {
-            htmlOutput += `<option value="Mix ${parseInt(output.mix) + 1}" selected>Mix ${parseInt(output.mix) + 1}</option>`;
-        } else if (output.source === "Input" && output.inputNumber) {
-            htmlOutput += `<option value="Input ${output.inputNumber}" selected>Input ${output.inputNumber}</option>`;
-        } else {
-            htmlOutput += `<option value="${output.source}" selected>${output.source}</option>`;
-        }
+            // Ajouter l'option avec l'attribut `selected` si nécessaire
+            htmlOutput += `<option value="${option.value}"${isSelected ? ' selected' : ''}>${option.textContent}</option>`;
+        });
 
         htmlOutput += '</select>';
 
@@ -209,3 +217,25 @@ function changeMenuSettings(menuName: string) {
     (document.getElementById('SettingsContainer_content_' + menuMapping[menuName]) as HTMLElement).style.display = "";
 }
 //custom envoi vmix
+function processPageSettings_update_Output(command: string,selectElement: HTMLSelectElement) {
+    const selectedValue = selectElement.value as string;
+    if (selectedValue) {
+        let input = "0"; // Par défaut, aucun numéro
+        let value = selectedValue; // Par défaut, valeur brute
+        let Mix = "0";
+
+        // Vérifier et extraire les détails de la sélection
+        if (selectedValue.startsWith("Mix")) {
+            // Exemple : "Mix 10" -> input = "10", value = "Mix"
+            const parts = selectedValue.split(" ");
+            Mix = (parseInt(parts[1], 10) - 1).toString() || "0";
+            value = parts[0]; // "Mix"
+        } else if (selectedValue.startsWith("Input")) {
+            // Exemple : "Input 150" -> input = "150", value = "Input"
+            const parts = selectedValue.split(" ");
+            input = parts[1] || "0";
+            value = parts[0]; // "Input"
+        }
+        ApiVmixSend(command,input,value,"","","",Mix)
+    }
+}
