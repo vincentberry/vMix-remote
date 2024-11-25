@@ -119,7 +119,7 @@
         display: grid;
         grid-template-areas:
             "a c"
-            "b c";
+            "b d";
         grid-template-columns: 208px auto;
         width: 208px * 2 + 10px;
         &>div:nth-child(1) {
@@ -130,6 +130,9 @@
         }
         &>div:nth-child(3) {
             grid-area: c;
+        }
+        &>div:nth-child(4) {
+            grid-area: d;
         }
 
         .Mix-source {
@@ -149,6 +152,7 @@
 
                 select {
                     width: 80%;
+                    padding: 5px;
                     background-color: $background_item;
                 }
 
@@ -160,6 +164,44 @@
                     background-color: $preview;
                 }
             }
+        }
+
+        .Mix-transition{
+            width: 100%;
+           
+            border-left: 1px solid $primary-btn;
+            .custom{
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .transparent {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 80%;
+                    height: 100%;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    z-index: 1; /* Au-dessus du select */
+                }
+    
+                select {
+                    @include center;
+                    position: relative;
+                    padding: 0px;
+                    width: 100%;
+                    height: 100%;
+                    background: $background_item;
+                    margin: 0px;
+                    border-radius: 0px;
+                    border: 0px;
+                    border-top: 1px solid $primary-btn;
+                    border-right: 1px solid $primary-btn;
+                }
+            }
+
         }
 
     }
