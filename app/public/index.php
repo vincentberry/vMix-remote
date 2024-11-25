@@ -435,7 +435,7 @@ require $Dir_inc . 'vmix_script.php';
                 </div>
             </div>
         </div>
-        <div id="SettingsContainer" class="inputContainer">
+        <div id="SettingsContainer" class="inputContainer disabled">
             <div id="SettingsContainer_Container" class="Container">
                 <div class="header">
                     <h1 id="SettingsContainer_header">Settings</h1>

@@ -384,7 +384,7 @@ function processPageSources_updateInput_layers(xmlDoc: Document) {
         if (selectElement) {
             inputSources.forEach(inputSource => {
                 const key = inputSource.getAttribute('key')!;
-                const title = inputSource.getAttribute('number')! + " :" + inputSource.getAttribute('title')!;
+                const title = inputSource.getAttribute('number')! + ": " + inputSource.getAttribute('title')!;
 
                 // Check if the option already exists
                 const existingOption = selectElement.querySelector('option[value="' + key + '"]');

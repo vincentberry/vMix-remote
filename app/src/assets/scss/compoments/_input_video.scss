@@ -1,22 +1,24 @@
-.video-source{
+.video-source {
     margin: 5px;
     border: 1px solid $primary-btn;
     height: 156px;
     width: 208px;
     overflow: hidden;
-    background-color: $background_video;
     display: grid;
     flex-direction: column;
     grid-template-rows: 80% 20%;
 
-    cursor: pointer;
-    .video{
+
+    .video {
         position: relative;
         overflow: hidden;
         height: 100%;
+        width: 208px;
         transition: 0.5s ease;
+        background-color: $background_video;
+        cursor: pointer;
 
-        .type{
+        .type {
             height: 100%;
             user-select: none;
             pointer-events: none;
@@ -25,19 +27,21 @@
             display: grid;
             grid-template-rows: 30% 70%;
             padding: 10px;
-            img{
+
+            img {
                 height: 100%;
             }
-            h1{
-                text-align:center;
+
+            h1 {
+                text-align: center;
                 font-size: 1.2rem;
-                align-self: flex-end; 
+                align-self: flex-end;
                 overflow: hidden;
                 word-wrap: break-word;
             }
         }
 
-        h2{
+        h2 {
             position: absolute;
             user-select: none;
             pointer-events: none;
@@ -48,30 +52,35 @@
             font-size: 2rem;
             color: #ffffff89;
         }
-        img{
+
+        img {
             width: 100%;
             height: auto;
         }
+
         @include status_pgm;
 
-        &:hover{
+        &:hover {
             background-color: lighten($background_video, 10%);
-            &.program{
-                background-color: lighten($program, 10%); 
+
+            &.program {
+                background-color: lighten($program, 10%);
             }
-            &.preview{
-                background-color: lighten($preview, 10%); 
+
+            &.preview {
+                background-color: lighten($preview, 10%);
             }
         }
     }
 
-    .overlay{
+    .overlay {
         @include center;
         height: 100%;
+        width: 208px;
         flex-direction: row;
         transition: 0.5s ease;
 
-        button{
+        button {
             @include center;
             padding: 0px;
             width: 100%;
@@ -82,23 +91,76 @@
             border: 0px;
             border-top: 1px solid $primary-btn;
             border-right: 1px solid $primary-btn;
-            
-            &.menu{
+
+            &.menu {
                 @include icon($icon-menu);
                 font-size: 1.2rem;
                 border-right: 0px solid $primary-btn;
             }
-            &:hover{
+
+            &:hover {
                 background-color: lighten($background, 10%);
-                &.program{
-                    background-color: lighten($program, 10%); 
+
+                &.program {
+                    background-color: lighten($program, 10%);
                 }
-                &.preview{
-                    background-color: lighten($preview, 10%); 
+
+                &.preview {
+                    background-color: lighten($preview, 10%);
                 }
             }
+
             @include status_pgm;
-            
+
         }
+    }
+
+    &.Mix {
+        display: grid;
+        grid-template-areas:
+            "a c"
+            "b c";
+        grid-template-columns: 208px auto;
+        width: 208px * 2 + 10px;
+        &>div:nth-child(1) {
+            grid-area: a;
+        }
+        &>div:nth-child(2) {
+            grid-area: b;
+        }
+        &>div:nth-child(3) {
+            grid-area: c;
+        }
+
+        .Mix-source {
+            @include center;
+            flex-direction: column;
+            background: $background_item;
+            div {
+                @include center;
+                flex-direction: column;
+                padding: 3px;
+                width: 100%;
+                height: 100%;
+
+                label {
+                    padding: 5px;
+                }
+
+                select {
+                    width: 80%;
+                    background-color: $background_item;
+                }
+
+                &.program {
+                    background-color: $program;
+                }
+
+                &.preview {
+                    background-color: $preview;
+                }
+            }
+        }
+
     }
 }
