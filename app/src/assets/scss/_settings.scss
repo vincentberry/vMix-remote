@@ -78,16 +78,6 @@ body {
     overflow-x: hidden;
 }
 
-@mixin logo {
-    background: url(../img/Logo-multiCAM-LIVE.png) center/cover no-repeat;
-}
-
-@mixin logo-min {
-    background: url(../img/Logo-multiCAM-LIVE.png) center/cover no-repeat;
-}
-
-
-
 img[data-src] {
     filter: blur(0.2em);
 }
