@@ -18,7 +18,7 @@ function processVideoSources(xmlDoc: Document): void {
                 // Mettre à jour les informations nécessaires
                 let VideoSourceHTML = getVideoSourceHTML(videoSource);
                 const title = videoSource.getAttribute('title');
-                if (videoSource.getAttribute('type') == "Mix" && title) {
+                if (videoSource.getAttribute('type') == "Mix" && title && isVersionSupported("27")) {
                     const match = title.match(/Mix(\d+)/);
                     if (match && match[1]) {
                         const mixNumber = match[1]; // Numéro trouvé après "Mix"
@@ -35,13 +35,13 @@ function processVideoSources(xmlDoc: Document): void {
             } else if (key) {
                 // Créer une nouvelle div pour la source video
                 const newDivElement = document.createElement('div');
-                newDivElement.className = 'video-source ' + videoSource.getAttribute('type');
+                newDivElement.className = 'video-source ' +  (isVersionSupported("27") ? videoSource.getAttribute('type') : '');
                 newDivElement.setAttribute('data-key', key);
 
                 // Remplir la div avec les informations
                 newDivElement.innerHTML = getVideoSourceHTML(videoSource);
                 const title = videoSource.getAttribute('title');
-                if (videoSource.getAttribute('type') == "Mix" && title) {
+                if (videoSource.getAttribute('type') == "Mix" && title && isVersionSupported("27")) {
                     const match = title.match(/Mix(\d+)/);
                     if (match && match[1]) {
                         const mixNumber = match[1]; // Numéro trouvé après "Mix"

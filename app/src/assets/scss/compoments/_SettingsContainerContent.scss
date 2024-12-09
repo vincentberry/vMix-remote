@@ -112,11 +112,11 @@ label {
             button {
                 height: 100%;
                 padding: 5px 20px;
-                margin: 0px;
+                margin: 0px 0px 0px 5px;
                 border: 0;
                 font-weight: 500;
 
-                &.NDI{
+                &.NDI, &.SRT{
                     cursor:not-allowed;
                 }
     
@@ -127,7 +127,7 @@ label {
     
                 &.off {
                     padding: 5px 10px;
-                    background: $color-danger;
+                    background: $background;
                 }
             }
         }

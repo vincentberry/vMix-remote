@@ -83,18 +83,19 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
         number: string;
         source: string;
         ndi: boolean;
+        srt: boolean;
         mix?: string;
         inputNumber?: string;
     }
 
     // Configuration par défaut
     const defaultOutputs: OutputConfig[] = [
-        { type: "fullscreen", number: "1", source: "Output", ndi: false },
-        { type: "fullscreen", number: "2", source: "Output", ndi: false },
-        { type: "output", number: "1", source: "Output", ndi: false },
-        { type: "output", number: "2", source: "Output", ndi: false },
-        { type: "output", number: "3", source: "Output", ndi: false },
-        { type: "output", number: "4", source: "Output", ndi: false },
+        { type: "fullscreen", number: "1", source: "Output", ndi: false, srt: false },
+        { type: "fullscreen", number: "2", source: "Output", ndi: false, srt: false },
+        { type: "output", number: "1", source: "Output", ndi: false, srt: false },
+        { type: "output", number: "2", source: "Output", ndi: false, srt: false },
+        { type: "output", number: "3", source: "Output", ndi: false, srt: false },
+        { type: "output", number: "4", source: "Output", ndi: false, srt: false },
     ];
 
     // Met à jour les valeurs par défaut avec celles du XML
@@ -103,6 +104,7 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
         const number = output.getAttribute("number")!;
         const source = output.getAttribute("source") || "Output";
         const ndi = output.getAttribute("ndi") === "True";
+        const srt = output.getAttribute("srt") === "True";
         const mix = output.getAttribute("mix") || undefined;
         const inputNumber = output.getAttribute("inputNumber") || undefined;
 
@@ -111,6 +113,7 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
         if (defaultOutput) {
             defaultOutput.source = source;
             defaultOutput.ndi = ndi;
+            defaultOutput.srt = srt;
             if (mix) defaultOutput.mix = mix;
             if (inputNumber) defaultOutput.inputNumber = inputNumber;
         }
@@ -188,7 +191,9 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
         // Si l'attribut ndi est activé, ajouter le bouton NDI
         if (output.type === "output") {
             const ndiClass = output.ndi ? 'on' : 'off';
+            const srtClass = output.srt ? 'on' : 'off';
             htmlOutput += `<button class="NDI ${ndiClass}">NDI</button>`;
+            htmlOutput += `<button class="SRT ${srtClass}">SRT</button>`;
         }
 
         // Fermer la div de la liste
@@ -203,7 +208,6 @@ function changeMenuSettings(menuName: string) {
     // Liste des menus et de leurs correspondances avec les IDs des éléments HTML
     const menuMapping: { [key: string]: string } = {
         'general': 'general',
-        'audio': 'audio',
     };
 
     // Réinitialiser toutes les classes à une chaîne vide

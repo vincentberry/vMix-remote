@@ -444,23 +444,12 @@ require $Dir_inc . 'vmix_script.php';
                 <div class="body">
                     <div id="SettingsContainer_nav" class="nav">
                         <button id="SettingsContainer_nav_general" class="active" onclick="changeMenuSettings('general')">Output/NDI/SRT</button>
-                        <button id="SettingsContainer_nav_audio" onclick="changeMenuSettings('audio')">Audio</button>
                     </div>
                     <div class="content SettingsContainerContent">
                         <div id="SettingsContainer_content_general" class="general">
                             <div class="head">
                             </div>
                             <div class="GeneralContainer" id="SettingsContainer_content_general_GeneralContainer">
-                            </div>
-                        </div>
-                        <div id="SettingsContainer_content_audio" class="audio" style="display:none;">
-                            <div class="head">
-                                <button onclick="processPageSources_list_addItem()"> Add</button>
-                                <button id="inputContainer_listShuffle">Shuffle</button>
-                            </div>
-                            <div class="GeneralContainer">
-                                <ul id="inputContainer_content_list_ul">
-                                </ul>
                             </div>
                         </div>
                     </div>
