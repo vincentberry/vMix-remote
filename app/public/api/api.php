@@ -11,6 +11,7 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
 
         //Génére le XML à sauvegardé
         $xml = "<session_delay>". $_POST["session_delay"] ."</session_delay>". $_POST["xml"];
+        $xml = str_replace('<?xml version="1.0" encoding="utf-16"?>', '', $xml);
 
         // Sauvegarder le XML dans un fichier
         file_put_contents($file, $xml);
