@@ -190,10 +190,10 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
 
         // Si l'attribut ndi est activé, ajouter le bouton NDI
         if (output.type === "output") {
-            const ndiClass = output.ndi ? 'on' : 'off';
-            const srtClass = output.srt ? 'on' : 'off';
+            const ndiClass = output.ndi ? 'Stop' : 'Start';
+            const srtClass = output.srt ? 'Stop' : 'Start';
             htmlOutput += `<button class="NDI ${ndiClass}">NDI</button>`;
-            htmlOutput += `<button class="SRT ${srtClass}">SRT</button>`;
+            htmlOutput += `<button class="SRT ${srtClass}" onclick="ApiVmixSend('${srtClass}SRTOutput','${parseInt(output.number) - 1}')">SRT</button>`;
         }
 
         // Fermer la div de la liste
