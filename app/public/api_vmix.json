@@ -9770,7 +9770,6 @@
         "version": 27,
         "group": "audio"
     },
-
     {
         "name": "SetVolumeBusMixerD",
         "hasValue": 1,
@@ -10173,7 +10172,7 @@
     {
         "name": "SoloAllOff",
         "hasValue": 0,
-        "hasInput":0,
+        "hasInput": 0,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10192,7 +10191,7 @@
     {
         "name": "SoloPFL",
         "hasValue": 0,
-        "hasInput":0,
+        "hasInput": 0,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10211,7 +10210,7 @@
     {
         "name": "SoloPFLOff",
         "hasValue": 0,
-        "hasInput":0,
+        "hasInput": 0,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10230,7 +10229,7 @@
     {
         "name": "SoloPFLOn",
         "hasValue": 0,
-        "hasInput":0,
+        "hasInput": 0,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10249,7 +10248,7 @@
     {
         "name": "Effect1",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10268,7 +10267,7 @@
     {
         "name": "Effect2",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10287,7 +10286,7 @@
     {
         "name": "Effect3",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10306,7 +10305,7 @@
     {
         "name": "Effect4",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10325,7 +10324,7 @@
     {
         "name": "Effect1On",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10344,7 +10343,7 @@
     {
         "name": "Effect4On",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10363,7 +10362,7 @@
     {
         "name": "Effect2On",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10382,7 +10381,7 @@
     {
         "name": "Effect3On",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10401,7 +10400,7 @@
     {
         "name": "Effect1Off",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10420,7 +10419,7 @@
     {
         "name": "Effect4Off",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10439,7 +10438,7 @@
     {
         "name": "Effect2Off",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10458,7 +10457,7 @@
     {
         "name": "Effect3Off",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10477,7 +10476,7 @@
     {
         "name": "loop",
         "hasValue": 0,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10496,7 +10495,7 @@
     {
         "name": "SetCrop",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10515,7 +10514,7 @@
     {
         "name": "SetCropX1",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10534,7 +10533,7 @@
     {
         "name": "SetCropX2",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10553,7 +10552,7 @@
     {
         "name": "SetCropY1",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10572,7 +10571,7 @@
     {
         "name": "SetCropY2",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10591,7 +10590,7 @@
     {
         "name": "SetEffect1Strength",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10610,7 +10609,7 @@
     {
         "name": "SetEffect2Strength",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10629,7 +10628,7 @@
     {
         "name": "SetEffect3Strength",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10648,7 +10647,7 @@
     {
         "name": "SetEffect4Strength",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10667,7 +10666,7 @@
     {
         "name": "SetFrameDelay",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10686,7 +10685,7 @@
     {
         "name": "SetLayer[X]Crop",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10705,7 +10704,7 @@
     {
         "name": "SetLayer[X]CropX1",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10724,7 +10723,7 @@
     {
         "name": "SetLayer[X]CropX2",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10743,7 +10742,7 @@
     {
         "name": "SetLayer[X]CropY1",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10762,7 +10761,7 @@
     {
         "name": "SetLayer[X]CropY2",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10781,7 +10780,7 @@
     {
         "name": "SetLayer[X]Height",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10800,7 +10799,7 @@
     {
         "name": "SetLayer[X]Width",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10819,7 +10818,7 @@
     {
         "name": "SetLayer[X]PanX",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10838,7 +10837,7 @@
     {
         "name": "SetLayer[X]PanY",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10857,7 +10856,7 @@
     {
         "name": "SetLayer[X]Rectangle",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10876,7 +10875,7 @@
     {
         "name": "SetLayer[X]X",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10895,7 +10894,7 @@
     {
         "name": "SetLayer[X]Y",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10914,7 +10913,7 @@
     {
         "name": "SetLayer[X]Zoom",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10933,7 +10932,7 @@
     {
         "name": "SetLayerDynamicCrop",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10952,7 +10951,7 @@
     {
         "name": "SetLayerDynamicCropX1",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10971,7 +10970,7 @@
     {
         "name": "SetLayerDynamicCropX2",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -10990,7 +10989,7 @@
     {
         "name": "SetLayerDynamicCropY1",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11009,7 +11008,7 @@
     {
         "name": "SetLayerDynamicCropY2",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11028,7 +11027,7 @@
     {
         "name": "SetLayerDynamicHeight",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11047,7 +11046,7 @@
     {
         "name": "SetLayerDynamicWidth",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11066,7 +11065,7 @@
     {
         "name": "SetLayerDynamicPanX",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11085,7 +11084,7 @@
     {
         "name": "SetLayerDynamicPanY",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11104,7 +11103,7 @@
     {
         "name": "SetLayerDynamicRectangle",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11123,7 +11122,7 @@
     {
         "name": "SetLayerDynamicZoom",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11142,7 +11141,7 @@
     {
         "name": "SwapLayerAnimated",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11161,7 +11160,7 @@
     {
         "name": "ReplayScrollSelectedEvent",
         "hasValue": 1,
-        "hasInput":0,
+        "hasInput": 0,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "",
@@ -11180,7 +11179,7 @@
     {
         "name": "SetLayer",
         "hasValue": 1,
-        "hasInput":1,
+        "hasInput": 1,
         "hasSelectedName": 0,
         "mixNotes": "",
         "inputNotes": "Target input",
