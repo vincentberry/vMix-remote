@@ -1,6 +1,8 @@
 let inputContainer_InputName_No_Focus: boolean = true;
 let inputContainer_LayersSelect_No_Focus: boolean = true;
+let inputContainer_PositionSelect_No_Focus: boolean = true;
 let PageSources_LayersSelect: string = "0";
+let PageSources_LayersSelectKey: string | null;
 let PageSources_GtSelect: number = 0;
 let clickCount_closePageInput: boolean = false;
 
@@ -30,6 +32,10 @@ function processPageSources(xmlDoc: Document) {
             const meterF2 = input.getAttribute('meterF2');
             const gainDb = input.getAttribute('gainDb');
             const selectedIndex = input.getAttribute('selectedIndex');
+            const callVideoSource = input.getAttribute('callVideoSource') || "";
+            const callAudioSource = input.getAttribute('callAudioSource') || "";
+            const callConnected = input.getAttribute('callConnected') || "";
+            const callPassword = input.getAttribute('callPassword') || "";
 
             // Obtenir l'élément GT <text> et son contenu
             if (input.querySelector('text') || input.querySelector('image')) {
@@ -90,8 +96,23 @@ function processPageSources(xmlDoc: Document) {
                 document.getElementById('inputContainer_nav_list')!.style.display = "none";
             }
 
+            if (type === "VideoCall") {
+                const inputContainer_List_videoSources = document.getElementById('inputContainer_List_videoSources') as HTMLSelectElement;
+                inputContainer_List_videoSources.value = callVideoSource;
+                const inputContainer_List_audioSources = document.getElementById('inputContainer_List_audioSources') as HTMLSelectElement;
+                inputContainer_List_audioSources.value = callAudioSource;
+                const inputContainer_InputcallPassword = document.getElementById('inputContainer_InputcallPassword') as HTMLInputElement;
+                inputContainer_InputcallPassword.value = callPassword;
+                const inputContainer_InputcallConnected = document.getElementById('inputContainer_InputcallConnected') as HTMLInputElement;
+                inputContainer_InputcallConnected.classList = callConnected;
+                document.getElementById('inputContainer_nav_vmixcall')!.style.display = "";
+            }else{
+                document.getElementById('inputContainer_nav_vmixcall')!.style.display = "none";
+            }
+
             processPageSources_updateLayers(input);
             processPageSources_updateInput_layers(xmlDoc);
+            processPageSources_updateInput_Position(xmlDoc);
 
             // Supposons également que vous avez déjà obtenu la référence aux éléments HTML du formulaire
             const inputContainer_InputId = document.getElementById('inputContainer_InputId') as HTMLInputElement;
@@ -264,20 +285,22 @@ function processPageSources_updateGT_nav_select(element: HTMLElement, index: str
 }
 
 function processPageSources_updateLayers(inputSource: Element) {
+    PageSources_LayersSelectKey = null;
     for (let i = 0; i <= 9; i++) {
         if (inputSource) {
             const overlays = inputSource.querySelectorAll('overlay');
             overlays.forEach(overlay => {
                 const overlayIndex = overlay.getAttribute('index');
-                const overlayKey = overlay.getAttribute('key');
+                let overlayKey = overlay.getAttribute('key');
+                //Mise à jours via onglet Layers
                 (document.getElementById('inputContainer_List_Layers_' + overlayIndex) as HTMLInputElement).value = overlayKey!;
                 (document.getElementById('inputContainer_List_Layers_' + i) as HTMLInputElement).value = "";
                 (document.getElementById('inputContainer_Content_Layers_Select') as HTMLInputElement).textContent = "Layer " + (parseInt(PageSources_LayersSelect) + 1).toString();
                 if (PageSources_LayersSelect === overlayIndex && inputContainer_LayersSelect_No_Focus) {
                     const positionElement = overlay.getElementsByTagName('position')[0];
                     if (positionElement) {
-                        (document.getElementById('inputContainer_Content_Layers_Select_move_X') as HTMLInputElement).value = positionElement.getAttribute('X')!;
-                        (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = positionElement.getAttribute('Y')!;
+                        (document.getElementById('inputContainer_Content_Layers_Select_move_X') as HTMLInputElement).value = positionElement.getAttribute('x')!;
+                        (document.getElementById('inputContainer_Content_Layers_Select_move_Y') as HTMLInputElement).value = positionElement.getAttribute('y')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Width') as HTMLInputElement).value = positionElement.getAttribute('width')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Height') as HTMLInputElement).value = positionElement.getAttribute('height')!;
                     } else {
@@ -286,7 +309,7 @@ function processPageSources_updateLayers(inputSource: Element) {
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Width') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_move_Height') as HTMLInputElement).value = "";
                     }
-                    const cropElement = overlay.getElementsByTagName('position')[0];
+                    const cropElement = overlay.getElementsByTagName('crop')[0];
                     if (cropElement) {
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_X1') as HTMLInputElement).value = cropElement.getAttribute('X1')!;
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_Y1') as HTMLInputElement).value = cropElement.getAttribute('Y1')!;
@@ -297,6 +320,47 @@ function processPageSources_updateLayers(inputSource: Element) {
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_Y1') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_X2') as HTMLInputElement).value = "";
                         (document.getElementById('inputContainer_Content_Layers_Select_crop_Y2') as HTMLInputElement).value = "";
+                    }
+                }
+
+                //Mise à jours via onglet Position
+                if (PageSources_LayersSelect === overlayIndex && inputContainer_PositionSelect_No_Focus) {
+                    PageSources_LayersSelectKey = overlayKey;
+                    const positionElement = overlay.getElementsByTagName('position')[0];
+                    if (positionElement) {
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = positionElement.getAttribute('panX') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = positionElement.getAttribute('panY') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X') as HTMLInputElement).value = positionElement.getAttribute('zoomX') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = positionElement.getAttribute('panX') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = positionElement.getAttribute('panY') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X-value') as HTMLInputElement).value = positionElement.getAttribute('zoomX') || '1';
+                    } else {
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_X-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_pan_Y-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_zoom_X-value') as HTMLInputElement).value = '1';
+                    }
+                    const cropElement = overlay.getElementsByTagName('crop')[0];
+                    if (cropElement) {
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = cropElement.getAttribute('X1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = cropElement.getAttribute('Y1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = cropElement.getAttribute('X2') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = cropElement.getAttribute('Y2') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = cropElement.getAttribute('X1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = cropElement.getAttribute('Y1') || '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = cropElement.getAttribute('X2') || '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = cropElement.getAttribute('Y2') || '1';
+                    } else {
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X1-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y1-value') as HTMLInputElement).value = '0';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_X2-value') as HTMLInputElement).value = '1';
+                        (document.getElementById('inputContainer_Content_Position_Select_crop_Y2-value') as HTMLInputElement).value = '1';
                     }
                 }
             });
@@ -312,8 +376,10 @@ function changeMenu(menuName: string) {
         'general': 'general',
         'list': 'list',
         'color_correction': 'color_correction',
+        'position': 'position',
         'layers': 'layers',
-        'gt': 'gt'
+        'gt': 'gt',
+        'vmixcall': 'vmixcall'
     };
 
     // Réinitialiser toutes les classes à une chaîne vide
@@ -337,7 +403,7 @@ function processPageSources_updateInput_layers(xmlDoc: Document) {
         if (selectElement) {
             inputSources.forEach(inputSource => {
                 const key = inputSource.getAttribute('key')!;
-                const title = inputSource.getAttribute('number')! + " :" + inputSource.getAttribute('title')!;
+                const title = inputSource.getAttribute('number')! + ": " + inputSource.getAttribute('title')!;
 
                 // Check if the option already exists
                 const existingOption = selectElement.querySelector('option[value="' + key + '"]');
@@ -362,6 +428,34 @@ function processPageSources_updateInput_layers(xmlDoc: Document) {
                     selectElement.remove(option.index);
                 }
             });
+        }
+    }
+}
+
+function processPageSources_updateInput_Position(xmlDoc: Document) {
+    const selectElement = document.getElementById('inputContainer_Content_Position_Select') as HTMLSelectElement | null;
+    if (selectElement && PageSources_LayersSelect) {
+        // Initialise le contenu avec "Layer" et le numéro correspondant
+        let content: string = "Layer " + (parseInt(PageSources_LayersSelect) + 1).toString() + ": ";
+
+        // Vérifie que PageSources_LayersSelectKey n'est pas null
+        if (PageSources_LayersSelectKey) {
+            // Supposons que xmlDoc soit le document XML ou HTML
+            const inputs = xmlDoc.querySelectorAll('input');
+            // Parcourt tous les inputs et récupère celui avec l'attribut 'key' correspondant à PageSources_LayersSelectKey
+            inputs.forEach(input => {
+                if (input.getAttribute('key') === PageSources_LayersSelectKey) {
+                    const title = input.getAttribute('title');  // Récupère l'attribut 'title'
+                    // Vérifie si title est non null et l'ajoute à la variable content
+                    if (title) {
+                        content += title;
+                    }
+                }
+            });
+        }
+
+        if (selectElement.textContent?.trim() !== content.trim()) {
+            selectElement.textContent = content;
         }
     }
 }
@@ -404,4 +498,38 @@ document.getElementById('inputContainer_listShuffle')?.addEventListener('click',
     } else {
         console.error("inputSelect not found.");
     }
+});
+
+// inputContainer_List_Position
+document.getElementById('inputContainer_List_Position')?.addEventListener('change', () => {
+    const target = document.getElementById('inputContainer_List_Position') as HTMLSelectElement;
+    PageSources_LayersSelect = target.value;
+});
+
+// inputContainer_List_Position
+document.getElementById('inputContainer_Content_Position_resetall')?.addEventListener('click', () => {
+    if (inputSelect && PageSources_LayersSelect) {
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'Zoom', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'PanX', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'PanY', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropX1', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropY1', inputSelect, '0')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropX2', inputSelect, '1')
+        ApiVmixSend('SetLayer' + (parseInt(PageSources_LayersSelect.toString()) + 1) + 'CropY2', inputSelect, '1')
+    }
+});
+
+// Utility function to get element with type assertion
+function getElement<T extends HTMLElement>(id: string): T | null {
+    return document.getElementById(id) as T | null;
+}
+
+// Update values when sliders are moved
+document.querySelectorAll<HTMLInputElement>('input[type="range"]').forEach((slider) => {
+    slider.addEventListener('input', function () {
+        const valueField = getElement<HTMLInputElement>(this.id + '-value');
+        if (valueField) {
+            valueField.value = this.value;
+        }
+    });
 });

@@ -17,6 +17,12 @@ function processSettings(xmlDoc: Document): void {
             }
         }
     }
+    const versionElement = xmlDoc.querySelector("version");
+    if (versionElement) {
+        const versionText = versionElement.textContent || "" ;
+        vMixVersion = versionText.split(".")[0];
+        hideUnsupportedFeatures();
+    }
 
     updateCheckboxClass('streaming', JSON.parse(xmlDoc.querySelector('streaming')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
     updateCheckboxClass('recording', JSON.parse(xmlDoc.querySelector('recording')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);
@@ -35,6 +41,8 @@ function updateCheckboxClass(checkboxId: string, className: boolean, xmlDoc: Doc
             let filename1 = "";
             let filename2 = "";
             let filename3 = "";
+            let filename4 = "";
+            let filename5 = "";
 
             const recordings = xmlDoc.getElementsByTagName(checkboxId);
 
@@ -42,17 +50,23 @@ function updateCheckboxClass(checkboxId: string, className: boolean, xmlDoc: Doc
                 filename1 = recordings[0].getAttribute("channel1") || "";
                 filename2 = recordings[0].getAttribute("channel2") || "";
                 filename3 = recordings[0].getAttribute("channel3") || "";
+                filename4 = recordings[0].getAttribute("channel4") || "";
+                filename5 = recordings[0].getAttribute("channel5") || "";
             }
 
             if (checkboxId === 'recording') {
                 filename1 = recordings[0].getAttribute("filename1") || "";
                 filename2 = recordings[0].getAttribute("filename2") || "";
                 filename3 = recordings[0].getAttribute("filename3") || "";
+                filename4 = recordings[0].getAttribute("filename4") || "";
+                filename5 = recordings[0].getAttribute("filename5") || "";
             }
 
             updateStatus(checkboxId, filename1, '1');
             updateStatus(checkboxId, filename2, '2');
             updateStatus(checkboxId, filename3, '3');
+            updateStatus(checkboxId, filename4, '4');
+            updateStatus(checkboxId, filename5, '5');
         }
 
     } else {
@@ -64,6 +78,8 @@ function updateCheckboxClass(checkboxId: string, className: boolean, xmlDoc: Doc
             updateStatus(checkboxId, "", '1');
             updateStatus(checkboxId, "", '2');
             updateStatus(checkboxId, "", '3');
+            updateStatus(checkboxId, "", '4');
+            updateStatus(checkboxId, "", '5');
         }
     }
 }

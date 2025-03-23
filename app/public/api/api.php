@@ -11,6 +11,7 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
 
         //Génére le XML à sauvegardé
         $xml = "<session_delay>". $_POST["session_delay"] ."</session_delay>". $_POST["xml"];
+        $xml = str_replace('<?xml version="1.0" encoding="utf-16"?>', '', $xml);
 
         // Sauvegarder le XML dans un fichier
         file_put_contents($file, $xml);
@@ -26,6 +27,7 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
                 $duration = $item["duration"];
                 $selectedName = $item["selectedName"];
                 $selectedIndex = $item["selectedIndex"];
+                $Mix = $item["Mix"];
 
                 // Build the XML command string
                 $envoi_vmix .= '<command> ';
@@ -35,6 +37,7 @@ if(!empty($_POST["connector"]) && !empty($_POST["xml"]) && !empty($_POST["sessio
                 $envoi_vmix .= '<selectedNameParam>' . $selectedName . '</selectedNameParam>';
                 $envoi_vmix .= '<selectedIndexParam>' . $selectedIndex . '</selectedIndexParam>';
                 $envoi_vmix .= '<valueParam>' . $value . '</valueParam>';
+                $envoi_vmix .= '<Mix>' . $Mix . '</Mix>';
                 $envoi_vmix .= '</command>';
 
                 db_insert::delete_vmix_command($item["id"]);

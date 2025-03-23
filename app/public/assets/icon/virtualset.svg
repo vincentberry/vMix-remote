@@ -1,0 +1,12 @@
+<svg width="750" height="750" viewBox="0 0 750 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_307_91)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M750 0H0V750H750V0ZM30 30H720V720H30V30ZM450 230C450 271.421 416.421 305 375 305C333.579 305 300 271.421 300 230C300 188.579 333.579 155 375 155C416.421 155 450 188.579 450 230Z" fill="white"/>
+<rect x="77" y="488" width="596" height="240" rx="2" fill="white"/>
+<ellipse cx="376" cy="474.5" rx="107" ry="169.5" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_307_91">
+<rect width="750" height="750" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -180,6 +180,132 @@ label {
     }
 }
 
+.position {
+    .GeneralContainer {
+        display: flex;
+        align-items: flex-start;
+        align-items: center;
+        justify-content: space-between;
+
+        .list {
+
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            margin: 2px;
+            height: 26px;
+
+            select {
+                padding: 4px;
+                width: 200px;
+                border-radius: 0;
+                height: 100%;
+            }
+
+            button {
+                height: 100%;
+                padding: 5px 20px;
+                margin: 0px;
+                border: 0;
+                font-weight: 500;
+
+                &.on {
+                    padding: 5px 10px;
+                    background: $audio;
+                }
+
+                &.off {
+                    padding: 5px 10px;
+                    background: $color-danger;
+                }
+            }
+        }
+
+        h1 {
+            color: $background_item;
+            font-size: 1rem;
+        }
+
+        button {
+            margin: 0;
+            padding: 5px 5px;
+        }
+    }
+
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @media (max-width: 1300px) {
+            grid-template-columns: 1fr;
+            margin-bottom: 50px;
+        }
+
+        .left .rigth {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .list {
+            button {
+                height: 100%;
+                padding: 5px 20px;
+                margin: 0px;
+                border: 0;
+                font-weight: 500;
+
+                &.on {
+                    padding: 5px 10px;
+                    background: $audio;
+                }
+
+                &.off {
+                    padding: 5px 10px;
+                    background: $color-danger;
+                }
+            }
+        }
+
+        .mode_content {
+            display: grid;
+            grid-template-columns: 100px 200px 90px 90px;
+            justify-items: end;
+            align-items: center;
+            height: 26px;
+            margin: 5px;
+
+            .label_content {
+                @include center;
+                width: 50px;
+                height: 100%;
+                background: $background;
+
+                label {
+                    color: $color-text;
+                }
+            }
+
+            input {
+                width: 100%;
+                background: $color-text;
+            }
+
+            button {
+                padding: 5px 15px;
+            }
+
+            &.border {
+                padding: 15px;
+                width: 100%;
+            }
+        }
+    }
+}
+
 .layers {
     display: grid;
     grid-template-columns: 500px 1fr;
@@ -418,15 +544,16 @@ label {
                             @include icon($icon-stop2);
                         }
 
-                        .input_color{
+                        .input_color {
                             width: 150px;
                             margin-right: 7px;
                         }
                     }
 
-                    .countdown{
+                    .countdown {
                         justify-content: flex-end;
                     }
+
                     .color {
                         justify-content: flex-start;
                     }
@@ -437,5 +564,67 @@ label {
         }
 
 
+    }
+}
+
+.vmixcall {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+
+    @media (max-width: 1300px) {
+        grid-template-columns: 1fr;
+        margin-bottom: 50px;
+    }
+
+    .left {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        .callConnect{
+            #inputContainer_InputcallPassword{
+                width: 200px;
+            }
+            input#inputContainer_InputcallConnected {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: $color-danger; // Default to red
+                color: $color-danger;
+                text-align: center;
+
+                &.True {
+                    background-color: $audio; // Green if true
+                }
+            }
+        }
+
+        .list {
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            margin: 2px;
+            height: 26px;
+
+            .layer_number {
+                @include center;
+                height: 100%;
+                background: $background;
+
+                label {
+                    color: $color-text;
+                }
+            }
+
+
+            select {
+                padding: 4px;
+                width: 200px;
+                border-radius: 0;
+                height: 100%;
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+let vMixVersion: string
 let activatedBuses: any[] = [];
 let inputArray: any[] = [];
 let previewNumber: number | undefined;
@@ -8,7 +9,7 @@ let activeOverlay2: number | undefined;
 let activeOverlay3: number | undefined;
 let activeOverlay4: number | undefined;
 let XmlFile: Document | undefined; // Définissez le type approprié pour XmlFile
-
+let Alltransition: HTMLOptionsCollection
 const getHttpRequest = (): XMLHttpRequest | false => {
     let httpRequest: XMLHttpRequest | false = false;
 
@@ -81,6 +82,10 @@ function chargerFichierXML() {
                             if(inputSelect){
                                 processPageSources(vmixDocument);
                             }
+                            const SettingsContainerSelect = document.getElementById('SettingsContainer');
+                            if (SettingsContainerSelect && !SettingsContainerSelect.classList.contains('display:none')){
+                                processPageSettings(vmixDocument);
+                            }
                             XmlFile = vmixDocument;
                             
                         }
@@ -90,6 +95,7 @@ function chargerFichierXML() {
                             document.getElementById('fast')!.className = "off";
                         }
                         update_url(vmixConnect!.value);
+                        filterCommandDetailsByVersion();
                     }
                 } else if (xhr.status === 301) {
                     window.location.href = JSON.parse(xhr.responseText)['redirect'];
@@ -259,6 +265,22 @@ function Session_delay() {
 
 }
 
+// Fonction pour comparer les versions
+function isVersionSupported(requiredVersion: string): boolean {
+    return parseFloat(vMixVersion) >= parseFloat(requiredVersion);
+}
+
+// Fonction pour masquer les éléments en fonction de la version
+function hideUnsupportedFeatures() {
+    const elements = document.querySelectorAll('[data-min-version]');
+
+    elements.forEach((element) => {
+        const minVersion = element.getAttribute("data-min-version");
+        if (minVersion && !isVersionSupported(minVersion)) {
+            (element as HTMLElement).style.display = "none";
+        }
+    });
+}
 
 // Charger le fichier XML et générer les éléments HTML au chargement de la page
 window.onload = chargerFichierXML;

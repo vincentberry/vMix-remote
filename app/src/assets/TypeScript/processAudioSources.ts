@@ -3,45 +3,47 @@ function processAudioSources(xmlDoc: Document): void {
 
     const audioSources = xmlDoc.querySelectorAll('input[muted]');
     let container: HTMLElement = document.getElementById('audioSourcesContainer') as HTMLElement;
+    
+    if (container) {
+        // Parcourir toutes les sources audio
+        audioSources.forEach(audioSource => {
+            // Récupérer la clé unique de la source audio
+            const key: string | null = audioSource.getAttribute('key');
 
-    // Parcourir toutes les sources audio
-    audioSources.forEach(audioSource => {
-        // Récupérer la clé unique de la source audio
-        const key: string | null = audioSource.getAttribute('key');
+            // Vérifier si une source audio avec la même clé existe déjà dans le conteneur
+            const existingAudioSource = document.querySelector(`.audio-source[data-key="${key}"]`) as HTMLElement;
 
-        // Vérifier si une source audio avec la même clé existe déjà dans le conteneur
-        const existingAudioSource = document.querySelector(`.audio-source[data-key="${key}"]`) as HTMLElement;
+            // Si la source audio existe déjà, la mettre à jour
+            if (existingAudioSource) {
+                // Mettre à jour les informations nécessaires
+                const AudioSourceHTML = getAudioSourceHTML(audioSource);
+                if (existingAudioSource.innerHTML != AudioSourceHTML) {
+                    existingAudioSource.innerHTML = AudioSourceHTML;
+                }
+            } else if(key){
+                // Créer une nouvelle div pour la source audio
+                const newDivElement = document.createElement('div');
+                newDivElement.className = 'audio-source';
+                newDivElement.setAttribute('data-key', key);
 
-        // Si la source audio existe déjà, la mettre à jour
-        if (existingAudioSource) {
-            // Mettre à jour les informations nécessaires
-            const AudioSourceHTML = getAudioSourceHTML(audioSource);
-            if (existingAudioSource.innerHTML != AudioSourceHTML) {
-                existingAudioSource.innerHTML = AudioSourceHTML;
+                // Remplir la div avec les informations
+                newDivElement.innerHTML = getAudioSourceHTML(audioSource);
+
+                // Ajouter la nouvelle div au conteneur
+                container.appendChild(newDivElement);
             }
-        } else if(key){
-            // Créer une nouvelle div pour la source audio
-            const newDivElement = document.createElement('div');
-            newDivElement.className = 'audio-source';
-            newDivElement.setAttribute('data-key', key);
+        });
 
-            // Remplir la div avec les informations
-            newDivElement.innerHTML = getAudioSourceHTML(audioSource);
-
-            // Ajouter la nouvelle div au conteneur
-            container.appendChild(newDivElement);
-        }
-    });
-
-    // Supprimer les sources audio qui n'existent plus
-    const existingAudioSources = document.querySelectorAll('.audio-source');
-    existingAudioSources.forEach(existingAudioSource => {
-        const key = existingAudioSource.getAttribute('data-key');
-        const matchingAudioSource = xmlDoc.querySelector(`input[key="${key}"]`);
-        if (!matchingAudioSource) {
-            existingAudioSource.remove();
-        }
-    });
+        // Supprimer les sources audio qui n'existent plus
+        const existingAudioSources = document.querySelectorAll('.audio-source');
+        existingAudioSources.forEach(existingAudioSource => {
+            const key = existingAudioSource.getAttribute('data-key');
+            const matchingAudioSource = xmlDoc.querySelector(`input[key="${key}"]`);
+            if (!matchingAudioSource) {
+                existingAudioSource.remove();
+            }
+        });
+    }
 }
 
 // Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML

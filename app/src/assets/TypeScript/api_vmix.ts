@@ -7,12 +7,18 @@ fetch('api_vmix.json')
         commands = data; // Assigner les données à la variable commands
         // Générer les options du menu déroulant
         const commandSelector = document.getElementById('commandSelector') as HTMLSelectElement;
+        const CustomTransition1 = document.getElementById('CustomTransition') as HTMLSelectElement;
+       // const Transition: string
         commands.forEach(command => {
             const option = document.createElement('option');
             option.value = command.name;
             option.text = command.name;
+            option.setAttribute('data-min-version', command.version);
             if (!option.selected) {
                 commandSelector.appendChild(option);
+                if(command.group === 'transition' && command.hasValue === 0 && command.hasMix ==="Optional"){
+                    CustomTransition1.appendChild(option);
+                }
             }
         });
 
@@ -73,8 +79,49 @@ function updateCommandDetails() {
         <input type="text" style="display: none;" id="valueSelectedName" placeholder="test.text">
     `;
     }
+    
+    if (selectedCommand.hasMix) {
+        commandDetailsContainer.innerHTML += `
+            <label for="valueMix">Mix :</label>
+            <input type="number" id="valueMix" placeholder="Enter Mix">
+        `;
+    }else{
+        commandDetailsContainer.innerHTML += `
+        <input type="number" style="display: none;" id="valueMix" placeholder="Enter Mix">
+    `;
+    }
 
     commandDetailsContainer.innerHTML += `<p>Notes: ${selectedCommand.notes}</p>`;
+}
+
+function filterCommandDetailsByVersion() {
+    const selectElement = document.getElementById("commandSelector") as HTMLSelectElement;
+    const options = selectElement.options; // Récupère toutes les options
+
+    for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        const minVersion = option.getAttribute("data-min-version");
+        
+        if (minVersion && !isVersionSupported(minVersion)) {
+            option.style.display = "none"; // Masquer l'option
+        } else {
+            option.style.display = ""; // Afficher l'option (par sécurité)
+        }
+    }
+    const CustomTransition1 = document.getElementById('CustomTransition') as HTMLSelectElement;
+    const optionsTransition = CustomTransition1.options; // Récupère toutes les options
+    
+    for (let i = 0; i < optionsTransition.length; i++) {
+        const option = optionsTransition[i];
+        const minVersion = option.getAttribute("data-min-version");
+        
+        if (minVersion && !isVersionSupported(minVersion)) {
+            option.style.display = "none"; // Masquer l'option
+        } else {
+            option.style.display = ""; // Afficher l'option (par sécurité)
+        }
+    }
+    Alltransition = CustomTransition1.options;
 }
 
 // Fonction pour envoyer la commande
@@ -84,6 +131,12 @@ function sendCommand() {
     const valueInput = (document.getElementById('valueInput') as HTMLInputElement).value;
     const durationInput = (document.getElementById('durationInput') as HTMLInputElement).value;
     const valueSelectedName = (document.getElementById('valueSelectedName') as HTMLInputElement).value;
+    // Gestion du Mix : Soustraire 1 si une valeur valide est entrée
+    const valueMixElement = document.getElementById('valueMix') as HTMLInputElement;
+    const valueMix = valueMixElement && valueMixElement.value !== "" 
+        ? (parseInt(valueMixElement.value, 10) - 1).toString() // Soustraire 1
+        : "0"; // Valeur par défaut si le champ est vide ou non valide
+
     // Appeler la fonction d'envoi de l'API vMix avec les paramètres appropriés
-    ApiVmixSend(commandSelector, inputSelector, valueInput, durationInput, valueSelectedName);
+    ApiVmixSend(commandSelector, inputSelector, valueInput, durationInput, valueSelectedName,"", valueMix);
 }
