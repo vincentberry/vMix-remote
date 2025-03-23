@@ -104,7 +104,7 @@ function processPageSources(xmlDoc: Document) {
                 const inputContainer_InputcallPassword = document.getElementById('inputContainer_InputcallPassword') as HTMLInputElement;
                 inputContainer_InputcallPassword.value = callPassword;
                 const inputContainer_InputcallConnected = document.getElementById('inputContainer_InputcallConnected') as HTMLInputElement;
-                inputContainer_InputcallConnected.classList = callConnected;
+                inputContainer_InputcallConnected.className = callConnected;
                 document.getElementById('inputContainer_nav_vmixcall')!.style.display = "";
             }else{
                 document.getElementById('inputContainer_nav_vmixcall')!.style.display = "none";
