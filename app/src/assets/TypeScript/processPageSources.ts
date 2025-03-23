@@ -32,6 +32,10 @@ function processPageSources(xmlDoc: Document) {
             const meterF2 = input.getAttribute('meterF2');
             const gainDb = input.getAttribute('gainDb');
             const selectedIndex = input.getAttribute('selectedIndex');
+            const callVideoSource = input.getAttribute('callVideoSource') || "";
+            const callAudioSource = input.getAttribute('callAudioSource') || "";
+            const callConnected = input.getAttribute('callConnected') || "";
+            const callPassword = input.getAttribute('callPassword') || "";
 
             // Obtenir l'élément GT <text> et son contenu
             if (input.querySelector('text') || input.querySelector('image')) {
@@ -90,6 +94,20 @@ function processPageSources(xmlDoc: Document) {
                 document.getElementById('inputContainer_nav_list')!.style.display = "";
             } else {
                 document.getElementById('inputContainer_nav_list')!.style.display = "none";
+            }
+
+            if (type === "VideoCall") {
+                const inputContainer_List_videoSources = document.getElementById('inputContainer_List_videoSources') as HTMLSelectElement;
+                inputContainer_List_videoSources.value = callVideoSource;
+                const inputContainer_List_audioSources = document.getElementById('inputContainer_List_audioSources') as HTMLSelectElement;
+                inputContainer_List_audioSources.value = callAudioSource;
+                const inputContainer_InputcallPassword = document.getElementById('inputContainer_InputcallPassword') as HTMLInputElement;
+                inputContainer_InputcallPassword.value = callPassword;
+                const inputContainer_InputcallConnected = document.getElementById('inputContainer_InputcallConnected') as HTMLInputElement;
+                inputContainer_InputcallConnected.classList = callConnected;
+                document.getElementById('inputContainer_nav_vmixcall')!.style.display = "";
+            }else{
+                document.getElementById('inputContainer_nav_vmixcall')!.style.display = "none";
             }
 
             processPageSources_updateLayers(input);
@@ -360,7 +378,8 @@ function changeMenu(menuName: string) {
         'color_correction': 'color_correction',
         'position': 'position',
         'layers': 'layers',
-        'gt': 'gt'
+        'gt': 'gt',
+        'vmixcall': 'vmixcall'
     };
 
     // Réinitialiser toutes les classes à une chaîne vide
@@ -384,7 +403,7 @@ function processPageSources_updateInput_layers(xmlDoc: Document) {
         if (selectElement) {
             inputSources.forEach(inputSource => {
                 const key = inputSource.getAttribute('key')!;
-                const title = inputSource.getAttribute('number')! + " :" + inputSource.getAttribute('title')!;
+                const title = inputSource.getAttribute('number')! + ": " + inputSource.getAttribute('title')!;
 
                 // Check if the option already exists
                 const existingOption = selectElement.querySelector('option[value="' + key + '"]');

@@ -19,11 +19,11 @@ main {
         }
     }
 
-    .center{
+    .center {
         @include center;
     }
 
-    .ContainerCommandSelector{
+    .ContainerCommandSelector {
         @include center;
         justify-content: space-between;
         margin: 15px 0;
@@ -32,20 +32,95 @@ main {
         border: 1px solid $color-info;
         width: 1400px;
 
-        &.center{
+        &.center {
             @include center;
         }
 
-        p{
+        p {
             color: $background;
             font-size: 0.9rem;
             padding-top: 5px;
         }
 
-        select{
+        select {
             cursor: pointer;
         }
 
+    }
+
+
+
+
+    #headerContainer {
+        padding-bottom: 20px;
+        border-bottom: 1px solid $primary-btn;
+
+        .video {
+            height: 140.625px;
+            width: 250px;
+
+            &.program{
+                background-color: $program;
+            }
+            &.preview{
+                background-color: $preview;
+            }
+        }
+
+        .transition {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+
+            button{
+                @include center;
+                margin: 5px 10px;
+                background: $background_item;
+                border-radius: 0px;
+                border: 1px solid $primary-btn;
+                &:hover {
+                        background-color: lighten($background, 10%);
+
+                }
+            }
+
+            .Mix-transition {
+                width: 140px;
+                margin: 5px 10px;
+                border-left: 1px solid $primary-btn;
+                @include All-transition;
+        
+                .custom {
+                    width: calc(100%);
+                    .transparent {
+                        top: -5px;
+                        left: -10px;
+                    }
+        
+                    select {
+                        width: calc(100%);
+                        padding: 10px 25px;
+                    }
+                }
+            }
+        }
+    }
+
+    .Mix-transition {
+        width: 100px;
+        border-left: 1px solid $primary-btn;
+        @include All-transition;
+
+        .custom {
+            .transparent {
+                top: -10px;
+                left: -10px;
+            }
+
+            select {
+                padding: 10px 25px;
+            }
+        }
     }
 
     #videoSourcesContainer {

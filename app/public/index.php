@@ -25,6 +25,8 @@ require $Dir_inc . 'vmix_script.php';
                             <div id="statut_streaming1" class=""></div>
                             <div id="statut_streaming2" class=""></div>
                             <div id="statut_streaming3" class=""></div>
+                            <div id="statut_streaming4" class="" data-min-version="28"></div>
+                            <div id="statut_streaming5" class="" data-min-version="28"></div>
                         </div>
                     </div>
                     <div id="recording" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the recording?','StartStopRecording')" class="statut_vmix">
@@ -41,6 +43,9 @@ require $Dir_inc . 'vmix_script.php';
                     </div>
                     <div id="fullscreen" onclick="ConfirmApiVmixSend('Are you sure you want to Start/Stop the fullscreen?','Fullscreen')" class="statut_vmix">
                         <h1>fullscreen</h1>
+                    </div>
+                    <div id="settings" onclick="OpenPageSettings()" class="statut_vmix" data-min-version="28">
+                        <img src="./assets/icon/Settings.svg" class="video">
                     </div>
                 </div>
             </div>
@@ -61,10 +66,28 @@ require $Dir_inc . 'vmix_script.php';
                 <button onclick="sendCommand()">Send Command</button>
             </div>
         </section>
-        <button onclick="ApiVmixSend('Cut', previewNumber)">CUT</button>
-        <button onclick="ApiVmixSend('Fade', previewNumber)">FACE</button>
-        <button onclick="ApiVmixSend('Stinger1', previewNumber)">STINGER 1</button>
-        <button onclick="ApiVmixSend('Merge', previewNumber)">MERGE</button>
+        <section id="headerContainer" class="center">
+            <div class="video preview">
+                PREVIEW
+            </div>
+            <div class="transition">
+                <button onclick="ApiVmixSend('Cut', previewNumber)">CUT</button>
+                <button onclick="ApiVmixSend('Transition1', previewNumber)">Transition1</button>
+                <button onclick="ApiVmixSend('Transition2', previewNumber)">Transition2</button>
+                <button onclick="ApiVmixSend('Transition3', previewNumber)">Transition3</button>
+                <button onclick="ApiVmixSend('Transition4', previewNumber)">Transition4</button>
+                <div class="Mix-transition overlay ">
+                    <div class="custom">
+                        <button class="transparent" onclick="ApiVmixSend(document.getElementById('CustomTransition').value, previewNumber)"></button>
+                        <select id="CustomTransition">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="video program">
+                PROGRAM
+            </div>
+        </section>
         <section class="VmixContainer">
             <div id="videoSourcesContainer"></div>
             <div>
@@ -86,8 +109,9 @@ require $Dir_inc . 'vmix_script.php';
                         <button id="inputContainer_nav_position" onclick="changeMenu('position')">Position</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
                         <button id="inputContainer_nav_gt" onclick="changeMenu('gt')">GT Title</button>
+                        <button id="inputContainer_nav_vmixcall" onclick="changeMenu('vmixcall')">vMix Call</button>
                     </div>
-                    <div class="content">
+                    <div class="content inputContainerContent">
                         <div id="inputContainer_content_general" class="general">
                             <div class="head">
                                 <h1 for="inputContainer_InputType"> </h1>
@@ -426,6 +450,64 @@ require $Dir_inc . 'vmix_script.php';
                                 </div>
                             </div>
                         </div>
+                        <div id="inputContainer_content_vmixcall" class="vmixcall" style="display:none;">
+                        <div class="left">
+                                <div class="callConnect">
+                                    <label for="inputContainer_InputcallPassword">Call Password</label>
+                                        <input id="inputContainer_InputcallPassword" type="text" disabled>
+                                        <input id="inputContainer_InputcallConnected" type="text" disabled>
+                                </div>
+                                <div class="list">
+                                    <div class="layer_number">
+                                        <label>Video Source</label>
+                                    </div>
+                                    <select onchange="ApiVmixSend('VideoCallVideoSource', inputSelect, this.value)"  id="inputContainer_List_videoSources">
+                                        <option value="Output1">Output 1</option>
+                                        <option value="Output2">Output 2</option>
+                                        <option value="Output3">Output 3</option>
+                                        <option value="Output4">Output 4</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                                <div class="list">
+                                    <div class="layer_number">
+                                        <label>Audio Source</label>
+                                    </div>
+                                    <select onchange="ApiVmixSend('VideoCallAudioSource', inputSelect, this.value)" id="inputContainer_List_audioSources">
+                                        <option value="Headphones">Headphones</option>
+                                        <option value="Master">Master</option>
+                                        <option value="BusA">Bus A</option>
+                                        <option value="BusB">Bus B</option>
+                                        <option value="BusC">Bus C</option>
+                                        <option value="BusD">Bus D</option>
+                                        <option value="BusE">Bus E</option>
+                                        <option value="BusF">Bus F</option>
+                                        <option value="BusG">Bus G</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="SettingsContainer" class="inputContainer disabled">
+            <div id="SettingsContainer_Container" class="Container">
+                <div class="header">
+                    <h1 id="SettingsContainer_header">Settings</h1>
+                    <span class="closeButton" onclick="closePageSettings(this)">✖</span>
+                </div>
+                <div class="body">
+                    <div id="SettingsContainer_nav" class="nav">
+                        <button id="SettingsContainer_nav_general" class="active" onclick="changeMenuSettings('general')">Output/NDI/SRT</button>
+                    </div>
+                    <div class="content SettingsContainerContent">
+                        <div id="SettingsContainer_content_general" class="general">
+                            <div class="head">
+                            </div>
+                            <div class="GeneralContainer" id="SettingsContainer_content_general_GeneralContainer">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -449,6 +531,7 @@ require $Dir_inc . 'vmix_script.php';
 <script src="./assets/js/processAudioBus.js"></script>
 <script src="./assets/js/processVideoSources.js"></script>
 <script src="./assets/js/processPageSources.js"></script>
+<script src="./assets/js/processPageSettings.js"></script>
 <script src="./assets/js/processEdit.js"></script>
 <script src="./assets/js/api_vmix.js"></script>
 <script src="./assets/js/submit_vmix.js"></script>

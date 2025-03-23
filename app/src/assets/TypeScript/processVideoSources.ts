@@ -8,27 +8,49 @@ function processVideoSources(xmlDoc: Document): void {
         // Parcourir toutes les sources video
         videoSources.forEach(videoSource => {
             // Récupérer la clé unique de la source video
-            const key: string | null = videoSource.getAttribute('key');
+            let key: string | null = videoSource.getAttribute('key');
 
             // Vérifier si une source video avec la même clé existe déjà dans le conteneur
-            const existingAudioSource = document.querySelector(`.video-source[data-key="${key}"]`) as HTMLElement;;
+            const existingVideoSource = document.querySelector(`.video-source[data-key="${key}"]`) as HTMLElement;;
 
             // Si la source video existe déjà, la mettre à jour
-            if (existingAudioSource) {
+            if (existingVideoSource && key) {
                 // Mettre à jour les informations nécessaires
-                const VideoSourceHTML = getVideoSourceHTML(videoSource);
-                if (existingAudioSource.innerHTML != VideoSourceHTML) {
-                    existingAudioSource.innerHTML = VideoSourceHTML;
+                let VideoSourceHTML = getVideoSourceHTML(videoSource);
+                const title = videoSource.getAttribute('title');
+                if (videoSource.getAttribute('type') == "Mix" && title && isVersionSupported("27")) {
+                    const match = title.match(/Mix(\d+)/);
+                    if (match && match[1]) {
+                        const mixNumber = match[1]; // Numéro trouvé après "Mix"
+                        VideoSourceHTML += getVideoMixSourceHTML(xmlDoc, mixNumber, key);
+                    } else {
+                        VideoSourceHTML += `<div class="Mix-source"><p>The input title must include the name of the mix, such as 'Mix2' or 'Mix3' or ... .</p></div>`
+                    }
                 }
-            } else if(key){
+
+                if (existingVideoSource.innerHTML != VideoSourceHTML) {
+                    existingVideoSource.innerHTML = VideoSourceHTML;
+                }
+            } else if (key) {
                 // Créer une nouvelle div pour la source video
                 const newDivElement = document.createElement('div');
-                newDivElement.className = 'video-source';
+                newDivElement.className = 'video-source ' +  (isVersionSupported("27") ? videoSource.getAttribute('type') : '');
                 newDivElement.setAttribute('data-key', key);
 
                 // Remplir la div avec les informations
                 newDivElement.innerHTML = getVideoSourceHTML(videoSource);
-
+                const title = videoSource.getAttribute('title');
+                if (videoSource.getAttribute('type') == "Mix" && title && isVersionSupported("27")) {
+                    const match = title.match(/Mix(\d+)/);
+                    if (match && match[1]) {
+                        const mixNumber = match[1]; // Numéro trouvé après "Mix"
+                        if (match && match[1]) {
+                            newDivElement.innerHTML += getVideoMixSourceHTML(xmlDoc, mixNumber, key);
+                        } else {
+                            newDivElement.innerHTML += `<div class="Mix-source"><p>The input title must include the name of the mix, such as 'Mix2' or 'Mix3' or ... .</p></div>`
+                        }
+                    }
+                }
                 // Ajouter la nouvelle div au conteneur
                 container.appendChild(newDivElement);
             }
@@ -101,4 +123,77 @@ function getVideoSourceHTML(videoSource: Element): string {
         <button class="menu grid_menu" onclick="OpenPageInput('${key}')"></button>
     </div>
 `;
+}
+// Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
+function getVideoMixSourceHTML(xmlDoc: Document, MixNumber: string, Inputkey: string): string {
+    const inputSources = xmlDoc.querySelectorAll('input');
+    const mixSources = xmlDoc.querySelector(`mix[number="${MixNumber}"]`);
+
+    const newOptions: HTMLOptionElement[] = [];
+    inputSources.forEach(inputSource => {
+        const key = inputSource.getAttribute('key')!;
+        const title = inputSource.getAttribute('number')! + ": " + inputSource.getAttribute('title')!;
+        const option = document.createElement('option');
+        if (key != Inputkey) {
+            option.value = key;
+            option.text = title;
+            option.setAttribute('data-number', inputSource.getAttribute('number')!);
+            newOptions.push(option);
+        }
+    });
+
+    const mixPreview = mixSources?.querySelector('preview')?.textContent || "";
+    const mixActive = mixSources?.querySelector('active')?.textContent || "";
+
+    // Générer les options en tant que HTML Program
+    const optionsHTMLProgram = newOptions.map(option => {
+        const isSelectedForActive = option.getAttribute('data-number') === mixActive ? ' selected=""' : '';
+        return `
+            <option value="${option.value}"${isSelectedForActive}>${option.text}</option>`;
+    }).join('');
+
+    // Générer les options en tant que HTML Preview
+    const optionsHTMLPreview = newOptions.map(option => {
+        const isSelectedForPreview = option.getAttribute('data-number') === mixPreview ? ' selected=""' : '';
+        return `
+            <option value="${option.value}"${isSelectedForPreview}>${option.text}</option>`;
+    }).join('');
+
+    // Convertir HTMLOptionsCollection en une chaîne HTML
+    let optionsHTML = "";
+    if (Alltransition){
+        for (let i = 0; i < Alltransition.length; i++) {
+            const option = Alltransition[i];
+            optionsHTML += `<option value="${option.value}">${option.textContent}</option>`;
+        }
+    }
+
+    // Retourner le HTML complet
+    return `
+    <div class="Mix-source">
+        <div class="program">
+            <label>Program</label>
+            <select onchange="ApiVmixSend('ActiveInput',this.value,'','','','','${(parseInt(MixNumber, 10) - 1).toString()}')">
+                <option value="0">None</option>
+                ${optionsHTMLProgram}
+            </select>
+        </div>
+        <div class="preview">
+            <label>Preview</label>
+            <select onchange="ApiVmixSend('PreviewInput',this.value,'','','','','${(parseInt(MixNumber, 10) - 1).toString()}')">
+                <option value="0">None</option>
+                ${optionsHTMLPreview}
+            </select>
+        </div>
+    </div>
+    <div class="Mix-transition overlay">
+        <button onclick="ApiVmixSend('Cut','','','','','','${(parseInt(MixNumber, 10) - 1).toString()}')">CUT</button>
+        <div class="custom">
+            <button class="transparent" onclick="ApiVmixSend(document.getElementById('mixSelectTransition${Inputkey}').value,'','','','','','${(parseInt(MixNumber, 10) - 1).toString()}')"></button>
+            <select id="mixSelectTransition${Inputkey}">
+                ${optionsHTML}
+            </select>
+        </div>
+    </div>
+    `;
 }

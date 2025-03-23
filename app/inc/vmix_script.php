@@ -50,8 +50,9 @@
                                 Dim durationParam As String = command.SelectSingleNode("durationParam").InnerText
                                 Dim selectedNameParam As String = command.SelectSingleNode("selectedNameParam").InnerText
                                 Dim selectedIndexParam As String = command.SelectSingleNode("selectedIndexParam").InnerText
+                                Dim Mix As String = command.SelectSingleNode("Mix").InnerText
 
-                                API.Function(functionType, Input:=inputParam, Value:=valueParam, Duration:=durationParam, selectedName:=selectedNameParam, selectedIndex:=selectedIndexParam)
+                                API.Function(functionType, Input:=inputParam, Value:=valueParam, Duration:=durationParam, selectedName:=selectedNameParam, selectedIndex:=selectedIndexParam, Mix:=Mix)
 
                                 If functionType = "session_delay" Then
                                         session_delay = valueParam

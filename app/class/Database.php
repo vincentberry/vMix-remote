@@ -17,6 +17,7 @@ class Database{
                             `value` TEXT DEFAULT '0',
                             `selectedName` TEXT DEFAULT '0',
                             `selectedIndex` TEXT DEFAULT '0',
+                            `Mix` TEXT DEFAULT '0',
                             `push_vmix` INTEGER NOT NULL DEFAULT 0);"                                          
         );
     }

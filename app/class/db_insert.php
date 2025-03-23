@@ -2,9 +2,9 @@
 
 class db_insert{
 
-    public static function new_command($session_vmix, $command, $input, $value, $duration, $selectedName, $selectedIndex){
+    public static function new_command($session_vmix, $command, $input, $value, $duration, $selectedName, $selectedIndex, $Mix){
 
-        App::getDatabase()->query('INSERT INTO command(date_time, session_vmix, command, input, value, duration, selectedName, selectedIndex) VALUES(CURRENT_TIMESTAMP, ?, ?,?,?,?,?,?)', [
+        App::getDatabase()->query('INSERT INTO command(date_time, session_vmix, command, input, value, duration, selectedName, selectedIndex, Mix) VALUES(CURRENT_TIMESTAMP, ?, ?,?,?,?,?,?,?)', [
             $session_vmix,
             $command, 
             $input, 
@@ -12,6 +12,7 @@ class db_insert{
             $duration,
             $selectedName, 
             $selectedIndex,
+            $Mix
             ]
         );
         return App::getDatabase()->lastInsertId();

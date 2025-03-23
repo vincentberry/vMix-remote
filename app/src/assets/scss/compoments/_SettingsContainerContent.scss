@@ -1,0 +1,255 @@
+input,
+textarea {
+    background: $inputContainer_input;
+    border: 1px solid $background;
+    border-radius: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px;
+    color: $background_item;
+    width: 500px;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    cursor: pointer;
+    -webkit-appearance: none;
+    border: 0;
+    background: transparent;
+    width: 15px;
+    height: 15px;
+    border: 1px solid $background_item;
+
+    &:checked:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+        background-color: $audio;
+    }
+
+}
+
+label {
+    color: $background_item;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px;
+}
+
+.Buttonvalid {
+    @include center;
+    @include icon($icon-check);
+    color: $background_item;
+    padding: 5px;
+    font-size: 1.5rem;
+    transition: 0.5s ease;
+    cursor: pointer;
+
+    &:hover {
+        color: $audio;
+        transform: scale(1.2)
+    }
+}
+
+@mixin mixinhead {
+    @include center-custom(space-between);
+    height: 100%;
+    background: $background_item;
+
+    h1 {
+        font-size: 0.8rem;
+        padding-left: 10px;
+    }
+
+    button {
+        height: 100%;
+        margin: 0;
+        border: 0px;
+        margin-left: 2px;
+    }
+}
+
+.general {
+
+    .GeneralContainer {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding: 10px;
+
+        .list {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 0;
+            margin: 2px;
+            height: 26px;
+    
+            .Output_number {
+                @include center;
+                width: 100px;
+                height: 100%;
+                background: $background;
+    
+                label {
+                    color: $color-text;
+                }
+            }
+    
+    
+            select {
+                padding: 4px;
+                width: 200px;
+                border-radius: 0;
+                height: 100%;
+            }
+    
+            button {
+                height: 100%;
+                padding: 5px 20px;
+                margin: 0px 0px 0px 5px;
+                border: 0;
+                font-weight: 500;
+                transition: 0.5s ease;
+
+                &.NDI{
+                    cursor:not-allowed;
+                }
+    
+                &.Stop {
+                    padding: 5px 10px;
+                    background: $audio;
+                    transition: 0.5s ease;
+                    &:hover{
+                        background: lighten($audio, 10%);
+                    }
+                }
+    
+                &.Start {
+                    padding: 5px 10px;
+                    background: $background;
+                    transition: 0.5s ease;
+                    &:hover{
+                        background: lighten($background, 10%);
+                    }
+                }
+            }
+        }
+    }
+
+    .head {
+        @include mixinhead;
+    }
+}
+
+.gessnerdal {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+
+    @media (max-width: 1300px) {
+        grid-template-columns: 1fr;
+        margin-bottom: 50px;
+    }
+
+    .left {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+
+   
+    }
+
+    .rigth {
+        position: relative;
+
+        h1 {
+            font-size: 1rem;
+            padding: 10px;
+            color: $background_video;
+        }
+
+        button {
+            position: absolute;
+            transform: translateY(-50%) translateX(50%);
+            top: 10px;
+            right: 25px;
+            font-size: 0.8rem;
+            padding: 5px;
+            border: 0;
+        }
+
+        .mode {
+            border: $background solid 1px;
+            padding: 10px;
+            margin-top: 5px;
+            background: $color-muted;
+
+            .mode_header {
+                @include center;
+                position: relative;
+
+                h3 {
+                    color: $background_item;
+                    text-transform: uppercase;
+                    font-style: 1rem;
+                    font-weight: 600;
+                    padding-bottom: 15px;
+                    text-decoration-line: underline;
+                    transition: 0.5s ease;
+                }
+
+                button {
+                    position: absolute;
+                    transform: translateY(-50%) translateX(50%);
+                    top: 0;
+                    right: 10px;
+                    font-size: 0.8rem;
+                    padding: 5px;
+                    border: 0;
+                }
+
+
+            }
+
+            .mode_content {
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+
+                div {
+                    @include center;
+                    display: flex;
+                    height: 26px;
+                    margin: 5px;
+
+                    .label_content {
+                        @include center;
+                        width: 50px;
+                        height: 100%;
+                        background: $background;
+
+                        label {
+                            color: $color-text;
+                        }
+                    }
+
+                    input {
+                        width: 100px;
+                        background: $color-text;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
