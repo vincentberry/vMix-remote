@@ -566,3 +566,65 @@ label {
 
     }
 }
+
+.vmixcall {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+
+    @media (max-width: 1300px) {
+        grid-template-columns: 1fr;
+        margin-bottom: 50px;
+    }
+
+    .left {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        .callConnect{
+            #inputContainer_InputcallPassword{
+                width: 200px;
+            }
+            input#inputContainer_InputcallConnected {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: $color-danger; // Default to red
+                color: $color-danger;
+                text-align: center;
+
+                &.True {
+                    background-color: $audio; // Green if true
+                }
+            }
+        }
+
+        .list {
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            margin: 2px;
+            height: 26px;
+
+            .layer_number {
+                @include center;
+                height: 100%;
+                background: $background;
+
+                label {
+                    color: $color-text;
+                }
+            }
+
+
+            select {
+                padding: 4px;
+                width: 200px;
+                border-radius: 0;
+                height: 100%;
+            }
+        }
+    }
+}

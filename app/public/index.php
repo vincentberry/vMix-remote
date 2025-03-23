@@ -109,6 +109,7 @@ require $Dir_inc . 'vmix_script.php';
                         <button id="inputContainer_nav_position" onclick="changeMenu('position')">Position</button>
                         <button id="inputContainer_nav_layers" onclick="changeMenu('layers')">Layers</button>
                         <button id="inputContainer_nav_gt" onclick="changeMenu('gt')">GT Title</button>
+                        <button id="inputContainer_nav_vmixcall" onclick="changeMenu('vmixcall')">vMix Call</button>
                     </div>
                     <div class="content inputContainerContent">
                         <div id="inputContainer_content_general" class="general">
@@ -446,6 +447,43 @@ require $Dir_inc . 'vmix_script.php';
                                             <input id="inputContainer_Content_Layers_Select_border_Radius" type="text">
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="inputContainer_content_vmixcall" class="vmixcall" style="display:none;">
+                        <div class="left">
+                                <div class="callConnect">
+                                    <label for="inputContainer_InputcallPassword">Call Password</label>
+                                        <input id="inputContainer_InputcallPassword" type="text" disabled>
+                                        <input id="inputContainer_InputcallConnected" type="text" disabled>
+                                </div>
+                                <div class="list">
+                                    <div class="layer_number">
+                                        <label>Video Source</label>
+                                    </div>
+                                    <select onchange="ApiVmixSend('VideoCallVideoSource', inputSelect, this.value)"  id="inputContainer_List_videoSources">
+                                        <option value="Output1">Output 1</option>
+                                        <option value="Output2">Output 2</option>
+                                        <option value="Output3">Output 3</option>
+                                        <option value="Output4">Output 4</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                                <div class="list">
+                                    <div class="layer_number">
+                                        <label>Audio Source</label>
+                                    </div>
+                                    <select onchange="ApiVmixSend('VideoCallAudioSource', inputSelect, this.value)" id="inputContainer_List_audioSources">
+                                        <option value="Headphones">Headphones</option>
+                                        <option value="Master">Master</option>
+                                        <option value="BusA">Bus A</option>
+                                        <option value="BusB">Bus B</option>
+                                        <option value="BusC">Bus C</option>
+                                        <option value="BusD">Bus D</option>
+                                        <option value="BusE">Bus E</option>
+                                        <option value="BusF">Bus F</option>
+                                        <option value="BusG">Bus G</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
