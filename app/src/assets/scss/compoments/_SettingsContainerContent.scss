@@ -115,19 +115,28 @@ label {
                 margin: 0px 0px 0px 5px;
                 border: 0;
                 font-weight: 500;
+                transition: 0.5s ease;
 
-                &.NDI, &.SRT{
+                &.NDI{
                     cursor:not-allowed;
                 }
     
-                &.on {
+                &.Stop {
                     padding: 5px 10px;
                     background: $audio;
+                    transition: 0.5s ease;
+                    &:hover{
+                        background: lighten($audio, 10%);
+                    }
                 }
     
-                &.off {
+                &.Start {
                     padding: 5px 10px;
                     background: $background;
+                    transition: 0.5s ease;
+                    &:hover{
+                        background: lighten($background, 10%);
+                    }
                 }
             }
         }

@@ -66,10 +66,28 @@ require $Dir_inc . 'vmix_script.php';
                 <button onclick="sendCommand()">Send Command</button>
             </div>
         </section>
-        <button onclick="ApiVmixSend('Cut', previewNumber)">CUT</button>
-        <button onclick="ApiVmixSend('Fade', previewNumber)">FACE</button>
-        <button onclick="ApiVmixSend('Stinger1', previewNumber)">STINGER 1</button>
-        <button onclick="ApiVmixSend('Merge', previewNumber)">MERGE</button>
+        <section id="headerContainer" class="center">
+            <div class="video preview">
+                PREVIEW
+            </div>
+            <div class="transition">
+                <button onclick="ApiVmixSend('Cut', previewNumber)">CUT</button>
+                <button onclick="ApiVmixSend('Transition1', previewNumber)">Transition1</button>
+                <button onclick="ApiVmixSend('Transition2', previewNumber)">Transition2</button>
+                <button onclick="ApiVmixSend('Transition3', previewNumber)">Transition3</button>
+                <button onclick="ApiVmixSend('Transition4', previewNumber)">Transition4</button>
+                <div class="Mix-transition overlay ">
+                    <div class="custom">
+                        <button class="transparent" onclick="ApiVmixSend(document.getElementById('CustomTransition').value, previewNumber)"></button>
+                        <select id="CustomTransition">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="video program">
+                PROGRAM
+            </div>
+        </section>
         <section class="VmixContainer">
             <div id="videoSourcesContainer"></div>
             <div>

@@ -7,6 +7,8 @@ fetch('api_vmix.json')
         commands = data; // Assigner les données à la variable commands
         // Générer les options du menu déroulant
         const commandSelector = document.getElementById('commandSelector') as HTMLSelectElement;
+        const CustomTransition1 = document.getElementById('CustomTransition') as HTMLSelectElement;
+       // const Transition: string
         commands.forEach(command => {
             const option = document.createElement('option');
             option.value = command.name;
@@ -14,6 +16,9 @@ fetch('api_vmix.json')
             option.setAttribute('data-min-version', command.version);
             if (!option.selected) {
                 commandSelector.appendChild(option);
+                if(command.group === 'transition' && command.hasValue === 0 && command.hasMix ==="Optional"){
+                    CustomTransition1.appendChild(option);
+                }
             }
         });
 
@@ -87,6 +92,36 @@ function updateCommandDetails() {
     }
 
     commandDetailsContainer.innerHTML += `<p>Notes: ${selectedCommand.notes}</p>`;
+}
+
+function filterCommandDetailsByVersion() {
+    const selectElement = document.getElementById("commandSelector") as HTMLSelectElement;
+    const options = selectElement.options; // Récupère toutes les options
+
+    for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        const minVersion = option.getAttribute("data-min-version");
+        
+        if (minVersion && !isVersionSupported(minVersion)) {
+            option.style.display = "none"; // Masquer l'option
+        } else {
+            option.style.display = ""; // Afficher l'option (par sécurité)
+        }
+    }
+    const CustomTransition1 = document.getElementById('CustomTransition') as HTMLSelectElement;
+    const optionsTransition = CustomTransition1.options; // Récupère toutes les options
+    
+    for (let i = 0; i < optionsTransition.length; i++) {
+        const option = optionsTransition[i];
+        const minVersion = option.getAttribute("data-min-version");
+        
+        if (minVersion && !isVersionSupported(minVersion)) {
+            option.style.display = "none"; // Masquer l'option
+        } else {
+            option.style.display = ""; // Afficher l'option (par sécurité)
+        }
+    }
+    Alltransition = CustomTransition1.options;
 }
 
 // Fonction pour envoyer la commande

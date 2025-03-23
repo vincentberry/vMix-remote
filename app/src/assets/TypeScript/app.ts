@@ -9,7 +9,7 @@ let activeOverlay2: number | undefined;
 let activeOverlay3: number | undefined;
 let activeOverlay4: number | undefined;
 let XmlFile: Document | undefined; // Définissez le type approprié pour XmlFile
-
+let Alltransition: HTMLOptionsCollection
 const getHttpRequest = (): XMLHttpRequest | false => {
     let httpRequest: XMLHttpRequest | false = false;
 
@@ -95,6 +95,7 @@ function chargerFichierXML() {
                             document.getElementById('fast')!.className = "off";
                         }
                         update_url(vmixConnect!.value);
+                        filterCommandDetailsByVersion();
                     }
                 } else if (xhr.status === 301) {
                     window.location.href = JSON.parse(xhr.responseText)['redirect'];

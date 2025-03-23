@@ -30,7 +30,6 @@ function processVideoSources(xmlDoc: Document): void {
 
                 if (existingVideoSource.innerHTML != VideoSourceHTML) {
                     existingVideoSource.innerHTML = VideoSourceHTML;
-                    console.log(VideoSourceHTML);
                 }
             } else if (key) {
                 // Créer une nouvelle div pour la source video
@@ -160,6 +159,15 @@ function getVideoMixSourceHTML(xmlDoc: Document, MixNumber: string, Inputkey: st
             <option value="${option.value}"${isSelectedForPreview}>${option.text}</option>`;
     }).join('');
 
+    // Convertir HTMLOptionsCollection en une chaîne HTML
+    let optionsHTML = "";
+    if (Alltransition){
+        for (let i = 0; i < Alltransition.length; i++) {
+            const option = Alltransition[i];
+            optionsHTML += `<option value="${option.value}">${option.textContent}</option>`;
+        }
+    }
+
     // Retourner le HTML complet
     return `
     <div class="Mix-source">
@@ -183,14 +191,7 @@ function getVideoMixSourceHTML(xmlDoc: Document, MixNumber: string, Inputkey: st
         <div class="custom">
             <button class="transparent" onclick="ApiVmixSend(document.getElementById('mixSelectTransition${Inputkey}').value,'','','','','','${(parseInt(MixNumber, 10) - 1).toString()}')"></button>
             <select id="mixSelectTransition${Inputkey}">
-                <option value="Fade">FADE</option>
-                <option value="Merge">Merge</option>
-                <option value="Wipe">Wipe</option>
-                <option value="Slide">Slide</option>
-                <option value="Stinger1">STINGER 1</option>
-                <option value="Stinger2">STINGER 2</option>
-                <option value="Stinger3">STINGER 3</option>
-                <option value="Stinger4">STINGER 4</option>
+                ${optionsHTML}
             </select>
         </div>
     </div>
