@@ -15,6 +15,7 @@ require $Dir_inc . 'vmix_script.php';
             </select>
         </div>
         <button onclick="copyToClipboard('VmixScript')">DOWNLOAD SCRIPT FOR VMIX</button>
+        <h4>It's the demo version</h4>
         <p>BY VINCENT BERRY</p>
         <a href="https://github.com/vincentberry/vmix-remote" target="_blank">
             <img class="github" src="./assets/icon/GitHub.svg" alt="github">
