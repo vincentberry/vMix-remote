@@ -3,6 +3,13 @@ class Database{
 
     private $pdo;
 
+    /**
+     * Constructs the Database instance.
+     *
+     * Initializes a PDO connection to the SQLite database located at '/var/www/html/db/database.sqlite', sets error mode to throw exceptions,
+     * and configures the default fetch mode to associative arrays. Also ensures that the 'command' table exists with the expected schema,
+     * including the newly added 'Mix' column with a default value of '0' along with other command-related fields.
+     */
     public function __construct(){
         $this->pdo = new PDO('sqlite:/var/www/html/db/database.sqlite');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

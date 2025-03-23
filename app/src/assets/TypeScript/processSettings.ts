@@ -1,3 +1,14 @@
+/**
+ * Processes an XML document to extract and apply configuration settings.
+ *
+ * This function parses numerical values for preview, active, and overlay elements,
+ * updates the project name based on a preset element, and extracts version information
+ * to update the global version state and hide unsupported features. It also updates
+ * the state of checkbox UI elements for streaming, recording, external, and fullscreen
+ * features based on their boolean values specified in the XML.
+ *
+ * @param xmlDoc - The XML document containing configuration settings.
+ */
 function processSettings(xmlDoc: Document): void {
     previewNumber = parseInt(xmlDoc.querySelector('preview')?.textContent || "");
     activeNumber = parseInt(xmlDoc.querySelector('active')?.textContent || "");
@@ -30,6 +41,18 @@ function processSettings(xmlDoc: Document): void {
     updateCheckboxClass('fullscreen', JSON.parse(xmlDoc.querySelector('fullscreen')?.textContent?.trim().toLowerCase() || "false"), xmlDoc);    
 }
 
+/**
+ * Updates the visual state of a checkbox element and synchronizes its status based on associated XML data.
+ *
+ * When activated (indicated by a true flag and a provided XML document), the function adds the 'true' class to the checkbox element. 
+ * It then retrieves channel or filename attributes from the XML—using "channel1" to "channel5" for a checkbox with the ID 'streaming' 
+ * and "filename1" to "filename5" for a checkbox with the ID 'recording'—and updates the status for channels 1 through 5 via a call 
+ * to `updateStatus`. When deactivated, the function removes the 'true' class and clears the status for all five channels.
+ *
+ * @param checkboxId - The ID of the checkbox element in the DOM.
+ * @param className - A boolean flag indicating whether the checkbox should be marked as active.
+ * @param xmlDoc - An optional XML document containing attributes for channel or filename updates.
+ */
 function updateCheckboxClass(checkboxId: string, className: boolean, xmlDoc: Document | null = null): void {
 
     if (className && xmlDoc) {

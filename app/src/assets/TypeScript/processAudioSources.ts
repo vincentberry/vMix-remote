@@ -1,4 +1,10 @@
-// Fonction pour traiter les sources audio
+/**
+ * Processes muted audio source elements from the given XML document and synchronizes them with the DOM.
+ *
+ * This function retrieves all muted audio source elements from the provided XML document and updates the container with ID "audioSourcesContainer". For each audio source, it extracts a unique key and either updates an existing element if the HTML content has changed or creates a new element when necessary. After processing, it removes any audio source elements in the container that no longer have a corresponding entry in the XML.
+ *
+ * @param xmlDoc - An XML document containing audio source elements.
+ */
 function processAudioSources(xmlDoc: Document): void {
 
     const audioSources = xmlDoc.querySelectorAll('input[muted]');

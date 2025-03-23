@@ -1,6 +1,12 @@
 let clickCount_closePageSettings: boolean = false;
 
-// Fonction pour convertir le XML en HTML et l'ajouter à la page
+/**
+ * Converts settings from an XML document to HTML and updates the settings container.
+ *
+ * This function checks whether the current version supports settings updates (version "28"). If supported, it retrieves the general settings container from the DOM and updates its content using HTML generated from the provided XML document. A nested helper function ensures that the container is only updated if the new value is non-empty and differs from the current content, applying a default value or checkbox state as needed. If the version is not supported, an error message is logged.
+ *
+ * @param xmlDoc - The XML document containing the settings configuration.
+ */
 function processPageSettings(xmlDoc: Document) {
     if (isVersionSupported("28")) {
 
@@ -10,7 +16,21 @@ function processPageSettings(xmlDoc: Document) {
 
         }
 
-        // Fonction pour mettre à jour une valeur si elle est différente et non vide
+        /**
+         * Updates an element's content and value based on a new attribute string.
+         *
+         * The function trims the provided attribute and compares it to the element's current content, which may be its
+         * value, innerHTML, or checked state for checkbox inputs. If the trimmed attribute is non-empty and different from
+         * the current content, the function updates the element's value and innerHTML. For checkbox elements, it also sets
+         * the checked state using the provided default value.
+         *
+         * If the attribute is empty and a default value is provided, the function applies the default as the element's content,
+         * and for checkboxes, updates the checked state accordingly.
+         *
+         * @param element - The HTML element to update.
+         * @param attribute - The new value to set, trimmed of whitespace.
+         * @param defaultValue - An optional default value used when the attribute is empty.
+         */
         function updateValue(element: HTMLElement, attribute: string, defaultValue: string | null = null) {
             const attributeValue = attribute.trim();
             if (element && ((element as HTMLInputElement).value || element.innerHTML || ((element as HTMLInputElement).checked !== undefined && (element as HTMLInputElement).checked.toString()))) {
@@ -38,6 +58,12 @@ function processPageSettings(xmlDoc: Document) {
     }
 }
 
+/**
+ * Closes the settings interface.
+ *
+ * Resets the internal flag for pending settings closure and hides the settings container by
+ * adding the "disabled" class to the element with ID "SettingsContainer".
+ */
 function closePageSettings() {
     // Get the parent div and hide it
     clickCount_closePageSettings = false;
@@ -46,6 +72,15 @@ function closePageSettings() {
 
 document.addEventListener('DOMContentLoaded', function () {
     const popup = document.getElementById('SettingsContainer_Container');
+    /**
+     * Handles document click events to conditionally close the settings page.
+     *
+     * If the click occurs outside the popup and the settings container is active (not disabled), this
+     * handler resets the click count flag and, when the flag is set, invokes the function to close
+     * the page settings.
+     *
+     * @param event - The mouse click event.
+     */
     function closePageSettings_handleDocumentClick(event: MouseEvent) {
         // Vérifier si l'élément cliqué est en dehors de la popup
         if (!popup!.contains(event.target as Node) && !document.getElementById('SettingsContainer')!.classList.contains('disabled')) {
@@ -59,6 +94,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', closePageSettings_handleDocumentClick);
 });
 
+/**
+ * Opens the page settings interface.
+ *
+ * Resets the settings page close flag, retrieves the settings container element, and if both the global XML file and container are available, processes the XML data to update the settings and displays the settings interface by selecting the "general" menu and removing the "disabled" class. Logs an error to the console if the required elements are missing.
+ */
 function OpenPageSettings() {
     // Get the parent div and hide it
     clickCount_closePageSettings = false;
@@ -74,6 +114,19 @@ function OpenPageSettings() {
 
 }
 
+/**
+ * Generates HTML for the output settings interface by merging default configurations with XML data.
+ *
+ * The function initializes a default set of output configurations and updates these settings using
+ * attributes from the provided XML document. It then builds an HTML string that renders a control for
+ * each output, including a label, a select element populated with fixed options (such as "Output", "Preview",
+ * "MultiView", etc.), as well as dynamic "Mix" and "Input" options. For outputs of type "output", it additionally
+ * renders NDI and SRT buttons with their respective states. The onchange event of each select element is set to
+ * invoke a command-specific update function.
+ *
+ * @param xmlDoc - An XML document containing <output> elements that override the default output settings.
+ * @returns A string of HTML that represents the updated output settings controls.
+ */
 function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
 
     // Types pour les données des sorties
@@ -204,6 +257,15 @@ function processPageSettings_updateSettings_Output(xmlDoc: Document): string {
     return htmlOutput;
 }
 
+/**
+ * Activates the specified settings menu while hiding all others.
+ *
+ * Iterates over a predefined mapping of menu identifiers to update the navigation and content elements by clearing
+ * any active states and hiding their display. The menu corresponding to the provided key is then marked as active,
+ * and its content is made visible.
+ *
+ * @param menuName - The key identifying the menu to activate.
+ */
 function changeMenuSettings(menuName: string) {
     // Liste des menus et de leurs correspondances avec les IDs des éléments HTML
     const menuMapping: { [key: string]: string } = {
@@ -220,7 +282,18 @@ function changeMenuSettings(menuName: string) {
     (document.getElementById('SettingsContainer_nav_' + menuMapping[menuName]) as HTMLElement).className = 'active';
     (document.getElementById('SettingsContainer_content_' + menuMapping[menuName]) as HTMLElement).style.display = "";
 }
-//custom envoi vmix
+/**
+ * Sends a vMix command with updated output settings based on the selected option.
+ *
+ * This function extracts the output configuration from the provided HTML select element. It parses
+ * the selected option to determine whether it represents a "Mix" or an "Input" configuration. For
+ * a "Mix" option (e.g., "Mix 10"), it calculates the mix index by subtracting one from the provided
+ * number. For an "Input" option (e.g., "Input 150"), it uses the number directly. The function then
+ * sends the command and the extracted parameters to vMix via the ApiVmixSend function.
+ *
+ * @param command - The vMix command to be sent.
+ * @param selectElement - The HTML select element containing the output configuration.
+ */
 function processPageSettings_update_Output(command: string,selectElement: HTMLSelectElement) {
     const selectedValue = selectElement.value as string;
     if (selectedValue) {

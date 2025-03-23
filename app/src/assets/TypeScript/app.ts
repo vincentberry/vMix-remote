@@ -41,6 +41,16 @@ const getHttpRequest = (): XMLHttpRequest | false => {
 
 
 let init = 1;
+/**
+ * Retrieves XML data from the vMix API and updates the application's session state and user interface.
+ *
+ * Sends an asynchronous HTTP GET request to the vMix API endpoint. When the request completes:
+ * - If the response status is 200, either a new session is initiated (if the current connection mode is "N") or the returned XML is parsed to update settings, video sources, audio buses, audio sources, and page elements. It also updates session delay indicators and URL parameters, and filters commands based on the current vMix version.
+ * - If the response status is 301, redirects the browser to the new URL provided in the response.
+ * - For other statuses, displays error or warning notifications and may reset the session state.
+ *
+ * If an XMLHttpRequest instance cannot be created, an error is logged to the console.
+ */
 function chargerFichierXML() {
 
     const xhr = getHttpRequest();
@@ -256,6 +266,11 @@ function get_vmix_connect_param() {
     }
 }
 
+/**
+ * Prompts the user to confirm switching the session mode and sends the corresponding vMix command.
+ *
+ * Depending on whether the "fast" mode is active (determined by checking if the element with id "fast" has the class "on"), this function prompts the user to switch to slow mode with a longer processing delay (30000 ms) or to switch to fast mode with a shorter delay (1000 ms). The confirmation message advises waiting for the icon to turn red before proceeding.
+ */
 function Session_delay() {
     if (document.getElementById('fast')!.className == "on") {
         ConfirmApiVmixSend("Are you sure you want to switch to slow mode ? Please note that processing may take some time. Wait until the icon turns red to confirm that VMix has responded to your request before proceeding with the shipment.", "session_delay", "", "30000");
@@ -265,12 +280,25 @@ function Session_delay() {
 
 }
 
-// Fonction pour comparer les versions
+/**
+ * Determines if the current vMix version meets the required minimum.
+ *
+ * Compares the global vMixVersion with the provided required version by parsing both as numbers.
+ *
+ * @param requiredVersion - The minimum supported version as a string.
+ * @returns True if the global vMixVersion is greater than or equal to the required version, false otherwise.
+ */
 function isVersionSupported(requiredVersion: string): boolean {
     return parseFloat(vMixVersion) >= parseFloat(requiredVersion);
 }
 
-// Fonction pour masquer les éléments en fonction de la version
+/**
+ * Hides HTML elements that require a minimum vMix version not met by the current version.
+ *
+ * This function searches for elements with a "data-min-version" attribute and, using
+ * isVersionSupported(), determines if the current vMix version satisfies the requirement.
+ * Unsupported elements are hidden by setting their display style to "none".
+ */
 function hideUnsupportedFeatures() {
     const elements = document.querySelectorAll('[data-min-version]');
 

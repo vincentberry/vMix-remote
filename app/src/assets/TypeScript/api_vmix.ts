@@ -27,7 +27,11 @@ fetch('api_vmix.json')
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-// Mettre à jour les détails de la commande lorsqu'une nouvelle commande est sélectionnée
+/**
+ * Updates the command details panel in the UI based on the properties of the selected command.
+ *
+ * This function retrieves the current command selection from the "commandSelector" dropdown, finds the corresponding command from the global commands array, and dynamically updates the "commandDetails" container. It conditionally renders input fields for Input, Value, Duration, Selected Name, and Mix based on the command's configuration, and appends any associated notes.
+ */
 function updateCommandDetails() {
     const commandSelector = document.getElementById('commandSelector') as HTMLSelectElement;
     const selectedCommandName = commandSelector.value;
@@ -94,6 +98,11 @@ function updateCommandDetails() {
     commandDetailsContainer.innerHTML += `<p>Notes: ${selectedCommand.notes}</p>`;
 }
 
+/**
+ * Filters command options based on the minimum version required.
+ *
+ * This function iterates over the options in both the "commandSelector" and "CustomTransition" select elements. For each option, it checks the "data-min-version" attribute and uses the `isVersionSupported` function to determine if the option is valid for the current version. Unsupported options are hidden, while valid options are displayed. Finally, the filtered options from "CustomTransition" are assigned to the global `Alltransition` variable.
+ */
 function filterCommandDetailsByVersion() {
     const selectElement = document.getElementById("commandSelector") as HTMLSelectElement;
     const options = selectElement.options; // Récupère toutes les options
@@ -124,7 +133,13 @@ function filterCommandDetailsByVersion() {
     Alltransition = CustomTransition1.options;
 }
 
-// Fonction pour envoyer la commande
+/**
+ * Sends a command to the vMix API using values from UI input elements.
+ *
+ * This function gathers the command and its parameters from specific HTML elements, including the command identifier, input values, duration, and selected name.
+ * If a mix value is provided, it converts the input to an integer, decrements it by one, and defaults to "0" when the field is empty or invalid.
+ * The processed values are then passed to {@link ApiVmixSend} to execute the command.
+ */
 function sendCommand() {
     const commandSelector = (document.getElementById('commandSelector') as HTMLSelectElement).value;
     const inputSelector = (document.getElementById('inputSelector') as HTMLInputElement).value;

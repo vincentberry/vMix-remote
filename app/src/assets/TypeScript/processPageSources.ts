@@ -6,7 +6,16 @@ let PageSources_LayersSelectKey: string | null;
 let PageSources_GtSelect: number = 0;
 let clickCount_closePageInput: boolean = false;
 
-// Fonction pour convertir le XML en HTML et l'ajouter à la page
+/**
+ * Processes an XML document to update the media input interface.
+ *
+ * This function locates an <input> element in the provided XML document using a globally defined selection key and extracts its attributes 
+ * to update various HTML sections. It dynamically populates elements for text, image, color, and list items, and if the input type is "VideoCall", 
+ * it configures video call settings. Additionally, it refreshes layer selections, position details, and form input values. 
+ * If no matching input is found or the selection key is absent, an error is logged to the console.
+ *
+ * @param xmlDoc - The XML document containing media input configuration.
+ */
 function processPageSources(xmlDoc: Document) {
 
     if (inputSelect) {
@@ -267,6 +276,15 @@ function processPageSources_updateGT_text(textItems: { index: string, name: stri
     return htmlString;
 }
 
+/**
+ * Updates the active state of GT navigation and text items based on the selected index.
+ *
+ * This function updates the global GT selection by parsing the provided index and then ensures
+ * that only the corresponding navigation element and its associated text element are marked as active.
+ *
+ * @param element - The GT navigation element that was selected.
+ * @param index - The index of the GT item as a string used to identify the target elements.
+ */
 function processPageSources_updateGT_nav_select(element: HTMLElement, index: string) {
     PageSources_GtSelect = parseInt(index);
     document.getElementById("gt_nav_" + index)!.classList.remove('active');
@@ -284,6 +302,19 @@ function processPageSources_updateGT_nav_select(element: HTMLElement, index: str
     document.getElementById('gt_text_' + index)!.classList.add('active');
 }
 
+/**
+ * Updates the Layers and Position UI sections using overlay data from the provided XML input.
+ *
+ * This function iterates through all overlay nodes within the given XML element and refreshes several UI fields:
+ * - For the Layers tab, it updates the layer keys and clears other list inputs. It also sets movement and cropping
+ *   input fields based on the overlay's position and crop attributes when the Layers tab is not focused.
+ * - For the Position tab, if the overlay matches the currently selected layer and the Position tab is not focused,
+ *   it updates the panning, zooming, and cropping values and caches the corresponding layer key.
+ *
+ * If no valid input source is provided, the function clears the related layer list fields.
+ *
+ * @param inputSource - The XML element containing overlay definitions for updating layer configurations.
+ */
 function processPageSources_updateLayers(inputSource: Element) {
     PageSources_LayersSelectKey = null;
     for (let i = 0; i <= 9; i++) {
@@ -370,6 +401,14 @@ function processPageSources_updateLayers(inputSource: Element) {
     };
 }
 
+/**
+ * Activates the specified menu and hides all others.
+ *
+ * This function resets the active state and visibility for all menu navigation and content elements within the input container,
+ * then sets the "active" class for the navigation element and displays the content element corresponding to the provided menu name.
+ *
+ * @param menuName - The key of the menu to activate (e.g., "general", "list", "color_correction", "position", "layers", "gt", "vmixcall").
+ */
 function changeMenu(menuName: string) {
     // Liste des menus et de leurs correspondances avec les IDs des éléments HTML
     const menuMapping: { [key: string]: string } = {
@@ -393,6 +432,17 @@ function changeMenu(menuName: string) {
     (document.getElementById('inputContainer_content_' + menuMapping[menuName]) as HTMLElement).style.display = "";
 }
 
+/**
+ * Updates the layer select elements' options based on the provided XML document.
+ *
+ * The function iterates over ten specific select elements (with IDs in the format "inputContainer_List_Layers_X")
+ * and synchronizes their options with the <input> elements in the XML document. For each <input> element,
+ * it constructs an option using its "key" as the value and a text composed of its "number" and "title" attributes.
+ * Existing options are updated if their text differs from the computed value, and options that no longer match
+ * any <input> element are removed.
+ *
+ * @param xmlDoc - The XML document containing <input> elements with "key", "number", and "title" attributes.
+ */
 function processPageSources_updateInput_layers(xmlDoc: Document) {
 
     const inputSources = xmlDoc.querySelectorAll('input');
@@ -432,6 +482,16 @@ function processPageSources_updateInput_layers(xmlDoc: Document) {
     }
 }
 
+/**
+ * Updates the text content of the position selection element to reflect the current layer choice.
+ *
+ * This function retrieves the select element with the id "inputContainer_Content_Position_Select" and checks if a layer is selected
+ * via the global variable representing the current layer index. It constructs a label in the format "Layer N: [title]",
+ * where N is the one-based layer number. If a global key is provided, the function searches the given XML document for an input element
+ * with a matching key and, if found, appends its title to the label. Finally, the element's text is updated only if it differs from the new label.
+ *
+ * @param xmlDoc - The XML or HTML document containing input elements from which the layer title is retrieved.
+ */
 function processPageSources_updateInput_Position(xmlDoc: Document) {
     const selectElement = document.getElementById('inputContainer_Content_Position_Select') as HTMLSelectElement | null;
     if (selectElement && PageSources_LayersSelect) {
@@ -519,7 +579,15 @@ document.getElementById('inputContainer_Content_Position_resetall')?.addEventLis
     }
 });
 
-// Utility function to get element with type assertion
+/**
+ * Retrieves an HTML element by its ID and casts it to the specified type.
+ *
+ * This utility function wraps the standard document.getElementById call, returning the
+ * element as type T if it exists, or null if no element with the given ID is found.
+ *
+ * @param id - The ID of the HTML element to retrieve.
+ * @returns The element cast as type T, or null if not found.
+ */
 function getElement<T extends HTMLElement>(id: string): T | null {
     return document.getElementById(id) as T | null;
 }
