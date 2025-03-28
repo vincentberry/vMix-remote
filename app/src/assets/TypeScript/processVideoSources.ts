@@ -111,7 +111,7 @@ function getVideoSourceHTML(videoSource: Element): string {
     <div class="video ${tally}" onclick="ApiVmixSend('PreviewInput','${key}')">
         <h2>${number}</h2>
         <div class="type">
-            <img src="./assets/icon/${type ? type.toLowerCase() : 'default'}.svg" alt="${type}">
+            <img src="./assets/icon/${type ? type.toLowerCase() : 'default'}.svg" onerror="this.onerror=null; this.src='./assets/icon/default.svg';" alt="${type}">
             <h1>${title}</h1>
         </div>
     </div>

@@ -7,7 +7,7 @@ require $Dir_inc . 'vmix_script.php';
 <body>
     <div id="notification-container"></div>
     <section class="new_session">
-        <img src="./assets/icon/VMIX REMOTE.svg" alt="">
+        <img src="./assets/icon/vmix-remote.svg" alt="">
         <h1>WELCOME TO REMOTE VMIX</h1>
         <div class="list">
             <select name="vmix_connect" onclick="chargerFichierXML_lobby()" id="vmix_connect">
@@ -17,7 +17,7 @@ require $Dir_inc . 'vmix_script.php';
         <button onclick="copyToClipboard('VmixScript')">DOWNLOAD SCRIPT FOR VMIX</button>
         <p>BY VINCENT BERRY</p>
         <a href="https://github.com/vincentberry/vmix-remote" target="_blank">
-            <img class="github" src="./assets/icon/GitHub.svg" alt="github">
+            <img class="github" src="./assets/icon/github.svg" alt="github">
         </a>
     </section>
 
