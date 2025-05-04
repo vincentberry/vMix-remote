@@ -45,7 +45,7 @@ require $Dir_inc . 'vmix_script.php';
                         <h1>fullscreen</h1>
                     </div>
                     <div id="settings" onclick="OpenPageSettings()" class="statut_vmix" data-min-version="28">
-                        <img src="./assets/icon/Settings.svg" class="video">
+                        <img src="./assets/icon/settings.svg" class="video">
                     </div>
                 </div>
             </div>
