@@ -6,7 +6,16 @@ let PageSources_LayersSelectKey: string | null;
 let PageSources_GtSelect: number = 0;
 let clickCount_closePageInput: boolean = false;
 
-// Fonction pour convertir le XML en HTML et l'ajouter à la page
+/**
+ * Parses the provided XML document to extract information about the currently selected input and updates the corresponding UI elements.
+ *
+ * This function locates the `<input>` element matching the global `inputSelect` key, extracts its attributes and child elements (such as text, image, color, and list items), and updates various sections of the web interface to reflect the input's properties and state. It also manages the display and content of GT navigation, list, and video call controls, and updates layer and position selectors.
+ *
+ * @param xmlDoc - The XML document containing input data to be processed and displayed.
+ *
+ * @remark
+ * Logs an error to the console if `inputSelect` is not set or if no matching input is found in the XML.
+ */
 function processPageSources(xmlDoc: Document) {
 
     if (inputSelect) {

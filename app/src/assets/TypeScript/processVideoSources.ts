@@ -68,7 +68,14 @@ function processVideoSources(xmlDoc: Document): void {
     }
 }
 
-// Fonction pour obtenir le HTML d'une source audio à partir de l'élément XML
+/**
+ * Generates the HTML markup for a video source element, including tally indicators, type icon, overlay controls, and a menu button.
+ *
+ * The returned HTML includes interactive elements for previewing the source, activating overlays, and opening a detailed input page. The type icon image falls back to a default icon if the specified type image fails to load.
+ *
+ * @param videoSource - The XML element representing the video source.
+ * @returns An HTML string representing the video source with controls and status indicators.
+ */
 function getVideoSourceHTML(videoSource: Element): string {
     const key = videoSource.getAttribute('key');
     const title = videoSource.getAttribute('title');
