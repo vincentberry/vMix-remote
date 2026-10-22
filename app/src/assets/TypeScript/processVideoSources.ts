@@ -83,7 +83,7 @@ function getVideoSourceHTML(videoSource: Element): string {
     let tallyOverlay6: string = "";
     let tallyOverlay7: string = "";
     let tallyOverlay8: string = "";
-    
+
     if (number) {
         // Ajouter la classe "preview" si le nombre correspond à previewNumber
         if (parseInt(number) === previewNumber) {
@@ -140,10 +140,10 @@ function getVideoSourceHTML(videoSource: Element): string {
         <button class="${tallyOverlay2}" data-min-version="0" onclick="ApiVmixSend('OverlayInput2','${key}')">2</button>
         <button class="${tallyOverlay3}" data-min-version="0" onclick="ApiVmixSend('OverlayInput3','${key}')">3</button>
         <button class="${tallyOverlay4}" data-min-version="0" onclick="ApiVmixSend('OverlayInput4','${key}')">4</button>
-        <button class="${tallyOverlay5}" data-min-version="29" onclick="ApiVmixSend('OverlayInput5','${key}')">5</button>
+        ${isVersionSupported("29") ? `<button class="${tallyOverlay5}" data-min-version="29" onclick="ApiVmixSend('OverlayInput5','${key}')">5</button>
         <button class="${tallyOverlay6}" data-min-version="29" onclick="ApiVmixSend('OverlayInput6','${key}')">6</button>
         <button class="${tallyOverlay7}" data-min-version="29" onclick="ApiVmixSend('OverlayInput7','${key}')">7</button>
-        <button class="${tallyOverlay8}" data-min-version="29" onclick="ApiVmixSend('OverlayInput8','${key}')">8</button>
+        <button class="${tallyOverlay8}" data-min-version="29" onclick="ApiVmixSend('OverlayInput8','${key}')">8</button>` : ""}
         <button class="menu grid_menu" onclick="OpenPageInput('${key}')"></button>
     </div>
 `;
