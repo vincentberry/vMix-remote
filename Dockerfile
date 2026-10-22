@@ -1,4 +1,4 @@
-FROM node:14 AS build
+FROM node:24 AS build
 ARG NODE_ENV
 WORKDIR /build
 
@@ -10,7 +10,10 @@ RUN npm install typescript
 
 RUN npm run build-${NODE_ENV}
 
-FROM php:apache
+FROM php:8.5-apache
+
+# Minimum release fixing CVE-2026-109618 and CVE-2026-109619.
+RUN php -r 'exit(PHP_VERSION_ID >= 80512 ? 0 : 1);'
 
 ARG NODE_ENV
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -27,8 +30,8 @@ RUN apt-get update -qq && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# PHP Extensions
-RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
+# OPcache is built into PHP 8.5 and no longer needs a separate installation.
+RUN docker-php-ext-install -j$(nproc) pdo_mysql
 
 # Apache
 COPY config/${NODE_ENV}/apache2/conf-available/swag.conf /etc/apache2/conf-available/swag.conf

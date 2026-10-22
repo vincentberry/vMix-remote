@@ -36,6 +36,23 @@ The logs are stored within the Docker container `/var/log/apache2`
 
 ## How to Use Docker Image with Docker Compose (without Docker Hub)
 
+The PHP runtime is pinned to `8.5-apache`, which fixes
+[CVE-2026-109618 and CVE-2026-109619](https://www.php.net/archive/2026.php#2026-10-21-5).
+Changing the configuration alone does not update a running container. For the
+repository's `docker-compose.yaml`, pull and recreate the service:
+
+```sh
+docker compose pull
+docker compose up -d --force-recreate
+docker compose exec remotevmix-apache php -v
+```
+
+To rebuild the complete application image (including compiled assets and Apache modules):
+
+```sh
+docker build --pull --build-arg NODE_ENV=prod -t vmix-remote:local .
+```
+
 1. Download the GitHub repository.
 2. Docker compose up.
 
@@ -44,7 +61,7 @@ version: '3'
 
 services:
   vmix-remote:
-    image: php:8.0-apache
+    image: php:8.5-apache
     container_name: vmix-remote
     volumes:
         - ./app/:/var/www/html/
