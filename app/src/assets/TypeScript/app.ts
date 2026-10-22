@@ -8,6 +8,10 @@ let activeOverlay1: number | undefined;
 let activeOverlay2: number | undefined;
 let activeOverlay3: number | undefined;
 let activeOverlay4: number | undefined;
+let activeOverlay5: number | undefined;
+let activeOverlay6: number | undefined;
+let activeOverlay7: number | undefined;
+let activeOverlay8: number | undefined;
 let XmlFile: Document | undefined; // Définissez le type approprié pour XmlFile
 let Alltransition: HTMLOptionsCollection
 const getHttpRequest = (): XMLHttpRequest | false => {
@@ -148,6 +152,10 @@ function reset_session() {
     activeOverlay2 = undefined;
     activeOverlay3 = undefined;
     activeOverlay4 = undefined;
+    activeOverlay5 = undefined;
+    activeOverlay6 = undefined;
+    activeOverlay7 = undefined;
+    activeOverlay8 = undefined;
     document.getElementById('projetName')!.textContent = "";
     updateCheckboxClass('streaming', false);
     updateCheckboxClass('recording', false);
