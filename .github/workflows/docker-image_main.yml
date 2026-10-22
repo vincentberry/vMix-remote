@@ -23,10 +23,10 @@ jobs:
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
         
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --build-arg NODE_ENV=prod --tag vincentberry/vmix-remote:latest 
+        run: docker build --pull . --file Dockerfile --build-arg NODE_ENV=prod --tag vincentberry/vmix-remote:latest
         
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --build-arg NODE_ENV=prod --tag vincentberry/vmix-remote:$(date +%s) 
+        run: docker build --pull . --file Dockerfile --build-arg NODE_ENV=prod --tag vincentberry/vmix-remote:$(date +%s)
             
       - name: Docker Push
         run: docker push --all-tags vincentberry/vmix-remote

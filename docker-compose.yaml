@@ -2,7 +2,7 @@ version: '3'
 
 services:
   remotevmix-apache:
-    image: php:8.0-apache
+    image: php:8.5-apache
     container_name: remotevmix-apache
     volumes:
         - ./app/:/var/www/html/

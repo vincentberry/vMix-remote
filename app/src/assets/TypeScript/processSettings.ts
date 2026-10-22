@@ -5,6 +5,10 @@ function processSettings(xmlDoc: Document): void {
     activeOverlay2 = parseInt(xmlDoc.querySelector('overlay[number="2"]')?.textContent || "");
     activeOverlay3 = parseInt(xmlDoc.querySelector('overlay[number="3"]')?.textContent || "");
     activeOverlay4 = parseInt(xmlDoc.querySelector('overlay[number="4"]')?.textContent || "");
+    activeOverlay5 = parseInt(xmlDoc.querySelector('overlay[number="5"]')?.textContent || "");
+    activeOverlay6 = parseInt(xmlDoc.querySelector('overlay[number="6"]')?.textContent || "");
+    activeOverlay7 = parseInt(xmlDoc.querySelector('overlay[number="7"]')?.textContent || "");
+    activeOverlay8 = parseInt(xmlDoc.querySelector('overlay[number="8"]')?.textContent || "");
     const presetElement = xmlDoc.querySelector('preset');
     if (presetElement) {
         const presetElement_textContent = presetElement.textContent
